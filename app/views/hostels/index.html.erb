@@ -1,0 +1,17 @@
+<% provide :title, Hostel.model_name.human(count: :other) %>
+
+<article id="hostels">
+<h1><%= Hostel.model_name.human(count: :other) %></h1>
+
+<div class="overview">
+<ul>
+<% @hostels.each do |hostel| %>
+	<li><%= hostel_link(hostel) %></li>
+<% end %>
+</ul>
+</div>
+
+<div class="actions">
+	<%= new_hostel_link %>
+</div>
+</article>

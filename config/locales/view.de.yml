@@ -1,0 +1,9 @@
+---
+de:
+  helpers:
+    reset: Zurücksetzen
+  sections:
+     person:
+       generalinfo: Personendaten
+       settings: Einstellungen
+       additional_information: Weitere Informationen

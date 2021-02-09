@@ -1,0 +1,57 @@
+<% provide :title, @group.title %>
+
+<% if @group_policy.show? %>
+<% subgroups = @group.subgroups - [@group] %>
+<% supergroups = @group.supergroups - [@group] %>
+
+<div class="flexlayout">
+<article id="group" class="panel">
+	<h2><%= @group.title %></h2>
+
+	<section id="group_generalinfo">
+	<dl>
+		<dt>Beschreibung:</dt>
+		<dd><i><%= @group.description %></i></dd>
+
+		<dt>Einstellung:</dt>
+		<dd>
+			<%= Group.human_enum_value :mode, @group.mode %>
+				<% unless @group.mode == 'userdefined' %>
+				<%= Group.human_enum_value(:program, @group.program) %>
+			<% end %>
+		</dd>
+
+		<dt>Hinzugefügte Unterruppen:</dt>
+		<dd><%= subgroups.empty? ? tag.i{"keine"} : subgroups.map {|g| group_link(g)}.join(",\n").html_safe %></dd>
+
+		<dt>Diese Gruppe wird hinzugefügt zu:</dt>
+		<dd><%= supergroups.empty? ? tag.i{"keine"} : supergroups.map {|g| group_link(g)}.join(",\n").html_safe %></dd>
+	</dl>
+	</section>
+
+	<section id="group_memberlist">
+	<h3>Alle aktuellen Gruppenmitglieder</h3>
+	<% members = @group.members %>
+	<% unless members.empty? %>
+		<%= wrap_summary(members.size > 20,
+			sprintf("Insgesamt %d Gruppenmitglieder...", members.size)) do %>
+			<ul>
+			<% @group.members.each do |m| %>
+				<li><%= person_link(m) %></li>
+			<% end %>
+			</ul>
+		<% end %>
+	<% else %>
+		<p>Diese Gruppe hat bislang keine Mitglieder.</p>
+	<% end %>
+	</section>
+
+
+	<div class="actions">
+		<%= edit_group_link(@group) %>
+		<%= delete_group_link(@group) %>
+	</div>
+</article>
+</div>
+<% end %>
+

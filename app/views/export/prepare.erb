@@ -1,0 +1,43 @@
+<% provide :title, "Export" %>
+<% provide :path, navigation_path([root_link, export_link]) %>
+
+<h1>Export</h1>
+
+<div class="flexlayout" id="export_prepare">
+<%= form_tag export_path(@event, format: :json) do %>
+<fieldset>
+	<legend>Einstellungen für Export</legend>
+	<p>Wähle die Datensätze aus, die exportiert werden sollen.</p>
+
+	<label>
+		<%= check_box_tag :export_people, 'yes', true %>
+		<%= "Alle Personen exportieren (inkl. Adressen, Kontakten und Zahlungen)" %>
+	</label>
+
+	<label>
+		<%= check_box_tag :export_events, 'yes', true %>
+		<%= label_tag :export_events, "Alle Veranstaltungen exportieren (inkl. Unterkunft)" %>
+	</label>
+
+	<label>
+		<%= check_box_tag :export_registrations, 'yes', true %>
+		<%= label_tag :export_registrations, "Alle Anmeldungen exportieren" %>
+	</label>
+
+	<label>
+		<%= check_box_tag :export_groups, 'yes', true %>
+		<%= label_tag :export_groups, "Alle Gruppen exportieren" %>
+	</label>
+
+	<label>
+		<%= check_box_tag :export_mailinglists, 'yes', true %>
+		<%= label_tag :export_mailinglists, "Alle Emailverteiler exportieren" %>
+	</label>
+
+	<div class="actions">
+		<%= submit_tag t('actions.export.submit') %>
+	</div>
+	<b>Hinweis:</b><br>Der Export aller Daten kann einige Minuten dauern.
+<% end %>
+</fieldset>
+</div>

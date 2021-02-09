@@ -1,0 +1,140 @@
+---
+de:
+  sessions:
+    new:
+      account_name: Benutzername
+      password: Passwort
+      login: Einloggen
+      forgot_password: Ich habe mein Passwort vergessen!
+      already: Bereits eingeloggt
+    create:
+      success: Login erfolgreich
+      failed: Login fehlgeschlagen
+    destroy:
+      complete: Ausgeloggt
+  password_resets:
+    new:
+      title: Passwort vergessen
+      account_name: Benutzername
+      reset_password: Passwort zurücksetzen
+    create:
+      success: Eine Email zum Neusetzen des Passworts wurde verschickt
+    edit:
+      title: Neues Passwort angeben
+      submit: Passwort ändern
+    update:
+      success: Passwort wurde erfolgreich geändert
+
+  events:
+    create:
+      success: Veranstaltung wurde erfolgreich angelegt
+    update:
+      success: Änderung an der Veranstaltung wurden gespeichert
+    destroy:
+      success: Veranstaltung wurde erfolgreich gelöscht
+
+  people:
+    create:
+      success: Person wurde erfolgreich eingetragen
+    update:
+      success: Änderungen an der Person wurden gespeichert
+    destroy:
+      success: Person wurde erfoglreich gelöscht
+    edit:
+      submit: Personendaten speichern
+    edit_addresses:
+      submit: Kontaktdaten speichern
+    edit_payments:
+      submit: Zahlungen speichern
+    edit_privacy:
+      submit: Einstellungen speichern
+
+  registrations:
+    event_full: Für diese Veranstaltung sind keine freien Plätze mehr vorhanden. Eine Anmeldung zu dieser Veranstaltung ist leider nicht mehr möglich.
+    deadline_missed: Der Anmeldeschluss ist bereits vorbei. Eine Anmeldung zu dieser Veranstaltung oder eine Änderung der Anmeldedaten ist leider nicht mehr möglich.
+    create:
+      success: Anmeldung wurde erfolgreich eingetragen
+    create_self:
+      success: Du wurdest erfolgreich zur Veranstaltung angemeldet
+    update:
+      success: Änderungen an der Anmeldung wurden gespeichert
+    update_self:
+      success: Die Änderungen an deiner Anmeldung wurden erfolgreich gespeichert
+    destroy:
+      success: Anmeldung wurde erfoglreich gelöscht
+
+  hostels:
+    create:
+      success: Herberge wurde erfolgreich eingetragen
+    update:
+      success: Änderungen an der Herberge wurden gespeichert
+    destroy:
+      success: Herberge wurde erfoglreich gelöscht
+
+  groups:
+    create:
+      success: Gruppe wurde erfolgreich eingetragen
+    update:
+      success: Änderungen an der Gruppe wurden gespeichert
+    destroy:
+      success: Gruppe wurde erfoglreich gelöscht
+
+  mailinglists:
+    create:
+      success: Emailverteiler wurde erfolgreich eingetragen
+    update:
+      success: Änderungen an der Emailverteiler wurden gespeichert
+    destroy:
+      success: Emailverteiler wurde erfoglreich gelöscht
+
+  actions:
+    person:
+      new: Neue Person eintragen
+      delete: Person löschen
+      show: Allgemeines
+      edit: Person bearbeiten
+      edit_general: Mitgliedsdaten bearbeiten
+      addresses: Kontakt
+      edit_addresses: Adressen & Kontakte bearbeiten
+      registrations: Anmeldungen
+      payments: Zahlungen
+      edit_payments: Zahlungen bearbeiten
+      submit_payments: Zahlungen eintragen
+      privacy: Datenschutz
+      edit_privacy: Datenschutz einstellen
+      groups: Rechte
+      edit_groups: Rechte
+    event:
+      new: Neue Veranstaltung eintragen
+      edit: Veranstaltung bearbeiten
+      delete: Veranstaltung löschen
+      register_self: Zur Veranstaltung anmelden
+      register_other: Teilnehmer hinzufügen
+      edit_own_registration: Eigene Anmeldung bearbeiten
+    registration:
+      edit: Anmeldung bearbeiten
+      delete: Anmeldung löschen
+    hostel:
+      new: Neue Herberge eintragen
+      edit: Herberge bearbeiten
+      delete: Herberge löschen
+      delete_confirm: Herberge „%{title}“ wirklich löschen?
+      index: Herbergen
+    group:
+      new: Neue Gruppe erstellen
+      edit: Gruppe bearbeiten
+      delete: Gruppe löschen
+      delete_confirm: Gruppe „%{title}“ wirklich löschen?
+      index: Gruppen
+    mailinglist:
+      new: Neuen Emailverteiler erstellen
+      edit: Emailverteiler bearbeiten
+      delete: Emailverteiler löschen
+      delete_confirm: Emailverteiler „%{title}“ wirklich löschen?
+      index: Emailverteiler
+    import:
+      prepare: Import
+      submit: Daten importieren
+    export:
+      prepare: Export
+      submit: Daten exportieren

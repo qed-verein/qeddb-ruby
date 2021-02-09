@@ -1,0 +1,49 @@
+<details>
+<summary>Debugmeldungen</summary>
+<h3>Rechte</h3>
+<b>Rails-Umgebung: <%= Rails.env %></b><br>
+<% if logged_in? %>
+<div class="debug" style="text-align: left">
+<b>Status: </b>
+<% unless current_user.nil? %>
+<%= current_user.groups.where(event: nil).map{|g| g.title}.join(", ") %>
+<% end %>
+<dl>
+<% if controller_name == 'people' %>
+<dt>Person:</dt>
+<dd><%= (policy(@person.nil? ? Person : @person).granted_list).to_s %></dd>
+<dt>Person Attributes:</dt>
+<dd><%= (policy(@person.nil? ? Person : @person).permitted_attributes).to_s %></dd>
+<% end %>
+<% if controller_name == 'events' %>
+<dt>Event:</dt>
+<dd><%= (policy(@event.nil? ? Event : @event).granted_list).to_s %></dd>
+<dt>Event Attributes:</dt>
+<dd><%= (policy(@event.nil? ? Event : @event).permitted_attributes).to_s %></dd>
+<% end %>
+<% if controller_name  == 'registrations' %>
+<dt>Registration:</dt>
+<dd><%= (policy(@registration.nil? ? Registration : @registration).granted_list).to_s %></dd>
+<dt>Registration Attributes:</dt>
+<dd><%= (policy(@registration.nil? ? Registration : @registration).permitted_attributes).to_s %></dd>
+<% end %>
+<% if controller_name == 'hostels' %>
+<dt>Hostel:</dt>
+<dd><%= (policy(@hostel.nil? ? Hostel : @hostel).granted_list).to_s %></dd>
+<% end %>
+<% if controller_name == 'groups' %>
+<dt>Group:</dt>
+<dd><%= (policy(@group.nil? ? Group : @group).granted_list).to_s %></dd>
+<% end %>
+<% if controller_name == 'mailinglists' %>
+<dt>Mailinglist:</dt>
+<dd><%= (policy(@mailinglist.nil? ? Mailinglist : @mailinglist).granted_list).to_s %></dd>
+<% end %>
+<dt>Version:</dt>
+<dd><%= policy(PaperTrail::Version).granted_list.to_s %></dd>
+<dt>Admin:</dt>
+<dd><%= policy(:admin).granted_list.to_s %></dd>
+</dl>
+</div>
+<% end %>
+</details>

@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+registration1:
+  event: event_mathematikerkonferenz
+  person: person1
+  status: 1
+  organizer: true
+  arrival: 2002-02-20 20:20:20
+  departure: 2112-12-21 21:12:00
+  station_arrival: von hier komme ich
+  station_departure: hierher fahre ich
+  railway_discount: Bahncard
+  money_transfer_date: 1111-11-11
+  member_discount: true
+  meal_preference: vegetarier
+  talks: Differentialgleichungen
+  comment: bringe einen Beamer mit
+  
+registration2:
+  event: event_mathematikerkonferenz
+  person: person2
+  status: 2
+  organizer: false
+  arrival: 2002-02-20 20:20:20
+  departure: 2112-12-21 21:12:00
+  station_arrival: von hier komme ich
+  station_departure: hierher fahre ich
+  railway_discount: Jugend-Bahncard 25
+  money_transfer_date: 1010-10-10
+  member_discount: true
+  meal_preference: vegetarier
+  talks: Potenzreihen
+  comment: bringe ein Kuchen mit
+
+registration3:
+  event: event_mathematikerkonferenz
+  person: person3
+  status: 4
+  organizer: false
+  arrival: 2002-02-20 20:20:20
+  departure: 2112-12-21 21:12:00
+  station_arrival: von hier komme ich
+  station_departure: hierher fahre ich
+  railway_discount: Semesterticket
+  money_transfer_date: 1212-12-12
+  member_discount: true
+  meal_preference: Fruitarier
+  talks: Zahlentee
+  comment: bringe Tee mit
+  
+registration4:
+  event: event_physikerkonferenz
+  person: person1
+  status: 3
+  organizer: false
+  arrival: 2002-02-20 20:20:20
+  departure: 2112-12-21 21:12:00
+  station_arrival: von hier komme ich
+  station_departure: hierher fahre ich
+  railway_discount: Monatskarte
+  money_transfer_date: 2002-20-02
+  member_discount: false
+  meal_preference: Fruitarier
+  talks: Graviation
+  comment: schwerer Vortrag 

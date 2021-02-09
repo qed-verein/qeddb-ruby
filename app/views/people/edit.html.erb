@@ -1,0 +1,17 @@
+<div class="flexlayout">
+<%= form_with(model: @person, local: true) do |form| %>
+	<%= hidden_field_tag 'formular', 'edit' %>
+	<%= render partial: "shared/errors", locals: {object: @person} %>
+	<fieldset>
+	<div class="flexlayout">
+		<%= render partial: 'general_fieldset', locals: {form: form} %>
+		<% if @person_policy.edit_additional? %>
+			<%= render partial: 'additional_information_fieldset', locals: {form: form} %>
+		<% end %>
+	</div>
+	<div class="actions">
+		<%= form.submit %>
+	</div>
+	</fieldset>
+<% end %>
+</div>

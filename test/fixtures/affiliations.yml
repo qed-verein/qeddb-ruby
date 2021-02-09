@@ -1,0 +1,56 @@
+group_gl_entry_1:
+    group: group_gl
+    groupable: group_sl
+    groupable_type: Group
+group_gl_entry_2:
+    group: group_gl
+    groupable: group_o
+    groupable_type: Group
+group_sl_entry:
+    group: group_sl
+    groupable: group_so
+    groupable_type: Group
+group_o_entry_1:
+    group: group_o
+    groupable: group_so
+    groupable_type: Group
+group_o_entry_2:
+    group: group_o
+    groupable: person1
+    groupable_type: Person
+group_so_entry_1:
+    group: group_o
+    groupable: testmitglied
+    groupable_type: Person
+ 
+group_q_entry_1:
+    group: group_q
+    groupable: group_z
+    groupable_type: Group
+group_q_entry_2:
+    group: group_q
+    groupable: person2
+    groupable_type: Person
+group_q_entry_3:
+    group: group_q
+    groupable: person3
+    groupable_type: Person
+
+group_admin_entry_1:
+    group: group_admin
+    groupable_type: Person
+    groupable: testadmin   
+group_admin_entry_2:
+    group: group_admin
+    groupable_type: Person
+    groupable: admin
+    
+group_chairman_entry_1:
+    group: group_chairman
+    groupable_type: Person
+    groupable: testvorstand
+    
+group_treasurer_entry_1:
+    group: group_treasurer
+    groupable_type: Person
+    groupable: testkassier

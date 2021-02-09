@@ -1,0 +1,25 @@
+<% provide :title, "Versionen vergleichen" %>
+
+<h1>Versionen</h1>
+
+<dl>
+<% @versions.each do |version| %>
+	<% klass = version.item_type.constantize %>
+	<% item_title = sprintf("%s %d", klass.model_name.human, version.item_id.to_s) %>
+	<dt>Änderung an <%= item_title %> am <%= render_datetime version.created_at %>, 
+		Aktion <%= version.event.humanize %></dt>
+
+	<%
+		keys = klass.column_names - klass.paper_trail_options[:skip] - ['updated_at']
+		before_version = version.reify || {}
+		after_version = version.next ? version.next.reify : klass.find_by(id: version.item_id) || {}
+		diffs = keys.map {|k| [k, before_version[k], after_version[k]]}.reject {|k,x,y| x == y}
+	%>
+	<ul>
+	<% diffs.each do |k,x,y| %>
+		<li><b><%= klass.human_attribute_name k %>:</b> <%= x.inspect %> -> <%= y.inspect %></li>
+	<% end %>
+	</ul>
+	</dd>
+<% end %>
+</dl>

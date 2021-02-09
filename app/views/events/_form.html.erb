@@ -1,0 +1,39 @@
+<%= form_with(model: event, local: true) do |form| %>
+<%= render partial: "shared/errors", locals: {object: @event} %>
+
+<fieldset id="event_general_information_fieldset">
+<legend><%= Event.model_name.human %></legend>
+<div class="aligned">
+	<%= form.label :title %>
+	<%= form.text_field :title, id: :event_title %>
+
+	<%= form.label :homepage %>
+	<%= form.url_field :homepage, id: :event_homepage, size: 30 %>
+
+	<%= form.label :start %>
+    <%= form.date_field :start, id: :event_start %>
+
+	<%= form.label :end %>
+    <%= form.date_field :end, id: :event_end %>
+
+	<%= form.label :deadline %>
+    <%= form.date_field :deadline, id: :event_deadline %>
+
+	<%= form.label :hostel_id %>
+    <%= hostel_select form %>
+
+	<%= form.label :cost %>
+	<%= form.number_field :cost, id: :event_cost, size: 3, step: 0.01 %>
+
+	<%= form.label :max_participants %>
+	<%= form.number_field :max_participants, id: :event_max_participants, min: 1 %>
+
+	<%= form.label :comment %>
+	<%= form.text_area :comment, id: :event_comment, style: 'display: block' %>
+</div>
+
+<div class="actions">
+	<%= form.submit %>
+</div>
+</fieldset>
+<% end %>

@@ -1,0 +1,73 @@
+<%= form_with(model: @mailinglist, local: true) do |form| %>
+<%= render partial: "shared/errors", locals: {object: @mailinglist} %>
+<% 5.times {@mailinglist.subscriptions.build} %>
+
+<fieldset>
+<fieldset>
+	<legend><%= Mailinglist.model_name.human %></legend>
+	<div class="aligned">
+		<%= form.label :title %>
+		<%= form.text_field :title %>
+		<%= form.label :description %>
+		<%= form.text_area :description, rows: 3, cols: 30 %>
+		<%= form.label :can_unsubscribe %>
+			<%= form.check_box :can_unsubscribe %>
+		<%= form.label :public_email_address %>
+			<%= form.email_field :public_email_address %>
+	</div>
+</fieldset>
+<hr>
+<fieldset>
+<legend>Automatisch hinzugefügte Personen</legend>
+<p>Zur einfacheren Verwaltung lassen sich große Personenkreise automatisch zum Emailverteiler hinzufügen.</p>
+
+<label>
+	<%= Mailinglist.human_attribute_name(:sender_group) %>
+	<i>Folgende Leute können Emails an diesen Verteiler senden:</i>
+	<%= form.collection_select(:sender_group_id, Group.all, :id, :title,
+		include_blank: "Keine Gruppe gewählt") %>
+</label>
+
+<label>
+	<%= Mailinglist.human_attribute_name(:receiver_group) %>
+	<i>Folgende Leute erhalten Emails von diesem Verteiler:</i>
+	<%= form.collection_select(:receiver_group_id, Group.all, :id, :title,
+		include_blank: "Keine Gruppe gewählt") %>
+</label>
+
+<label>
+	<%= Mailinglist.human_attribute_name(:moderator_group) %>
+	<i>Folgende Leute können diesen Emailverteiler moderieren:</i>
+	<%= form.collection_select(:moderator_group_id, Group.all, :id, :title,
+			include_blank: "Keine Gruppe gewählt") %>
+</label>
+</fieldset>
+<hr>
+<fieldset>
+<legend>Manuelle Änderungen</legend>
+<p>Füge weitere Emailadressen hinzu zu diesem Emailverteiler hinzu.</p>
+<table>
+<thead>
+	<tr>
+	<% [:email_address, :first_name, :last_name, :as_sender, :as_receiver, :as_moderator].each do |attr| %>
+		<th><%= Subscription.human_attribute_name attr %></th>
+	<% end %>
+	</tr>
+</thead>
+<%= form.fields_for :subscriptions do |sub| %>
+	<tr>
+		<td><%= sub.email_field :email_address %></td>
+		<td><%= sub.text_field :first_name %></td>
+		<td><%= sub.text_field :last_name %></td>
+		<td><%= sub.check_box :as_sender %></td>
+		<td><%= sub.check_box :as_receiver %></td>
+		<td><%= sub.check_box :as_moderator %></td>
+	</tr>
+<% end %>
+</table>
+</fieldset>
+<div class="actions">
+	<%= form.submit %>
+</div>
+</fieldset>
+<% end %>

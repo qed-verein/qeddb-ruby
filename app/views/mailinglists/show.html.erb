@@ -1,0 +1,59 @@
+<% provide :title, @mailinglist.title %>
+
+<% if @mailinglist_policy.show? %>
+<div class="flexlayout">
+<article id="mailinglist" class="panel">
+	<h2><%= @mailinglist.title %></h2>
+	<dl class="aligned">
+		<dt><%= Mailinglist.human_attribute_name :description %>:</dt>
+		<dd><%= check_blank(@mailinglist.description) {|x| x} %></dd>
+
+		<dt><%= Mailinglist.human_attribute_name :can_unsubscribe %>:</dt>
+		<dd><%= render_yes_no(@mailinglist.can_unsubscribe) %></dd>
+
+		<dt><%= Mailinglist.human_attribute_name :public_email_address %>:</dt>
+		<dd><%= check_unknown(@mailinglist.public_email_address) {|x| mail_to(x)} %></dd>
+	</dl>
+
+	<section id="mailinglist_groups">
+	<h3>Konfiguration</h3>
+	<dl>
+		<% [:sender_group, :receiver_group, :moderator_group].each do |type| %>
+			<dt><%= Mailinglist.human_attribute_name type %>:</dt>
+			<dd><%= check_unknown(@mailinglist.send type) {|x| group_link x} %> -
+			<em><%= check_unknown(@mailinglist.send type) {|x| x.description} %></em></dd>
+		<% end %>
+	</dl>
+
+	<section id="mailinglist_subscriptions">
+	<h3>Eingetragene Emailadressen</h3>
+	<% subscriptions = @mailinglist.all_subscriptions %>
+		<% unless subscriptions.empty? %>
+		<%= wrap_summary(subscriptions.size > 50, sprintf("Insgesamt %d Emailadressen...", subscriptions.size)) do %>
+		<ul>
+			<% subscriptions.each do |sub| %>
+			<li>
+				<%= name = (sub.first_name || "") +  " " + (sub.last_name || "")
+				    mail_to sub.email_address, name.blank? ? sub.email_address: name %>
+				<i><%= "(" + [
+					(sub.as_sender ? "Sender" : nil),
+					(sub.as_receiver ? "Empfänger" : nil),
+					(sub.as_moderator ? "Moderator" : nil),
+					(sub.manual ? "manuell" : nil)].compact.join(", ") + ")" %></i>
+			</li>
+			<% end %>
+		</ul>
+		<% end %>
+	<% else %>
+		Der Emailverteiler hat bislang keine Emailadressen.
+	<% end %>
+	</section>
+
+	<div class="actions">
+		<%= edit_mailinglist_link(@mailinglist) %>
+		<%= delete_mailinglist_link(@mailinglist) %>
+	</div>
+</article>
+</div>
+<% end %>
+

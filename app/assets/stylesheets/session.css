@@ -1,0 +1,19 @@
+.login {
+	text-align: center;
+}
+
+.login fieldset {
+	display: inline-block;
+	text-align: initial;
+}
+
+.login label, .login .actions {
+	display: block;
+	margin-top: 0.5em;
+	margin-bottom: 0em;
+}
+
+
+.login .actions {
+	text-align: center;
+}

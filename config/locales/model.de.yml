@@ -1,0 +1,224 @@
+---
+de:
+  "true": wahr
+  "false": falsch
+  "yes": Ja
+  "no": Nein
+  error: Fehler
+
+
+  activerecord:
+    models:
+      person:
+        one: Person
+        other: Personen
+      event:
+        one: Veranstaltung
+        other: Veranstaltungen
+      registration:
+        one: Anmeldung
+        other: Anmeldungen
+      address:
+        one: Adresse
+        other: Adressen
+      contact:
+        one: Kontakt
+        other: Kontakte
+      hostel:
+        one: Herberge
+        other: Herbergen
+      payment:
+        one: Überweisung
+        other: Überweisungen
+      group:
+        one: Gruppe
+        other: Gruppen
+      affiliation:
+        one: Zugehörigkeit
+        other: Zugehörigkeiten
+      mailinglist:
+        one: Emailverteiler
+        other: Emailverteiler
+      subscription:
+        one: Emailabonnement
+        other: Emailabonnements
+      version:
+        one: Version
+        other: Versionen
+    attributes:
+      person:
+        account_name: Benutzername
+        password: Passwort
+        password_confirmation: Passwort bestätigen
+        first_name: Vorname
+        last_name: Nachname
+        email_address: Emailadresse
+        mobile_number: Handynummer
+        birthday: Geburtstag
+        gender: Geschlecht
+        joined: Eingetreten
+        quitted: Ausgetreten
+        paid_until: Bezahlt bis
+        member_until: Mitglied bis
+        member: Aktuell Mitglied
+        active: Aktiviertes Profil
+
+        newsletter: Newsletter abonnieren
+        photos_allowed: Fotoeinwilligung vorhanden
+        publish_birthday: Geburtstag einsehbar
+        publish_email: Emailadresse einsehbar
+        publish_address: Adressen und Kontakte einsehbar
+        publish: Profil veröffentlichen
+
+        railway_station: Bahnhof
+        railway_discount: Bahnermäßigung
+        meal_preference: Essenswünsche
+        comment: Anmerkungen
+        full_name: Name
+
+        mobile_phone: Handynummer
+        main_address: Hauptadresse
+      person/gender:
+        male: männlich
+        female: weiblich
+        other: andere
+      event:
+        title: Titel
+        homepage: Homepage
+        start: Beginn
+        end: Ende
+        period: Zeitraum
+        deadline: Anmeldeschluss
+        hostel_id: Unterkunft
+        organizer_email_address: Email an Orgas
+        participant_email_address: Email an Teilnehmer
+        cost: Kosten
+        max_participants: Teilnehmerlimit
+        comment: Anmerkungen
+      registration:
+        event: Veranstaltung
+        person: Person
+
+        created_at: Angemeldet am
+        updated_at: Letzte Änderung
+        status: Anmeldestatus
+        organizer: Organisator
+
+        arrival: Ankunftszeit
+        departure: Abfahrtszeit
+        nights_stay: Übernachtungen
+        station_arrival: Anreisebahnhof
+        station_departure: Abfahrtsbahnhof
+        railway_discount: Bahncard
+
+        member_discount: Mitgliedsermäßigung
+        other_discounts: Sonstige Ermäßigungen
+        money_amount: Gezahlter Betrag
+        money_amount_short: Betrag
+        money_transfer_date: Geldeingang
+        payment_complete: Vollständig Bezahlt
+        payment_complete_short: Bezahlt
+
+
+        meal_preference: Essenswünsche
+        talks: Vorträge
+        comment: Anmerkungen
+        terms_of_service: Teilnahmebedingungen akzeptieren
+      registration/status:
+        pending: offen
+        confirmed: bestätigt
+        rejected: abgelehnt
+        cancelled: abgesagt
+      address:
+        country: Land
+        city: Stadt
+        postal_code: Postleitzahl
+        street_name: Straße
+        house_number: Hausnummer
+        address_addition: Adresszusatz
+        priority: Priorität
+        _destroy: Löschen
+      contact:
+        protocol: Kontaktart
+        identifier: Eintrag
+        priority: Priorität
+        _destroy: Löschen
+      hostel:
+        title: Titel
+        homepage: Homepage
+        comment: Anmerkung
+      payment:
+        type: Zahlungsart
+        start: Von
+        end: Bis
+        interval: Zeitraum
+        amount: Betrag
+        comment: Anmerkung
+        _destroy: Löschen
+      payment/payment_type:
+        regular_member: Mitgliedsbeitrag
+        sponsor_member: Förderbeitrag
+        donation: Spende an den Verein
+        other: Anderer Verwendungszweck
+      session:
+        account_name: Benutzername
+        password: Passwort
+
+      group:
+        title: Titel
+        description: Beschreibung
+        preset: Voreinstellung
+        event: Veranstaltung
+      group/program:
+        manual: Es werden keine Benutzer automatisch hinzugefügt.
+        members: Alle Mitglieder werden automatisch zu dieser Gruppe hinzugefügt.
+        members_and_externals: Alle Mitglieder und Externe werden automatisch zu dieser Gruppe hinzugefügt.
+        externals: Alle Externen werden automatisch zu dieser Gruppe hinzugefügt.
+        newsletter: Alle Personen, die Newsletter abonnieren möchten, werden in diese Gruppe eingetragen.
+        organizers: Füge alle Organisatoren dieser Veranstaltung automatisch hinzu.
+        participants: Füge alle Teilnehmer dieser Veranstaltung automatisch hinzu.
+        chairman: Alle angegebenen Gruppenmitglieder bekommen automatisch Vorstandsrechte.
+        treasurer: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassiererrechte.
+        admins: Alle angegebenen Gruppenmitglieder bekommen automatisch Administratorrechte.
+      group/mode:
+        automatic: Diese Gruppe wurde vollautomatisch verwaltet. Es sind keine Änderungen möglich.
+        editable: Diese Gruppe wurde automatisch erstellt, kann jedoch vom Benutzer verändert werden.
+        userdefined: Diese Gruppe wurde vom Benutzer anlegt.
+      affiliation:
+        person: Person
+        group: Gruppe
+        start: Zugehörigkeit ab
+        end: Zugehörigkeit bis
+
+      mailinglist:
+        title: Titel
+        description: Beschreibung
+        can_unsubscribe: Abmeldbar
+        public_email_address: Öffentliche Emailadresse
+        sender_group: Sendergruppe
+        receiver_group: Empfängergruppe
+        moderator_group: Moderatorengruppe
+
+      subscription:
+        email_address: Emailadresse
+        first_name: Vorname
+        last_name: Nachname
+        as_sender: Senden
+        as_receiver: Empfangen
+        as_moderator: Moderator
+
+      version:
+        index: Version
+        created_at: Datum
+        whodunnit: Autor
+        event: Aktion
+      version/event:
+        create: Erstellen
+        destroy: Löschen
+        update: Ändern
+
+
+
+  time:
+    formats:
+      very_short: "%d. %b, %H:%M"

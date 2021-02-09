@@ -1,0 +1,50 @@
+<% ro_personal = !@person_policy.edit_personal? %>
+<% ro_settings = !@person_policy.edit_settings? %>
+
+<fieldset id="person_general_information_fieldset">
+	<legend><%= t 'sections.person.generalinfo' %></legend>
+	<div class="aligned">
+	<%= form.label :account_name %>
+	<!-- Hier muss der Accountname stehen, welcher zum Login benutzt wird. -->
+	<%= form.text_field :account_name, id: :person_account_name, disabled: ro_personal %>
+
+	<%= form.label :active %>
+	<%= form.check_box :active, id: :person_active, disabled: ro_personal %>
+	<!-- Aktivierte Benutzer können sich in die Datenbank einloggen. -->
+
+	<% if @person_policy.view_private? || @person.publish_email %>
+		<%= form.label :email_address %>
+		<%= form.email_field :email_address, id: :person_email_address, disabled: ro_settings %>
+	<% end %>
+
+	<% if @person_policy.edit_settings? %>
+		<%= form.label :password %>
+		<%= form.password_field :password, id: :person_password %>
+
+		<%= form.label :password_confirmation %>
+		<%= form.password_field :password_confirmation, id: :person_password_confirmation %>
+	<% end %>
+
+	<%= form.label :first_name %>
+	<%= form.text_field :first_name, id: :person_first_name, disabled: ro_personal %>
+
+	<%= form.label :last_name %>
+	<%= form.text_field :last_name, id: :person_last_name, disabled: ro_personal %>
+
+	<% if @person_policy.view_private? || @person.publish_birthday %>
+		<%= form.label :birthday %>
+		<%= form.date_field :birthday, id: :person_birthday, disabled: ro_personal %>
+	<% end %>
+
+	<%= form.label :gender %>
+	<%= form.select :gender, Person.human_enum_options(:genders),
+		{}, id: :person_gender, disabled: ro_personal %>
+
+
+	<%= form.label :joined %>
+	<%= form.date_field :joined, id: :person_joined, disabled: ro_personal %>
+
+	<%= form.label :quitted %>
+	<%= form.date_field :quitted, id: :person_quitted, disabled: ro_personal %>
+	</div>
+</fieldset>

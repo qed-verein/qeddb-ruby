@@ -1,0 +1,32 @@
+<% provide :title, "Import" %>
+<% provide :path, navigation_path([root_link, import_link]) %>
+
+<h1>Import</h1>
+
+<div class="flexlayout" id="import_prepare">
+<%= form_tag import_path(@event), multipart: true do %>
+<fieldset>
+	<legend>Einstellungen für Import</legend>
+
+	<label>
+		Datei zum Importieren
+		<i>Bitte eine Datei zum Importieren auswählen.
+		Diese muss sich im JSON-Format befinden <br> und die gleichen Attribute besitzen
+		wie die von der Exportfunktion erzeugten Daten.</i>
+		<%= file_field_tag 'import_file', {accept: 'application/json'} %>
+	</label>
+
+	<div class="actions">
+		<%= submit_tag t('actions.import.submit') %><br>
+	</div>
+	<b>Hinweis:</b><br><i>Der Import aller Daten kann einige Minuten dauern.</i>
+<% end %>
+</fieldset>
+
+<% unless @import_errors.empty? %>
+<h2>Validierungsfehler</h2>
+<pre id="import_errors">
+<%= @import_errors %>
+</pre>
+<% end %>
+</div>

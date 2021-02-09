@@ -1,0 +1,21 @@
+<% provide(:title, t('.title')) %>
+
+<h1>Wähle ein neues Passwort</h1>
+
+<div class="login">
+<%= form_for @person, :url => password_reset_path(@token), :html => {:method => :put} do |f| %>
+<fieldset>
+	<legend><%= t('.title') %></legend>
+
+	<%= render partial: "shared/errors", locals: {object: @person} %>
+	
+	<%= f.label :password %>
+	<%= f.password_field :password %><br>
+
+	<%= f.label :password_confirmation %>
+	<%= f.password_field :password_confirmation %><br>
+
+	<%= f.submit t(".submit") %>
+</fieldset>
+</div>
+<% end %>

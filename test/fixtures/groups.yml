@@ -1,0 +1,68 @@
+group_admin:
+    title: "Admin"
+    description: "Diese Gruppe enthält alle Administratoren"
+    mode: editable
+    program: admins
+
+group_chairman:
+    title: "Vorstand"
+    description: "Diese Gruppe enthält alle Vorstände"
+    mode: editable
+    program: chairman
+
+group_treasurer:
+    title: "Kassier"
+    description: "Diese Gruppe enthält alle Kassenwärte"
+    mode: editable
+    program: treasurer
+
+group_member:
+    title: "Mitglieder"
+    description: "Diese Gruppe enthält alle Mitglieder"
+    mode: automatic
+    program: members
+
+group_gl:
+    title: Allgemeine lineare Gruppe
+    description: "Diese Gruppe enthält alle invertierbaren Matrizen"
+    mode: manual
+    program: admins
+
+group_sl:
+    title: Spezielle lineare Gruppe
+    description: "Diese Gruppe enthält alle invertierbaren Matrizen mit Determinate 1"
+    mode: userdefined
+    
+group_o:
+    title: Orthogonale Gruppe
+    description: "Diese Gruppe enthält alle orthogonalen Matrizen"
+    mode: userdefined
+    
+group_so:
+    title: Spezielle orthogonale Gruppe
+    description: "Diese Gruppe enthält alle orthogonalen Matrizen mit Determinate 1"
+    mode: userdefined 
+    
+group_q:
+    title: Rationale Zahlen
+    description: Additive Gruppe der rationalen Zahlen
+    mode: userdefined
+
+group_z:
+    title: Ganze Zahlen
+    description: Additive Gruppe der ganzen Zahlen
+    mode: userdefined
+
+group_mathematikerkonferenz_orgas:
+    title: Orgas der Mathematikerkonferenz
+    event: event_mathematikerkonferenz
+    description: Alle Orgas der Mathematikerkonferenz
+    mode: automatic
+    program: organizers
+
+group_mathematikerkonferenz_teilnehmer:
+    title: Teilnehmer der Mathematikerkonferenz
+    event: event_mathematikerkonferenz
+    description: Alle Teilnehmer der Mathematikerkonferenz
+    mode: automatic
+    program: participants

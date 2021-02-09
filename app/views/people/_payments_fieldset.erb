@@ -1,0 +1,7 @@
+<fieldset id="person_payments_fieldset">
+	<legend><%= Payment.model_name.human(count: :other) =%></legend>
+	Hier kann man gezahlte Mitgliedsbeiträge eintragen:
+	<%= form.fields_for :payments do |payment| %>
+		<%= render partial: 'payments/payment_fields', locals: {form: payment} %>
+	<% end %>
+</fieldset>

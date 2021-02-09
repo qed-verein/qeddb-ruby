@@ -1,0 +1,13 @@
+<% provide(:title, t('.title')) %>
+
+<div class="login">
+<%= form_tag password_resets_path, :method => :post do %>
+<fieldset>
+	<legend><%= t('.title') %></legend>
+	Bitte gib deinen Benutzernamen an, um das Passwort neu zu setzen.
+	<%= label_tag :account_name, t('.account_name') %>
+	<%= text_field_tag :account_name %><br>
+	<%= submit_tag t('.reset_password')%>
+</fieldset>
+</div>
+<% end %>

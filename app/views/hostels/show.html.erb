@@ -1,0 +1,28 @@
+<% provide :title, @hostel.title %>
+
+<% if @hostel_policy.show? %>
+<div class="flexlayout">
+<article id="hostel" class="panel">
+	<h2><%= @hostel.title %></h2>
+	<dl class="aligned">
+		<dt><%= Hostel.human_attribute_name :title %></dt>
+		<dd><%= @hostel.title %></dd>
+
+		<dt><%= Hostel.human_attribute_name :homepage %></dt>
+		<dd><%= check_blank(@hostel.homepage) {link_to @hostel.homepage, @hostel.homepage} %></dd>
+
+		<dt><%= Address.model_name.human %></dt>
+		<dd><%= render_block_address(@hostel.address) %></dd>
+
+		<dt><%= Hostel.human_attribute_name :comment %></dt>
+		<dd><%= render_string @hostel.comment %></dd>
+	</dl>
+
+	<div class="actions">
+		<%= edit_hostel_link(@hostel) %>
+		<%= delete_hostel_link(@hostel) %>
+	</div>
+</article>
+</div>
+
+<% end %>

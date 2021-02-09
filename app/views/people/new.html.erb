@@ -1,0 +1,33 @@
+<% provide :title, t('actions.person.new') %>
+<% @person.addresses.build; 3.times {@person.contacts.build} %>
+
+<article id="person" class="flexlayout">
+<h2><%= t('actions.person.new') %></h2>
+
+<%= form_with(model: @person, local: true) do |form| %>
+	<%= render partial: "shared/errors", locals: {object: @person} %>
+	<%= hidden_field_tag 'redirect', 'general' %>
+
+	<%= render partial: 'general_fieldset', locals: {form: form} %>
+
+	<details>
+		<summary>Zusätzliche Informationen...</summary>
+		<%= render partial: 'additional_information_fieldset', locals: {form: form} %>
+	</details>
+
+	<details>
+		<summary>Adressen und Kontakte...</summary>
+		<%= render partial: 'addresses_fieldset', locals: {form: form} %>
+		<%= render partial: 'contacts_fieldset', locals: {form: form} %>
+	</details>
+
+	<details>
+		<summary>Datenschutzeinstellungen...</summary>
+		<%= render partial: 'privacy_fieldset', locals: {form: form} %>
+	</details>
+
+	<p class="actions">
+		<%= form.submit %>
+	</p>
+<% end %>
+</article>

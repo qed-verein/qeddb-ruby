@@ -1,0 +1,38 @@
+<header>
+	<nav id="mainnav" class="horizontal">
+		<%= link_to "Eigene Daten", person_path(current_user) %>
+		<%= people_link %>
+		<%= events_link %>
+		<%= hostels_link %>
+		<%= groups_link %>
+		<%= mailinglists_link %>
+		<%= versions_link %>
+		<%= import_link %>
+		<%= export_link %>
+	</nav>
+
+	<div class="breadcrumb">
+		<%= breadcrumb_trail.map{|crumb| link_to crumb.name, crumb.url}.join(" » ").html_safe %>
+	</div>
+</header>
+
+
+<div class="mobilemenu">
+	<%= icon_button "", "menu", "javascript:toggleHeader()" %>
+</div>
+
+<script>
+function toggleHeader() {
+	var menu = document.getElementsByTagName("header")[0];
+	if(menu.style.visibility === "visible")
+	{
+		menu.style.visibility = "hidden";
+		menu.style.opacity = "0%";
+	}
+	else
+	{
+		menu.style.visibility = "visible";
+		menu.style.opacity = "95%";
+	}
+}
+</script>

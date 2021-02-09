@@ -1,0 +1,11 @@
+<% if object.errors.any? %>
+<div class="error validation_error">
+	<b><%= t('errors.template.header', :model => object.class.model_name.human, :count => object.errors.count) %></b><br>
+	<%= t('errors.template.body') %>
+	<ul>
+		<% object.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>

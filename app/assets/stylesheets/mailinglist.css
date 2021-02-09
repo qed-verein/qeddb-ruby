@@ -1,0 +1,17 @@
+#mailinglists .overview {
+	columns: 2 30em;
+	column-gap: 5em;
+}
+
+#mailinglists dt {
+	font-variant: normal;
+}
+
+
+#mailinglist_subscriptions ul
+{
+	columns: 2 30em;
+	column-gap: 1em;
+	list-style-type: none;
+}
+

@@ -1,0 +1,27 @@
+<%= form_with(model: hostel, local: true) do |form| %>
+	<%= render partial: "shared/errors", locals: {object: @hostel} %>
+
+	<fieldset class="hostel_fieldset">
+		<legend><%= Hostel.model_name.human %></legend>
+
+		<div class="aligned">
+			<%= form.label :title %>
+			<%= form.text_field :title, id: :hostel_title %>
+			<%= form.label :homepage %>
+			<%= form.url_field :homepage, id: :hostel_homepage %>
+		</div>
+		<label>
+			<%= Hostel.human_attribute_name :comment %>
+			<i>Für weitere Informationen zu dieser Unterkunft:</i>
+			<%= form.text_area :comment, id: :hostel_comment, rows: 3, cols: 50 %>
+		</label>
+		<hr>
+		Hier kann man die Anschrift der Unterkunft angeben:
+		<%= form.fields_for :address do |af| %>
+			<%= render partial: 'addresses/address_fields', locals: {form: af} %>
+		<% end %>
+		<div class="actions">
+			<%= form.submit %>
+		</div>
+	</fieldset>
+<% end %>

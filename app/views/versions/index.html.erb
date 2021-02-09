@@ -1,0 +1,39 @@
+<% provide :title, "Versionen" %>
+
+<div class="flexlayout">
+<article id="versions">
+
+<h1>Versionen</h1>
+
+Dies ist eine einfache Versionsübersicht.
+
+<div style="text-align: center">
+<%== pagy_nav(@pagy) %>
+</div>
+
+<table>
+	<thead>
+		<tr>
+			<th>Typ</th>
+			<th>Name</th>
+			<th>Version</th>
+			<th>Datum</th>
+			<th>Autor</th>
+			<th>Aktion</th>
+			<th></th>
+		</tr>
+	</thead>
+	<% @versions.each do |version| %>
+	<tr>
+		<td><%= item_type(version) %></td>
+		<td><%= item_name(version).truncate(30) %></td>
+		<td><%= version.index %></td>
+		<td><%= l version.created_at, format: :very_short if version.created_at %></td>
+		<td><%= version.whodunnit %></td>
+		<td><%= t "activerecord.attributes.version/event." + version.event %></td>
+		<td><%= link_to 'Vergleich', version_path(version) %></td>
+	</tr>
+	<% end %>
+</table>
+</article>
+</div>

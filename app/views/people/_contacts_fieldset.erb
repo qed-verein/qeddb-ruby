@@ -1,0 +1,15 @@
+<fieldset id="person_contacts_fieldset">
+	<legend><%= Contact.model_name.human(count: :other) %></legend>
+
+	<p>Für weitere Kontaktmöglichkeiten wie Telefonnummern, Email und Instant Messenger:</p>
+
+	<%= form.fields_for :contacts do |cf| %>
+		<%= render partial: 'contacts/contact_fields', locals: {form: cf} %>
+	<% end %>
+
+	<p><i>Einträge mit Typ "Mobil" werden auch in Teilnehmerlisten von Veranstaltungen angezeigt.</i></p>
+
+	<datalist id="protocol_list">
+		<%= im_protocol_list.map{|protocol| tag.option value: protocol}.join.html_safe %>
+	</datalist>
+</fieldset>

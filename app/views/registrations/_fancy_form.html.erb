@@ -1,0 +1,131 @@
+<% action = mode == :edit ? self_registration_path(@registration) :
+	event_register_self_path(@registration.event) %>
+<%=	form_with(model: @registration, url: action, local: true) do |form| %>
+<%= render partial: "shared/errors", locals: {object: @registration} %>
+
+<% ro_additional = !@registration_policy.edit_additional? %>
+
+<fieldset id="registration_general_information_fieldset">
+	<legend>Allgemeines</legend>
+
+	<% if ro_additional %>
+	Du kannst deine Anmeldung nicht mehr bearbeiten
+	<% elsif mode == :new %>
+    Auf dieser Seite kannst du dich für die Veranstaltung <%= event_link @registration.event %> anmelden.
+    <% elsif mode ==  :edit  %>
+	Auf dieser Seite kannst du deine Anmeldedaten für die Veranstaltung <%= event_link @registration.event %> bearbeiten.
+    <% end %>
+    <p>Bitte beachte, dass deine Anmeldung erst mit der Überweisung des Teilnahmebeitrags gültig ist.</p>
+	<p>Minderjährige müssen sich das <%= link_to "Minderjährigenformular", Rails.configuration.underage_formular %>
+	von den Eltern unterschreiben lassen und zum Seminar mitbringen.</p>
+
+	<dl class="aligned">
+		<dt><%= Registration.human_attribute_name :event %>:</dt>
+		<dd><%= event_link @registration.event %></dd>
+		<dt><%= Registration.human_attribute_name :person %>:</dt>
+		<dd><%= person_link @registration.person %></dd>
+		<dt><%= Person.human_attribute_name :birthday %>:</dt>
+		<dd><%= @registration.person.birthday %></dd>
+		<dt><%= Person.human_attribute_name :gender %>:</dt>
+		<dd><%= Person.human_enum_value(:gender, @registration.person.gender) %></dd>
+	</dl>
+	<p>Bitte kontrolliere deine Kontaktdaten. Diese kannst du
+	 <%= link_to "hier", edit_addresses_person_path(@registration.person) %> ändern.</p>
+	<dl class="aligned">
+		<dt><%= Address.model_name.human(count: 1) %>:</dt>
+		<dd><%= check_unknown(@registration.person.main_address) {|x| render_inline_address(x)} %></dd>
+		<dt><%= "Handynummer" %>:</dt>
+		<dd><%= check_unknown(@registration.person.mobile_number) {|x| mobile_phone_html(x)} %></dd>
+	</dl>
+</fieldset>
+
+<% if mode == :edit %>
+<fieldset id="registration_payment_fieldset">
+	<legend>Anmeldestatus</legend>
+	<dl class="aligned">
+		<% if mode == :edit %>
+		<dt><%= Registration.human_attribute_name :created_at %>:</dt>
+		<dd><%= render_datetime(@registration.created_at) %></dd>
+
+		<dt><%= Registration.human_attribute_name :updated_at %>:</dt>
+		<dd><%= render_datetime(@registration.updated_at) %></dd>
+		<% end %>
+
+		<dt><%= Registration.human_attribute_name :status %>:</dt>
+		<dd><%= Registration.human_enum_value(:status, @registration.status) %></dd>
+		<dt><%= Registration.human_attribute_name :organizer %>:</dt>
+		<dd><%= render_yes_no @registration.organizer %></dd>
+
+		<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
+		<dd><%= check_unknown(@registration.money_amount) {|x| number_to_currency x} %></dd>
+
+		<dt><%= Registration.human_attribute_name :payment_complete %>:</dt>
+		<dd><%= render_yes_no @registration.payment_complete %></dd>
+
+		<dt><%= Registration.human_attribute_name :money_transfer_date %>:</dt>
+		<dd><%= render_date @registration.money_transfer_date %></dd>
+
+		<dt><%= Registration.human_attribute_name :member_discount %>:</dt>
+		<dd><%= render_yes_no @registration.member_discount %></dd>
+
+		<dt><%= Registration.human_attribute_name :other_discounts %>:</dt>
+		<dd><%= render_string @registration.other_discounts %></dd>
+	</dl>
+</fieldset>
+<% end %>
+
+<fieldset id="registration_transport_fieldset">
+	<legend>An- und Abreise</legend>
+
+	<label><%= Registration.human_attribute_name :arrival %>
+		<i>Ankunftszeit, falls du erst später am Veranstaltungsort ankommst:</i>
+		<%= form.datetime_field :arrival, id: :registration_arrival, disabled: ro_additional %></label>
+
+	<label><%= Registration.human_attribute_name :departure %>
+		<i>Abfahrtszeit, falls du schon früher vom Veranstaltungsort abreisen musst:</i>
+		<%= form.datetime_field :departure, id: :registration_departure, disabled: ro_additional %></label>
+
+	<label><%= Registration.human_attribute_name :nights_stay %>
+		<i>Anzahl der Übernachtungen in der Herberge:</i>
+		<%= form.number_field :nights_stay, id: :registration_nights_stay, disabled: ro_additional, min: 0 %></label>
+
+	<label><%= Registration.human_attribute_name :station_arrival %>
+		<i>Ich werde vom folgenden Bahnhof zur Veranstaltung anreisen:</i>
+		<%= form.text_field :station_arrival, id: :registration_station_arrival, disabled: ro_additional %></label>
+
+	<label><%= Registration.human_attribute_name :station_departure %>
+		<i>Ich werde nach der Veranstaltung zum folgenden Bahnhof abreisen:</i>
+		<%= form.text_field :station_departure, id: :registration_station_departure, disabled: ro_additional %></label>
+
+	<label><%= Registration.human_attribute_name :railway_discount %>
+		<i>Für Ermäßigungen wie die BahnCard 25/50, Semesterticket oder ähnliches.</i>
+		<%= form.text_field :railway_discount, id: :registration_railway_discount, disabled: ro_additional %></label>
+</fieldset>
+
+<fieldset id="registration_additional_fieldset">
+	<legend>Sonstiges</legend>
+	<label><%= Registration.human_attribute_name :meal_preference %>
+		<i>Falls du vegetarisch essen möchtest oder wenn du bestimmte Allergien hast.</i>
+		<%= form.text_area :meal_preference, id: :registration_meal_preference, disabled: ro_additional %></label>
+	<label><%= Registration.human_attribute_name :talks %>
+		<i>Wenn du planst einen Vortrag zu halten, so trage hier dein Vortragsthema ein.<br>
+		Schreibe bitte auch die Dauer und Zielgruppe des Vortrags dazu.</i>
+		<%= form.text_area :talks, id: :registration_talks, disabled: ro_additional %></label>
+	<label><%= Registration.human_attribute_name :comment %>
+		<i>Hier kannst du den Orgas noch weitere Informationen zukommen lassen.</i>
+		<%= form.text_area :comment, id: :registration_comment,	disabled: ro_additional %></label>
+
+	<% if mode == :new %>
+		<%= form.label :terms_of_service, style: "display: block; max-width: 50em" do %>
+			<%= form.check_box :terms_of_service %><%= Registration.human_attribute_name :terms_of_service %>
+			<i>Ich bin mir bewusst, dass meine Anmeldung erst gültig ist, wenn ich meinen Teilnehmerbeitrag überwiesen habe und mein Platz von den Organisatoren bestätigt wurde. Ich stimme zu, dass meine personenbezogenen Daten an die Organisatoren und Teilnehmer dieser Veranstaltung weitergegeben werden. Weiterhin erlaube ich, dass auf der Veranstaltung Bilder von mir aufgenommen werden dürfen.</i>
+		<% end %>
+	<% end %>
+</fieldset>
+
+<% unless ro_additional %>
+<div class="actions">
+	<%= form.submit %>
+</div>
+<% end %>
+<% end %>

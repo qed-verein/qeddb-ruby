@@ -1,0 +1,19 @@
+<% provide :title, "Teilnehmer hinzufügen" %>
+
+<article class="flexlayout" id="registration">
+<h2><%= yield :title %></h2>
+
+<%= form_tag event_select_person_path(@event) do %>
+<fieldset>
+	<legend>Benutzer wählen</legend>
+	<p>Wähle die Person aus, welche zur Veranstaltung <em><%= @event.title %></em> hinzugefügt werden soll.</p>
+	<div class="aligned">
+		<%= label_tag :person_id, Person.model_name.human %>
+		<%= select_tag :person_id, options_from_collection_for_select(Person.all, :id, :full_name) %>
+	</div>
+	<div class="actions">
+		<%= submit_tag "Weiter zu Anmeldung"  %>
+	</div>
+</fieldset>
+<% end %>
+</article>

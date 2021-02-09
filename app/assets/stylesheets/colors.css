@@ -1,0 +1,109 @@
+:root {
+  --bg-color-1: #AB7F41;
+  --bg-color-2: #C5995B;
+  --bg-color-3: #DEB274;
+  --bg-color-4: #F8CC8E;
+  --bg-color-5: #FFE5A7;
+  --bg-color-6: #FFFFC1;
+  --bg-color-7: #FFFFDA;
+  --bg-color-8: #FFFFF3;
+
+  --text-color-1: #110000;
+  --text-color-2: #2B0909;
+  --text-color-3: #442222;
+  --text-color-4: #5E3C3C;
+  --text-color-5: #775555;
+
+  --link-color-1: #5F1B00;
+  --link-color-2: #85411E;
+  --link-color-3: #AB6744;
+  --link-color-4: #D18D6A;
+  --link-color-5: #F8B491;
+
+  --meta-color-1: #0C126A;
+  --meta-color-2: #262C84;
+  --meta-color-3: #3F459D;
+  --meta-color-4: #595FB7;
+  --meta-color-5: #7278D0;
+}
+
+body {
+	background-color: var(--bg-color-5);
+	color: var(--text-color-2);
+}
+
+header nav {
+	background-color: var(--bg-color-2);
+}
+
+header nav a {
+	color: var(--link-color-1);
+}
+
+header nav a:hover {
+	color: var(--link-color-2);
+	background-color: var(--bg-color-3);
+}
+
+th {
+	background-color: var(--bg-color-2);
+}
+
+tr:nth-of-type(even) td {
+	background-color: var(--bg-color-3);
+}
+
+tr:nth-of-type(odd) td {
+	background-color: var(--bg-color-4);
+}
+
+.panel, fieldset {
+	background-color: var(--bg-color-4);
+}
+
+dt {
+	color: var(--text-color-1)
+}
+
+dd {
+	color: var(--text-color-2)
+}
+
+label > i {
+	color: var(--text-color-3)
+}
+
+/* Links */
+
+a {
+	color: var(--link-color-1)
+}
+
+a:hover, a:focus {
+	color: var(--link-color-3)
+}
+
+/* Inputs */
+
+input, select, textarea {
+	background-color: var(--bg-color-5);
+}
+
+input:focus, select:focus, textarea:focus {
+	background-color: var(--bg-color-6);
+}
+
+input:hover, select:hover, textarea:hover {
+	background-color: var(--bg-color-7);
+}
+
+/* Buttons */
+
+button, input[type="submit"], input[type="button"], .actions a, a.button {
+	background-color: var(--link-color-3);
+	color: white;
+}
+
+button:hover, input[type="submit"]:hover, input[type="button"]:hover, .actions a:hover, .button:hover {
+	background-color: var(--link-color-4);
+}

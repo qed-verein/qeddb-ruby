@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= yield :title %></title>
+	<%= csrf_meta_tags %>
+	<%= stylesheet_link_tag 'application', media: 'all' %>
+	<%= javascript_include_tag 'application' %>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+</head>
+
+<body>
+	<% if logged_in? %>
+		<%= render partial: 'shared/menu_bar' %>
+	<% end %>
+
+	<div id="messages">
+		<% flash.each do |key, value| %>
+			<%= content_tag(:div, value, class: "message #{key}") %>
+		<% end %>
+	</div>
+
+	<%= content_for?(:sublayout) ? yield(:sublayout) : yield %>
+
+	<footer>
+		<div style="float: right; text-align: right">
+		<% if current_user.nil? %>
+			Du bist nicht eingeloggt.
+			<em><%= link_to "Einloggen", login_path %></em>
+		<% else %>
+			Du bist eingeloggt als: <b><%= person_link current_user %></b><br>
+			<em><%= link_to "Ausloggen", logout_path %></em>
+		<% end %>
+		</div>
+
+		<div style="text-align: left">
+		<b>Bei Fragen und Problem bitte an die Administratoren unter <em><%= admin_email_link %></em> wenden.</b>
+		</div>
+
+
+		<div style="text-align: left">
+		<% if Rails.env == "development" %>
+			<%= render partial: 'shared/debug' %>
+			<p style="padding: 1em; color: darkred; background-color: #FB8;
+				max-width: 100em; margin: 2em auto; text-align: center"><b>!!! ACHTUNG !!!</b>
+			Dies ist eine Entwicklerversion und darf nicht für den Produktivbetrieb eingesetzt werden.
+			Inbesondere kann es vorkommen, dass es Bugs oder unvollständige Seiten gibt.</p>
+		<% end %>
+		</div>
+	</footer>
+</body>
+</html>

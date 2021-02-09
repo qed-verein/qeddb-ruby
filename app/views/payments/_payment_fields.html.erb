@@ -1,0 +1,18 @@
+<fieldset class="payment">
+	<div class="aligned">
+		<%= form.label :type %>
+		<%= form.select :payment_type, Payment.human_enum_options(:payment_types), include_blank: "Keine Zahlung" %>
+
+		<%= form.label :amount %>
+		<%= form.number_field :amount, :step => 0.01 %>
+
+		<%= form.label :start %>
+		<%= form.date_field :start %>
+
+		<%= form.label :end %>
+		<%= form.date_field :end %>
+
+		<%= form.label :comment %>
+		<%= form.text_field :comment %>
+	</div>
+</fieldset>

@@ -1,0 +1,6 @@
+<% provide :title, sprintf("Anmeldung von %s bearbeiten", @registration.person.full_name) %>
+
+<article class="flexlayout" id="registration">
+<h2><%= yield :title %></h2>
+<%= render 'form', mode: :edit %>
+</article>

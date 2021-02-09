@@ -1,0 +1,477 @@
+/* Autor: Tamás Korodi
+ * Ein allgemeines Stylesheet, damit HTML-Elemente schöner ausschauen
+ */
+
+html {
+	font-size: 11pt;
+}
+
+body {
+	font-family: Cantarell, sans-serif;
+	margin: 0.0em;
+	line-height: 150%;
+}
+
+header {
+	transition: 1.0s;
+}
+
+header nav {
+	font-size: 1.2rem;
+	text-align: left;
+}
+
+
+header nav {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+header nav a {
+	padding: 0.7em;
+	font-weight: bold;
+	word-wrap: none;
+}
+
+summary {
+	font-size: 1.2rem;
+	outline: none;
+	transition: color 0.2s;
+	margin: 1em;
+}
+summary:hover {
+	color: #ffe;
+	cursor: pointer;
+}
+
+/* Hyperlinks */
+a {
+	text-decoration: none;
+	transition: color 0.5s, background-color 0.5s;
+}
+
+/* Tabellen */
+table {
+	border-collapse: collapse;
+	margin: 1em auto;
+	line-height: 120%;
+}
+
+th, td {
+	padding: 0.3em;
+	text-align: left;
+	overflow-wrap: break-word;
+}
+
+/* Formularelemente */
+
+fieldset {
+/*
+    border: 1px solid #ba7;
+*/
+    border: none;
+    margin: 1em 0em;
+    padding: 1em;
+}
+
+fieldset, header nav, .panel {
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+}
+
+fieldset fieldset {
+	border: none;
+	margin: 0.5em 0em;
+	padding: 0em;
+	box-shadow: none;
+}
+
+fieldset fieldset fieldset {
+	padding: 0.5em 0.0em;
+}
+
+fieldset fieldset fieldset:not(:last-of-type) {
+	border-bottom: 1px dashed #c66;
+}
+
+
+legend {
+	text-align: center;
+	font-weight: bold;
+	font-variant: small-caps;
+	font-size: larger;
+}
+
+fieldset fieldset legend {
+	margin-bottom: 1em;
+}
+
+label {
+	display: inline-block;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+fieldset > label
+{
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	display: block;
+	transition: background-color 0.3s;
+}
+
+label > i {
+	margin-left: 0.5em;
+	margin-bottom: 0.5em;
+	line-height: 90%;
+	display: block;
+	font-weight: normal;
+	font-size: smaller;
+	font-style: italic;
+}
+
+button, input[type="submit"], input[type="button"], .button {
+	display: inline-block;
+	font-weight: normal;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	padding: 0.6em 1em;
+	cursor: pointer;
+	border-radius: 2px;
+	letter-spacing: .5px;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+	border: none;
+	margin: 1em;
+	line-height: 22px;
+	user-select: none;
+	font-family: Cantarell, sans-serif;
+}
+
+.button i {
+	float: left;
+}
+
+button, input, select, textarea {
+	border: 1px solid #d96;
+	padding: 0.2em;
+	margin: 0.5em;
+	vertical-align: top;
+
+/*
+	appearance: none;
+*/
+	transition: background-color 0.3s, border-color 0.3s;
+}
+
+.aligned input[type="number"] {width: 4em;}
+
+.aligned input, .aligned select {
+	justify-self: start;
+	align-self: center;
+}
+
+
+button, input[type="submit"], input[type="button"], .button {
+	transition: background-color 0.3s, border-color 0.3s;
+}
+
+button:hover, input[type="submit"]:hover, input[type="button"]:hover, .button:hover {
+	border: none;
+}
+
+
+
+textarea {display: block; width: 90%}
+
+
+.actions {
+	margin: 0px;
+	padding: 0px;
+	display: block;
+	text-align: center;
+}
+
+
+
+/* Listen */
+ul, ol {
+	padding-left: 2em;
+}
+
+
+dt {
+	font-weight: bold;
+	font-variant: small-caps;
+	font-size: 110%;
+}
+
+dd {
+	margin-left: 2em;
+}
+
+
+/* Ausrichtung für Definitionlisten und Formularelemente */
+@media (min-width: 40em) {
+
+.aligned {
+	display: grid;
+	margin: 0em;
+	padding: 0em 1em;
+	grid-template-columns: minmax(auto, 10em) minmax(10em, 1fr);
+	gap: 0.5em 1.5em;
+}
+
+.aligned > dt, .aligned > label {
+	text-align: right;
+	grid-column: 1;
+	justify-self: end;
+	word-wrap: break-word;
+}
+
+
+.aligned > label::after {
+	content: ":"
+}
+
+.aligned > dd, .aligned > input, .aligned > select {
+	text-align: left;
+	margin: 0em;
+	grid-column: 2;
+}
+
+.aligned > textarea {
+	grid-column: span 2;
+}
+}
+
+
+
+/* Überschriften */
+h1, h2, h3, legend {
+	font-variant: small-caps;
+	text-align: center;
+}
+/* Zitate */
+q {
+	color: #833;
+}
+
+/* Abschnitte */
+aside {
+	background-color: #ec9;
+	margin: 1em;
+	padding: 1em;
+	min-width: 30em;
+	width: 30%;
+	float: right;
+}
+
+aside h1, aside h2, aside h3 {
+	margin-top: 0em;
+}
+
+
+header {
+	margin-bottom: 1em;
+	margin-top: 0em;
+	margin-left: 0em;
+	margin-right: 0em;
+}
+
+footer {
+	clear: both;
+	text-align: right;
+	font-size: small;
+	padding: 0.5em;
+}
+
+
+/* Fehlermeldungen */
+
+.alert, .error {
+	color: #EC8;
+	background-color: #C33;
+	padding: 1em;
+	margin: 0em 1em;}
+
+.validation_error ul {
+	margin: 0px;
+	font-style: italic;
+	font-size: smaller;
+}
+
+.notice {
+	color: white;
+	background-color: #484;
+	border: 2px solid #080;
+	padding: 1em;
+	margin: 0em 1em;}
+
+.message {
+	padding: 1em;
+	font-weight: bold;
+	text-align: center;
+	padding: 1em;
+	margin: 1em auto;
+	max-width: 30em;
+}
+
+.field_with_errors {
+	background-color: #C33;
+}
+
+/* Sonstiges */
+hr {
+	border-top-width: 0px;
+	border-bottom: 1px dashed #c66;
+}
+
+
+/* Überblick */
+.overview {
+	font-size: 120%;
+	line-height: 170%;
+	columns: 3 12em;
+	column-gap: 3em;
+	margin: 2em 0em;
+}
+
+.overview ul {
+	margin: 0em;
+	list-style-type: none;
+	break-inside: avoid-column;
+}
+
+.overview dt {
+	break-after: avoid-column;
+}
+
+.overview dd {
+	font-size: 90%;
+	font-style: italic;
+	color: #300;
+}
+
+/* Flexlayout */
+.flexlayout {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+/*
+fieldset .flexlayout, .panel .flexlayout {
+	justify-content: flex-start;
+}
+*/
+
+
+.flexlayout h2, .flexlayout p {
+	width: 100%;
+}
+
+.flexlayout > section, .flexlayout > fieldset {
+	margin: 0em 2em;
+	border: none;
+}
+
+.mobilemenu {
+	display: none;
+}
+
+@media (max-width: 40em) {
+	.mobilemenu {
+		position: fixed;
+		width: auto;
+		height: auto;
+		top: 0px;
+		left: 0px;
+		margin: 0px;
+		display: inline-block;
+	}
+
+	header {
+		position: fixed;
+		top: 0em;
+		left: 5em;
+		right: 0px;
+		visibility: hidden;
+		opacity: 0%;
+		margin: 0em;
+		z-index: 1;
+	}
+
+	header nav {
+		background-color: #ffe;
+		display: block;
+	}
+
+	header nav a {
+		display: block;
+	}
+}
+
+
+/* Für die mobile Version */
+@media (max-width: 40em) {
+	.breadcrumb {display: none}
+/*
+	footer {display: none}
+*/
+	.flexlayout {display: block}
+	.flexlayout h3 {margin-top: 0px}
+	dt {margin-top: 1em;}
+	.aligned label {display: block}
+	.aligned input[type=text] {display: block}
+	.flexlayout section, .flexlayout fieldset {margin: 0em}
+}
+
+.breadcrumb {
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+.tabs {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;}
+
+.tabs a {
+	word-wrap: none;
+	margin: 0px;
+	padding: 0.5em;
+	display: block;
+	background-color: #ea8;
+}
+
+.panel {
+	padding: 1.0em;
+}
+
+
+/* Für Tabellen sortieren und nummerieren */
+
+table.indexed_table {
+	counter-reset: row-num;
+}
+table.indexed_table tbody tr {
+	counter-increment: row-num;
+}
+table.indexed_table tr td:first-child::before {
+	content: counter(row-num) ". ";
+}
+
+th[data-sort]:hover {
+	cursor: pointer;
+	background-color: var(--bg-color-3);
+	color: var(--text-color-3);
+}
+
+th[data-sort].sorting-asc, th[data-sort].sorting-desc {
+	background-color: var(--bg-color-1);
+}
+
+th[data-sort].sorting-asc::after {
+	content: " ↓"}
+th[data-sort].sorting-desc::after {
+	content: " ↑"}

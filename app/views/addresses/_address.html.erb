@@ -1,0 +1,6 @@
+<span class="address">
+	<%= address.street_name + " " + address.house_number +
+		(address.address_addition.blank? ? "" : ", " + address.address_addition) %><br>
+	<%= address.postal_code + " " + address.city %><br>
+	<% address.country %>
+</span>

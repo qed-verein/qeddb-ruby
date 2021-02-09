@@ -1,0 +1,37 @@
+<fieldset id="person_privacy_fieldset">
+	<label>
+		<%= form.check_box :photos_allowed, id: :person_photos_allowed %>
+		<%= Person.human_attribute_name :photos_allowed %>
+		<i>Es dürfen Fotoaufnahmen von mir erstellt werden.</i>
+	</label>
+
+	<label>
+		<%= form.check_box :newsletter, id: :person_newsletter %>
+		<%= Person.human_attribute_name :newsletter %>
+		<i>Verschicke regelmäßige Newsletter meine Emailadresse.</i>
+	</label>
+
+	<label>
+		<%= form.check_box :publish, id: :person_publish %>
+		<%= Person.human_attribute_name :publish %>
+		<i>Zeige meinen Namen in der Mitgliederliste an.</i>
+	</label>
+
+	<label>
+		<%= form.check_box :publish_birthday, id: :person_publish_birthday %>
+		<%= Person.human_attribute_name :publish_birthday %>
+		<i>Zeige Geburtstag anderen Mitgleidern an.</i>
+	</label>
+
+	<label>
+		<%= form.check_box :publish_email, id: :person_publish_email %>
+		<%= Person.human_attribute_name :publish_email %>
+		<i>Zeige Emailadresse anderen Mitgliedern an.</i>
+	</label>
+
+	<label>
+		<%= form.check_box :publish_address, id: :person_publish_address %>
+		<%= Person.human_attribute_name :publish_address %>
+		<i>Zeige Adress- und Kontaktdaten anderen Mitgliedern an.</i>
+	</label>
+</fieldset>

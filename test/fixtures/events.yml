@@ -1,0 +1,32 @@
+event_mathematikerkonferenz:
+  hostel: hostel1
+  title: Mathematikerkonferenz
+  homepage: http://example.com/mathematikerkonferenz
+  start: 2017-01-01
+  end: 2017-02-02
+  deadline: 2016-01-01
+  cost: 3.1416
+  max_participants: 42
+  comment: Konferenz aller Mathematiker
+
+event_physikerkonferenz:
+  hostel: hostel1
+  title: Physikerkonferenz
+  homepage:
+  start: 3000-03-04
+  end: 3000-05-06
+  deadline: 3000-01-02
+  cost: 60.22
+  max_participants: 9.81
+  comment: Konferenz aller Physiker
+
+event_historikerkonferenz:
+  hostel: hostel2
+  title: Historikerkonferenz
+  homepage:
+  start: 1000-10-01
+  end: 1000-10-04
+  deadline: 1000-1-1
+  cost: 10
+  max_participants: 100
+  comment: Konferenz aller Historiker

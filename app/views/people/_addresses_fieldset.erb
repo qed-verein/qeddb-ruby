@@ -1,0 +1,9 @@
+<fieldset id="person_addresses_fieldset">
+	<legend><%= Address.model_name.human(count: :other) =%></legend>
+	<%= form.fields_for :addresses do |af| %>
+		<%= af.options[:child_index] == 0 ?
+			"Hier kann man den Hauptwohnsitz angeben:" :
+			"Hier kann man eine weitere Adresse angeben:" %>
+		<%= render partial: 'addresses/address_fields', locals: {form: af} %>
+	<% end %>
+</fieldset>

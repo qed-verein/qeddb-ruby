@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+payment1:
+  person: person1
+  start: 2000-1-1
+  end: 2020-1-1
+  amount: 5 100
+  payment_type: 1
+  comment: Kommentar
+
+payment2:
+  person: person2
+  start: 2000-1-1,
+  end: 2001-1-1
+  amount: 5
+  payment_type: 1
+  comment: Kommentar
+  
+
+payments_testmitglied_1:
+  person: testmitglied
+  start: 2000-1-1,
+  end: 2100-1-1
+  amount: 5
+  payment_type: 1
+payments_testmitglied_2:
+  person: testmitglied
+  start: 2100-1-1,
+  end: 2200-1-1
+  amount: 5
+  payment_type: 1

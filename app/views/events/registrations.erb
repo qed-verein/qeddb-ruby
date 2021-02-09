@@ -1,0 +1,128 @@
+<% view_private = @event_policy.list_private_fields? %>
+
+<h1><%= @event.title %></h1>
+
+<section id="event_participants_data">
+<h2>Teilnehmerliste</h2>
+
+<div class="flexlayout">
+<fieldset>
+	<legend>Spalten auswählen</legend>
+	<label><input type="checkbox" id="show_person_field" checked> Geschlecht und Geburtstag anzeigen</label>
+	<label><input type="checkbox" id="show_phone_field" checked> Handynummer anzeigen</label>
+	<label><input type="checkbox" id="show_address_field" checkd> Addressdaten anzeigen</label>
+	<label><input type="checkbox" id="show_status_field" checked> Anmeldestatus anzeigen</label>
+	<label><input type="checkbox" id="show_travel_field"> Anreiseinformationen anzeigen</label>
+	<% if view_private %>
+	<label><input type="checkbox" id="show_payment_field"> Zahlungsinformationen anzeigen</label>
+	<label><input type="checkbox" id="show_other_field"> Sonstige Daten anzeigen</label>
+	<% end %>
+	<div class="actions">
+		<%= download_table_button('#registrations_table') %>
+	</div>
+</fieldset>
+</div>
+
+<table class="registrations indexed_table" id="registrations_table">
+<thead>
+	<tr>
+		<th>#</th>
+		<th data-sort="string"><%= Person.human_attribute_name :first_name %></th>
+		<th data-sort="string"><%= Person.human_attribute_name :last_name %></th>
+		<th data-sort="string" class="person_field"><%= Person.human_attribute_name :gender %></th>
+		<th data-sort="string" class="person_field"><%= Person.human_attribute_name :birthday %></th>
+		<th data-sort="string" class="phone_field"><%= Person.human_attribute_name :mobile_number %></th>
+		<th data-sort="string" class="address_field"><%= Person.human_attribute_name :email_address %></th>
+		<th data-sort="string" class="address_field"><%= Address.model_name.human %></th>
+		<th data-sort="string" class="status_field"><%= Registration.human_attribute_name :status %></th>
+		<th data-sort="string" class="status_field"><%= Registration.human_attribute_name :organizer %></th>
+		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :arrival %></th>
+		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :departure %></th>
+		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :station_arrival %></th>
+		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :station_departure %></th>
+		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :railway_discount %></th>
+		<% if view_private %>
+		<th data-sort="int"    class="payment_field"><%= Registration.human_attribute_name :money_amount_short %></th>
+		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :payment_complete_short %></th>
+		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :money_transfer_date %></th>
+		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :member_discount %></th>
+		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :other_discounts %></th>
+		<th data-sort="string" class="other_field"><%= Registration.human_attribute_name :meal_preference %></th>
+		<th data-sort="string" class="other_field"><%= Registration.human_attribute_name :talks %></th>
+		<th data-sort="string" class="other_field"><%= Registration.human_attribute_name :comment %></th>
+		<% end %>
+	</tr>
+</thead>
+<tbody>
+	<% @event.registrations.each do |r| %>
+	<tr>
+		<td></td>
+		<td><%= link_to r.person.first_name, r %></td>
+		<td><%= link_to r.person.last_name, r %></td>
+		<td class="person_field"><%= Person.human_enum_value(:gender, r.person.gender)%></td>
+
+		<% if view_private || r.person.publish_birthday %>
+			<td class="person_field" data-sort-value="<%= r.person.birthday %>"><%= render_date r.person.birthday %></td>
+		<% else %>
+			<td class="person_field"><%= tag.i("privat") %></td>
+		<% end %>
+
+		<td class="phone_field">
+			<%= (view_private || r.person.publish_address) ?
+				check_unknown(r.person.mobile_number) {|x| mobile_phone_html(x)} : tag.i("privat") %>
+		</td>
+
+		<td class="address_field">
+			<%= (view_private || r.person.publish_email) ?
+				mail_to(r.person.email_address, r.person.email_address) : tag.i("privat") %>
+		</td>
+
+		<td class="address_field">
+			<%= (view_private || r.person.publish_address) ?
+				 check_unknown(r.person.main_address) {|x| render_inline_address(x)} : tag.i("privat") %>
+		</td>
+
+		<td class="status_field"><%= Registration.human_enum_value(:status, r.status) %></td>
+		<td class="status_field"><%= render_yes_no r.organizer %></td>
+		<td class="travel_field" data-sort-value='<%= r.arrival %>'><%= render_datetime r.arrival, :very_short  %></td>
+		<td class="travel_field" data-sort-value='<%= r.departure %>'><%= render_datetime r.departure, :very_short %></td>
+		<td class="travel_field"><%= render_string r.station_arrival %></td>
+		<td class="travel_field"><%= render_string r.station_departure %></td>
+		<td class="travel_field"><%= render_string r.railway_discount %></td>
+		<% if view_private %>
+		<td class="payment_field" data-sort-value="<%= r.money_amount || 0 %>">
+			<%= check_unknown(r.money_amount) {|x| number_to_currency x} %></td>
+		<td class="payment_field"><%= render_yes_no r.payment_complete %></td>
+		<td class="payment_field" data-sort-value='<%= r.money_transfer_date %>'><%= render_date r.money_transfer_date %></td>
+		<td class="payment_field"><%= render_yes_no r.member_discount %></td>
+		<td class="payment_field"><%= render_string r.other_discounts %></td>
+		<td class="other_field"><%= render_string r.meal_preference  %></td>
+		<td class="other_field"><%= render_string r.talks %></td>
+		<td class="other_field"><%= render_string r.comment  %></td>
+		<% end %>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+</section>
+<script>
+function downloadTable() {
+	$("#registrations_table").first().table2csv({"excludeColumns": "td[display='none'], td:first-child, th:first-child"});
+}
+
+function update_visiblity(item) {
+	var regex = /show_([a-z_]+)/;
+	match = item.id.match(regex);
+	if(!match) return;
+	selector = '.' + match[1];
+	checked = $(item).is(':checked');
+	if(checked)
+		$(selector).show();
+	else
+		$(selector).hide();}
+
+$(function(){
+	$("#registrations_table").stupidtable();
+	$('#event_participants_data input[type=checkbox]').each(function(index, item) {update_visiblity(item)})})
+$('#event_participants_data input[type=checkbox]').click(function() {update_visiblity(this)});
+</script>

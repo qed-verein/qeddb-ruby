@@ -1,0 +1,6 @@
+<% provide :title, sprintf("Teilnehmer zu %s hinzufügen", @registration.event.title) %>
+
+<article class="flexlayout" id="registration">
+<h2><%= yield :title %></h2>
+<%= render 'form', mode: :new %>
+</article>

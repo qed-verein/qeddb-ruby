@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+contact1:
+  person: person1
+  protocol: ICQ
+  identifier: 314159265
+  priority: 1
+
+contact2:
+  person: person1
+  protocol: ICQ
+  identifier: 271828182
+  priority: 2

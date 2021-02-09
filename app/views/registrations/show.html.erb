@@ -1,0 +1,109 @@
+<% provide :title, "Anmeldung von " + @registration.person.full_name %>
+
+<% if @registration_policy.view_general? %>
+<div class="flexlayout">
+<article id="registration" class="panel" style="flex-grow: 0.5">
+	<h2><%= "Anmeldung von " + @registration.person.full_name %></h2>
+
+	<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(20em, auto)) ; margin-bottom: 2em">
+	<section id="registration_general_information">
+		<h3>Allgemeines</h3>
+		<dl class="aligned">
+			<dt><%= Registration.human_attribute_name :event %>:</dt>
+			<dd><%= event_link @registration.event %></dd>
+			<dt><%= Registration.human_attribute_name :person %>:</dt>
+			<dd><%= person_link @registration.person %></dd>
+			<dt><%= Registration.human_attribute_name :organizer %>:</dt>
+			<dd><%= render_yes_no @registration.organizer %></dd>
+			<dt><%= Registration.human_attribute_name :status %>:</dt>
+			<dd><%= Registration.human_enum_value(:status, @registration.status) %></dd>
+
+			<% if @registration_policy.view_private? || @registration.person.publish_birthday %>
+			<dt><%= Person.human_attribute_name :birthday %>:</dt>
+			<dd><%= @registration.person.birthday %></dd>
+			<% end %>
+
+			<dt><%= Person.human_attribute_name :gender %>:</dt>
+			<dd><%= Person.human_enum_value(:gender, @registration.person.gender) %></dd>
+
+			<% if @registration_policy.view_private? || @registration.person.publish_email %>
+			<dt><%= Person.human_attribute_name :email_address %>:</dt>
+			<dd><%= check_unknown(@registration.person.email_address) {|x| mail_to(x)} %></dd>
+			<% end %>
+
+			<% if @registration_policy.view_private? || @registration.person.publish_address %>
+			<dt><%= Address.model_name.human(count: 1) %>:</dt>
+			<dd><%= check_unknown(@registration.person.main_address) {|x|
+				render_block_address(x)} %></dd>
+			<dt><%= Person.human_attribute_name :mobile_phone %>:</dt>
+			<dd><%= check_unknown(@registration.person.mobile_number) {|x|
+				mobile_phone_html(x)} %></dd>
+			<% end %>
+		</dl>
+	</section>
+
+	<% if @registration_policy.view_payments? %>
+	<section id="registration_status">
+		<h3>Zahlungen</h3>
+		<dl class="aligned">
+			<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
+			<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount} %></dd>
+
+			<dt><%= Registration.human_attribute_name :payment_complete %>:</dt>
+			<dd><%= render_yes_no @registration.payment_complete %></dd>
+
+			<dt><%= Registration.human_attribute_name :money_transfer_date %>:</dt>
+			<dd><%= render_date @registration.money_transfer_date %></dd>
+
+			<dt><%= Registration.human_attribute_name :member_discount %>:</dt>
+			<dd><%= render_yes_no @registration.member_discount %></dd>
+
+			<dt><%= Registration.human_attribute_name :other_discounts %>:</dt>
+			<dd><%= render_string @registration.other_discounts %></dd>
+		</dl>
+	</section>
+	<% end %>
+
+	<% if @registration_policy.view_additional? %>
+	<section id="registration_transport">
+		<h3>An- und Abreise</h3>
+		<dl class="aligned">
+			<dt><%= Registration.human_attribute_name :arrival %>:</dt>
+			<dd><%= render_datetime @registration.arrival %></dd>
+			<dt><%= Registration.human_attribute_name :departure %>:</dt>
+			<dd><%= render_datetime @registration.departure %></dd>
+			<dt><%= Registration.human_attribute_name :nights_stay %>:</dt>
+			<dd><%= check_unknown(@registration.nights_stay) {|x| x} %></dd>
+			<dt><%= Registration.human_attribute_name :station_arrival %>:</dt>
+			<dd><%= render_string @registration.station_arrival %></dd>
+			<dt><%= Registration.human_attribute_name :station_departure %>:</dt>
+			<dd><%= render_string @registration.station_departure %></dd>
+			<dt><%= Registration.human_attribute_name :railway_discount %>:</dt>
+			<dd><%= render_string @registration.railway_discount %></dd>
+		</dl>
+	</section>
+
+	<section id="registration_additional">
+		<h3>Sonstiges</h3>
+		<dl class="aligned">
+			<dt><%= Registration.human_attribute_name :meal_preference %>:</dt>
+			<dd><%= render_string @registration.meal_preference %></dd>
+			<dt><%= Registration.human_attribute_name :talks %>:</dt>
+			<dd><%= render_string @registration.talks %></dd>
+			<dt><%= Registration.human_attribute_name :comment %>:</dt>
+			<dd><%= render_string @registration.comment %></dd>
+		</dl>
+	</section>
+	<% end %>
+	</div>
+
+	<div class="actions">
+		<% if @registration.person.id == current_user.id && !@registration_policy.edit_general? %>
+			<%= event_register_self_link(@registration.event) %>
+		<% end %>
+		<%= edit_registration_link(@registration) %>
+		<%= delete_registration_link(@registration) %>
+	</div>
+</article>
+</div>
+<% end %>

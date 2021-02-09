@@ -1,0 +1,33 @@
+<div class="flexlayout">
+<article>
+
+<h3>Herzlich willkommen in der QED-Datenbank!</h3>
+
+Hier kanst du deine eigenen Daten ändern und dich zu Veranstaltung anmelden.
+
+<% if current_user.member? %>
+<li>Als Mitglied hast du die Möglichkeit eine Mitgliederliste des Vereins einzusehen.</li>
+<% else %>
+<li>Du bist als externe Person angemeldet.</li>
+<% end %>
+<% if current_user.organizing_now? %>
+Als Organisator kannst du deine Veranstaltung bearbeiten und die Daten der Teilnehmer einsehen.
+<% end %>
+<% if current_user.chairman? %>
+<li>Als Vorstand hast du die Möglichkeit sämtliche Daten zu Personen und Veranstaltungen
+(außer Zahlungen) zu bearbeiten.</li>
+<% end %>
+<% if current_user.treasurer? %>
+<li>Als Kassier kannst du die Zahlungsinformationen der einzelnen Teilnehmer aktualisieren.</li>
+<% end %>
+<% if current_user.admin? %>
+<li>Als Administrator kannst du sämtliche Daten ändern sowie alle technische Informationen einsehen.</li>
+<% end %>
+
+<p><b>Hinweis:</b>
+Alle Daten dürfen nur für den privaten Gebrauch verwendet werden! <br>
+Desweiteren ist jegliche Weitergabe von Informationen oder Logindaten untersagt.</p>
+
+<p>Im Falle von Fragen und Problemen, könnt ihr das Webmasterteam unter <%= admin_email_link %> erreichen.</p>
+</article>
+</div>

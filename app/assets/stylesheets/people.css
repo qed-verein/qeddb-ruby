@@ -1,0 +1,44 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+
+#people .overview {
+	columns: 5 30em;
+}
+
+#people .overview dt {
+	margin-top: 3em;
+}
+
+#people .overview ul {
+	list-style-type: none;
+	columns: 3 10em;
+}
+
+
+
+#person_registrations ul {
+	list-style-type: none;
+	columns: 3 15em;
+}
+
+#person_groups_automatic {
+	max-width: 50em;
+}
+
+#person nav a {word-wrap: none}
+
+#people_table td {
+	max-width: 15em;
+	word-wrap: break-word;
+}
+/*
+@media (max-width: 50em) {#person_flex nav {float: none;}}
+*/
+
+
+/*
+@media (max-width: 50em) {#person_flex nav {float: none;}}
+*/

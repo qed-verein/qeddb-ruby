@@ -1,0 +1,9 @@
+mailinglist_mathematikerkonferenz_orgas:
+  title: mathematikerkonferenz-orgas
+  receiver_group: group_mathematikerkonferenz_orgas
+
+mailinglist_mathematikerkonferenz_teilnehmer:
+  title: mathematikerkonferenz-teilnehmer
+  sender_group: group_mathematikerkonferenz_orgas
+  receiver_group: group_mathematikerkonferenz_teilnehmer
+  

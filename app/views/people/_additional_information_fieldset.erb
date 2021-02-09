@@ -1,0 +1,27 @@
+<fieldset id="person_additional_information_fieldset">
+	<legend><%= t 'sections.person.additional_information' %></legend>
+
+	<label>
+		<%= Person.human_attribute_name(:railway_station) %>
+		<i>Voreinstellung für den  Anreisebahnhof</i>
+		<%= form.text_field :railway_station, id: :person_railway_station %>
+	</label>
+
+	<label>
+		<%= Person.human_attribute_name(:railway_discount) %>
+		<i>Für Ermäßigungen wie BahnCard oder Semesterticket</i>
+		<%= form.text_field :railway_discount, id: :person_railway_discount %>
+	</label>
+
+	<label>
+		<%= Person.human_attribute_name(:meal_preference) %>
+		<i>Für besondere Essenwünsche wie Vegetarier oder Allergien</i>
+		<%= form.text_area :meal_preference, id: :person_meal_preference, rows: 3, cols: 50 %>
+	</label>
+
+	<label>
+		<%= Person.human_attribute_name(:comment) %>
+		<i>Freifeld für beliebige weitere Informationen</i>
+		<%= form.text_area :comment, id: :person_comment, rows: 3, cols: 50 %>
+	</label>
+</fieldset>

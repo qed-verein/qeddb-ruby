@@ -1,0 +1,53 @@
+<dl>
+	<dt>Eintrag:</dt>
+	<dd><%= item_name(@version) %></dd>
+	
+	<dt>Zeitpunkt:</dt>
+	<dd><%= render_datetime @version.created_at %></dd>
+	
+	<dt>Aktion:</dt>
+	<dd><%= t "activerecord.attributes.version/event." + version.event %></dd>
+	
+	<dt>Benutzer:</dt>
+	<dd><%= check_unknown(version.whodunnit) {|x| x} %></dd>
+	
+	<dt>Unterschied:</dt>
+	<dd>
+	<table>
+	<thead>
+	<th>Attribut</th><th>vorher</th><th>nachher</th>
+	</thead>
+	<tbody>
+	<%
+		klass = @version.item_type.constantize
+		keys = klass.column_names - klass.paper_trail_options[:skip] - ['updated_at']
+		before_version = version.reify || {}
+		after_version = version.next ? version.next.reify : klass.find_by(id: version.item_id) || {}
+		diffs = keys.map {|k| [k, before_version[k], after_version[k]]}.reject {|k,x,y| x == y}
+	%>
+	<% diffs.each do |k,x,y| %>
+		<tr>
+		<td><%= klass.human_attribute_name k %></td>
+		<td><%= (ap x).html_safe %></td>
+		<td><%= (ap y).html_safe %></td>
+		</tr>
+	<% end %>	
+	</tbody>
+	</table></dd>
+	
+	<dt>Damaliger Stand:</dt>
+	<dd>
+	<table>
+	<thead>
+	<th>Attribut</th><th>damals</th>
+	</thead>
+	<tbody>
+	<% keys.each do |k,v| %>
+		<tr>
+		<td><%= klass.human_attribute_name k %></td>
+		<td><%= (ap after_version[k]).html_safe %></td>
+		</tr>
+	<% end %>	
+	</tbody>
+	</table></dd>
+</dl>

@@ -1,0 +1,46 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+address1:
+  addressable: person1
+  addressable_type: Person
+  country: Schweiz
+  city: Hintertupfingen
+  postal_code: 27183
+  street_name: Eulerweg
+  house_number: 271
+  address_addition: E
+  priority: 1
+
+address2:
+  addressable: person1
+  addressable_type: Person
+  country: Deutschland
+  city: Pinneberg
+  postal_code: 31416
+  street_name: Pistazienallee
+  house_number: π
+  address_addition: PI
+  priority: 2
+
+address_hostel_mandelbrot:
+  addressable: hostel_mandelbrot
+  addressable_type: Hostel
+  country: Deutschland
+  city: Mandelbrot
+  postal_code: 46689
+  street_name: Feigenbaumgasse
+  house_number: 2503
+  address_addition: 
+  priority: 1
+
+address_hostel_burg:
+  addressable: hostel_burg
+  addressable_type: Hostel
+  country: Deutschland
+  city: Burgstadt
+  postal_code: 12345
+  street_name: Ritterstraße
+  house_number: 1b
+  address_addition: Hinter dem Burg
+  priority: 1
+

@@ -1,0 +1,29 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+#event_registrations {
+	max-width: 50em;
+}
+
+
+#event_registrations ul {
+	list-style-type: none;
+	padding-left: 0em;
+	columns: 3 12em;}
+}
+
+#events .overview dl {
+	min-height: 10em;
+}
+
+#events_table td {
+	max-width: 20em;
+	word-wrap: break-word;
+}
+
+#registrations_table td {
+	max-width: 15em;
+	word-wrap: break-word;
+}

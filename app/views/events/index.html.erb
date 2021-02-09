@@ -1,0 +1,31 @@
+<% provide :title,  Event.model_name.human(count: :other) %>
+
+<%
+categories = {}
+@events.each {|event|
+	key = event.start.year
+	categories[key] = [] if categories[key].nil?
+	categories[key].push event}
+%>
+
+<article id="events">
+	<h1><%= Event.model_name.human(count: :other) %></h1>
+
+	<div class="overview">
+	<dl>
+		<% categories.keys.sort.reverse.each do |key| %>
+			<dt><%= key %></dt>
+			<ul>
+				<% categories[key].each do |event| %>
+					<li><%= event_link event %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	</dl>
+	</div>
+</article>
+
+<div class="actions">
+	<%= icon_button 'Tabellenansicht', 'grid_on', events_as_table_path %>
+	<%= new_event_link %>
+</div>

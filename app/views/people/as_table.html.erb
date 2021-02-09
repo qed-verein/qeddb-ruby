@@ -1,0 +1,69 @@
+<% provide :title, Person.model_name.human(count: :other) %>
+<h1><%= Person.model_name.human(count: :other) =%></h1>
+
+<% if @person_policy.list_published_people? %>
+<div class="actions">
+	<%= download_table_button('#people_table') %>
+</div>
+
+<table class="indexed_table" id="people_table">
+	<thead>
+		<tr>
+			<th>#</th>
+			<% [:first_name, :last_name, :birthday, :email_address, :main_address, :mobile_phone, :member].each do |field| %>
+				<th data-sort="string"><%= Person.human_attribute_name field =%></th>
+			<% end %>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @people.each do |person| %>
+			<tr>
+				<td></td>
+				<td><%= link_to person.first_name, person %></td>
+				<td><%= link_to person.last_name, person %></td>
+
+				<% if @person_policy.view_private? || person.publish_birthday %>
+					<td data-sort-value="<%= person.birthday %>">
+						<%= render_date person.birthday %>
+					</td>
+				<% else %>
+					<td><%= tag.i "privat" %></td>
+				<% end %>
+
+
+				<td>
+					<% if @person_policy.view_private? || person.publish_email %>
+						<%= mail_to person.email_address %>
+					<% else %>
+						<%= tag.i "privat" %>
+					<% end %>
+				</td>
+
+				<td>
+					<% if @person_policy.view_private? || person.publish_address %>
+						<%= check_unknown(person.main_address) {|a| render_inline_address(a)}  %>
+					<% else %>
+						<%= tag.i "privat" %>
+					<% end %>
+				</td>
+
+				<td>
+					<% if @person_policy.view_private? || person.publish_address %>
+						<%= check_unknown(person.mobile_number) {|n| mobile_phone_html(n)}  %>
+					<% else %>
+						<%= tag.i "privat" %>
+					<% end %>
+				</td>
+
+				<td>
+					<%= render_yes_no(person.member?) %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<script>
+	$("#people_table").stupidtable();
+</script>
+<% end %>
