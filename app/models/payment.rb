@@ -1,7 +1,7 @@
 # Die Klasse "Payment" verwaltet eine Mitgliedschaftszahlung.
 # Hierzu gehören alle normalen Mitgliedszahlungen, aber auch Fördermitgliedschaften etc.
 # Nicht erfasst werden hier veranstaltungsspezifische Zahlungen.
-# Diese müssen in der jeweiligen Anmeldung der Person eingetragen werden (siehe Registration). 
+# Diese müssen in der jeweiligen Anmeldung der Person eingetragen werden (siehe Registration).
 
 class Payment < ApplicationRecord
 	# Versionkontrolle
@@ -29,7 +29,7 @@ class Payment < ApplicationRecord
 
 	def update_membership_status
 		person.compute_membership_status
-		person.update_attributes({
+		person.update({
 			paid_until: person.paid_until,
 			member_until: person.member_until})
 	end

@@ -18,12 +18,13 @@ Installation
 Im GIT-Repository sind lediglich die Quelltextdateien für die QEDDB.
 Die zugehörigen Abhängigkeiten sind *nicht* im GIT-Repositiry enthalten. Diese können nach dem Klonen mit
 
-    bundle install --path=vendor/bundle
+    bundle config set --local path 'vendor/bundle'
+    bundle install
 
 ins Verzeichnis vendor/bundle nachinstalliert werden. Zur Installation muss das Ruby-Paket bundle zur Verfügung stehen.
 Anschließend müssen die JavaScript-Abhängigkeiten mit yarn installiert werden
 
-    yarn install
+    yarnpkg install
 
 Datenbanksetup
 ==============
@@ -44,6 +45,8 @@ In config/application.rb befinden sich die Einstellungen zum Konfigurieren
 
 Beim Updaten
 ======================
+Neue Abhängigkeiten herunterladen
+ bundle update
 Neue CSS/JS vorcompilieren
  rake assets:precompile
 Migrations laufen lassen
