@@ -8,7 +8,7 @@ class Event < ApplicationRecord
 	default_scope {order(start: :desc)}
 
 	# Alle Anmeldungen für dieser Veranstaltung
-	has_many :registrations, -> { includes(person: [:addresses, :contacts]).order('people.last_name') }, dependent: :destroy,
+	has_many :registrations, -> { includes(:person).order('people.last_name') }, dependent: :destroy,
 		inverse_of: :event
 	# Die zugehörigen Personen dieser Anmeldungen
 	has_many :people, through: :registrations
@@ -19,9 +19,6 @@ class Event < ApplicationRecord
 	# Alle Organisatoren dieser Veranstaltung
 	has_many :organizers, -> {where(registrations: {organizer: true})},
 		source: :person, through: :registrations
-
-
-	#~ has_many :groups, dependent: :destroy
 
 	# Rechtegruppen für Organisatoren und Teilnehmer
 	has_one :organizer_group, -> {where(program: :organizers)}, class_name: 'Group', dependent: :destroy
