@@ -1,6 +1,6 @@
 <p>Hallo <%= @registration.person.full_name %>!</p>
 
-<p>Du hast erfolgreich deine Anmeldedaten für die Veranstaltung 
+<p>Du hast erfolgreich deine Anmeldedaten für die Veranstaltung
 <b><%= link_to(@registration.event.title, @registration.event) %></b> aktualisiert.</p>
 
-<p>Unter folgenden Link kannst du deine aktuellen Anmeldedaten einsehen und bis zum Anmeldeschluss weiterhin ändern: <b><%= link_to("Anmeldedaten anzeigen", @registration) %></b></p>
+<p>Unter folgendem Link kannst du deine aktuellen Anmeldedaten einsehen und bis zum Anmeldeschluss weiterhin ändern: <b><%= link_to("Anmeldedaten anzeigen", @registration) %></b></p>
