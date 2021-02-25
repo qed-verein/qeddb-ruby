@@ -1,9 +1,5 @@
 module PeopleHelper
 
-def person_select(form)
-	form.select :person_id, Person.order('last_name').all.map {|p| [p.full_name, p.id]}, id: :person_id
-end
-
 def person_link(person)
 	#return nil unless policy(person).view_public?  # TODO zu langsam für /people/
 	link_to person.full_name, person_path(person)

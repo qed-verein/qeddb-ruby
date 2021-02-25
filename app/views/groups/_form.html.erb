@@ -29,7 +29,7 @@
 	<tbody>
 	<%= form.fields_for :member_affiliations do |entry| %>
 		<tr>
-			<td><%= entry.collection_select(:groupable_id, Person.all, :id, :full_name,
+			<td><%= entry.collection_select(:groupable_id, Person.all.sort_by(&:full_name), :id, :full_name,
 				{include_blank: "Kein Benutzer gewählt"}, {:style => "max-width: 15em"}) %>
 				<%= entry.hidden_field :groupable_type, :value => "Person" %></td>
 			<td><%= entry.date_field :start %></td>
