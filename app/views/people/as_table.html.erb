@@ -2,37 +2,76 @@
 <h1><%= Person.model_name.human(count: :other) =%></h1>
 
 <% if @person_policy.list_published_people? %>
-<div class="actions">
-	<%= download_table_button('#people_table') %>
+
+<section id="people_data">
+
+<div class="flexlayout">
+<fieldset>
+	<legend>Ansicht konfigurieren</legend>
+	<div class="flexlayout">
+	<fieldset>
+		<label>Personen auswählen</label>
+		<label><input type="checkbox" id="show_member_row" checked> Mitglieder anzeigen</label>
+		<label><input type="checkbox" id="show_non_member_row" checked> Nichtmitglieder anzeigen</label>
+	</fieldset>
+	<fieldset>
+		<label>Informationen auswählen</label>
+		<label><input type="checkbox" id="show_person_field" checked> Geschlecht und Geburtstag</label>
+		<label><input type="checkbox" id="show_phone_field" checked> Handynummer</label>
+		<label><input type="checkbox" id="show_email_field" checked> Emailadresse</label>
+		<label><input type="checkbox" id="show_address_field" checked> Addressdaten</label>
+		<label><input type="checkbox" id="show_status_field"> Mitgliedsstatus</label>
+		<% if @person_policy.view_payments? %>
+		<label><input type="checkbox" id="show_payment_field"> Zahlungsstatus</label>
+		<% end %>
+	</fieldset>
+	</div>
+	<div class="actions">
+		<%= download_table_button('#people_table') %>
+	</div>
+</fieldset>
 </div>
 
 <table class="indexed_table" id="people_table">
 	<thead>
 		<tr>
 			<th>#</th>
-			<% [:first_name, :last_name, :birthday, :email_address, :main_address, :mobile_phone, :member].each do |field| %>
-				<th data-sort="string"><%= Person.human_attribute_name field =%></th>
+			<th data-sort="string"><%= Person.human_attribute_name :first_name %></th>
+			<th data-sort="string"><%= Person.human_attribute_name :last_name %></th>
+			<th data-sort="string" class="person_field"><%= Person.human_attribute_name :gender %></th>
+			<th data-sort="string" class="person_field"><%= Person.human_attribute_name :birthday %></th>
+			<th data-sort="string" class="email_field"><%= Person.human_attribute_name :email_address %></th>
+			<th data-sort="string" class="address_field"><%= Person.human_attribute_name :main_address %></th>
+			<th data-sort="string" class="phone_field"><%= Person.human_attribute_name :mobile_phone %></th>
+			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :active %></th>
+			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :member %></th>
+			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :joined %></th>
+			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :quitted %></th>
+			<% if @person_policy.view_payments? %>
+			<th data-sort="string" class="payment_field"><%= Person.human_attribute_name :paid_until %></th>
 			<% end %>
 		</tr>
 	</thead>
 
 	<tbody>
 		<% @people.each do |person| %>
-			<tr>
+			<tr class="<%= person.member? ? 'member_row' : 'non_member_row' %>">
 				<td></td>
 				<td><%= link_to person.first_name, person %></td>
 				<td><%= link_to person.last_name, person %></td>
 
+				<td class="person_field"><%= Person.human_enum_value(:gender, person.gender) %></td>
+
 				<% if @person_policy.view_private? || person.publish_birthday %>
-					<td data-sort-value="<%= person.birthday %>">
+					<td class="person_field" data-sort-value="<%= person.birthday %>">
 						<%= render_date person.birthday %>
 					</td>
 				<% else %>
-					<td><%= tag.i "privat" %></td>
+					<td class="person_field"><%= tag.i "privat" %></td>
 				<% end %>
 
 
-				<td>
+				<td class="email_field">
 					<% if @person_policy.view_private? || person.publish_email %>
 						<%= mail_to person.email_address %>
 					<% else %>
@@ -40,7 +79,7 @@
 					<% end %>
 				</td>
 
-				<td>
+				<td class="address_field">
 					<% if @person_policy.view_private? || person.publish_address %>
 						<%= check_unknown(person.main_address) {|a| render_inline_address(a)}  %>
 					<% else %>
@@ -48,7 +87,7 @@
 					<% end %>
 				</td>
 
-				<td>
+				<td class="phone_field">
 					<% if @person_policy.view_private? || person.publish_address %>
 						<%= check_unknown(person.mobile_number) {|n| mobile_phone_html(n)}  %>
 					<% else %>
@@ -56,14 +95,36 @@
 					<% end %>
 				</td>
 
-				<td>
+				<td class="status_field">
+					<%= render_yes_no(person.active) %>
+				</td>
+
+				<td class="status_field">
 					<%= render_yes_no(person.member?) %>
 				</td>
+
+				<td class="status_field" data-sort-value="<%= person.joined %>">
+					<%= render_date person.joined %>
+				</td>
+
+				<td class="status_field" data-sort-value="<%= person.quitted %>">
+					<%= render_date person.quitted %>
+				</td>
+
+				<% if @person_policy.view_payments? %>
+					<td class="payment_field" data-sort-value="<%= person.paid_until %>"><%= render_date(person.paid_until) %></td>
+				<% end %>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+</section>
+
 <script>
+$(function(){
 	$("#people_table").stupidtable();
+	$('#people_data input[type=checkbox]').each(function(index, item) {updateVisibility(item)})})
+$('#people_data input[type=checkbox]').click(function() {updateVisibility(this)});
 </script>
+
 <% end %>

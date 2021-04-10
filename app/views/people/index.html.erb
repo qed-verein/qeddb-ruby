@@ -1,4 +1,5 @@
 <% provide :title, Person.model_name.human(count: :other) %>
+
 <%
 categories = {}
 @people.each {|person|
@@ -11,6 +12,13 @@ categories = {}
 
 <article id="people">
 	<h1><%= Person.model_name.human(count: :other) %></h1>
+
+	<div class="actions">
+		<%= icon_button "Tabellenansicht", 'grid_on', people_as_table_path %>
+		<%= new_person_link %>
+	</div>
+
+
 	<div class="overview">
 		<dl>
 		<% categories.keys.sort.each do |key| %>
@@ -24,8 +32,3 @@ categories = {}
 		</dl>
 	</div>
 </article>
-
-<div class="actions">
-	<%= icon_button "Tabellenansicht", 'grid_on', people_as_table_path %>
-	<%= new_person_link %>
-</div>

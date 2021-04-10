@@ -10,7 +10,7 @@
 	<legend>Spalten auswählen</legend>
 	<label><input type="checkbox" id="show_person_field" checked> Geschlecht und Geburtstag anzeigen</label>
 	<label><input type="checkbox" id="show_phone_field" checked> Handynummer anzeigen</label>
-	<label><input type="checkbox" id="show_address_field" checkd> Addressdaten anzeigen</label>
+	<label><input type="checkbox" id="show_address_field" checked> Addressdaten anzeigen</label>
 	<label><input type="checkbox" id="show_status_field" checked> Anmeldestatus anzeigen</label>
 	<label><input type="checkbox" id="show_travel_field"> Anreiseinformationen anzeigen</label>
 	<% if view_private %>
@@ -105,24 +105,10 @@
 </tbody>
 </table>
 </section>
+
 <script>
-function downloadTable() {
-	$("#registrations_table").first().table2csv({"excludeColumns": "td[display='none'], td:first-child, th:first-child"});
-}
-
-function update_visiblity(item) {
-	var regex = /show_([a-z_]+)/;
-	match = item.id.match(regex);
-	if(!match) return;
-	selector = '.' + match[1];
-	checked = $(item).is(':checked');
-	if(checked)
-		$(selector).show();
-	else
-		$(selector).hide();}
-
 $(function(){
 	$("#registrations_table").stupidtable();
-	$('#event_participants_data input[type=checkbox]').each(function(index, item) {update_visiblity(item)})})
-$('#event_participants_data input[type=checkbox]').click(function() {update_visiblity(this)});
+	$('#event_participants_data input[type=checkbox]').each(function(index, item) {updateVisibility(item)})})
+$('#event_participants_data input[type=checkbox]').click(function() {updateVisibility(this)});
 </script>
