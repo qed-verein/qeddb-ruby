@@ -1,0 +1,11 @@
+<p>Hallo <%= @person.full_name %>,</p>
+
+<p>für dich wurde ein Benutzerkonto in der Mitgliederdatenbank angelegt.</p>
+
+<p>Dein Benutzername lautet: <b><%= @person.account_name %></b></p>
+
+<p>Bitte trage noch unter <%= link_to "Passwort setzen", @password_url %> ein Passwort für dein Benutzerkonto ein.<br>
+
+<p>Anschließend kannst du in der <%= link_to "Mitgliederdatenbank", @database_url %> deine persönlichen Daten ändern oder dich zu Veranstaltungen anmelden.</p>
+
+<p>Bitte achte darauf, dass dein Emailprogramm so konfiguriert ist, dass alle Emails von unserem Server durchgelassen werden.</p>

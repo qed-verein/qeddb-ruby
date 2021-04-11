@@ -8,16 +8,12 @@
 	<!-- Hier muss der Accountname stehen, welcher zum Login benutzt wird. -->
 	<%= form.text_field :account_name, id: :person_account_name, disabled: ro_personal %>
 
-	<%= form.label :active %>
-	<%= form.check_box :active, id: :person_active, disabled: ro_personal %>
-	<!-- Aktivierte Benutzer können sich in die Datenbank einloggen. -->
-
 	<% if @person_policy.view_private? || @person.publish_email %>
 		<%= form.label :email_address %>
 		<%= form.email_field :email_address, id: :person_email_address, disabled: ro_settings %>
 	<% end %>
 
-	<% if @person_policy.edit_settings? %>
+	<% if @person_policy.edit_settings? && mode == :edit %>
 		<%= form.label :password %>
 		<%= form.password_field :password, id: :person_password %>
 
@@ -47,4 +43,10 @@
 	<%= form.label :quitted %>
 	<%= form.date_field :quitted, id: :person_quitted, disabled: ro_personal %>
 	</div>
+	<hr>
+	<label>
+		<%= form.check_box :active, id: :person_active, disabled: ro_personal %>
+		<%= Person.human_attribute_name :active %>
+		<i>Aktivierte Benutzer können sich selbständig in die Datenbank einloggen.</i>
+	</label>
 </fieldset>

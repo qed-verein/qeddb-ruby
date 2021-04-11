@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_24_003819) do
+ActiveRecord::Schema.define(version: 2021_04_11_092621) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
@@ -137,15 +137,11 @@ ActiveRecord::Schema.define(version: 2020_09_24_003819) do
     t.datetime "updated_at", null: false
     t.string "crypted_password"
     t.string "salt"
-    t.string "activation_state"
-    t.string "activation_token"
-    t.datetime "activation_token_expires_at"
     t.string "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
     t.integer "access_count_to_reset_password_page", default: 0
     t.index ["account_name"], name: "index_people_on_account_name"
-    t.index ["activation_token"], name: "index_people_on_activation_token"
     t.index ["email_address"], name: "index_people_on_email_address"
     t.index ["reset_password_token"], name: "index_people_on_reset_password_token"
   end
@@ -201,112 +197,112 @@ ActiveRecord::Schema.define(version: 2020_09_24_003819) do
 
   create_view "active_affiliations",  sql_definition: <<-SQL
     		-- Liefert die Liste aller momentan gültigen Gruppenzugehörigkeiten
-		SELECT group_id, groupable_type, groupable_id
-		FROM affiliations
-		WHERE (start IS NULL OR start <= DATETIME('now'))
-			AND (end IS NULL OR end >= DATETIME('now'))
+				SELECT group_id, groupable_type, groupable_id
+				FROM affiliations
+				WHERE (start IS NULL OR start <= DATETIME('now'))
+					AND (end IS NULL OR end >= DATETIME('now'))
   SQL
 
   create_view "recursive_subgroups",  sql_definition: <<-SQL
     		/* Erzeugt eine SQL-View, welche für jede Gruppe alle hinzugefügten Untergruppen
-		zurückliefert. Dabei werden auch mehrfach ineinander geschachtelte Gruppen berücksichtigt. */
-		WITH RECURSIVE
-		-- Liste der direkt eingetragen Untergruppen
-		direct_subgroups(group_id, child_id) AS (
-			SELECT group_id, groupable_id FROM active_affiliations
-			WHERE groupable_type = 'Group'),
-		-- Liste aller enthaltenen Untergruppen (auch rekursiv geschachtelt)
-		recursive_subgroups_relation(group_id, descendant_id) AS (
-			SELECT id, id FROM groups
-			UNION
-			SELECT DISTINCT d.group_id, r.descendant_id
-			FROM direct_subgroups AS d, recursive_subgroups_relation AS r
-			WHERE d.child_id = r.group_id)
-		SELECT * FROM recursive_subgroups_relation
+				zurückliefert. Dabei werden auch mehrfach ineinander geschachtelte Gruppen berücksichtigt. */
+				WITH RECURSIVE
+				-- Liste der direkt eingetragen Untergruppen
+				direct_subgroups(group_id, child_id) AS (
+					SELECT group_id, groupable_id FROM active_affiliations
+					WHERE groupable_type = 'Group'),
+				-- Liste aller enthaltenen Untergruppen (auch rekursiv geschachtelt)
+				recursive_subgroups_relation(group_id, descendant_id) AS (
+					SELECT id, id FROM groups
+					UNION
+					SELECT DISTINCT d.group_id, r.descendant_id
+					FROM direct_subgroups AS d, recursive_subgroups_relation AS r
+					WHERE d.child_id = r.group_id)
+				SELECT * FROM recursive_subgroups_relation
   SQL
 
   create_view "recursive_members",  sql_definition: <<-SQL
       /* Erzeugt eine SQL-View, welche für jede Gruppe alle darin enthaltenen Personen zurückliefert.
-     Dabei werden auch automatisch verwaltete Gruppen sowie  rekursive Beziehungen von
-     verschachtelten Gruppen berücksichtigt */
-  WITH RECURSIVE
-  -- Liste der automatisch eingetragenen Gruppenmitglieder
-  automatic_members(group_id, person_id) AS (
-  	SELECT groups.id, registrations.person_id
-  	FROM groups, registrations
-  	WHERE groups.event_id = registrations.event_id AND
-  		((groups.program = 7 AND registrations.organizer) OR
-  		 (groups.program = 8 AND registrations.status IN (1, 2)))
-  	UNION
-  	SELECT groups.id, people.id
-  	FROM groups, people
-  	WHERE (groups.program = 4 AND people.active AND (DATETIME('now') BETWEEN people.joined AND people.member_until)) OR
-  		  (groups.program = 5 AND people.active AND (NOT DATETIME('now') BETWEEN people.joined AND people.member_until OR
-  				people.joined IS NULL OR people.member_until IS NULL)) OR
-  		  (groups.program = 6 AND people.active AND people.newsletter)),
-  -- Liste der manuell eingetragenen Gruppenmitglieder
-  direct_members(group_id, person_id) AS (
-  	SELECT group_id, groupable_id FROM active_affiliations
-  	WHERE groupable_type = 'Person'
-  	UNION
-  	SELECT * FROM automatic_members),
-  -- Liste aller momentanen Mitgleider einer Gruppe (auch rekursiv durch Untergruppen)
-  recursive_members_relation(group_id, person_id) AS (
-  	SELECT DISTINCT r.group_id, d.person_id
-  	FROM recursive_subgroups AS r, direct_members AS d
-  	WHERE d.group_id = r.descendant_id)
-  SELECT * FROM recursive_members_relation
+       Dabei werden auch automatisch verwaltete Gruppen sowie  rekursive Beziehungen von
+       verschachtelten Gruppen berücksichtigt */
+    WITH RECURSIVE
+    -- Liste der automatisch eingetragenen Gruppenmitglieder
+    automatic_members(group_id, person_id) AS (
+    	SELECT groups.id, registrations.person_id
+    	FROM groups, registrations
+    	WHERE groups.event_id = registrations.event_id AND
+    		((groups.program = 7 AND registrations.organizer) OR
+    		 (groups.program = 8 AND registrations.status IN (1, 2)))
+    	UNION
+    	SELECT groups.id, people.id
+    	FROM groups, people
+    	WHERE (groups.program = 4 AND people.active AND (DATETIME('now') BETWEEN people.joined AND people.member_until)) OR
+    		  (groups.program = 5 AND people.active AND (NOT DATETIME('now') BETWEEN people.joined AND people.member_until OR
+    				people.joined IS NULL OR people.member_until IS NULL)) OR
+    		  (groups.program = 6 AND people.active AND people.newsletter)),
+    -- Liste der manuell eingetragenen Gruppenmitglieder
+    direct_members(group_id, person_id) AS (
+    	SELECT group_id, groupable_id FROM active_affiliations
+    	WHERE groupable_type = 'Person'
+    	UNION
+    	SELECT * FROM automatic_members),
+    -- Liste aller momentanen Mitgleider einer Gruppe (auch rekursiv durch Untergruppen)
+    recursive_members_relation(group_id, person_id) AS (
+    	SELECT DISTINCT r.group_id, d.person_id
+    	FROM recursive_subgroups AS r, direct_members AS d
+    	WHERE d.group_id = r.descendant_id)
+    SELECT * FROM recursive_members_relation
   SQL
 
   create_view "accounts",  sql_definition: <<-SQL
     		/* Erzeugt eine SQL-View, welche für jede Berechtigunsgruppe
-		wie Homepage, Gallery eine Liste aller Accounts liefert */
-		SELECT
-			groups.title AS group_title,
-			people.id AS account_id,
-			people.account_name AS account_name,
-			people.crypted_password AS crypted_password,
-			people.email_address AS email_address
-		FROM recursive_members AS m, groups, people
-		WHERE m.group_id = groups.id AND m.person_id = people.id
+				wie Homepage, Gallery eine Liste aller Accounts liefert */
+				SELECT
+					groups.title AS group_title,
+					people.id AS account_id,
+					people.account_name AS account_name,
+					people.crypted_password AS crypted_password,
+					people.email_address AS email_address
+				FROM recursive_members AS m, groups, people
+				WHERE m.group_id = groups.id AND m.person_id = people.id
   SQL
 
   create_view "all_subscriptions",  sql_definition: <<-SQL
     		/* Erzeugt eine SQL-View, welche für jede Emailverteiler
-		eine Liste aller eingetragenen Emailadressen mit zugehörigen Rechten liefert.
-		Dabei werden auch automatische eingetragenen Emailadressen beachtet. */
-		WITH
-		-- Sendergruppe einer Mailingliste
-		senders(mailinglist_id, email_address, first_name, last_name) AS (
-			SELECT ml.id, p.email_address, p.first_name, p.last_name
-			FROM recursive_members AS gp, mailinglists AS ml, people AS p
-			WHERE gp.person_id = p.id AND gp.group_id = ml.sender_group_id),
-		-- Empfängergruppe einer Mailingliste
-		receivers(mailinglist_id, email_address, first_name, last_name) AS (
-			SELECT ml.id, p.email_address, p.first_name, p.last_name
-			FROM recursive_members AS gp, mailinglists AS ml, people AS p
-			WHERE gp.person_id = p.id AND gp.group_id = ml.receiver_group_id),
-		-- Moderatorengruppe einer Mailingliste
-		moderators(mailinglist_id, email_address, first_name, last_name) AS (
-			SELECT ml.id, p.email_address, p.first_name, p.last_name
-			FROM recursive_members AS gp, mailinglists AS ml, people AS p
-			WHERE gp.person_id = p.id AND gp.group_id = ml.moderator_group_id),
-		-- Alle über Gruppen automatisch eintragenen Sender, Empfänger und Moderatoren
-		automatic(mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator) AS (
-			SELECT mailinglist_id, email_address, first_name, last_name, MAX(as_sender) = 1, MAX(as_receiver) = 1, MAX(as_moderator) = 1 FROM (
-				SELECT *, 1 AS as_sender, 0 AS as_receiver, 0 AS as_moderator FROM senders UNION
-				SELECT *, 0 AS as_sender, 1 AS as_receiver, 0 AS as_moderator FROM receivers UNION
-				SELECT *, 0 AS as_sender, 0 AS as_receiver, 1 AS as_moderator FROM moderators) AS flag_table
-			GROUP BY mailinglist_id, email_address),
-		-- Manuelle Änderungen an der Mailingliste
-		manual(mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator) AS (
-			SELECT mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator
-			FROM subscriptions)
-		SELECT mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator, MAX(m) AS manual
-		FROM (
-			SELECT *, TRUE AS m FROM manual UNION
-			SELECT *, FALSE AS m FROM automatic) AS combination_table
-		GROUP BY mailinglist_id, email_address
+				eine Liste aller eingetragenen Emailadressen mit zugehörigen Rechten liefert.
+				Dabei werden auch automatische eingetragenen Emailadressen beachtet. */
+				WITH
+				-- Sendergruppe einer Mailingliste
+				senders(mailinglist_id, email_address, first_name, last_name) AS (
+					SELECT ml.id, p.email_address, p.first_name, p.last_name
+					FROM recursive_members AS gp, mailinglists AS ml, people AS p
+					WHERE gp.person_id = p.id AND gp.group_id = ml.sender_group_id),
+				-- Empfängergruppe einer Mailingliste
+				receivers(mailinglist_id, email_address, first_name, last_name) AS (
+					SELECT ml.id, p.email_address, p.first_name, p.last_name
+					FROM recursive_members AS gp, mailinglists AS ml, people AS p
+					WHERE gp.person_id = p.id AND gp.group_id = ml.receiver_group_id),
+				-- Moderatorengruppe einer Mailingliste
+				moderators(mailinglist_id, email_address, first_name, last_name) AS (
+					SELECT ml.id, p.email_address, p.first_name, p.last_name
+					FROM recursive_members AS gp, mailinglists AS ml, people AS p
+					WHERE gp.person_id = p.id AND gp.group_id = ml.moderator_group_id),
+				-- Alle über Gruppen automatisch eintragenen Sender, Empfänger und Moderatoren
+				automatic(mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator) AS (
+					SELECT mailinglist_id, email_address, first_name, last_name, MAX(as_sender) = 1, MAX(as_receiver) = 1, MAX(as_moderator) = 1 FROM (
+						SELECT *, 1 AS as_sender, 0 AS as_receiver, 0 AS as_moderator FROM senders UNION
+						SELECT *, 0 AS as_sender, 1 AS as_receiver, 0 AS as_moderator FROM receivers UNION
+						SELECT *, 0 AS as_sender, 0 AS as_receiver, 1 AS as_moderator FROM moderators) AS flag_table
+					GROUP BY mailinglist_id, email_address),
+				-- Manuelle Änderungen an der Mailingliste
+				manual(mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator) AS (
+					SELECT mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator
+					FROM subscriptions)
+				SELECT mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator, MAX(m) AS manual
+				FROM (
+					SELECT *, TRUE AS m FROM manual UNION
+					SELECT *, FALSE AS m FROM automatic) AS combination_table
+				GROUP BY mailinglist_id, email_address
   SQL
 
 end

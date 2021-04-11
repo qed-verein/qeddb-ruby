@@ -6,27 +6,27 @@ class PasswordResetsController < ApplicationController
 	end
 
 	# Benutzer hat seinen Accountnamen angegeben und möchte ein neues Passwort anfordern
-	def create 
+	def create
 		person = Person.find_by_account_name(params[:account_name])
 		person.deliver_reset_password_instructions! if person
 		redirect_to login_path, :notice => t('.success')
 	end
-	
+
 	# Der Benutzer bekommt die Möglichkeit ein neues Passwort anzugeben
 	def edit
 		@token = params[:id]
 		@person = Person.load_from_reset_password_token(params[:id])
-		not_authenticated if @person.blank?
+		invalid_password_token if @person.blank?
 	end
-	
+
 	# Der Benutzer hat neue Passwörter abgeschickt
 	def update
 		@token = params[:id]
 		@person = Person.load_from_reset_password_token(params[:id])
 
 		if @person.blank?
-			not_authenticated
-		else			
+			invalid_password_token
+		else
 			@person.password_confirmation = params[:person][:password_confirmation]
 			if @person.change_password(params[:person][:password])
 				redirect_to root_path, :notice => t('.success')
@@ -34,5 +34,10 @@ class PasswordResetsController < ApplicationController
 				render :edit
 			end
 		end
+	end
+
+	def invalid_password_token
+		redirect_to new_password_reset_url, notice: "Der Link ist Neusetzen des Benutzerpasswortes ist ungültig oder abgelaufen. " +
+			"Bitte beginne den Vorgang von vorne."
 	end
 end

@@ -6,7 +6,6 @@ DEFAULTS: &DEFAULTS
   birthday: 1-1-2000
   gender: 1
   active: true
-  activation_state: "active"
   salt: <%= salt = "Natriumchlorid" %>
   crypted_password: <%= QEDCryptoProvider.encrypt("mypassword", salt) %>
 

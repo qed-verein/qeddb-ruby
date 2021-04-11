@@ -4,7 +4,7 @@
 	<%= render partial: "shared/errors", locals: {object: @person} %>
 	<fieldset>
 	<div class="flexlayout">
-		<%= render partial: 'general_fieldset', locals: {form: form} %>
+		<%= render partial: 'general_fieldset', locals: {form: form, mode: :edit} %>
 		<% if @person_policy.edit_additional? %>
 			<%= render partial: 'additional_information_fieldset', locals: {form: form} %>
 		<% end %>

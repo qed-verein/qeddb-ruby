@@ -5,7 +5,7 @@
 
 class Person < ApplicationRecord
 	# Alle Änderungen an Person werden gespeichert. Hierzu benutzen wir das Paket "PaperTrail".
-	has_paper_trail skip: [:crypted_password, :salt, :activation_token, :reset_password_token]
+	has_paper_trail skip: [:crypted_password, :salt, :reset_password_token]
 
 	# Diese Klasse ist für das Loginmanagement zuständig. Hierzu benutzen wir das Paket "Sorcery".
 	authenticates_with_sorcery!
@@ -207,14 +207,6 @@ class Person < ApplicationRecord
 		contact = contacts.sort_by{|c| c.priority}.select{|c| /mobil|handy/i.match(c.protocol)}.first
 		return nil if contact.nil?
 		contact.identifier
-	end
-
-	# Standardmäßig keine Aktivierungsemails
-	after_initialize :skip_email
-
-	def skip_email
-		self.skip_activation_needed_email = true
-		self.skip_activation_success_email = true
 	end
 
 	# Standardwerte setzen

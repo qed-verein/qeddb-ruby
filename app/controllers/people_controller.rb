@@ -7,7 +7,6 @@ class PeopleController < ApplicationController
 	before_action :set_person, only: [:show, :addresses, :registrations, :privacy, :payments, :groups,
 		:edit, :edit_addresses, :edit_privacy, :edit_payments, :edit_groups, :update, :destroy]
 	before_action :basic_authorization
-	skip_before_action :require_login, only: [:activate]
 
 	def index
 	end
@@ -43,9 +42,12 @@ class PeopleController < ApplicationController
 	def create
 		@person = Person.new(permitted_attributes(Person))
 		@person_policy = policy(@person)
-		#~ @person.skip_activation_needed_email = false
 		if @person.save
-			@person.activate!
+			if @person.active
+				@person.generate_reset_password_token!
+				mailer = AccountMailer.with(person: @person)
+				mailer.account_created_email.deliver_now
+			end
 			redirect_to @person, notice: t('.success')
 		else
 			render :new
@@ -66,18 +68,6 @@ class PeopleController < ApplicationController
 		authorize @person, :delete_person?
 		@person.destroy
 		redirect_to people_url, notice: t('.success')
-	end
-
-	# Die Erstellung des Accounts wurde bestätigt
-	def activate
-		@person = Person.load_from_activation_token(params[:id])
-		if @person
-			#@person.skip_activation_success_email = false
-			@person.activate!
-			redirect_to(login_path, :notice => "Dein Account wurde erfolgreich aktiviert")
-		else
-			not_authenticated
-		end
 	end
 private
 	def set_person
@@ -116,8 +106,6 @@ private
 				authorize Person, :list_published_people?
 			when :destroy
 				authorize @person, :delete_person?
-			when :activate
-				return
 			else
 				raise AccessDeniedException(action_name, @person)
 		end
