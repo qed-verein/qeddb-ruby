@@ -31,12 +31,12 @@ class Person < ApplicationRecord
 	# In diese Gruppen wird die Person explizit eingetragen (siehe Group)
 	has_many :affiliations, as: :groupable, inverse_of: :groupable, dependent: :destroy
 
-	# Alle Gruppe, in welche diese Person eingetragen ist (auch indirekt)
+	# Alle Gruppen, in welche diese Person eingetragen ist (auch indirekt)
 	def groups
 		Group.joins("INNER JOIN recursive_members AS r ON r.group_id = groups.id").where('r.person_id' => id)
 	end
 
-	# Daten zu Adresse, Kontakte und Zahlungen werden ebenfalls mit Person gespeichert
+	# Daten zu Adressen, Kontakte und Zahlungen werden ebenfalls mit Person gespeichert
 	accepts_nested_attributes_for :addresses, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 	accepts_nested_attributes_for :contacts, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 	accepts_nested_attributes_for :payments, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
@@ -44,9 +44,9 @@ class Person < ApplicationRecord
 	enum gender: {male: 1, female: 2, other: 3}
 
 	# Validierungen
-	validates :account_name, :first_name, :last_name, :email_address, presence: true
-	validates :first_name, :last_name, length: {maximum: 50}
-	validates :account_name, uniqueness: true
+	validates :first_name, :last_name, presence: true, length: {maximum: 50}
+	validates :account_name, :email_address, presence: true, if: :active
+	validates_uniqueness_of :account_name, allow_blank: true
 
 	validates :password, length: {minimum: 6}, if: -> {new_record? || changes[:crypted_password]}, allow_blank: true
 	validates :password, confirmation: true, if: -> {new_record? || changes[:crypted_password]}
@@ -180,12 +180,12 @@ class Person < ApplicationRecord
 		organized_events.still_organizable.exists?
 	end
 
-	## Hat sich diese Person zu dieser Veranstaltung angemeldet
+	# Hat sich diese Person zu dieser Veranstaltung angemeldet
 	def registered?(event)
 		events.exists?(event.id)
 	end
 
-	## Nimmt dieser Person tatsächlich an der Veranstaltung teil
+	# Nimmt diese Person tatsächlich an der Veranstaltung teil
 	def participant?(event)
 		participated_events.exists?(event.id)
 	end
