@@ -27,7 +27,7 @@
 #   Das dürfen Administratoren tun
 
 class RegistrationPolicy
-	include PermissionImplications
+	include PunditImplications
 
 	define_implications({
 			edit_general:        [:view_general],

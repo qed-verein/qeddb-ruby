@@ -2,8 +2,8 @@
 # Wird zum Konfigurieren von Gruppen, Emailverteiler und Versionsständen hergenommen
 
 class AdminPolicy
-	include PermissionImplications
-	
+	include PunditImplications
+
 	define_implications({
 		:viewable     => [:show, :index],
 		:editable     => [:viewable, :edit, :new, :edit, :destroy]})

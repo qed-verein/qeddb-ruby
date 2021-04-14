@@ -1,6 +1,6 @@
 class HostelPolicy
-	include PermissionImplications
-	
+	include PunditImplications
+
 	define_implications({
 		:by_member => [:show, :index],
 		:by_admin  => [:by_member, :new, :edit, :destroy, :export]
@@ -8,7 +8,7 @@ class HostelPolicy
 
 	alias_method :update?, :edit?
 	alias_method :create?, :new?
-	
+
 	def initialize(user, hostel)
 		if user.admin? || user.chairman? || user.organizing_now?
 			grant :by_admin
@@ -16,9 +16,9 @@ class HostelPolicy
 			grant :by_member
 		end
 	end
-	
+
 	def permitted_attributes
-		[:title, :homepage, :comment, 
+		[:title, :homepage, :comment,
 			address_attributes: [:id, :country, :city, :postal_code, :street_name, :house_number, :address_addition]]
 	end
 end

@@ -38,7 +38,7 @@
 
 
 class PersonPolicy
-	include PermissionImplications
+	include PunditImplications
 
 	# Baut einen Abhängigkeitsgraph für die verschieden Rechtestufen
 	# Die Rechte auf linken Seite implizieren die Rechte auf rechten Seite

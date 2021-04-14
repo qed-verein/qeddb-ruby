@@ -5,13 +5,13 @@ class PaperTrail::Version
 end
 
 class VersionPolicy
-	include PermissionImplications
-	
+	include PunditImplications
+
 	define_implications({
 		:by_chairman => [:index, :show],
 		:by_admin    => [:by_chairman, :revert_all]
 	})
-	
+
 	def initialize(user, object)
 		if user.admin?
 			grant :by_admin

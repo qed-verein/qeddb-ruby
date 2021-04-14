@@ -13,7 +13,7 @@
 #	 Analog wie bei Registrierungen
 
 class EventPolicy
-	include PermissionImplications
+	include PunditImplications
 
 	define_implications({
 			view_event:     [:view_basic, :list_participants],

@@ -9,6 +9,8 @@ gem 'mysql2'
 gem 'paper_trail', '~> 11.1.0'
 # Pundit for Authorization
 gem 'pundit',  '~> 2.1.0'
+# Pundit Implications to handle permission implications
+gem 'pundit_implications', '~> 0.1.0'
 # Sorcery for Authentification
 gem 'sorcery', '~> 0.15.0'
 # awesome_print for Object Rendering
