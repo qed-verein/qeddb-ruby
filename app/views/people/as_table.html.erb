@@ -20,6 +20,7 @@
 		<label><input type="checkbox" id="show_phone_field" checked> Handynummer</label>
 		<label><input type="checkbox" id="show_email_field" checked> Emailadresse</label>
 		<label><input type="checkbox" id="show_address_field" checked> Addressdaten</label>
+		<label><input type="checkbox" id="show_account_field"> Benutzerkonto</label>
 		<label><input type="checkbox" id="show_status_field"> Mitgliedsstatus</label>
 		<% if @person_policy.view_payments? %>
 		<label><input type="checkbox" id="show_payment_field"> Zahlungsstatus</label>
@@ -43,7 +44,9 @@
 			<th data-sort="string" class="email_field"><%= Person.human_attribute_name :email_address %></th>
 			<th data-sort="string" class="address_field"><%= Person.human_attribute_name :main_address %></th>
 			<th data-sort="string" class="phone_field"><%= Person.human_attribute_name :mobile_phone %></th>
-			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :active %></th>
+			<th data-sort="int"    class="account_field"><%= Person.human_attribute_name :id %></th>
+			<th data-sort="string" class="account_field"><%= Person.human_attribute_name :account_name %></th>
+			<th data-sort="string" class="account_field"><%= Person.human_attribute_name :active %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :member %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :joined %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :quitted %></th>
@@ -81,7 +84,7 @@
 
 				<td class="address_field">
 					<% if @person_policy.view_private? || person.publish_address %>
-						<%= check_unknown(person.main_address) {|a| render_inline_address(a)}  %>
+						<%= check_unknown(person.main_address) {|a| render_inline_address(a)}	%>
 					<% else %>
 						<%= tag.i "privat" %>
 					<% end %>
@@ -89,13 +92,21 @@
 
 				<td class="phone_field">
 					<% if @person_policy.view_private? || person.publish_address %>
-						<%= check_unknown(person.mobile_number) {|n| mobile_phone_html(n)}  %>
+						<%= check_unknown(person.mobile_number) {|n| mobile_phone_html(n)}	%>
 					<% else %>
 						<%= tag.i "privat" %>
 					<% end %>
 				</td>
 
-				<td class="status_field">
+				<td class="account_field">
+					<%= person.id %>
+				</td>
+
+				<td class="account_field">
+					<%= person.account_name %>
+				</td>
+
+				<td class="account_field">
 					<%= render_yes_no(person.active) %>
 				</td>
 
