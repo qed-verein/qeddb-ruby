@@ -27,6 +27,6 @@ class RegistrationMailer < ApplicationMailer
 	def edit_registration_for_organizer_email
 		return unless @event.organizer_email_address
 		mail(:to => @event.organizer_email_address, :subject => sprintf(
-			"Anmeldung von %s für die Veranstaltung %s geändert",  @person.full_name, @event.title))
+			"Geänderte Anmeldung von %s für die Veranstaltung %s",  @person.full_name, @event.title))
 	end
 end
