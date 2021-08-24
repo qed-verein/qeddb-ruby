@@ -4,3 +4,16 @@
 
 <p>Unter folgendem Link könnt ihr die aktuellen Anmeldedaten der Person einsehen und gegebenfalls noch ergänzen:
  <b><%= link_to("Anmeldedaten anzeigen", @registration) %></b></p>
+
+<p>Änderungen:</p>
+<%
+    klass = @registration.class
+    keys = klass.column_names - klass.paper_trail_options[:skip] - ['updated_at']
+    before_version = @registration.versions.last.reify || {}
+    diffs = keys.map {|k| [k, before_version[k], @registration[k]]}.reject {|k,x,y| x == y}
+%>
+	<ul>
+	<% diffs.each do |k,x,y| %>
+		<li><b><%= klass.human_attribute_name k %>:</b> <%= x.inspect %> -> <%= y.inspect %></li>
+	<% end %>
+	</ul>
