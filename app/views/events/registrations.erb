@@ -36,6 +36,7 @@
 		<th data-sort="string" class="address_field"><%= Address.model_name.human %></th>
 		<th data-sort="string" class="status_field"><%= Registration.human_attribute_name :status %></th>
 		<th data-sort="string" class="status_field"><%= Registration.human_attribute_name :organizer %></th>
+        <th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :nights_stay %></th>
 		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :arrival %></th>
 		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :departure %></th>
 		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :station_arrival %></th>
@@ -84,6 +85,7 @@
 
 		<td class="status_field"><%= Registration.human_enum_value(:status, r.status) %></td>
 		<td class="status_field"><%= render_yes_no r.organizer %></td>
+        <td class="travel_field"><%= render_string(r.nights_stay) %></td>
 		<td class="travel_field" data-sort-value='<%= r.arrival %>'><%= render_datetime r.arrival, :very_short  %></td>
 		<td class="travel_field" data-sort-value='<%= r.departure %>'><%= render_datetime r.departure, :very_short %></td>
 		<td class="travel_field"><%= render_string r.station_arrival %></td>
