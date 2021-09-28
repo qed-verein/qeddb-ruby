@@ -8,11 +8,12 @@ def registration_information(reg)
 end
 
 def registration_link_with_name(registration)
+	return registration.person.full_name unless policy(registration).view_general?
 	link_to registration.person.full_name, registration_path(registration)
 end
 
-
 def registration_link_with_name_fancy(registration)
+	return registration.person.full_name unless policy(registration).view_general?
 	text = registration.person.full_name
 	text = content_tag :del, text if registration.status == 'rejected' || registration.status == 'cancelled'
 	tag.div style: 'display: inline-block' do
@@ -23,6 +24,7 @@ def registration_link_with_name_fancy(registration)
 end
 
 def registration_link_with_event_fancy(registration)
+    return registration.person.full_name unless policy(registration).view_general?
 	text = registration.event.title
 	text = content_tag :del, text if registration.status == 'rejected' || registration.status == 'cancelled'
 	[link_to(text, registration_path(registration)), " ", registration_information(registration)].join.html_safe
