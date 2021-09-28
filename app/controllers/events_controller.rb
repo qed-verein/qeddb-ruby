@@ -26,7 +26,7 @@ class EventsController < ApplicationController
 
 	def create
 		@event = Event.new(permitted_attributes(Event))
-		if @event.save && @event.create_groups
+		if @event.save
 			redirect_to @event, notice: t('.success')
 		else
 			render :new

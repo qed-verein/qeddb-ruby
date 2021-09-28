@@ -39,17 +39,31 @@ class Event < ApplicationRecord
 	validates :comment, length: {maximum: 1000}
 	validate :max_participants_not_exceeded
 
-	# Erstelle für die Veranstaltung zwei Gruppen für die Organistatoren und die Teilnehmer.
-	# Diese können anschließend in Rechtemanagement weiterverwendet werden. (siehe hierzu model/group.rb)
+	after_create :create_groups
+	after_save :update_groups
+
+	# Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
+	# Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden. (siehe hierzu model/group.rb)  
+	def organizer_group_data(title) {
+		title: sprintf("Organisatoren von „%s“", title),
+		description: sprintf("Alle Organisatoren der Veranstaltung „%s“", title),
+		event: self, mode: :automatic, program: :organizers}
+	end
+
+	def participant_group_data(title) {
+		title: sprintf("Teilnehmer von „%s“", title),
+		description: sprintf("Alle Teilnehmer der Veranstaltung „%s“", title),
+		event: self, mode: :automatic, program: :participants}
+	end
+
 	def create_groups
-		Group.create!({
-			title: sprintf("Organisatoren von „%s“", title),
-			description: sprintf("Alle Organisatoren der Veranstaltung „%s“", title),
-			event: self, mode: :automatic, program: :organizers})
-		Group.create!({
-			title: sprintf("Teilnehmer von „%s“", title),
-			description: sprintf("Alle Teilnehmer der Veranstaltung „%s“", title),
-			event: self, mode: :automatic, program: :participants})
+		Group.create!(organizer_group_data(title))
+		Group.create!(participant_group_data(title))
+	end
+
+	def update_groups
+		organizer_group.update(organizer_group_data(title))
+		participant_group.update(participant_group_data(title))
 	end
 
 	# Sind Anmeldungen derzeit möglich?
