@@ -107,7 +107,7 @@ private
 			when :destroy
 				authorize @person, :delete_person?
 			else
-				raise AccessDeniedException(action_name, @person)
+				raise Pundit::NotAuthorizedError({query: action_name, record: @person})
 		end
 	end
 end

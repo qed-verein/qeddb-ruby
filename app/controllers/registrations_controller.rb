@@ -149,7 +149,7 @@ class RegistrationsController < ApplicationController
 			when :destroy
 				authorize @registration, :delete_registration?
 			else
-				raise AccessDeniedException(action_name, @registration)
+				raise Pundit::NotAuthorizedError({query: action_name, record: @registration})
 		end
 	end
 
