@@ -6,8 +6,7 @@ Die Implementierung erfolgte mit Ruby on Rails Version 6 (https://rubyonrails.or
 Voraussetzungen
 ============
 
-* ruby mit Version >= 2.5.0
-* bundle
+* ruby mit Version >= 2.7.0 und < 3.0.0
 * yarn
 * sqlite mit Version >= 3
 
@@ -18,6 +17,7 @@ Installation
 Im GIT-Repository sind lediglich die Quelltextdateien für die QEDDB.
 Die zugehörigen Abhängigkeiten sind *nicht* im GIT-Repositiry enthalten. Diese können nach dem Klonen mit
 
+    gem install bundle
     bundle config set --local path 'vendor/bundle'
     bundle install
 

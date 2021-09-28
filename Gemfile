@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '>= 2.5.0'
+# Ruby interpreter version: Enforce Ruby 2 because Ruby 3 breaks many third-party modules
+ruby '>= 2.7.0', '< 3.0.0'
+
 # MYSQL database adapter
 gem 'mysql2'
 
