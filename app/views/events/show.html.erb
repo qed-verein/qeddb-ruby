@@ -56,15 +56,21 @@
 		<dl>
 			<dt>Status:</dt>
 			<dd>
+
 			<% if @event.full? %>
 				Diese Veranstaltung ist voll. Eine Anmeldung ist daher derzeit nicht möglich.<br>
-			<% elsif @event.deadline_missed? %>
-				Der Anmeldeschluss ist bereits vorbei. Eine Anmeldung zu dieser Veranstaltung oder eine Änderung der Anmeldedaten ist leider nicht mehr möglich.<br>
-			<% else %>
-				Für diese Veranstaltung gibt es noch freie Plätze.
 			<% end %>
+
+			<% if @event.deadline_missed? %>
+				Der Anmeldeschluss ist bereits vorbei. Eine Anmeldung zu dieser Veranstaltung ist leider nicht mehr möglich.<br>
+			<% end %>
+
+			<% if @event.can_create_registration? %>
+				Für diese Veranstaltung gibt es noch freie Plätze. Eine Anmeldung ist somit möglich.
+			<% end %>
+
 			<% if !@event.still_organizable? && @event_policy.by_organizer? && !@event_policy.by_admin? %>
-				Diese Veranstaltung ist bereits eingefroren und kann von Organisatoren nicht mehr geändert werden.<br>
+				Diese Veranstaltung ist bereits archiviert und kann von Organisatoren nicht mehr geändert werden.<br>
 			<% end %>
 			</dd>
 

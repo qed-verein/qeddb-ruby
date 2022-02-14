@@ -43,7 +43,7 @@ class Event < ApplicationRecord
 	after_save :update_groups
 
 	# Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
-	# Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden. (siehe hierzu model/group.rb)  
+	# Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden. (siehe hierzu model/group.rb)
 	def organizer_group_data(title) {
 		title: sprintf("Organisatoren von „%s“", title),
 		description: sprintf("Alle Organisatoren der Veranstaltung „%s“", title),
@@ -67,8 +67,13 @@ class Event < ApplicationRecord
 	end
 
 	# Sind Anmeldungen derzeit möglich?
-	def can_register?
+	def can_create_registration?
 		!full? && !deadline_missed?
+	end
+
+	# Können Anmeldungen von Teilnehmern geändert werden?
+	def can_edit_registration?
+		!deadline_missed? # TODO: Separate Deadline zum Bearbeiten der Anmeldedaten?
 	end
 
 	# Prüft ob die Veranstaltung schon ausgebucht ist

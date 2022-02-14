@@ -24,10 +24,11 @@ def event_select(form)
 end
 
 def event_register_self_link(event)
-	return nil unless policy(event).register_self? && event.can_register?
-	if current_user.registered?(event)
+	return nil unless policy(event).register_self?
+	reg = current_user.registered?(event)
+	if reg && event.can_edit_registration?
 		icon_button t('actions.event.edit_own_registration'), 'assignment_turned_in', edit_own_registration_event_path(event)
-	else
+	elsif !reg && event.can_create_registration?
 		icon_button t('actions.event.register_self'), 'assignment_turned_in', event_register_self_path(event)
 	end
 end
