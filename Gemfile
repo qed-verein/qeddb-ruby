@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# Ruby interpreter version: Enforce Ruby 2 because Ruby 3 breaks many third-party modules
-ruby '>= 2.5.0', '< 3.0.0'
+# Ruby interpreter version
+ruby '>= 2.5.0'
 
 # MYSQL database adapter
 gem 'mysql2'
@@ -14,7 +14,7 @@ gem 'pundit',  '~> 2.1.0'
 # Pundit Implications to handle permission implications
 gem 'pundit_implications', '~> 0.1.0'
 # Sorcery for Authentification
-gem 'sorcery', '~> 0.15.0'
+gem 'sorcery', '~> 0.16.0'
 # awesome_print for Object Rendering
 gem 'awesome_print', '~> 1.8.0'
 # pagy for Paging
@@ -70,6 +70,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'irb', require: false
+  gem 'rdoc', require: false
 end
 
 group :test do

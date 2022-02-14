@@ -6,7 +6,7 @@ Die Implementierung erfolgte mit Ruby on Rails Version 6 (https://rubyonrails.or
 Voraussetzungen
 ============
 
-* ruby mit Version >= 2.5.0 und < 3.0.0
+* ruby mit Version >= 2.5.0
 * yarn
 * sqlite mit Version >= 3
 
