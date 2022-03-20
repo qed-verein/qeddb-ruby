@@ -11,19 +11,19 @@
 	<div class="flexlayout">
 	<fieldset>
 		<label>Personen auswählen</label>
-		<label><input type="checkbox" id="show_member_row" checked> Mitglieder anzeigen</label>
-		<label><input type="checkbox" id="show_non_member_row" checked> Nichtmitglieder anzeigen</label>
+		<%= checkbox("show_member_row", "Mitglieder anzeigen", true) %>
+		<%= checkbox("show_non_member_row", "Nichtmitglieder anzeigen", true) %>
 	</fieldset>
 	<fieldset>
 		<label>Informationen auswählen</label>
-		<label><input type="checkbox" id="show_person_field" checked> Geschlecht und Geburtstag</label>
-		<label><input type="checkbox" id="show_phone_field" checked> Handynummer</label>
-		<label><input type="checkbox" id="show_email_field" checked> Emailadresse</label>
-		<label><input type="checkbox" id="show_address_field" checked> Addressdaten</label>
-		<label><input type="checkbox" id="show_account_field"> Benutzerkonto</label>
-		<label><input type="checkbox" id="show_status_field"> Mitgliedsstatus</label>
+		<%= checkbox("show_person_field", "Geschlecht und Geburtstag", true) %>
+		<%= checkbox("show_phone_field", "Handynummer", true) %>
+		<%= checkbox("show_email_field", "Emailadresse", true) %>
+		<%= checkbox("show_address_field", "Addressdaten", true) %>
+		<%= checkbox("show_account_field", "Benutzerkonto", false) %>
+		<%= checkbox("show_status_field", "Mitgliedsstatus", false) %>
 		<% if @person_policy.view_payments? %>
-		<label><input type="checkbox" id="show_payment_field"> Zahlungsstatus</label>
+		  <%= checkbox("show_payment_field", "Zahlungsstatus", false) %>
 		<% end %>
 	</fieldset>
 	</div>
