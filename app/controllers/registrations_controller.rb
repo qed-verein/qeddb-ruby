@@ -42,6 +42,9 @@ class RegistrationsController < ApplicationController
 		@registration.assign_attributes(permitted_attributes(@registration))
 		@registration.set_defaults
 		if @registration.save
+			# Verschicke Emails an die angemeldete Person
+			mailer = RegistrationMailer.with(registration: @registration)
+			mailer.new_registration_for_participant_by_organizer_email.deliver_now
 			redirect_to @registration, notice: t('.success')
 		else
 			render :new
