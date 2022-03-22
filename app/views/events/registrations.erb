@@ -13,6 +13,7 @@
 	<%= checkbox("show_travel_field", "Anreiseinformationen anzeigen", true) %>
 	<%= checkbox("show_address_field", "Addressdaten anzeigen", false) %>
 	<%= checkbox("show_status_field", "Anmeldestatus anzeigen", false) %>
+	<%= checkbox("show_inactive", "Inaktive Teilnehmende anzeigen", false) %>
 	<% if view_private %>
 	<%= checkbox("show_payment_field", "Zahlungsinformationen anzeigen", false) %>
 	<%= checkbox("show_other_field", "Sonstige Daten anzeigen", false) %>
@@ -56,7 +57,7 @@
 </thead>
 <tbody>
 	<% @event.registrations.each do |r| %>
-	<tr>
+	<tr class='<%= 'inactive' if !r.active? %>'>
 		<td></td>
 		<td><%= link_to r.person.first_name, r %></td>
 		<td><%= link_to r.person.last_name, r %></td>
