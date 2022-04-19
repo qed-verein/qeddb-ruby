@@ -8,9 +8,8 @@
 <p>Änderungen:</p>
 <%
     klass = @registration.class
-    keys = klass.column_names - klass.paper_trail_options[:skip] - ['updated_at']
-    before_version = @registration.versions.last.reify || {}
-    diffs = keys.map {|k| [k, before_version[k], @registration[k]]}.reject {|k,x,y| x == y}
+    diffs = @registration.previous_changes.map {|key,vals| [key, vals[0], vals[1]]}
+		.reject {|x| x[0] == 'updated_at'}
 %>
 	<ul>
 	<% diffs.each do |k,x,y| %>
