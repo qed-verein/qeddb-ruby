@@ -70,6 +70,14 @@ class Registration < ApplicationRecord
 		end
 	end
 
+	def self.status_active?(status)
+		['pending', 'confirmed'].include?(status)
+	end
+
+	def active?
+		Registration.status_active?(status)
+	end
+
 	private
 
 	# Prüft ob die zeitliche Reihenfolge von Anreise und Abreise korrekt ist.
@@ -81,14 +89,12 @@ class Registration < ApplicationRecord
 
 	# Prüft ob noch Plätze für Anmeldung verfügbar sind.
 	def max_participants_not_exceeded
-		r = ['pending', 'confirmed'] # TODO Sollen offene Anmeldungen ebenfalls zählen
-
 		# Zähle wie viele Plätze vorher benötigt wurden
 		count = event.participants.count
 		# Bei einer Zusage brauchen wir einen Platz mehr
-		count += 1 if r.include?(status) && !r.include?(status_was)
+		count += 1 if active? && !Registration.status_active?(status_was)
 		# Bei einer Absage brauchen wir einen Platz weniger
-		count -= 1 if !r.include?(status) && r.include?(status_was)
+		count -= 1 if !active? && Registration.status_active?(status_was)
 
 		unless count <= event.max_participants
 			errors.add :base, "Die Anzahl der angemeldeten Teilnehmer darf das Teilnehmerlimit nicht übersteigen"
