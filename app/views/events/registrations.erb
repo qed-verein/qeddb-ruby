@@ -13,7 +13,7 @@
 	<%= checkbox("show_travel_field", "Anreiseinformationen anzeigen", true) %>
 	<%= checkbox("show_address_field", "Addressdaten anzeigen", false) %>
 	<%= checkbox("show_status_field", "Anmeldestatus anzeigen", false) %>
-	<%= checkbox("show_inactive", "Inaktive Teilnehmende anzeigen", false) %>
+	<%= checkbox("unhide_inactive", "Inaktive Teilnehmende anzeigen", false) %>
 	<% if view_private %>
 	<%= checkbox("show_payment_field", "Zahlungsinformationen anzeigen", false) %>
 	<%= checkbox("show_other_field", "Sonstige Daten anzeigen", false) %>
@@ -112,6 +112,10 @@
 <script>
 $(function(){
 	$("#registrations_table").stupidtable();
-	$('#event_participants_data input[type=checkbox]').each(function(index, item) {updateVisibility(item)})})
+	$('#event_participants_data input[type=checkbox]').each(function(index, item) {updateVisibility(item)});
+    hideRow($('#unhide_inactive'), '.inactive', false);
+  })
+
 $('#event_participants_data input[type=checkbox]').click(function() {updateVisibility(this)});
+$('#unhide_inactive').click(function() { hideRow(this, '.inactive', false); });
 </script>

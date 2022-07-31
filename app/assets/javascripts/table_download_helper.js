@@ -11,4 +11,18 @@ function updateVisibility(item) {
 	if(checked)
 		$(selector).show();
 	else
-		$(selector).hide();}
+		$(selector).hide();
+}
+
+function hideRow(item, row_selector, checked_is_hidden) {
+	hide = $(item).is(':checked') == checked_is_hidden;
+	rows = $(row_selector);
+	let is_hidden = rows.parent().is('div');
+	if (is_hidden !== hide) {
+		if (hide) {
+			rows.wrap('<div style="display: none"> </div>')
+		} else {
+			rows.unwrap('div')
+		}
+	}
+}
