@@ -216,6 +216,10 @@ class Person < ApplicationRecord
 		contact.identifier
 	end
 
+	def open_event_fees
+		registrations.sum {|registration| (registration.money_amount if registration.active? and not registration.payment_complete?) || 0}
+	end
+
 	# Standardwerte setzen
 	after_initialize :set_defaults
 
