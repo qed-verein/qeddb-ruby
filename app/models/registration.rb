@@ -47,18 +47,20 @@ class Registration < ApplicationRecord
 		self.status ||= :pending
 		self.organizer = false if organizer.nil?
 
-		self.money_amount = 0 if money_amount.nil?
 		self.payment_complete = false if payment_complete.nil?
 		if member_discount.nil? && !person.nil? && !event.nil?
 			self.member_discount = person.member_at_time?(event.start)
 		end
 
 		# Übernehme Standardeinstellungen zu Anreise ect. aus dem Veranstaltungsprofil
-		unless event.nil?
+		if event.nil?
+			self.money_amount = 0 if money_amount.nil?
+		else
 			max_days = ((event.end.middle_of_day - event.start.middle_of_day) / 1.day).round
 			self.nights_stay = max_days if nights_stay.blank?
 			self.arrival = event.start if arrival.blank?
 			self.departure = event.end if departure.blank?
+			self.money_amount = event.cost if money_amount.nil?
 		end
 
 		# Übernehme Standardeinstellungen zu Bahnhöfen, Essenswünschen etc. aus den Personendaten

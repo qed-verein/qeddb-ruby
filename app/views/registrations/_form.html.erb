@@ -15,6 +15,8 @@
 		<%= form.select :status, Registration.human_enum_options(:statuses), id: :registration_state %>
 	<%= form.label :organizer %>
 		<%= form.check_box :organizer, id: :registration_organizer %>
+	<%= form.label :money_amount %>
+		<%= form.text_field :money_amount, id: :registration_money_amount %>
 	</div>
 </fieldset>
 <% end %>
@@ -25,8 +27,6 @@
 	<div class="aligned">
 	<%= form.label :payment_complete %>
 		<%= form.check_box :payment_complete, id: :registration_payment_complete %>
-	<%= form.label :money_amount %>
-		<%= form.text_field :money_amount, id: :registration_money_amount %>
 	<%= form.label :money_transfer_date %>
 		<%= form.date_field :money_transfer_date, id: :registration_money_transfer_date %>
 	<%= form.label :member_discount %>
