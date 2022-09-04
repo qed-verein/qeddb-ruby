@@ -61,7 +61,7 @@ class RegistrationPolicy
 	def permitted_attributes
 		editable = []
 		if edit_general?
-			editable.push :event_id, :person_id, :status, :organizer
+			editable.push :event_id, :person_id, :status, :organizer, :money_amount
 		end
 		if edit_additional?
 			editable.push :arrival, :departure, :nights_stay,
@@ -69,7 +69,7 @@ class RegistrationPolicy
 				:meal_preference, :talks, :comment, :terms_of_service
 		end
 		if edit_payments?
-			editable.push :payment_complete, :money_amount, :money_transfer_date,
+			editable.push :payment_complete, :money_transfer_date,
 				:member_discount,  :other_discounts
 		end
 		editable
