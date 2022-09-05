@@ -15,6 +15,7 @@ class Person < ApplicationRecord
 	has_many :addresses, as: :addressable, inverse_of: :addressable, dependent: :destroy
 	has_many :contacts, dependent: :destroy
 	has_many :payments, dependent: :destroy
+	has_one :sepa_mandate, dependent: :destroy
 
 	# Liste alle Anmeldungen dieser Person auf (einschließlich Absagen, Warteliste etc)
 	has_many :registrations, -> { includes('event').order('events.start DESC') }, dependent: :destroy,
