@@ -214,11 +214,6 @@
 				<li><%= registration_link_with_event_fancy r %></li>
 			<% end %>
 		</ul>
-		<% if policy(@person).view_private? %>
-			<p>Offene Teilnahmebeiträge:
-				<%= check_unknown(@person.open_event_fees) {number_to_currency @person.open_event_fees} %>
-			</p>
-		<% end %>
 	<% else %>
 		<p><i>Keine Anmeldungen vorhanden.</i></p>
 	<% end %>
