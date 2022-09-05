@@ -4,8 +4,8 @@ class PeopleController < ApplicationController
 	breadcrumb Person.model_name.human(count: :other), :people_path
 
 	before_action :set_all_people, only: [:index, :index_as_table]
-	before_action :set_person, only: [:show, :addresses, :registrations, :privacy, :payments, :groups,
-		:edit, :edit_addresses, :edit_privacy, :edit_payments, :edit_groups, :update, :destroy]
+	before_action :set_person, only: [:show, :addresses, :registrations, :privacy, :payments, :sepa_mandate, :groups,
+		:edit, :edit_addresses, :edit_privacy, :edit_payments, :edit_sepa_mandate, :edit_groups, :update, :destroy]
 	before_action :basic_authorization
 
 	def index
@@ -34,6 +34,9 @@ class PeopleController < ApplicationController
 	def edit_groups
 	end
 
+	def edit_sepa_mandate
+	end
+
 	def new
 		@person = Person.new
 		@person_policy = policy(@person)
@@ -58,7 +61,7 @@ class PeopleController < ApplicationController
 		if @person.update(permitted_attributes(@person))
 			redirect_to @person, notice: t('.success')
 		else
-			pages = ['edit', 'edit_addresses', 'edit_payments', 'edit_privacy']
+			pages = ['edit', 'edit_addresses', 'edit_payments', 'edit_privacy', 'edit_sepa_mandate']
 			action = pages.include?(params[:formular]) ? params[:formular] : 'edit'
 			render action
 		end
@@ -90,6 +93,8 @@ private
 				authorize @person, :view_settings?
 			when :payments
 				authorize @person, :view_payments?
+			when :sepa_mandate
+				authorize @person, :view_sepa_mandate?
 			when :addresses
 				authorize @person, :view_additional?
 			when :edit, :update
@@ -98,6 +103,8 @@ private
 				authorize @person, :edit_settings?
 			when :edit_payments
 				authorize @person, :edit_payments?
+			when :edit_sepa_mandate
+				authorize @person, :edit_sepa_mandate?
 			when :edit_addresses
 				authorize @person, :edit_additional?
 			when :new, :create

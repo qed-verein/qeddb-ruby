@@ -46,6 +46,8 @@ de:
       submit: Kontaktdaten speichern
     edit_payments:
       submit: Zahlungen speichern
+    edit_sepa_mandate:
+      submit: SEPA-Mandat speichern
     edit_privacy:
       submit: Einstellungen speichern
 
@@ -100,6 +102,7 @@ de:
       payments: Zahlungen
       edit_payments: Zahlungen bearbeiten
       submit_payments: Zahlungen eintragen
+      edit_sepa_mandate: SEPA-Mandat bearbeiten
       privacy: Datenschutz
       edit_privacy: Datenschutz einstellen
       groups: Rechte

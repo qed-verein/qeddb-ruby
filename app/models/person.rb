@@ -42,6 +42,7 @@ class Person < ApplicationRecord
 	accepts_nested_attributes_for :addresses, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 	accepts_nested_attributes_for :contacts, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 	accepts_nested_attributes_for :payments, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
+	accepts_nested_attributes_for :sepa_mandate, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 
 	enum gender: {male: 1, female: 2, other: 3}
 

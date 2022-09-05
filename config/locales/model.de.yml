@@ -45,6 +45,9 @@ de:
       version:
         one: Version
         other: Versionen
+      sepa_mandate:
+        one: SEPA-Mandat
+        other: SEPA-Mandate
     attributes:
       person:
         account_name: Benutzername
@@ -164,6 +167,13 @@ de:
       session:
         account_name: Benutzername
         password: Passwort
+      sepa_mandate:
+        mandate_reference: Mandatsreferenz
+        signature_date: Datum der Unterschrift
+        iban: IBAN
+        bic: BIC
+        name_account_holder: Kontoinhaber
+        _destroy: Löschen
 
       group:
         title: Titel

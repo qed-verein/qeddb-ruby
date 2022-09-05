@@ -38,11 +38,13 @@ Rails.application.routes.draw do
 			get 'registrations'
 			get 'privacy'
 			get 'payments'
+      get 'sepa_mandate'
 			get 'groups'
 	
 			get 'edit_addresses'
 			get 'edit_privacy'
 			get 'edit_payments'
+      get 'edit_sepa_mandate'
 			get 'edit_groups'
 			
 			get 'activate'

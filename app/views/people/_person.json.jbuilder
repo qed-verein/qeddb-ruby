@@ -27,3 +27,9 @@ if modules.include? :registrations
 			as: :registration
 	end
 end
+if modules.include? :sepa_mandate
+	json.sepa_mandate do
+		json.type :SepaMandate
+		json.extract! person.sepa_mandate, :id, :mandate_reference, :signature_date, :iban, :bic, :name_account_holder
+	end
+end

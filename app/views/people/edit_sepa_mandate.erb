@@ -1,0 +1,14 @@
+<% if @person_policy.edit_sepa_mandate? %>
+<div class="flexlayout">
+<%= form_with(model: @person, local: true) do |form| %>
+	<%= hidden_field_tag 'formular', 'edit_sepa_mandate' %>
+	<fieldset>
+	<%= render partial: "shared/errors", locals: {object: @person} %>
+	<%= render partial: 'sepa_mandate_fieldset', locals: {form: form} %>
+	<div class="actions">
+		<%= form.submit t('.submit') %>
+	</div>
+	</fieldset>
+<% end %>
+</div>
+<% end %>

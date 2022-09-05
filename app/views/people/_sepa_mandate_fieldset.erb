@@ -1,0 +1,23 @@
+<fieldset id="person_sepa_mandate_fieldset">
+  <legend><%= SepaMandate.model_name.human(count: :other) %></legend>
+  Hier kann ein SEPA-Lastschriftmandat verwaltet werden:
+
+  <div class="aligned">
+    <%= form.fields_for :sepa_mandate do |sepa| %>
+      <%= sepa.label :mandate_reference %>
+      <%= sepa.text_field :mandate_reference %>
+
+      <%= sepa.label :signature_date %>
+      <%= sepa.date_field :signature_date %>
+
+      <%= sepa.label :iban %>
+      <%= sepa.text_field :iban %>
+
+      <%= sepa.label :bic %>
+      <%= sepa.text_field :bic %>
+
+      <%= sepa.label :name_account_holder %>
+      <%= sepa.text_field :name_account_holder %>
+    <% end %>
+  </div>
+</fieldset>
