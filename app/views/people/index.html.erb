@@ -16,6 +16,9 @@ categories = {}
 	<div class="actions">
 		<%= icon_button "Tabellenansicht", 'grid_on', people_as_table_path %>
 		<%= new_person_link %>
+		<% if policy(@people).export? %>
+			<%= icon_button 'Als JSON anzeigen', 'notes', people_path(format: :json) %>
+		<% end %>
 	</div>
 
 
