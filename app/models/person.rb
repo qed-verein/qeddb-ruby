@@ -73,7 +73,7 @@ class Person < ApplicationRecord
 		maximal_gap = 1.week # Vermeidet Lücken vom 31.12 -> 1.1
 
 		# TODO Fördermitgliedschaft
-		intervals = payments.where(payment_type: [:regular_member, :free_member]).pluck(:start, :end)
+		intervals = payments.where(payment_type: [:regular_member, :free_member, :sponsor_and_member]).pluck(:start, :end)
 		times = intervals.map{|s, e|
 			[[s - maximal_gap, 1], [e, -1]]}.flatten(1).sort
 

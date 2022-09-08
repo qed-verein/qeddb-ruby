@@ -19,7 +19,8 @@ class Payment < ApplicationRecord
 	#  donation: Spende
 	#  other: sonstige
 	#  free_member: kostenlose Mitgliedschaft (Preis o.ä.)
-	enum payment_type: {regular_member: 1, sponsor_member: 2, donation: 3, other: 4, free_member: 5}
+	#  sponsor_and_member: Fördermitgliedschaft mit Mitgliedschaft
+	enum payment_type: {regular_member: 1, sponsor_member: 2, donation: 3, other: 4, free_member: 5, sponsor_and_member: 6}
 
 	validates :comment, length: {maximum: 1000}
 	validates :payment_type, inclusion: {in: payment_types.keys}
