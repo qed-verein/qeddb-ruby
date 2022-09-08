@@ -32,8 +32,12 @@ class Payment < ApplicationRecord
 	def update_membership_status
 		person.compute_membership_status
 		person.update({
-			paid_until: person.paid_until,
-			member_until: person.member_until})
+										paid_until: person.paid_until,
+										member_until: person.member_until})
+		person.registrations.each do |registration|
+			registration.compute_member_discount
+			registration.update({member_discount: registration.member_discount})
+		end
 	end
 
 	def object_name

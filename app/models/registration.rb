@@ -48,9 +48,7 @@ class Registration < ApplicationRecord
 		self.organizer = false if organizer.nil?
 
 		self.payment_complete = false if payment_complete.nil?
-		if member_discount.nil? && !person.nil? && !event.nil?
-			self.member_discount = person.member_at_time?(event.start)
-		end
+		compute_member_discount
 
 		# Übernehme Standardeinstellungen zu Anreise ect. aus dem Veranstaltungsprofil
 		if event.nil?
@@ -74,6 +72,12 @@ class Registration < ApplicationRecord
 
 	def reference_line
 		"#{event.reference_line}, #{person.reference_line}"
+	end
+
+	def compute_member_discount
+		if !person.nil? && !event.nil?
+			self.member_discount = person.member_at_time?(event.start)
+		end
 	end
 
 	def self.status_active?(status)
