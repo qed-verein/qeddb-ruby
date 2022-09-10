@@ -6,6 +6,8 @@ class Event < ApplicationRecord
 	# Versionskontrolle
 	has_paper_trail
 
+	include EventsHelper
+
 	# Standmäßig Veranstaltung absteigend nach Datum ordnen
 	default_scope {order(start: :desc)}
 
@@ -41,7 +43,7 @@ class Event < ApplicationRecord
 	validates :comment, length: {maximum: 1000}
 	validate :max_participants_not_exceeded
 
-	after_create :create_groups
+	after_create :create_groups, :create_mailinglists
 	after_save :update_groups
 	after_initialize :set_defaults
 
@@ -70,6 +72,31 @@ class Event < ApplicationRecord
 	def create_groups
 		Group.create!(organizer_group_data(title))
 		Group.create!(participant_group_data(title))
+	end
+
+	def organizer_mailinglist_data(email)
+		{
+			:title => email,
+			:description => sprintf("Mailingliste für Organisatoren der Veranstaltung „%s“", title),
+			:receiver_group => participant_group,
+			:can_unsubscribe => false
+		}
+	end
+
+	def participant_mailinglist_data(email)
+		{
+			:title => sprintf("%s-teilnehmer", email),
+			:description => sprintf("Mailingliste für Teilnehmer der Veranstaltung „%s“", title),
+			:sender_group => participant_group,
+			:receiver_group => participant_group,
+			:can_unsubscribe => false
+		}
+	end
+
+	def create_mailinglists
+		email = event_mail(self)
+		Mailinglist.create!(organizer_mailinglist_data(email))
+		Mailinglist.create!(participant_mailinglist_data(email))
 	end
 
 	def update_groups
