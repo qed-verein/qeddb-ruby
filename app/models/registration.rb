@@ -76,7 +76,7 @@ class Registration < ApplicationRecord
 
 	def compute_member_discount
 		if !person.nil? && !event.nil?
-			self.member_discount = person.member_at_time?(event.start)
+			self.member_discount = person.member_at_time?(event.start) or person.member_at_time?(event.end)
 		end
 	end
 
