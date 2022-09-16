@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 	post '/export', to: 'export#export'
 	get '/import', to: 'import#prepare'
 	post '/import', to: 'import#import'
-	
+	get '/import_banking_statement', to: 'banking_statement_import#prepare'
+	post '/import_banking_statement', to: 'banking_statement_import#import'
+
 	get '/admin', to: 'admin#show'
 
 	resources :versions, only: [:index, :show] do

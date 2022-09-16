@@ -135,6 +135,9 @@ de:
     import:
       prepare: Import
       submit: Daten importieren
+    import_banking_statements:
+      prepare: Kontoauszug importieren
+      submit: Kontoauszug importieren
     export:
       prepare: Export
       submit: Daten exportieren
