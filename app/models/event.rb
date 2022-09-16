@@ -1,6 +1,8 @@
 # Die Klasse "Event" verwaltet eine Veranstaltung, zu der sich Personen anmelden können.
+require 'general_helpers.rb'
 
 class Event < ApplicationRecord
+	include GeneralHelpers
 	# Versionskontrolle
 	has_paper_trail
 
@@ -44,16 +46,18 @@ class Event < ApplicationRecord
 
 	# Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
 	# Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden. (siehe hierzu model/group.rb)
-	def organizer_group_data(title) {
-		title: sprintf("Organisatoren von „%s“", title),
-		description: sprintf("Alle Organisatoren der Veranstaltung „%s“", title),
-		event: self, mode: :automatic, program: :organizers}
+	def organizer_group_data(title)
+		{
+			title: sprintf("Organisatoren von „%s“", title),
+			description: sprintf("Alle Organisatoren der Veranstaltung „%s“", title),
+			event: self, mode: :automatic, program: :organizers}
 	end
 
-	def participant_group_data(title) {
-		title: sprintf("Teilnehmer von „%s“", title),
-		description: sprintf("Alle Teilnehmer der Veranstaltung „%s“", title),
-		event: self, mode: :automatic, program: :participants}
+	def participant_group_data(title)
+		{
+			title: sprintf("Teilnehmer von „%s“", title),
+			description: sprintf("Alle Teilnehmer der Veranstaltung „%s“", title),
+			event: self, mode: :automatic, program: :participants}
 	end
 
 	def create_groups
@@ -112,6 +116,10 @@ class Event < ApplicationRecord
 
 	def object_name
 		title
+	end
+
+	def reference_line
+		asciify title
 	end
 
 	private
