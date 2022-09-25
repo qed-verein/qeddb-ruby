@@ -138,6 +138,7 @@ de:
     import_banking_statements:
       prepare: Kontoauszug importieren
       submit: Kontoauszug importieren
+      reading_failed: Datei konnte nicht gelesen werden
     export:
       prepare: Export
       submit: Daten exportieren

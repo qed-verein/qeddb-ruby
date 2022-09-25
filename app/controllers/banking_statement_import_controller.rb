@@ -5,16 +5,20 @@ class BankingStatementImportController < ApplicationController
 	breadcrumb 'import', :import_path
 
 	def prepare
-		@import_errors = ""
+		@results = []
 	end
 
 	def import
-		@import_errors = ""
+		@results = []
 
 		stream = params[:import_file]
-		return if stream.nil?
 
-		@import_errors = import_banking_csv(stream.read)
+		if stream.nil?
+			flash[:error] = t("actions.import_banking_statements.reading_failed")
+			return render :prepare
+		end
+
+		@results = import_banking_csv(stream.read)
 
 		render :prepare
 	end
