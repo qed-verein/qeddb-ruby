@@ -87,6 +87,7 @@ class EventsController < ApplicationController
 
 	def set_event
 		@event = Event.find(params[:id])
+		@registration_of_current_user = current_user.registrations.find_by(event: @event)
 		@event_policy = policy(@event)
 		breadcrumb @event.title, @event
 	end

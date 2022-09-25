@@ -47,6 +47,11 @@
 
 			<dt><%= Event.human_attribute_name :comment %>:</dt>
 			<dd><%= render_string @event.comment %></dd>
+
+			<% unless @registration_of_current_user.nil? %>
+				<dt><%= Event.human_attribute_name :reference_line %></dt>
+				<dd><%= @registration_of_current_user.reference_line %></dd>
+			<% end %>
 		</dl>
 	</section>
 

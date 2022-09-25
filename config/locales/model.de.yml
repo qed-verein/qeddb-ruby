@@ -95,6 +95,7 @@ de:
         cost: Kosten
         max_participants: Teilnehmerlimit
         comment: Anmerkungen
+        reference_line: Verwendungszweck
       registration:
         event: Veranstaltung
         person: Person
