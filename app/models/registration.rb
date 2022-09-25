@@ -70,6 +70,10 @@ class Registration < ApplicationRecord
 		end
 	end
 
+	def reference_line
+		"#{event.reference_line}, #{person.full_name}"
+	end
+
 	def self.status_active?(status)
 		['pending', 'confirmed'].include?(status)
 	end

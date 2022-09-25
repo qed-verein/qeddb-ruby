@@ -4,6 +4,7 @@
 # Dies tun wir jedoch nicht selber, sondern benutzen hierfür das Paket "Sorcery".
 
 class Person < ApplicationRecord
+	include GeneralHelpers
 	# Alle Änderungen an Person werden gespeichert. Hierzu benutzen wir das Paket "PaperTrail".
 	has_paper_trail skip: [:crypted_password, :salt, :reset_password_token]
 
@@ -197,6 +198,10 @@ class Person < ApplicationRecord
 	# Liefert den vollen Namen einer Person zurück
 	def full_name
 		first_name + " " + last_name
+	end
+
+	def reference_line
+		asciify full_name
 	end
 
 	# Liefert die Hauptaddresse mit der höchsten Priorität
