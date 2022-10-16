@@ -36,7 +36,7 @@ module BankingStatementImportHelper
 
 	def find_person(name)
 		begin
-			matches = Person.all.select {|person| (asciify(person.full_name)).gsub(/ /, '') == name}
+			matches = Person.all.select {|person| person.reference_line.gsub(/ /, '') == name}
 			sole_element matches
 		rescue Exception => e
 			case e.message
