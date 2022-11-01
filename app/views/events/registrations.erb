@@ -7,17 +7,25 @@
 
 <div class="flexlayout">
 <fieldset>
-	<legend>Spalten auswählen</legend>
-	<%= checkbox("show_person_field", "Geschlecht und Geburtstag anzeigen", true) %>
-	<%= checkbox("show_phone_field", "Handynummer anzeigen", true) %>
-	<%= checkbox("show_travel_field", "Anreiseinformationen anzeigen", true) %>
-	<%= checkbox("show_address_field", "Addressdaten anzeigen", false) %>
-	<%= checkbox("show_status_field", "Anmeldestatus anzeigen", false) %>
-	<%= checkbox("unhide_inactive", "Inaktive Teilnehmende anzeigen", false) %>
-	<% if view_private %>
-	<%= checkbox("show_payment_field", "Zahlungsinformationen anzeigen", false) %>
-	<%= checkbox("show_other_field", "Sonstige Daten anzeigen", false) %>
-	<% end %>
+	<legend>Ansicht konfigurieren</legend>
+    <div class="flexlayout">
+    <fieldset>
+        <label>Anmeldungen auswählen</label>
+        <%= checkbox("unhide_inactive", "Auch inaktive Anmeldungen anzeigen", false) %>
+    </fieldset>
+	<fieldset>
+        <legend>Spalten auswählen</legend>
+        <%= checkbox("show_person_field", "Geschlecht und Geburtstag anzeigen", true) %>
+        <%= checkbox("show_phone_field", "Handynummer anzeigen", true) %>
+        <%= checkbox("show_travel_field", "Anreiseinformationen anzeigen", true) %>
+        <%= checkbox("show_address_field", "Addressdaten anzeigen", false) %>
+        <%= checkbox("show_status_field", "Anmeldestatus anzeigen", false) %>
+        <% if view_private %>
+            <%= checkbox("show_payment_field", "Zahlungsinformationen anzeigen", false) %>
+            <%= checkbox("show_other_field", "Sonstige Daten anzeigen", false) %>
+        <% end %>
+    </fieldset>
+    </div>
 	<div class="actions">
 		<%= download_table_button('#registrations_table') %>
 	</div>
