@@ -110,6 +110,10 @@ class Event < ApplicationRecord
 		return mailinglist && mailinglist.title + "@" + Rails.configuration.mailinglist_domain
 	end
 
+	def object_name
+		title
+	end
+
 	private
 
 	# Überprüft ob die angegeben Zeiten für Anfang und Ende in der korrekten Reihenfolge sind.
@@ -125,9 +129,5 @@ class Event < ApplicationRecord
 		if max_participants && participants.count > max_participants
 			errors.add(:max_participants, " darf nicht kleiner als die Anzahl der angemeldeten Teilnehmer sein")
 		end
-	end
-
-	def object_name
-		title
 	end
 end
