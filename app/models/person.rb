@@ -223,4 +223,8 @@ class Person < ApplicationRecord
 		self.publish_email = true if publish_email.nil?
 		self.publish_address = true if publish_address.nil?
 	end
+
+	def object_name
+		full_name
+	end
 end

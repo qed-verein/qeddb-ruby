@@ -78,6 +78,10 @@ class Registration < ApplicationRecord
 		Registration.status_active?(status)
 	end
 
+	def object_name
+		event.title + " » " + person.full_name
+	end
+
 	private
 
 	# Prüft ob die zeitliche Reihenfolge von Anreise und Abreise korrekt ist.

@@ -1,6 +1,6 @@
 class ApplicationRecord < ActiveRecord::Base
 	self.abstract_class = true
- 	
+
  	# Diese Helferfunktion ignoriert bei der Formulareingabe eines assoziierten Models
  	# alle leeren Felder und löscht diese auch gegebenfalls aus der Datenbank
 	def self.reject_blank_entries(attributes, keys = nil)
@@ -11,17 +11,22 @@ class ApplicationRecord < ActiveRecord::Base
 				attributes.merge!({:_destroy => true}); false
 			else true; end
 		else p attributes; false; end
-	end  
- 
+	end
+
 	# Helferfunktionen für lokalisierte Enumerations
 	def self.human_enum_value(enum_symbol, key)
 		return nil if key.nil?
 		human_attribute_name(enum_symbol.to_s + "." + key)
-	end 
- 
+	end
+
 	def self.human_enum_options(enum_symbol)
 		send(enum_symbol).keys.map {|key|
 			[human_attribute_name(enum_symbol.to_s.singularize + "." + key), key]}.to_h
 	end
-	
+
+    # Kurze Beschreibung des Objekts (wird für den Versions-Log gebraucht)
+    # Wird in den Unterklassen Person, Event usw. implementiert
+	def object_name
+        "Unbekanntes Objekt"
+	end
 end

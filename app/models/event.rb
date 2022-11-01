@@ -126,4 +126,8 @@ class Event < ApplicationRecord
 			errors.add(:max_participants, " darf nicht kleiner als die Anzahl der angemeldeten Teilnehmer sein")
 		end
 	end
+
+	def object_name
+		title
+	end
 end

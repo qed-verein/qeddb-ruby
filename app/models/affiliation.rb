@@ -7,7 +7,7 @@
 class Affiliation < ApplicationRecord
 	# Versionskontrolle
 	has_paper_trail
-	
+
 	# Gibt die Gruppen an, zu welcher dieser Eintrag hinzugefügt werden.
 	belongs_to :group
 	# Die eingetragene Person oder Gruppe (-> polymorphes Attribut "groupable")
@@ -25,5 +25,9 @@ class Affiliation < ApplicationRecord
 		unless start.nil? || self.end.nil? || start <= self.end
 			errors.add :start, " muss früher als #{Affiliation.human_attribute_name :end} sein"
 		end
+	end
+
+	def object_name
+		group.title + " » " + groupable.object_name
 	end
 end

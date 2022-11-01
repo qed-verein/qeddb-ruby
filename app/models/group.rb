@@ -98,5 +98,9 @@ class Group < ApplicationRecord
 		self.mode ||= :userdefined
 	end
 
+	def object_name
+		title
+	end
+
 	default_scope {order('title ASC')}
 end

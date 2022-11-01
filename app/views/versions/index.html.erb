@@ -26,7 +26,7 @@ Dies ist eine einfache Versionsübersicht.
 	<% @versions.each do |version| %>
 	<tr>
 		<td><%= item_type(version) %></td>
-		<td><%= item_name(version).truncate(30) %></td>
+		<td><%= item_name(version).truncate(50) %></td>
 		<td><%= version.index %></td>
 		<td><%= l version.created_at, format: :very_short if version.created_at %></td>
 		<td><%= version.whodunnit %></td>

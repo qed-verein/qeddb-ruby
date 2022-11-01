@@ -33,4 +33,8 @@ class Payment < ApplicationRecord
 			paid_until: person.paid_until,
 			member_until: person.member_until})
 	end
+
+	def object_name
+		person.full_name
+	end
 end

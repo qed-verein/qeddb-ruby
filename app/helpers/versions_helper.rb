@@ -1,30 +1,22 @@
 module VersionsHelper
 
 include Pagy::Frontend
- 
+
+# Art des Objekts, welches in dieser Version geändert wurde
 def item_type(version)
 	klass = version.item_type.constantize
 	klass.model_name.human
 end
- 
-def item_name(version)
-	#~ klass = version.item_type.constantize
-	#~ latest_version = version.reify || (version.next && version.next.reify)
-	#~ return version.item_id.to_s if latest_version == nil
 
+# Kurzer Name des Objekts, welches in dieser Version geändert wurde
+def item_name(version)
 	klass = version.item_type.constantize
-	current_version = klass.find_by(id: version.item_id) 
-	
-	case version.item_type
-		when "Person"
-			person = current_version || (version.next && version.next.reify) || version.reify
-			person ? person.full_name : version.item_id
-		when "Event"
-			event = current_version || (version.next && version.next.reify) || version.reify
-			event ? event.title : version.item_id
-		else
-			version.item_id.to_s
-	end
+	current_version = klass.find_by(id: version.item_id)
+
+	object = current_version || (version.next && version.next.reify) || version.reify
+	return version.item_type + "#" + version.item_id unless object
+
+	object.object_name
 end
 
 def versions_link
@@ -39,8 +31,8 @@ end
 
 def revert_link(version)
 	link_to t('actions.version.revert'), revert_version_path(version), method: :patch, data: {
-		confirm: sprintf("Object %s-%d auf Version %d zurücksetzen?",  
+		confirm: sprintf("Object %s-%d auf Version %d zurücksetzen?",
 			version.item_type, version.item_id, version.index)}
-end	
-		
+end
+
 end

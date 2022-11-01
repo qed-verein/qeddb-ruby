@@ -42,4 +42,8 @@ class Mailinglist < ApplicationRecord
 
 	# Ordne Emailverteiler standardmäßig alphabetisch
 	default_scope {order('title ASC')}
+
+	def object_name
+		title
+	end
 end
