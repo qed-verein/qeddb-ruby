@@ -178,6 +178,7 @@ ActiveRecord::Schema.define(version: 2022_09_05_133117) do
     t.string "bic"
     t.string "name_account_holder"
     t.integer "person_id"
+		t.integer "sequence_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

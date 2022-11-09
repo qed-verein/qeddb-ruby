@@ -34,5 +34,10 @@ module QeddbRuby
 		config.mailinglist_domain   = ENV["QEDDB_EMAIL_DOMAIN"]      || "lists.example.com"
 		config.banking_link         = ENV["QEDDB_BANKING_LINK"]      || "example.com/bankaccount"
 		config.underage_formular    = ENV["QEDDB_UNDERAGE_FORMULAR"] || "example.com/underageformular"
+		config.iban 								= "DE34762500000009344508"
+		config.bic 									= "BYLADEM1SFU"
+		config.banking_name 				= "QED-Verein"
+		config.creditor_id 					= ENV["QEDDB_CREDITOR_ID"] 			 || "DE12QED1234EXAKT18"
+		config.kassier_email_address= ENV["QEDDB_KASSIER_EMAIL"] 		 || "kassier@example.com"
 	end
 end

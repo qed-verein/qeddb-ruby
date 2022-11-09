@@ -14,5 +14,8 @@
 
     <%= form.label :name_account_holder %>
     <%= form.text_field :name_account_holder %>
+
+    <%= form.label :sequence_type %>
+    <%= form.select :sequence_type, SepaMandate.human_enum_options(:sequence_types) %>
   </div>
 </fieldset>

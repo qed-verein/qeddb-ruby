@@ -4,7 +4,7 @@ class DatabasePolicy < Struct.new(:user, :database)
 	define_implications(
 		{
 			:by_admin => [:import, :export],
-			:by_treasurer => [:import_banking_statement]
+			:by_treasurer => [:import_banking_statement, :sepa_export]
 		}
 	)
 

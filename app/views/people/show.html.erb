@@ -186,6 +186,9 @@
 
 					<dt><%= SepaMandate.human_attribute_name :name_account_holder %></dt>
 					<dd><%= @person.sepa_mandate.name_account_holder %></dd>
+
+					<dt><%= SepaMandate.human_attribute_name :sequence_type %></dt>
+					<dd><%= @person.sepa_mandate.sequence_type %></dd>
 				</dl>
 			<% end %>
 		</section>

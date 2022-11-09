@@ -109,7 +109,7 @@ class PersonPolicy
 		end
 		if edit_sepa_mandate?
 			editable.push({sepa_mandate_attributes: [
-				:id, :mandate_reference, :signature_date, :iban, :bic, :name_account_holder, :_destroy]})
+				:id, :mandate_reference, :signature_date, :iban, :bic, :name_account_holder, :sequence_type, :_destroy]})
 		end
 		editable
 	end

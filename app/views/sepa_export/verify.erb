@@ -1,0 +1,57 @@
+<% provide :title, "SEPA-Export" %>
+
+<h1>SEPA-Export</h1>
+
+<div class="flexlayout">
+  <%= form_with url: sepa_export_path(event_id: @event, year: @year), multipart: true do |form| %>
+    <fieldset>
+      <legend>Export überprüfen</legend>
+
+      <div>Zusätzliche Aktionen:</div>
+      <div>
+        <%= form.check_box :notify %>
+        <%= form.label :notify, t('actions.export_sepa.mail') %>
+      </div>
+      <div>
+        <%= form.check_box :set_used %>
+        <%= form.label :set_used, t('actions.export_sepa.set_used') %>
+      </div>
+      <div class="aligned">
+        <%= form.label :execution_date, t('actions.export_sepa.execution_date') %>
+        <%= form.date_field :execution_date, {:required => true, value: Date.today + 14} %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit(t('actions.export_sepa.submit')) %>
+      </div>
+    </fieldset>
+
+    <% unless @transactions.nil? %>
+      <h2>Transaktionen</h2>
+      <table>
+        <thead>
+        <tr>
+          <th></th>
+          <th>Person</th>
+          <th>Betrag</th>
+          <th>Verwendungszweck</th>
+        </tr>
+        </thead>
+        <% @transactions.each_with_index do |transaction, index| %>
+          <tr>
+            <td>
+              <%= form.hidden_field "transactions[#{index}][amount]", value: transaction[:amount] %>
+              <%= form.hidden_field "transactions[#{index}][person_id]", value: transaction[:person].id %>
+              <%= form.hidden_field "transactions[#{index}][reference_line]", value: transaction[:reference_line] %>
+              <%= form.check_box "transactions[#{index}][use]", {:checked => true} %>
+            </td>
+            <td><%= form.label "transactions[#{index}][use]", transaction[:person].full_name %></td>
+            <td><%= transaction[:amount] %></td>
+            <td><%= transaction[:reference_line] %></td>
+          </tr>
+        <% end %>
+
+      </table>
+    <% end %>
+  <% end %>
+</div>

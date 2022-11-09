@@ -7,6 +7,7 @@ class CreateSepaMandates < ActiveRecord::Migration[6.1]
       t.string :bic
       t.string :name_account_holder
       t.integer :person_id
+      t.integer :sequence_type
 
       t.timestamps
     end

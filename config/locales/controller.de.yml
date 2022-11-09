@@ -145,3 +145,10 @@ de:
     export:
       prepare: Export
       submit: Daten exportieren
+    export_sepa:
+      prepare: Export
+      submit: Export durchführen
+      mail: Ankündigungsmails verschicken
+      set_used: Benutzte SEPA-Mandate kennzeichnen
+      execution_date: Ausführen am
+

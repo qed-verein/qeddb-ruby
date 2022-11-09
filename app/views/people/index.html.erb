@@ -19,6 +19,7 @@ categories = {}
 		<% if policy(@people).export? %>
 			<%= icon_button 'Als JSON anzeigen', 'notes', people_path(format: :json) %>
 		<% end %>
+		<%= sepa_export_button %>
 	</div>
 
 

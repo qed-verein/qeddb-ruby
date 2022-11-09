@@ -73,7 +73,7 @@ class Registration < ApplicationRecord
 	end
 
 	def reference_line
-		"#{event.reference_line}, #{person.full_name}"
+		"#{event.reference_line}, #{person.reference_line}"
 	end
 
 	def self.status_active?(status)

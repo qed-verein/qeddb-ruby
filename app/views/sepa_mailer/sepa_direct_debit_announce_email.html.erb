@@ -1,0 +1,33 @@
+<p>Hallo <%= @person.first_name %></p>
+
+<p>am <%= @execution_date %> wird der Quod Erat Demonstrandum e.V. <%= @amount %>€ unter dem Verwendungungzweck "<%= @reference_line %>" über dieses SEPA-Lastschriftmandat abbuche:</p>
+<table>
+  <tr>
+    <td>
+      Mandats-Referenz:
+    </td>
+    <td>
+      <%= @sepa_mandate.mandate_reference %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      IBAN:
+    </td>
+    <td>
+      <%= @sepa_mandate.iban %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Kontoninhaber:
+    </td>
+    <td>
+      <%= @sepa_mandate.name_account_holder %>
+    </td>
+  </tr>
+</table>
+
+<p>Solltest du nicht mit dieser Abbuchung einverstanden sein oder der Grund für sie unklar sein, melde dich bitte
+  umgehend bei
+  <%= mail_to Rails.configuration.kassier_email_address %></p>

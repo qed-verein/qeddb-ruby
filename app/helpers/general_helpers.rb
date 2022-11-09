@@ -12,7 +12,7 @@ module GeneralHelpers
 				'ö' => 'oe',
 				'ü' => 'ue',
 				'ß' => 'ss'
-			}
+			}[match]
 		end.encode(Encoding.find('ASCII'), encoding_options)
 	end
 

@@ -173,7 +173,11 @@ de:
         iban: IBAN
         bic: BIC
         name_account_holder: Kontoinhaber
+        sequence_type: Sequence Type
         _destroy: Löschen
+      sepa_mandate/sequence_type:
+        first_use: FRST
+        recurring_use: RCUR
 
       group:
         title: Titel

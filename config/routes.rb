@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 	post '/import', to: 'import#import'
 	get '/import_banking_statement', to: 'banking_statement_import#prepare'
 	post '/import_banking_statement', to: 'banking_statement_import#import'
+	get '/sepa_export', to: 'sepa_export#verify'
+	post '/sepa_export', to: 'sepa_export#export'
 
 	get '/admin', to: 'admin#show'
 

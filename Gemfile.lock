@@ -91,6 +91,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    iban-tools (1.1.0)
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
@@ -209,6 +210,10 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sepa_king (0.14.0)
+      activemodel (>= 4.2)
+      iban-tools
+      nokogiri
     sorcery (0.16.3)
       bcrypt (~> 3.1)
       oauth (~> 0.5, >= 0.5.5)
@@ -274,6 +279,7 @@ DEPENDENCIES
   scenic-mysql_adapter
   scenic_sqlite_adapter
   selenium-webdriver
+  sepa_king (~> 0.14.0)
   sorcery (~> 0.16.0)
   spring
   spring-watcher-listen (~> 2.0.0)
