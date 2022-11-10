@@ -20,7 +20,6 @@ Person.transaction do
 		comment:          "Der initial angelegte Account zum Administrieren",
 		password: "mypassword", password_confirmation: "mypassword"})
 	person.save!
-	person.activate!
 end
 
 Group.transaction do
