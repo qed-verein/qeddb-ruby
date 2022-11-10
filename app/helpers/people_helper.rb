@@ -1,7 +1,15 @@
 module PeopleHelper
 
 def person_link(person)
-	#return nil unless policy(person).view_public?  # TODO zu langsam für /people/
+	if policy(person).view_public?
+		link_to person.full_name, person_path(person)
+	else
+		person.full_name
+	end
+end
+
+# Effizientere Version ohne Rechteprüfung (wird für /people/ gebraucht)
+def person_link_unchecked(person)
 	link_to person.full_name, person_path(person)
 end
 

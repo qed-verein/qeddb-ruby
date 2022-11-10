@@ -25,7 +25,7 @@ categories = {}
 			<dt><%= key %></dt>
 			<ul>
 			<% categories[key].each do |person| %>
-				<li><%= person_link person %></li>
+				<li><%= person_link_unchecked person %></li>
 			<% end %>
 			</ul>
 		<% end %>
