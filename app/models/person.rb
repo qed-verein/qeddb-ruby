@@ -74,8 +74,10 @@ class Person < ApplicationRecord
 		times = intervals.map{|s, e|
 			[[s - maximal_gap, 1], [e, -1]]}.flatten(1).sort
 
-		# Falls noch keine Zahlung erfolgt ist??
-		return joined if intervals.empty?
+		# Die Mitgliedschaft ist bis zum Ende des Beitrittsjahres kostenlos
+		if intervals.empty?
+			return joined ? joined.end_of_year : nil
+		end
 
 		# Suche eine lückenlose Überlappung von bezahlten Intervallen
 		# TODO Was tun, wenn Lücken in bezahlten Zeiträumen sind
