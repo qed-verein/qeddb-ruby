@@ -43,6 +43,11 @@ class Event < ApplicationRecord
 
 	after_create :create_groups
 	after_save :update_groups
+	after_initialize :set_defaults
+
+	def set_defaults
+		self.reference_line ||= create_reference_line
+	end
 
 	# Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
 	# Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden. (siehe hierzu model/group.rb)
@@ -118,11 +123,10 @@ class Event < ApplicationRecord
 		title
 	end
 
-	def reference_line
-		create_reference_line
-	end
-
 	def create_reference_line
+		if title.nil?
+			return nil
+		end
 		ascii_title = asciify title
 		ascii_title.gsub(/20\d{2}/) {|match| match.delete_prefix("20")}
 	end

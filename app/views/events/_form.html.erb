@@ -28,6 +28,10 @@
 	<%= form.label :max_participants %>
 	<%= form.number_field :max_participants, id: :event_max_participants, min: 1 %>
 
+	<%= form.label :reference_line %>
+	<%= form.text_field :reference_line, id: :event_reference_line %>
+	<i class="hint">Sollte die Jahreszahl zweistellig enthalten.</i>
+
 	<%= form.label :comment %>
 	<%= form.text_area :comment, id: :event_comment, style: 'display: block' %>
 </div>
