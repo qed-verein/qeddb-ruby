@@ -119,7 +119,12 @@ class Event < ApplicationRecord
 	end
 
 	def reference_line
-		asciify title
+		create_reference_line
+	end
+
+	def create_reference_line
+		ascii_title = asciify title
+		ascii_title.gsub(/20\d{2}/) {|match| match.delete_prefix("20")}
 	end
 
 	private

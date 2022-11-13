@@ -52,9 +52,7 @@ module BankingStatementImportHelper
 
 	def find_event(event_str)
 		event_str.gsub!(/ /, '')
-		unless event_str =~ /\d{4}/
-			event_str.gsub!(/\d\d/) {|match| "20#{match}"}
-		end
+		event_str.gsub!(/20\d\d/) {|match| match.delete_prefix("20")}
 		begin
 			sole_element Event.all.select {|event| event.reference_line.gsub(/ /, '') == event_str}
 		rescue Exception => e
