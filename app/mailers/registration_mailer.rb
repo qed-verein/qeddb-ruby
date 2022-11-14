@@ -14,7 +14,7 @@ class RegistrationMailer < ApplicationMailer
 
 	def new_registration_for_participant_by_organizer_email
 		mail(:to => @person.email_address, :subject => sprintf(
-			"Anmeldung zur Veranstaltung %s",  @person.full_name, @event.title))
+			"Anmeldung zur Veranstaltung %s", @event.title))
 	end
 
 
