@@ -5,7 +5,7 @@ module BankingStatementImportHelper
 	include GeneralHelpers
 
 	def banking_statement_import_link
-		return unless policy(:database).import_banking_statement?
+		return unless policy(:banking).import_banking_statement?
 		link_to t('actions.import_banking_statements.prepare'), import_banking_statement_path
 	end
 

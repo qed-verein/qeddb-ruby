@@ -51,6 +51,6 @@ class SepaExportController < ApplicationController
 	end
 
 	def basic_authorization
-		authorize :database, :sepa_export?
+		authorize :banking, :sepa_export?
 	end
 end

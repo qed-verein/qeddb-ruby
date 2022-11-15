@@ -1,7 +1,7 @@
 module SepaExportHelper
 
 	def sepa_export_button(event_id = nil, year = nil)
-		return nil unless policy(:database).sepa_export?
+		return nil unless policy(:banking).sepa_export?
 		icon_button t('actions.export_sepa.prepare'), 'money', sepa_export_path(event_id: event_id, year: year)
 	end
 

@@ -26,6 +26,6 @@ class BankingStatementImportController < ApplicationController
 	private
 
 	def basic_authorization
-		authorize :database, :import_banking_statement?
+		authorize :banking, :import_banking_statement?
 	end
 end
