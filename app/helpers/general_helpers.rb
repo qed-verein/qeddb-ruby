@@ -1,19 +1,18 @@
 module GeneralHelpers
 	def asciify(string)
-		encoding_options = {:invalid => :replace, :undef => :replace, :replace => ''}
-
-		string.gsub(/[äöüß]/i) do |match|
-			{
-				'Ä' => 'Ae',
-				'Ö' => 'Oe',
-				'Ü' => 'Ue',
-				'ẞ' => 'Ss',
-				'ä' => 'ae',
-				'ö' => 'oe',
-				'ü' => 'ue',
-				'ß' => 'ss'
-			}[match]
-		end.encode(Encoding.find('ASCII'), encoding_options)
+		replacements = {
+			'Ä' => 'Ae',
+			'Ö' => 'Oe',
+			'Ü' => 'Ue',
+			'ẞ' => 'Ss',
+			'ä' => 'ae',
+			'ö' => 'oe',
+			'ü' => 'ue',
+			'ß' => 'ss'
+		}
+		string.gsub(/[^\p{ASCII}]/) do |match|
+			replacements[match] || ''
+		end
 	end
 
 	def sole_element(iterable)
