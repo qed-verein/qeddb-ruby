@@ -36,7 +36,7 @@ class EventPolicy
 	end
 
 	def permitted_attributes
-		[:title, :homepage, :start, :end, :deadline,
+		[:title, :homepage, :start, :end, :deadline, :reference_line,
 			:cost, :max_participants, :hostel_id, :comment]
 	end
 end
