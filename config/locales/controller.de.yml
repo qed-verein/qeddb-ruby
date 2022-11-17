@@ -151,4 +151,5 @@ de:
       mail: Ankündigungsmails verschicken
       set_used: Benutzte SEPA-Mandate kennzeichnen
       execution_date: Ausführen am
+      export_failed: Export ist fehlgeschlagen, wahrscheinlich ist ein Mandat ungültig
 

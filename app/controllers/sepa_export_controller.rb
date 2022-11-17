@@ -31,7 +31,11 @@ class SepaExportController < ApplicationController
 		to_use = params[:transactions].values.select {|transaction| transaction[:use] == "1"}
 		add_persons to_use
 		execution_date = Date.parse(params[:execution_date])
-		sepa_direct_debit = create_direct_debit to_use, execution_date
+		begin
+			sepa_direct_debit = create_direct_debit to_use, execution_date
+		rescue
+			flash[:error] = t("actions.export_sepa.export_failed")
+		end
 
 		if params[:notify] == "1"
 			notify_debtors to_use, execution_date
