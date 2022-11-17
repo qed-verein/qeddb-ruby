@@ -81,7 +81,7 @@ de:
       person/gender:
         male: männlich
         female: weiblich
-        other: andere
+        other: divers
       event:
         title: Titel
         homepage: Homepage

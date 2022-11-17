@@ -87,14 +87,17 @@
 			<% if @event_policy.list_participants? %>
 			<dt>Anzahl:</dt>
 			<dd>
-			Insgesamt <%= pluralize @event.participants.count, "Teilnehmer", "Teilnehmer" %>:
-			(<%= @event.participants.where(gender: :male).count.to_s + " " + Person.human_enum_value(:gender, 'male') %>,
-			<%= @event.participants.where(gender: :female).count.to_s + " " + Person.human_enum_value(:gender, 'female') %>)
+			Insgesamt <%= pluralize @event.participants.count, "Teilnehmer", "Teilnehmer" %> geplant:
+			<i><%= Person.genders.keys.map {|key|
+					count = @event.participants.where(gender: key).count
+					count.to_s + " " + Person.human_enum_value(:gender, key) if count > 0}.compact.join(", ")
+			%></i>
 			<br>
 			Status der Anmeldungen:
-			<%=	Registration.statuses.keys.map {|key|
+			<i><%= Registration.statuses.keys.map {|key|
 					count = @event.people.where('registrations.status' => key).count
-					count > 0 ? count.to_s + " " + Registration.human_enum_value(:status, key) : nil}.compact.join(", ") %>
+					count > 0 ? count.to_s + " " + Registration.human_enum_value(:status, key) : nil}.compact.join(", ")
+			 %></i>
 			</dd>
 
 			<dt>Teilnehmerliste:</dt>

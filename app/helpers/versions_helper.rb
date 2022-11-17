@@ -14,7 +14,7 @@ def item_name(version)
 	current_version = klass.find_by(id: version.item_id)
 
 	object = current_version || (version.next && version.next.reify) || version.reify
-	return version.item_type + "#" + version.item_id unless object
+	return version.item_type + "#" + version.item_id.to_s unless object
 
 	object.object_name
 end

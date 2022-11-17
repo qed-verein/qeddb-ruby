@@ -42,7 +42,7 @@ class RegistrationPolicy
 			by_organizer:        [:by_self, :edit_general, :export],
 			by_chairman:         [:by_organizer, :delete_registration],
 			by_treasurer:        [:by_chairman, :edit_payments],
-			by_admin:            [:by_chairman]})
+			by_admin:            [:by_treasurer]})
 
 	# TODO Rechtesystem für Veranstaltung und Person prüfen
 	def initialize(user, reg)
