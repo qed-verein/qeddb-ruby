@@ -28,13 +28,20 @@ class SepaExportController < ApplicationController
 	end
 
 	def export
+		if params[:transactions].blank?
+			flash[:error] = t("actions.export_sepa.no_transactions")
+			return redirect_back_or_to sepa_export_path(event_id: @event, year: @year)
+		end
+
 		to_use = params[:transactions].values.select {|transaction| transaction[:use] == "1"}
 		add_persons to_use
 		execution_date = Date.parse(params[:execution_date])
+
 		begin
 			sepa_direct_debit = create_direct_debit to_use, execution_date
 		rescue
 			flash[:error] = t("actions.export_sepa.export_failed")
+			return redirect_back_or_to sepa_export_path(event_id: @event, year: @year)
 		end
 
 		if params[:notify] == "1"

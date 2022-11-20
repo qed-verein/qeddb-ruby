@@ -152,4 +152,5 @@ de:
       set_used: Benutzte SEPA-Mandate kennzeichnen
       execution_date: Ausführen am
       export_failed: Export ist fehlgeschlagen, wahrscheinlich ist ein Mandat ungültig
+      no_transactions: Es wurden keine Transaktionen ausgewählt
 
