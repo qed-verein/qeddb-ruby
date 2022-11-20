@@ -46,7 +46,9 @@ class Event < ApplicationRecord
 	after_initialize :set_defaults
 
 	def set_defaults
-		self.reference_line ||= create_reference_line
+		if self.reference_line.blank?
+			self.reference_line = create_reference_line
+		end
 	end
 
 	# Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
