@@ -1,0 +1,17 @@
+mandate1:
+  mandate_reference: Mandat1
+  signature_date: 2022-09-05
+  iban: DE89370400440532013000
+  bic: COBADEFFXXX
+  name_account_holder: Ihre Frau Mama
+  sequence_type: FRST
+  person: testkassier
+
+mandate2:
+  mandate_reference: Mandat2
+  signature_date: 2022-10-05
+  iban: DE89370400440532013000
+  bic: COBADEFFXXX
+  name_account_holder: Niemand
+  sequence_type: FRST
+  person: person1
