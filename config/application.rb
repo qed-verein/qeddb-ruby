@@ -27,11 +27,17 @@ module QeddbRuby
 
 		config.lock_event_after_end = 100.year
 		config.max_deferred_payment = 2.year
+		config.membership_fee 			= 5
 		config.admin_email_address  = ENV["QEDDB_ADMIN_EMAIL"]       || "admin@example.com"
 		config.system_email_address = ENV["QEDDB_SYSTEM_EMAIL"]      || "qeddb@example.com"
 		config.database_title       = ENV["QEDDB_TITLE"]             || "QED-Datenbank"
 		config.mailinglist_domain   = ENV["QEDDB_EMAIL_DOMAIN"]      || "lists.example.com"
 		config.banking_link         = ENV["QEDDB_BANKING_LINK"]      || "example.com/bankaccount"
 		config.underage_formular    = ENV["QEDDB_UNDERAGE_FORMULAR"] || "example.com/underageformular"
+		config.iban 								= "DE34762500000009344508"
+		config.bic 									= "BYLADEM1SFU"
+		config.banking_name 				= "QED-Verein"
+		config.creditor_id 					= ENV["QEDDB_CREDITOR_ID"] 			 || "DE12QED1234EXAKT18"
+		config.kassier_email_address= ENV["QEDDB_KASSIER_EMAIL"] 		 || "kassier@example.com"
 	end
 end

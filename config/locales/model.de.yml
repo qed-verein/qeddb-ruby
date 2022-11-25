@@ -45,6 +45,9 @@ de:
       version:
         one: Version
         other: Versionen
+      sepa_mandate:
+        one: SEPA-Mandat
+        other: SEPA-Mandate
     attributes:
       person:
         account_name: Benutzername
@@ -95,6 +98,7 @@ de:
         cost: Kosten
         max_participants: Teilnehmerlimit
         comment: Anmerkungen
+        reference_line: Verwendungszweck
       registration:
         event: Veranstaltung
         person: Person
@@ -163,6 +167,17 @@ de:
       session:
         account_name: Benutzername
         password: Passwort
+      sepa_mandate:
+        mandate_reference: Mandatsreferenz
+        signature_date: Datum der Unterschrift
+        iban: IBAN
+        bic: BIC
+        name_account_holder: Kontoinhaber
+        sequence_type: Sequence Type
+        _destroy: Löschen
+      sepa_mandate/sequence_type:
+        first_use: FRST
+        recurring_use: RCUR
 
       group:
         title: Titel

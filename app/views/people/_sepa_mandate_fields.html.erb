@@ -1,0 +1,21 @@
+<fieldset class="sepa-mandate">
+  <div class="aligned">
+    <%= form.label :mandate_reference %>
+    <%= form.text_field :mandate_reference %>
+
+    <%= form.label :signature_date %>
+    <%= form.date_field :signature_date %>
+
+    <%= form.label :iban %>
+    <%= form.text_field :iban %>
+
+    <%= form.label :bic %>
+    <%= form.text_field :bic %>
+
+    <%= form.label :name_account_holder %>
+    <%= form.text_field :name_account_holder %>
+
+    <%= form.label :sequence_type %>
+    <%= form.select :sequence_type, SepaMandate.human_enum_options(:sequence_types) %>
+  </div>
+</fieldset>

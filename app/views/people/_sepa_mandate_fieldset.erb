@@ -1,0 +1,12 @@
+<% 1.times { @person.build_sepa_mandate if @person.sepa_mandate.nil? } %>
+
+<fieldset id="person_sepa_mandate_fieldset">
+  <legend><%= SepaMandate.model_name.human(count: :other) %></legend>
+  Hier kann ein SEPA-Lastschriftmandat verwaltet werden:
+
+  <div class="aligned">
+    <%= form.fields_for :sepa_mandate do |sepa| %>
+      <%= render partial: 'sepa_mandate_fields', locals: { form: sepa } %>
+    <% end %>
+  </div>
+</fieldset>

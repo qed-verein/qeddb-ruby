@@ -4,6 +4,7 @@
 # Dies tun wir jedoch nicht selber, sondern benutzen hierfür das Paket "Sorcery".
 
 class Person < ApplicationRecord
+	include GeneralHelpers
 	# Alle Änderungen an Person werden gespeichert. Hierzu benutzen wir das Paket "PaperTrail".
 	has_paper_trail skip: [:crypted_password, :salt, :reset_password_token]
 
@@ -14,6 +15,7 @@ class Person < ApplicationRecord
 	has_many :addresses, as: :addressable, inverse_of: :addressable, dependent: :destroy
 	has_many :contacts, dependent: :destroy
 	has_many :payments, dependent: :destroy
+	has_one :sepa_mandate, dependent: :destroy
 
 	# Liste alle Anmeldungen dieser Person auf (einschließlich Absagen, Warteliste etc)
 	has_many :registrations, -> { includes('event').order('events.start DESC') }, dependent: :destroy,
@@ -40,6 +42,7 @@ class Person < ApplicationRecord
 	accepts_nested_attributes_for :addresses, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 	accepts_nested_attributes_for :contacts, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 	accepts_nested_attributes_for :payments, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
+	accepts_nested_attributes_for :sepa_mandate, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 
 	enum gender: {male: 1, female: 2, other: 3}
 
@@ -197,6 +200,10 @@ class Person < ApplicationRecord
 	# Liefert den vollen Namen einer Person zurück
 	def full_name
 		first_name + " " + last_name
+	end
+
+	def reference_line
+		asciify full_name
 	end
 
 	# Liefert die Hauptaddresse mit der höchsten Priorität

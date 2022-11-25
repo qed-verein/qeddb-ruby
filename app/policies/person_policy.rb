@@ -50,6 +50,7 @@ class PersonPolicy
 			edit_additional:  [:view_additional, :view_addresses, :view_contacts, :edit_basic],
 			edit_settings:	  [:view_settings, :edit_basic],
 			edit_payments:	  [:view_payments],
+			edit_sepa_mandate:[:view_sepa_mandate],
 
 			view_public:	  [:view_additional],
 			view_private:	  [:view_public, :view_payments, :view_addresses, :view_contacts, :view_settings, :export],
@@ -60,9 +61,9 @@ class PersonPolicy
 			by_other:         [],
 			by_member:        [:view_public, :list_published_people],
 			by_organizer:     [:by_member, :view_private, :view_settings],
-			by_self:          [:by_member, :view_private, :edit_additional, :edit_settings],
+			by_self:          [:by_member, :view_private, :edit_additional, :edit_settings, :view_sepa_mandate],
 			by_chairman:      [:by_self, :edit_personal, :create_person, :delete_person, :list_all_people],
-			by_treasurer:     [:by_chairman, :edit_payments],
+			by_treasurer:     [:by_chairman, :edit_payments, :edit_sepa_mandate],
 			by_admin:         [:by_treasurer]})
 
 	# Vergibt die Rechtestufen, je nachdem ob der Benutzer ein Mitglieder, Admin etc. ist
@@ -105,6 +106,10 @@ class PersonPolicy
 		if edit_payments?
 			editable.push({payments_attributes:
 				[:id, :payment_type, :start, :end, :transfer_date, :amount, :comment, :_destroy]})
+		end
+		if edit_sepa_mandate?
+			editable.push({sepa_mandate_attributes: [
+				:id, :mandate_reference, :signature_date, :iban, :bic, :name_account_holder, :sequence_type, :_destroy]})
 		end
 		editable
 	end

@@ -6,7 +6,7 @@
 <p>Unter folgendem Link kannst du deine Anmeldedaten einsehen und bis zum Anmeldeschluss noch abändern:
  <b><%= link_to("Anmeldedaten anzeigen", @registration) %></b></p>
 
-<p>Beachte bitte, dass deine Anmeldung erst gültig ist, nachdem dein Teilnahmebeitrag auf unserem Konto angekommen ist.
+<p>Beachte bitte, dass deine Anmeldung erst gültig ist, wenn du ein SEPA-Lastschriftmandat hinterlegt hast oder dein Teilnahmebeitrag mit dem Verwendungszweck "<%= @registration.reference_line %>" auf unserem Konto angekommen ist.</p>
 Die Kontoinformationen findest du unter folgendem Link:
  <b><%= link_to "Kontodaten anzeigen", Rails.configuration.banking_link %></b></p>
 

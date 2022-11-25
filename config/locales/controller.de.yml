@@ -46,6 +46,8 @@ de:
       submit: Kontaktdaten speichern
     edit_payments:
       submit: Zahlungen speichern
+    edit_sepa_mandate:
+      submit: SEPA-Mandat speichern
     edit_privacy:
       submit: Einstellungen speichern
 
@@ -100,6 +102,7 @@ de:
       payments: Zahlungen
       edit_payments: Zahlungen bearbeiten
       submit_payments: Zahlungen eintragen
+      edit_sepa_mandate: SEPA-Mandat bearbeiten
       privacy: Datenschutz
       edit_privacy: Datenschutz einstellen
       groups: Rechte
@@ -135,6 +138,19 @@ de:
     import:
       prepare: Import
       submit: Daten importieren
+    import_banking_statements:
+      prepare: Kontoauszug importieren
+      submit: Kontoauszug importieren
+      reading_failed: Datei konnte nicht gelesen werden
     export:
       prepare: Export
       submit: Daten exportieren
+    export_sepa:
+      prepare: SEPA-Export
+      submit: SEPA-Export durchführen
+      mail: Ankündigungsmails verschicken
+      set_used: Benutzte SEPA-Mandate kennzeichnen
+      execution_date: Ausführen am
+      export_failed: Export ist fehlgeschlagen, wahrscheinlich ist ein Mandat ungültig
+      no_transactions: Es wurden keine Transaktionen ausgewählt
+

@@ -15,7 +15,7 @@
 #event_registrations ul {
 	list-style-type: none;
 	padding-left: 0em;
-	columns: 3 12em;}
+	columns: 3 12em;
 }
 
 #events .overview dl {
@@ -30,4 +30,10 @@
 #registrations_table td {
 	max-width: 15em;
 	word-wrap: break-word;
+}
+
+.aligned > .hint {
+	margin-top: -0.5em;
+	grid-column: span 2;
+	text-align: right;
 }

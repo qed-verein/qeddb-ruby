@@ -1,9 +1,9 @@
 json.type :Person
 json.extract! person, :id, :account_name, :first_name, :last_name,
-	:email_address, :birthday, :gender, :joined, :quitted, :active
+	:email_address, :birthday, :gender, :joined, :quitted, :active, :paid_until
 json.extract! person, :railway_station, :railway_discount, :meal_preference, :comment
 json.extract! person, :newsletter, :photos_allowed, :publish_birthday, :publish_email, :publish_address, :publish
-json.extract! person, :paid_until, :member?
+json.extract! person, :paid_until, :member?, :reference_line
 json.url person_url(person, format: :json)
 
 if modules.include? :addresses
@@ -26,4 +26,7 @@ if modules.include? :registrations
 		json.array! person.registrations, partial: 'registrations/registration_summary_for_person',
 			as: :registration
 	end
+end
+if modules.include? :sepa_mandate
+  json.partial! partial: 'sepa_mandate', person: person
 end

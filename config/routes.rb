@@ -8,7 +8,11 @@ Rails.application.routes.draw do
 	post '/export', to: 'export#export'
 	get '/import', to: 'import#prepare'
 	post '/import', to: 'import#import'
-	
+	get '/import_banking_statement', to: 'banking_statement_import#prepare'
+	post '/import_banking_statement', to: 'banking_statement_import#import'
+	get '/sepa_export', to: 'sepa_export#verify'
+	post '/sepa_export', to: 'sepa_export#export'
+
 	get '/admin', to: 'admin#show'
 
 	resources :versions, only: [:index, :show] do
@@ -36,11 +40,13 @@ Rails.application.routes.draw do
 			get 'registrations'
 			get 'privacy'
 			get 'payments'
+      get 'sepa_mandate'
 			get 'groups'
 	
 			get 'edit_addresses'
 			get 'edit_privacy'
 			get 'edit_payments'
+      get 'edit_sepa_mandate'
 			get 'edit_groups'
 			
 			get 'activate'

@@ -164,6 +164,41 @@
 <hr>
 <% end %>
 
+<% if @person_policy.view_sepa_mandate? %>
+	<div class="flexlayout">
+		<section id="person_sepa_mandate">
+			<h3><%= SepaMandate.model_name.human(count: :other) %></h3>
+			<% if @person.sepa_mandate.nil? %>
+			<i>Kein SEPA-Mandat hinterlegt.</i>
+			<% else %>
+				<dl>
+					<dt><%= SepaMandate.human_attribute_name :mandate_reference %></dt>
+					<dd><%= @person.sepa_mandate.mandate_reference %></dd>
+
+					<dt><%= SepaMandate.human_attribute_name :signature_date %></dt>
+					<dd><%= render_date @person.sepa_mandate.signature_date %></dd>
+
+					<dt><%= SepaMandate.human_attribute_name :iban %></dt>
+					<dd><%= @person.sepa_mandate.iban %></dd>
+
+					<dt><%= SepaMandate.human_attribute_name :bic %></dt>
+					<dd><%= @person.sepa_mandate.bic %></dd>
+
+					<dt><%= SepaMandate.human_attribute_name :name_account_holder %></dt>
+					<dd><%= @person.sepa_mandate.name_account_holder %></dd>
+
+					<dt><%= SepaMandate.human_attribute_name :sequence_type %></dt>
+					<dd><%= @person.sepa_mandate.sequence_type %></dd>
+				</dl>
+			<% end %>
+		</section>
+	</div>
+	<div class="actions">
+		<%= edit_sepa_mandate_person_link(@person) %>
+	</div>
+	<hr>
+<% end %>
+
 <% if @person_policy.view_private? %>
 <div class="flexlayout">
 <div>

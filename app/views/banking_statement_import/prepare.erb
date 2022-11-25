@@ -1,0 +1,44 @@
+<% provide :title, "Kontoauszugimport" %>
+<% provide :path, navigation_path([root_link, banking_statement_import_link]) %>
+
+<h1>Kontoauszugimport</h1>
+
+<div class="flexlayout" id="import_prepare">
+  <%= form_tag import_banking_statement_path, multipart: true do %>
+    <fieldset>
+      <legend>Einstellungen für Import</legend>
+
+      <label>
+        Datei zum Importieren
+        <i>Bitte eine Datei zum Importieren auswählen.
+          Diese muss sich im CSV-Format, wie es vom Sparkassen Online-Banking exportiert wird, befinden und die Spalten "Verwendungszweck", "Buchungstag" und "Betrag" besitzen.
+          Der Verwendungszweck muss das Format "Musterstadt 2022, Max Mustermann" oder "Mitgliedschaft 2038, Susi Schemafrau" haben.
+        </i>
+        <%= file_field_tag 'import_file', {accept: 'text/csv'} %>
+      </label>
+
+      <div class="actions">
+        <%= submit_tag t('actions.import_banking_statements.submit') %><br>
+      </div>
+  <% end %>
+  </fieldset>
+
+  <h2>Resultate</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Verwendungszweck</th>
+      <th>Betrag</th>
+      <th>Resultat</th>
+    </tr>
+    </thead>
+    <% @results.each do |result| %>
+      <tr>
+        <td><%= result[0] %></td>
+        <td><%= result[1] %></td>
+        <td><%= result[2] %></td>
+      </tr>
+    <% end %>
+
+  </table>
+</div>
