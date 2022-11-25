@@ -11,7 +11,9 @@
       <label>
         Datei zum Importieren
         <i>Bitte eine Datei zum Importieren auswählen.
-          Diese muss sich im CSV-Format, wie es vom Sparkassen Online-Banking exportiert wird, befinden und die Spalten "Verwendungszweck" und "Betrag" besitzen.</i>
+          Diese muss sich im CSV-Format, wie es vom Sparkassen Online-Banking exportiert wird, befinden und die Spalten "Verwendungszweck" und "Betrag" besitzen.
+          Der Verwendungszweck muss das Format "Musterstadt 2022, Max Mustermann" oder "Mitgliedschaft 2038, Susi Schemafrau" haben.
+        </i>
         <%= file_field_tag 'import_file', {accept: 'text/csv'} %>
       </label>
 
