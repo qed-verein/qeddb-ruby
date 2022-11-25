@@ -58,9 +58,9 @@ module BankingStatementImportHelper
 		rescue Exception => e
 			case e.message
 			when "None"
-				raise "Keine Veranstaltung mit Namen #{name} gefunden."
+				raise "Keine Veranstaltung mit Namen #{event_str} gefunden."
 			when "Multiple"
-				raise "Mehrere Veranstaltungen mit Namen #{name} gefunden."
+				raise "Mehrere Veranstaltungen mit Namen #{event_str} gefunden."
 			else
 				raise "Unbekannter Fehler, bei Veranstaltungssuche: #{e.message}"
 			end
