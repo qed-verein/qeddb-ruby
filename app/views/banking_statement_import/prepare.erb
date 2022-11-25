@@ -11,7 +11,7 @@
       <label>
         Datei zum Importieren
         <i>Bitte eine Datei zum Importieren auswählen.
-          Diese muss sich im CSV-Format befinden und die Spalten "Verwendungszweck" und "Betrag" besitzen.</i>
+          Diese muss sich im CSV-Format, wie es vom Sparkassen Online-Banking exportiert wird, befinden und die Spalten "Verwendungszweck" und "Betrag" besitzen.</i>
         <%= file_field_tag 'import_file', {accept: 'application/json'} %>
       </label>
 
