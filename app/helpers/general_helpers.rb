@@ -10,7 +10,7 @@ module GeneralHelpers
 			'ü' => 'ue',
 			'ß' => 'ss'
 		}
-		string.gsub(/[^\p{ASCII}]/) do |match|
+		I18n.transliterate(string).gsub(/[^\p{ASCII}]/) do |match|
 			replacements[match] || ''
 		end
 	end
