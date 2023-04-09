@@ -35,6 +35,6 @@ class Payment < ApplicationRecord
 	end
 
 	def object_name
-		person.full_name
+		person ? person.full_name : "Payment"
 	end
 end

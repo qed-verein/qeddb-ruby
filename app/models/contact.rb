@@ -19,6 +19,6 @@ class Contact < ApplicationRecord
 	# TODO Validierung für Email etc.
 
 	def object_name
-		person.full_name
+		person ? person.full_name : "Contact"
 	end
 end

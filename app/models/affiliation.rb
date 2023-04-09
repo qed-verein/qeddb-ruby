@@ -28,6 +28,7 @@ class Affiliation < ApplicationRecord
 	end
 
 	def object_name
-		group.title + " » " + groupable.object_name
+		(group ? group.title : "Unknown group") + " » " +
+		(groupable ? groupable.object_name : "Unknown element")
 	end
 end

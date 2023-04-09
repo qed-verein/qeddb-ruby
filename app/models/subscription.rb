@@ -12,6 +12,6 @@ class Subscription < ApplicationRecord
 	default_scope {order('LOWER(email_address) ASC')}
 
 	def object_name
-		mailinglist.title + " » " + email_address
+		(mailinglist ? mailinglist.title : "Unknown mailinglist") + " » " + email_address
 	end
 end

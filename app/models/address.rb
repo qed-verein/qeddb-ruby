@@ -19,6 +19,6 @@ class Address < ApplicationRecord
 	default_scope {order('priority ASC')}
 
 	def object_name
-		addressable.object_name
+		addressable ? addressable.object_name : "Address"
 	end
 end

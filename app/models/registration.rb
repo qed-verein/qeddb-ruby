@@ -85,7 +85,8 @@ class Registration < ApplicationRecord
 	end
 
 	def object_name
-		event.title + " » " + person.full_name
+		(event ? event.title : "Unknown event") + " » " +
+		(person ? person.full_name : "Unknown person")
 	end
 
 	private
