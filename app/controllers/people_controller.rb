@@ -46,6 +46,7 @@ class PeopleController < ApplicationController
 		@person = Person.new(permitted_attributes(Person))
 		@person_policy = policy(@person)
 		if @person.save
+			Rails.configuration.qeddb_hooks[:person_created].call(@person)
 			if @person.active
 				@person.generate_reset_password_token!
 				mailer = AccountMailer.with(person: @person)
@@ -70,6 +71,7 @@ class PeopleController < ApplicationController
 	def destroy
 		authorize @person, :delete_person?
 		@person.destroy
+		Rails.configuration.qeddb_hooks[:person_deleted].call(@person)
 		redirect_to people_url, notice: t('.success')
 	end
 private
