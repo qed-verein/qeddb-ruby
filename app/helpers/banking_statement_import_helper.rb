@@ -131,8 +131,17 @@ module BankingStatementImportHelper
 		end
 	end
 
+	def prepare_input(data)
+		# Ensure that we are utf-8 encoded, banking statements comes as iso-8859
+		data = data.force_encoding('ISO-8859-1').encode('UTF-8')
+		# Get rid of any kind of bom
+		data = data.sub!(/^.*?"/, '"')
+		# Remove artifically added comments in references
+		data.gsub('SVWZ+', '').gsub('EREF+', '')
+	end
+
 	def import_banking_csv(data)
-		records = CSV.parse(data, headers: true, col_sep: ";", strip: true)
+		records = CSV.parse(prepare_input(data), headers: true, col_sep: ";", strip: true)
 		results = []
 		ActiveRecord::Base.transaction do
 			records.each {|record|
