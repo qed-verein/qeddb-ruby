@@ -108,6 +108,14 @@ class Person < ApplicationRecord
 		true
 	end
 
+	def update_membership_status
+		compute_membership_status
+		registrations.each do |registration|
+			registration.compute_member_discount
+			registration.update({ member_discount: registration.member_discount })
+		end
+	end
+
 	# Nummeriert die Adress- und Kontaktangaben zum Eintragen in die Datenbank durch
 	def give_priority_numbers
 		addresses.each_with_index {|address, index| address.priority = 1 + index}
@@ -126,9 +134,10 @@ class Person < ApplicationRecord
         send(:"#{config.crypted_password_attribute_name}=", self.class.encrypt(send(config.password_attribute_name), account_name))
 	end
 
-	# Berechne das Zahlungsende beim Speichern einer Person automatisch
-	before_save :compute_membership_status
 	before_save :give_priority_numbers
+
+	# Update alle Registrierungen um Änderungen des Mitgliedstatus abzubilden
+	before_save :update_membership_status
 
 	# Dies ist ein Standardscope und sorgt dafür, dass Personen nach Nachname sortiert sind
 	default_scope {order(:last_name)}
