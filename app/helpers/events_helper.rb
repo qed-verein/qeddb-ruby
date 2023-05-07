@@ -51,18 +51,4 @@ def event_register_other_link(event)
 	return nil unless policy(event).register_other?
 	icon_button t('actions.event.register_other'), 'person_add', event_register_other_path(event)
 end
-
-def replace_umlauts(event)
-	event.title.downcase.gsub(/[ÄÖÜäöüß]/, {
-		"ä" => 'ae',
-		"ö" => 'oe',
-		"ü" => 'ue',
-		"ß" => 'ss',
-	})
-end
-
-def event_mail(event)
-	replace_umlauts(event).gsub(" ", "").gsub(/20(\d\d)$/, '\1')
-end
-
 end

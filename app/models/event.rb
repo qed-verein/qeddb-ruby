@@ -48,9 +48,7 @@ class Event < ApplicationRecord
 	after_initialize :set_defaults
 
 	def set_defaults
-		if self.reference_line.blank?
-			self.reference_line = create_reference_line
-		end
+		self.reference_line = create_reference_line if reference_line.blank?
 	end
 
 	# Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
@@ -94,7 +92,7 @@ class Event < ApplicationRecord
 	end
 
 	def create_mailinglists
-		email = event_mail(self)
+		email = reference_line.gsub(/ /, '').downcase
 		Mailinglist.create!(organizer_mailinglist_data(email))
 		Mailinglist.create!(participant_mailinglist_data(email))
 	end
