@@ -76,7 +76,7 @@ class Event < ApplicationRecord
 		{
 			:title => email,
 			:description => sprintf("Mailingliste für Organisatoren der Veranstaltung „%s“", title),
-			:receiver_group => participant_group,
+			:receiver_group => organizer_group,
 			:can_unsubscribe => false
 		}
 	end
@@ -87,6 +87,7 @@ class Event < ApplicationRecord
 			:description => sprintf("Mailingliste für Teilnehmer der Veranstaltung „%s“", title),
 			:sender_group => participant_group,
 			:receiver_group => participant_group,
+			:moderator_group => organizer_group,
 			:can_unsubscribe => false
 		}
 	end
