@@ -25,8 +25,10 @@ class Registration < ApplicationRecord
 	validates :money_amount, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 	validates :nights_stay, numericality: {greater_than_or_equal_to: 0, only_integer: true}
 
+	# member_discount ist deprecated, man sollte stattdessen effective_member_discount nutzen.
+	# Wir wollen member_discount jedoch nicht löschen, falls wir doch einen rollback brauchen.
 	with_options if: Proc.new {|reg| reg.payment_complete} do
-		validates :member_discount, inclusion: {in: [true, false]}
+		validates :member_discount, inclusion: {in: [true, false, nil]}
 		validates :money_transfer_date, presence: true
 		validates :money_amount, presence: true
 		validates :nights_stay, presence: true
@@ -48,7 +50,6 @@ class Registration < ApplicationRecord
 		self.organizer = false if organizer.nil?
 
 		self.payment_complete = false if payment_complete.nil?
-		compute_member_discount
 
 		# Übernehme Standardeinstellungen zu Anreise ect. aus dem Veranstaltungsprofil
 		if event.nil?
@@ -74,10 +75,8 @@ class Registration < ApplicationRecord
 		"#{event.reference_line}, #{person.reference_line}"
 	end
 
-	def compute_member_discount
-		if !person.nil? && !event.nil?
-			self.member_discount = person.member_at_time?(event.start) or person.member_at_time?(event.end)
-		end
+	def effective_member_discount
+		person.member_at_time?(event.start) or person.member_at_time?(event.end)
 	end
 
 	def self.status_active?(status)

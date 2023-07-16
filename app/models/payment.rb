@@ -31,7 +31,7 @@ class Payment < ApplicationRecord
 	after_save :update_membership_status
 
 	def update_membership_status
-		person.update_membership_status
+		person.compute_membership_status
 		person.update({ paid_until: person.paid_until, member_until: person.member_until })
 	end
 

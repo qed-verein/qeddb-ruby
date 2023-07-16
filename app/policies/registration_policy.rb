@@ -69,8 +69,7 @@ class RegistrationPolicy
 				:meal_preference, :talks, :comment, :terms_of_service
 		end
 		if edit_payments?
-			editable.push :payment_complete, :money_transfer_date,
-				:member_discount,  :other_discounts
+			editable.push :payment_complete, :money_transfer_date, :other_discounts
 		end
 		editable
 	end

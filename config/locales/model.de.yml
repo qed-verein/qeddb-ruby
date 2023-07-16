@@ -116,6 +116,7 @@ de:
         railway_discount: Bahncard
 
         member_discount: Mitgliedsermäßigung
+        effective_member_discount: Mitgliedsermäßigung
         other_discounts: Sonstige Ermäßigungen
         money_amount: Teilnahmebeitrag
         money_amount_short: Betrag
