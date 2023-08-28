@@ -73,7 +73,7 @@ class Person < ApplicationRecord
 		maximal_gap = 1.week # Vermeidet Lücken vom 31.12 -> 1.1
 
 		# TODO Fördermitgliedschaft
-		intervals = payments.where(payment_type: :regular_member).pluck(:start, :end)
+		intervals = payments.where(payment_type: [:regular_member, :free_member, :sponsor_and_member]).pluck(:start, :end)
 		times = intervals.map{|s, e|
 			[[s - maximal_gap, 1], [e, -1]]}.flatten(1).sort
 
@@ -126,9 +126,9 @@ class Person < ApplicationRecord
         send(:"#{config.crypted_password_attribute_name}=", self.class.encrypt(send(config.password_attribute_name), account_name))
 	end
 
-	# Berechne das Zahlungsende beim Speichern einer Person automatisch
-	before_save :compute_membership_status
 	before_save :give_priority_numbers
+
+	before_save :compute_membership_status
 
 	# Dies ist ein Standardscope und sorgt dafür, dass Personen nach Nachname sortiert sind
 	default_scope {order(:last_name)}

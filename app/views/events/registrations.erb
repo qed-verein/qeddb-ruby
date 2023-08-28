@@ -55,7 +55,7 @@
 		<th data-sort="int"    class="payment_field"><%= Registration.human_attribute_name :money_amount_short %></th>
 		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :payment_complete_short %></th>
 		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :money_transfer_date %></th>
-		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :member_discount %></th>
+		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :effective_member_discount %></th>
 		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :other_discounts %></th>
 		<th data-sort="string" class="other_field"><%= Registration.human_attribute_name :meal_preference %></th>
 		<th data-sort="string" class="other_field"><%= Registration.human_attribute_name :talks %></th>
@@ -105,7 +105,7 @@
 			<%= check_unknown(r.money_amount) {|x| number_to_currency x} %></td>
 		<td class="payment_field"><%= render_yes_no r.payment_complete %></td>
 		<td class="payment_field" data-sort-value='<%= r.money_transfer_date %>'><%= render_date r.money_transfer_date %></td>
-		<td class="payment_field"><%= render_yes_no r.member_discount %></td>
+		<td class="payment_field"><%= render_yes_no r.effective_member_discount %></td>
 		<td class="payment_field"><%= render_string r.other_discounts %></td>
 		<td class="other_field"><%= render_string r.meal_preference  %></td>
 		<td class="other_field"><%= render_string r.talks %></td>

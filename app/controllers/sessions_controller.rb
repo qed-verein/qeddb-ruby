@@ -12,6 +12,9 @@ class SessionsController < ApplicationController
 		redirect_to root_url, notice: t(".already") if logged_in?
 		@person = login(params[:account_name], params[:password])
 		if @person
+			if !@person.paid_until.nil? && @person.paid_until < DateTime.now && @person.member?
+				flash[:unpaid] = t(".not_payed")
+			end
 			redirect_back_or_to root_path, notice: t(".success")
 		else
 			flash.now[:error] = t(".failed")

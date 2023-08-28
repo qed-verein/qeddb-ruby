@@ -10,6 +10,7 @@ de:
     create:
       success: Login erfolgreich
       failed: Login fehlgeschlagen
+      not_payed: Du hast für das aktuelle Jahr noch keinen Mitgliedsbeitrag gezahlt.
     destroy:
       complete: Ausgeloggt
   password_resets:

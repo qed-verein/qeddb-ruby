@@ -299,6 +299,14 @@ footer {
 	font-size: smaller;
 }
 
+.unpaid {
+	color: white;
+	background-color: #d41;
+	border: 2px solid #d00;
+	padding: 1em;
+	margin: 0 1em;
+}
+
 .notice {
 	color: white;
 	background-color: #484;

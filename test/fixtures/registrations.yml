@@ -15,7 +15,7 @@ registration1:
   meal_preference: vegetarier
   talks: Differentialgleichungen
   comment: bringe einen Beamer mit
-  
+
 registration2:
   event: event_mathematikerkonferenz
   person: person2
@@ -43,11 +43,11 @@ registration3:
   station_departure: hierher fahre ich
   railway_discount: Semesterticket
   money_transfer_date: 1212-12-12
-  member_discount: true
+  member_discount: nil
   meal_preference: Fruitarier
   talks: Zahlentee
   comment: bringe Tee mit
-  
+
 registration4:
   event: event_physikerkonferenz
   person: person1
@@ -62,4 +62,4 @@ registration4:
   member_discount: false
   meal_preference: Fruitarier
   talks: Graviation
-  comment: schwerer Vortrag 
+  comment: schwerer Vortrag
