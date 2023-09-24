@@ -71,7 +71,7 @@ module BankingStatementImportHelper
 		{
 			**parse_reference_line(line["Verwendungszweck"]),
 			:amount => Float(line["Betrag"].gsub(/,/, '.')),
-			:payment_date => DateTime.parse(line["Buchungstag"]),
+			:payment_date => DateTime.strptime(line["Buchungstag"], "%d.%m.%Y"),
 		}
 	end
 
