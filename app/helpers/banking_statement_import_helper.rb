@@ -68,10 +68,13 @@ module BankingStatementImportHelper
 	end
 
 	def parse_line(line)
+		# Be advised: The date we get from the banking csv only contains two digits for the years.
+		# The following will parse 68 as 2068 and 69 as 1969, but this seems acceptable since I doubt
+		# that all of ruby3, this qeddb and the banking statements will still be around in 2069.
 		{
-			**parse_reference_line(line["Verwendungszweck"]),
-			:amount => Float(line["Betrag"].gsub(/,/, '.')),
-			:payment_date => DateTime.strptime(line["Buchungstag"], "%d.%m.%Y"),
+			**parse_reference_line(line['Verwendungszweck']),
+			amount: Float(line['Betrag'].gsub(/,/, '.')),
+			payment_date: DateTime.strptime(line['Buchungstag'], '%d.%m.%y')
 		}
 	end
 
