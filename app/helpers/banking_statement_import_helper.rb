@@ -6,60 +6,57 @@ module BankingStatementImportHelper
 
 	def banking_statement_import_link
 		return unless policy(:banking).import_banking_statement?
+
 		link_to t('actions.import_banking_statements.prepare'), import_banking_statement_path
 	end
 
 	def parse_reference_line(reference)
-		event_str, person_str = reference.split(",")
-		if person_str.nil?
-			raise "Verwendungszweck enthält kein Trennzeichen."
-		end
+		event_str, person_str = reference.split(',')
+		raise 'Verwendungszweck enthält kein Trennzeichen.' if person_str.nil?
 
 		person = find_person(person_str.gsub(/ /, ''))
 
-		if event_str.starts_with? "Mitgliedsbeitrag"
+		if event_str.starts_with? 'Mitgliedsbeitrag'
 			year = Integer(event_str.match(/\d{4}/)[0])
 			return {
-				:type => :membership,
-				:year => year,
-				:person => person
+				type: :membership,
+				year: year,
+				person: person
 			}
 		end
 		event = find_event(event_str)
 		{
-			:type => :event,
-			:event => event,
-			:person => person,
-			:registration => Registration.find_by(event: event, person: person)
+			type: :event,
+			event: event,
+			person: person,
+			registration: Registration.find_by(event: event, person: person)
 		}
 	end
 
 	def find_person(name)
-		begin
-			matches = Person.all.select {|person| person.reference_line.gsub(/ /, '') == name}
-			sole_element matches
-		rescue Exception => e
-			case e.message
-			when "None"
-				raise "Keine Person mit Namen #{name} gefunden."
-			when "Multiple"
-				raise "Mehrere Personen mit Namen #{name} gefunden."
-			else
-				raise "Unbekannter Fehler, bei Personensuche: #{e.message}"
-			end
+		matches = Person.all.select { |person| person.reference_line.gsub(/ /, '') == name }
+		sole_element matches
+	rescue Exception => e
+		case e.message
+		when 'None'
+			raise "Keine Person mit Namen #{name} gefunden."
+		when 'Multiple'
+			raise "Mehrere Personen mit Namen #{name} gefunden."
+		else
+			raise "Unbekannter Fehler, bei Personensuche: #{e.message}"
 		end
 	end
 
 	def find_event(event_str)
 		event_str.gsub!(/ /, '')
-		event_str.gsub!(/20\d\d/) {|match| match.delete_prefix("20")}
+		event_str.gsub!(/20\d\d/) { |match| match.delete_prefix('20') }
 		begin
-			sole_element Event.all.select {|event| event.reference_line.gsub(/ /, '') == event_str}
+			sole_element(Event.all.select { |event| event.reference_line.gsub(/ /, '') == event_str })
 		rescue Exception => e
 			case e.message
-			when "None"
+			when 'None'
 				raise "Keine Veranstaltung mit Namen #{event_str} gefunden."
-			when "Multiple"
+			when 'Multiple'
 				raise "Mehrere Veranstaltungen mit Namen #{event_str} gefunden."
 			else
 				raise "Unbekannter Fehler, bei Veranstaltungssuche: #{e.message}"
@@ -67,12 +64,37 @@ module BankingStatementImportHelper
 		end
 	end
 
+	def try_parse_e2e_reference(line)
+		return nil unless line['Kundenreferenz (End-to-End)'] =~ /^(M|E)(\d+) (\d+)$/
+
+		person = Person.find(Integer(::Regexp.last_match(3)))
+		id_or_year = Integer(::Regexp.last_match(2))
+
+		if ::Regexp.last_match(1) == 'M'
+			{
+				type: :membership,
+				year: id_or_year,
+				person: person
+			}
+		else
+			event = Event.find(id_or_year)
+			{
+				type: :event,
+				event: event,
+				person: person,
+				registration: Registration.find_by(event: event, person: person)
+			}
+		end
+	end
+
 	def parse_line(line)
+		payment_data = try_parse_e2e_reference(line)
+		payment_data = parse_reference_line(line['Verwendungszweck']) if payment_data.nil?
 		# Be advised: The date we get from the banking csv only contains two digits for the years.
 		# The following will parse 68 as 2068 and 69 as 1969, but this seems acceptable since I doubt
 		# that all of ruby3, this qeddb and the banking statements will still be around in 2069.
 		{
-			**parse_reference_line(line['Verwendungszweck']),
+			**payment_data,
 			amount: Float(line['Betrag'].gsub(/,/, '.')),
 			payment_date: DateTime.strptime(line['Buchungstag'], '%d.%m.%y')
 		}
@@ -91,9 +113,7 @@ module BankingStatementImportHelper
 		else
 			event = payment[:event]
 			registration = payment[:registration]
-			if registration.nil?
-				raise "Person #{person.full_name} nicht für die Veranstaltung #{event.title} angemeldet."
-			end
+			raise "Person #{person.full_name} nicht für die Veranstaltung #{event.title} angemeldet." if registration.nil?
 			if registration.payment_complete
 				raise "Person #{person.full_name} schon für die Veranstaltung #{event.title} bezahlt."
 			end
@@ -126,13 +146,11 @@ module BankingStatementImportHelper
 	end
 
 	def handle_payment_record(record)
-		begin
-			payment = parse_line(record)
-			validate_payment payment
-			return apply_payment payment
-		rescue Exception => e
-			return e.message
-		end
+		payment = parse_line(record)
+		validate_payment payment
+		apply_payment payment
+	rescue Exception => e
+		e.message
 	end
 
 	def prepare_input(data)
@@ -145,12 +163,12 @@ module BankingStatementImportHelper
 	end
 
 	def import_banking_csv(data)
-		records = CSV.parse(prepare_input(data), headers: true, col_sep: ";", strip: true)
+		records = CSV.parse(prepare_input(data), headers: true, col_sep: ';', strip: true)
 		results = []
 		ActiveRecord::Base.transaction do
-			records.each {|record|
-				results.push([record["Verwendungszweck"], record["Betrag"], handle_payment_record(record)])
-			} unless records.nil?
+			records&.each do |record|
+				results.push([record['Verwendungszweck'], record['Betrag'], handle_payment_record(record)])
+			end
 		end
 		results
 	end
