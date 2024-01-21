@@ -1,35 +1,39 @@
 module SepaExportHelper
-
 	def sepa_export_button(event_id = nil, year = nil)
 		return nil unless policy(:banking).sepa_export?
+
 		icon_button t('actions.export_sepa.prepare'), 'attach_money', sepa_export_path(event_id: event_id, year: year)
 	end
 
 	def get_transactions_for_members(year)
 		cutoff_date = DateTime.new(year).beginning_of_year
-		Person.where(paid_until: ..cutoff_date)
-					.where(member_until: cutoff_date..)
-					.select {|person| not person.sepa_mandate.nil?}
-					.map {|person|
-						{
-							:person => person,
-							:reference_line => "Mitgliedschaft #{year}, #{person.reference_line}",
-							:amount => Rails.configuration.membership_fee,
-						}
-					}
+		Person
+			.where(paid_until: ..cutoff_date)
+			.where(member_until: cutoff_date..)
+			.reject { |person| person.sepa_mandate.nil? }
+			.map do |person|
+				{
+					person: person,
+					reference_line: "Mitgliedschaft #{year}, #{person.reference_line}",
+					amount: Rails.configuration.membership_fee,
+					instruction: "M#{year} #{person.id}"
+				}
+			end
 	end
 
 	def get_transactions_for_event(event)
-		event.registrations
-				 .where(payment_complete: false, money_amount: 1..)
-				 .select {|registration| not registration.person.sepa_mandate.nil?}
-				 .map {|registration|
-					 {
-						 :person => registration.person,
-						 :reference_line => registration.reference_line,
-						 :amount => registration.money_amount,
-					 }
-				 }
+		event
+			.registrations
+			.where(payment_complete: false, money_amount: 1..)
+			.reject { |registration| registration.person.sepa_mandate.nil? }
+			.map do |registration|
+				{
+					person: registration.person,
+					reference_line: registration.reference_line,
+					amount: registration.money_amount,
+					instruction: "E#{event.id} #{registration.person.id}"
+				}
+			end
 	end
 
 	def add_persons(transactions)
@@ -54,10 +58,12 @@ module SepaExportHelper
 				remittance_information: transaction[:reference_line],
 				mandate_id: transaction[:person].sepa_mandate.mandate_reference,
 				mandate_date_of_signature: transaction[:person].sepa_mandate.signature_date,
+				reference: transaction[:instruction],
+				instruction: transaction[:instruction],
 				local_instrument: 'CORE',
 				sequence_type: 'FRST',
 				requested_date: execution_date,
-				batch_booking: true,
+				batch_booking: true
 			)
 		end
 		sdd
@@ -69,7 +75,7 @@ module SepaExportHelper
 				person: transaction[:person],
 				execution_date: execution_date,
 				amount: transaction[:amount],
-				reference_line: transaction[:reference_line],
+				reference_line: transaction[:reference_line]
 			)
 			mailer.sepa_direct_debit_announce_email.deliver_now
 		end

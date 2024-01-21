@@ -41,6 +41,8 @@ class Event < ApplicationRecord
 	validates :cost, numericality: {greater_than_or_equal_to: 0}
 	validates :max_participants, numericality: {only_integer: true, greater_than_or_equal_to: 0}
 	validates :comment, length: {maximum: 1000}
+	validates :reference_line, length: { maximum: 25 }
+	validates :reference_line, format: { with: /\A[a-zA-Z0-9 -]+\z/, message: I18n.t('validations.event.reference_line.charset') }
 	validate :max_participants_not_exceeded
 
 	after_create :create_groups, :create_mailinglists
