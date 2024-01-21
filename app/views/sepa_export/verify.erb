@@ -43,6 +43,7 @@
               <%= form.hidden_field "transactions[#{index}][amount]", value: transaction[:amount] %>
               <%= form.hidden_field "transactions[#{index}][person_id]", value: transaction[:person].id %>
               <%= form.hidden_field "transactions[#{index}][reference_line]", value: transaction[:reference_line] %>
+              <%= form.hidden_field "transactions[#{index}][instruction]", value: transaction[:instruction] %>
               <%= form.check_box "transactions[#{index}][use]", {:checked => true} %>
             </td>
             <td><%= form.label "transactions[#{index}][use]", transaction[:person].full_name %></td>
