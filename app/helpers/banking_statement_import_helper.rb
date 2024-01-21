@@ -11,7 +11,8 @@ module BankingStatementImportHelper
 	end
 
 	def parse_reference_line(reference)
-		event_str, person_str = reference.split(',')
+		# Our bank adds this garbage string somtimes
+		event_str, person_str = reference.gsub(/DATUM \d\d\.\d\d\.\d\d\d\d, \d\d\.\d\d UHR $/, '').split(',')
 		raise 'Verwendungszweck enthält kein Trennzeichen.' if person_str.nil?
 
 		person = find_person(person_str.gsub(/ /, ''))
