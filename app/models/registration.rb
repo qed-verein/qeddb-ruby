@@ -55,11 +55,11 @@ class Registration < ApplicationRecord
 		if event.nil?
 			self.money_amount = 0 if money_amount.nil?
 		else
-			max_days = ((event.end.middle_of_day - event.start.middle_of_day) / 1.day).round
-			self.nights_stay = max_days if nights_stay.blank?
 			self.arrival = event.start if arrival.blank?
 			self.departure = event.end if departure.blank?
 			self.money_amount = event.cost if money_amount.nil?
+ 			max_days = ((self.departure.middle_of_day - self.arrival.middle_of_day) / 1.day).round
+ 			self.nights_stay = max_days if nights_stay.blank?
 		end
 
 		# Übernehme Standardeinstellungen zu Bahnhöfen, Essenswünschen etc. aus den Personendaten
