@@ -5,7 +5,7 @@ class PeopleController < ApplicationController
 
 	before_action :set_all_people, only: [:index, :index_as_table]
 	before_action :set_person, only: [:show, :addresses, :registrations, :privacy, :payments, :sepa_mandate, :groups,
-		:edit, :edit_addresses, :edit_privacy, :edit_payments, :edit_sepa_mandate, :edit_groups, :update, :destroy]
+		:edit, :edit_addresses, :edit_privacy, :edit_payments, :edit_sepa_mandate, :edit_groups, :update, :destroy, :destroy_sepa_mandate]
 	before_action :basic_authorization
 
 	def index
@@ -74,6 +74,13 @@ class PeopleController < ApplicationController
 		Rails.configuration.qeddb_hooks[:person_deleted].call(@person)
 		redirect_to people_url, notice: t('.success')
 	end
+
+	def destroy_sepa_mandate
+		authorize @person, :edit_sepa_mandate?
+		@person.sepa_mandate = nil
+		redirect_to @person, notice: t('.success')
+	end
+
 private
 	def set_person
 		@person = policy_scope(Person).find(params[:id])
@@ -106,6 +113,10 @@ private
 			when :edit_payments
 				authorize @person, :edit_payments?
 			when :edit_sepa_mandate
+				authorize @person, :edit_sepa_mandate?
+			when :destroy_sepa_mandate
+				puts @person.inspect
+				puts action_name
 				authorize @person, :edit_sepa_mandate?
 			when :edit_addresses
 				authorize @person, :edit_additional?

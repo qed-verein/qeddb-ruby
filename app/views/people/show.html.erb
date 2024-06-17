@@ -189,6 +189,11 @@
 
 					<dt><%= SepaMandate.human_attribute_name :sequence_type %></dt>
 					<dd><%= @person.sepa_mandate.sequence_type %></dd>
+
+					<% if not @person.sepa_mandate.sponsor_membership.nil? %>
+						<dt><%= SepaMandate.human_attribute_name :sponsor_membership %></dt>
+						<dd><%= number_to_currency @person.sepa_mandate.sponsor_membership %></dd>
+					<% end %>
 				</dl>
 			<% end %>
 		</section>
