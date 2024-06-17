@@ -12,12 +12,21 @@ module SepaExportHelper
 			.where(member_until: cutoff_date..)
 			.reject { |person| person.sepa_mandate.nil? }
 			.map do |person|
-				{
-					person: person,
-					reference_line: "Mitgliedschaft #{year}, #{person.reference_line}",
-					amount: Rails.configuration.membership_fee,
-					instruction: "M#{year} #{person.id}"
-				}
+				if person.sepa_mandate.sponsor_membership.nil?
+					{
+						person: person,
+						reference_line: "Mitgliedschaft #{year}, #{person.reference_line}",
+						amount: Rails.configuration.membership_fee,
+						instruction: "M#{year} #{person.id}"
+					}
+				else
+					{
+						person: person,
+						reference_line: "Foerdermitgliedschaft #{year}, #{person.reference_line}",
+						amount: person.sepa_mandate.sponsor_membership,
+						instruction: "F#{year} #{person.id}"
+					}
+				end
 			end
 	end
 
@@ -26,6 +35,8 @@ module SepaExportHelper
 			.registrations
 			.where(payment_complete: false, money_amount: 1..)
 			.reject { |registration| registration.person.sepa_mandate.nil? }
+			# Falls Leute NUR der Abbuchung der Fördermitgliedschaft zugestimmt haben, dürfen wir sie keine Events damit zahlen lassen.
+			.select { |registration| registration.person.sepa_mandate.allow_all_payments }
 			.map do |registration|
 				{
 					person: registration.person,
