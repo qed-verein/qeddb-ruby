@@ -10,7 +10,11 @@ de:
     create:
       success: Login erfolgreich
       failed: Login fehlgeschlagen
-      not_payed: Du hast für das aktuelle Jahr noch keinen Mitgliedsbeitrag gezahlt.
+      not_payed: |
+        Du hast für das aktuelle Jahr noch keinen Mitgliedsbeitrag gezahlt. Überweise ihn bitte an
+        Quod Erat Demonstrandum e.V.,
+        IBAN: %{iban},
+        Verwendungszweck: %{reference_line}
     destroy:
       complete: Ausgeloggt
   password_resets:
