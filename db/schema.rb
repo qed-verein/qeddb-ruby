@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2024_06_23_100539) do
     t.integer "payment_type"
     t.date "start"
     t.date "end"
-    t.decimal "amount", precision: 2
+    t.decimal "amount", precision: 10, scale: 2
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2024_06_23_100539) do
     t.boolean "member_discount"
     t.string "other_discounts"
     t.date "money_transfer_date"
-    t.decimal "money_amount", precision: 2
+    t.decimal "money_amount", precision: 10, scale: 2
     t.boolean "payment_complete"
     t.datetime "arrival"
     t.datetime "departure"
