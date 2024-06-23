@@ -317,13 +317,13 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails
-  sqlite3 (~> 1.4)
+  sqlite3 (~> 1.6)
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
 
 RUBY VERSION
-   ruby 3.0.6p216
+   ruby 2.7.1p83
 
 BUNDLED WITH
    2.5.4

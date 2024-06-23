@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Ruby interpreter version
-ruby '>= 2.7.0'
+ruby '>= 2.7.0', '< 3.0.0'
 
 # Workaround for https://github.com/ffi/ffi/issues/1105
 gem 'ffi', '~> 1.16.3'
@@ -36,7 +36,7 @@ gem 'jquery-rails', '~> 4.6.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.4'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+gem 'sqlite3', '~> 1.6'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
