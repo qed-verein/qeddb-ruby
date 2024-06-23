@@ -4,6 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Ruby interpreter version
 ruby '>= 2.7.0'
 
+# Workaround for https://github.com/ffi/ffi/issues/1105
+gem 'ffi', '~> 1.16.3'
+
 # MYSQL database adapter
 gem 'mysql2'
 
