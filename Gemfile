@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Ruby interpreter version
-ruby '>= 2.5.0'
+ruby '>= 2.7.0'
 
 # MYSQL database adapter
 gem 'mysql2'
