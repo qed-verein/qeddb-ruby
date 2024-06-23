@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_13_154141) do
+ActiveRecord::Schema.define(version: 2024_06_23_100539) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2022_11_13_154141) do
     t.integer "payment_type"
     t.date "start"
     t.date "end"
-    t.decimal "amount"
+    t.decimal "amount", precision: 2
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 2022_11_13_154141) do
     t.boolean "member_discount"
     t.string "other_discounts"
     t.date "money_transfer_date"
-    t.decimal "money_amount"
+    t.decimal "money_amount", precision: 2
     t.boolean "payment_complete"
     t.datetime "arrival"
     t.datetime "departure"
