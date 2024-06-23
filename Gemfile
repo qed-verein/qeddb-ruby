@@ -6,6 +6,8 @@ ruby '>= 2.7.0', '< 3.0.0'
 
 # Workaround for https://github.com/ffi/ffi/issues/1105
 gem 'ffi', '~> 1.16.3'
+# Require last nokogiri version supporting ruby 2.7
+gem 'nokogiri', '~> 1.15.6'
 
 # MYSQL database adapter
 gem 'mysql2'

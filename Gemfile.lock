@@ -300,6 +300,7 @@ DEPENDENCIES
   loaf (~> 0.10.0)
   material_icons (~> 2.2.1)
   mysql2
+  nokogiri (~> 1.15.6)
   pagy (~> 3.8.3)
   paper_trail (~> 14.0.0)
   puma (~> 5.0)
