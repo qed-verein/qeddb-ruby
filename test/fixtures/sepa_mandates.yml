@@ -4,8 +4,10 @@ mandate1:
   iban: DE89370400440532013000
   bic: COBADEFFXXX
   name_account_holder: Ihre Frau Mama
-  sequence_type: FRST
+  sequence_type: first_use
   person: testkassier
+  sponsor_membership: 100.00
+  allow_all_payments: false
 
 mandate2:
   mandate_reference: Mandat2
@@ -13,5 +15,5 @@ mandate2:
   iban: DE89370400440532013000
   bic: COBADEFFXXX
   name_account_holder: Niemand
-  sequence_type: FRST
+  sequence_type: first_use
   person: person1

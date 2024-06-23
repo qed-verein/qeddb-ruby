@@ -48,6 +48,18 @@ def edit_sepa_mandate_person_link(person)
 	icon_button t('actions.person.edit_sepa_mandate'), "attach_money", edit_sepa_mandate_person_path(person)
 end
 
+def delete_sepa_mandate_link(person)
+	return nil unless policy(person).edit_sepa_mandate?
+
+	link_to delete_sepa_mandate_person_path(person),
+									method: :delete,
+									class: 'button',
+									data: { confirm: "SEPA-Mandat von „#{person.full_name}“ löschen?" } do
+		concat tag.i(class: 'material-icons md-24') { 'delete' }
+		concat t('actions.person.delete_sepa_mandate')
+	end
+end
+
 def delete_person_link(person)
 	return nil unless policy(person).delete_person?
 	link_to person, method: :delete, class: 'button',

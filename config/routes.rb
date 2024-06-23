@@ -33,26 +33,27 @@ Rails.application.routes.draw do
 	get '/events_as_table', to: 'events#index_as_table'
 
 	root 'static#index'
-	
+
 	resources :people, concerns: :versionable do
 		member do
 			get 'addresses'
 			get 'registrations'
 			get 'privacy'
 			get 'payments'
-      get 'sepa_mandate'
+			get 'sepa_mandate'
 			get 'groups'
-	
+
 			get 'edit_addresses'
 			get 'edit_privacy'
 			get 'edit_payments'
-      get 'edit_sepa_mandate'
+			get 'edit_sepa_mandate'
+			delete 'delete_sepa_mandate', to: 'people#destroy_sepa_mandate'
 			get 'edit_groups'
-			
+
 			get 'activate'
 		end
 	end
-	
+
 	resources :registrations, concerns: :versionable do
 		member do
 			post 'self', to: 'registrations#create_self'
@@ -61,13 +62,13 @@ Rails.application.routes.draw do
 			patch 'self', to: 'registrations#update_self'
 		end
 	end
-	
+
 	resources :events, concerns: :versionable do
 		member do
 			get 'registrations_as_table'
 			get 'edit_own_registration'
 		end
-		
+
 		get 'register_other', to: 'registrations#select_person', as: 'select_person'
 		post 'register_other', to: 'registrations#with_selected_person'
 		get 'register_other/:person_id', to: 'registrations#new', as: 'register_person'
@@ -75,10 +76,10 @@ Rails.application.routes.draw do
 		get 'register_self', to: 'registrations#new_self'
 		post 'register_self', to: 'registrations#create_self'
 	end
-	
+
 	resources :hostels, concerns: :versionable
 	resources :groups, concerns: :versionable
 	resources :mailinglists, concerns: :versionable
-	
+
 	# For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

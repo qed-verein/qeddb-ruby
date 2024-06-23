@@ -299,14 +299,6 @@ footer {
 	font-size: smaller;
 }
 
-.unpaid {
-	color: white;
-	background-color: #d41;
-	border: 2px solid #d00;
-	padding: 1em;
-	margin: 0 1em;
-}
-
 .notice {
 	color: white;
 	background-color: #484;
@@ -333,6 +325,14 @@ hr {
 	border-bottom: 1px dashed #c66;
 }
 
+.outstanding {
+	background-color: var(--bg-color-2);
+	font-weight: bold;
+	border: 2px solid;
+	padding: 1em;
+	margin: 1em auto;
+	max-width: 30em;
+}
 
 /* Überblick */
 .overview {

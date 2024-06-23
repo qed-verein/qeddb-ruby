@@ -25,6 +25,15 @@ module BankingStatementImportHelper
 				person: person
 			}
 		end
+		if event_str.starts_with? 'Foerdermitgliedschaft'
+			year = Integer(event_str.match(/\d{4}/)[0])
+			return {
+				type: :sponsor_membership,
+				year: year,
+				person: person
+			}
+		end
+
 		event = find_event(event_str)
 		{
 			type: :event,
@@ -66,7 +75,7 @@ module BankingStatementImportHelper
 	end
 
 	def try_parse_e2e_reference(line)
-		return nil unless line['Kundenreferenz (End-to-End)'] =~ /^(M|E)(\d+) (\d+)$/
+		return nil unless line['Kundenreferenz (End-to-End)'] =~ /^(M|F|E)(\d+) (\d+)$/
 
 		person = Person.find(Integer(::Regexp.last_match(3)))
 		id_or_year = Integer(::Regexp.last_match(2))
@@ -74,6 +83,12 @@ module BankingStatementImportHelper
 		if ::Regexp.last_match(1) == 'M'
 			{
 				type: :membership,
+				year: id_or_year,
+				person: person
+			}
+		elsif ::Regexp.last_match(1) == 'F'
+			{
+				type: :sponsor_membership,
 				year: id_or_year,
 				person: person
 			}
@@ -111,6 +126,13 @@ module BankingStatementImportHelper
 			if person.paid_until >= DateTime.new(payment[:year]).end_of_year.yesterday
 				raise "Person #{person.full_name} hat schon für das Jahr #{payment[:year]} gezahlt."
 			end
+		elsif payment[:type] == :sponsor_membership
+			unless person.sepa_mandate.sponsor_membership == amount
+				raise "Fördermitgliedsbeitrag ist #{person.sepa_mandate.sponsor_membership} nicht #{amount}."
+			end
+			if person.paid_until >= DateTime.new(payment[:year]).end_of_year.yesterday
+				raise "Person #{person.full_name} hat schon für das Jahr #{payment[:year]} gezahlt."
+			end
 		else
 			event = payment[:event]
 			registration = payment[:registration]
@@ -135,6 +157,16 @@ module BankingStatementImportHelper
 				amount: payment[:amount]
 			)
 			"Mitgliedschaft für #{payment[:person].full_name} für das Jahr #{payment[:year]} angelegt."
+		elsif payment[:type] == :sponsor_membership
+			year_date = DateTime.new(payment[:year])
+			Payment.create(
+				person: payment[:person],
+				payment_type: :sponsor_member,
+				start: year_date.beginning_of_year,
+				end: year_date.end_of_year,
+				amount: payment[:amount]
+			)
+			"Fördermitgliedschaft für #{payment[:person].full_name} für das Jahr #{payment[:year]} angelegt."
 		else
 
 			registration = payment[:registration]

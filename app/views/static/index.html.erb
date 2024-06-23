@@ -3,6 +3,19 @@
 
 <h3>Herzlich willkommen in der QED-Datenbank!</h3>
 
+<% current_year = DateTime.now.year %>
+<% if !current_user.paid_until.nil? && current_user.paid_until.year < current_year && current_user.member? && current_user.sepa_mandate.nil? %>
+  <% first_unpaid_year = current_user.paid_until.year + 1 %>
+  <div class="outstanding">
+    Du hast für <% if first_unpaid_year == current_year %>das aktuelle Jahr<% else %>die Jahre <%= first_unpaid_year %> bis <%= current_year %><% end %> noch keinen Mitgliedsbeitrag gezahlt. Überweise bitte <%= number_to_currency (current_year - first_unpaid_year + 1) * Rails.configuration.membership_fee %> an
+    <dl>
+      <dt></dt><dd>Quod Erat Demonstrandum e.V.</dd>
+      <dt>IBAN</dt><dd><%= Rails.configuration.iban %></dd>
+      <dt>Verwendungszweck</dt><dd>Mitgliedschaft <% if current_year == first_unpaid_year %><%= current_year %><% else %><%= first_unpaid_year %>-<%= current_year %><% end %>, <%= current_user.reference_line %></dd>
+    </dl>
+  </div>
+<% end %>
+
 Hier kanst du deine eigenen Daten ändern und dich zu Veranstaltung anmelden.
 
 <% if current_user.member? %>

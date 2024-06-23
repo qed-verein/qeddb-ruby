@@ -7,6 +7,7 @@
 	<%= render partial: 'sepa_mandate_fieldset', locals: {form: form} %>
 	<div class="actions">
 		<%= form.submit t('.submit') %>
+		<%= delete_sepa_mandate_link(@person) %>
 	</div>
 	</fieldset>
 <% end %>

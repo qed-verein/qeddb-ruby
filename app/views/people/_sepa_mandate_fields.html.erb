@@ -17,5 +17,11 @@
 
     <%= form.label :sequence_type %>
     <%= form.select :sequence_type, SepaMandate.human_enum_options(:sequence_types) %>
+
+    <%= form.label :sponsor_membership %>
+    <%= form.number_field :sponsor_membership, :step => 0.01 %>
+
+    <%= form.label :allow_all_payments %>
+    <%= form.check_box :allow_all_payments %>
   </div>
 </fieldset>

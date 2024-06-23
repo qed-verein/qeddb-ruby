@@ -177,6 +177,8 @@ de:
         bic: BIC
         name_account_holder: Kontoinhaber
         sequence_type: Sequence Type
+        sponsor_membership: Fördermitgliedschaft
+        allow_all_payments: Alle Zahlungen erlaubt
         _destroy: Löschen
       sepa_mandate/sequence_type:
         first_use: FRST

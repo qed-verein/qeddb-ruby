@@ -14,5 +14,6 @@ class SepaMandate < ApplicationRecord
   def use_mandate
     update(sequence_type: :recurring_use)
   end
+
   # TODO: IBAN-Validierung?
 end

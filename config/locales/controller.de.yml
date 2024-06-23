@@ -10,7 +10,6 @@ de:
     create:
       success: Login erfolgreich
       failed: Login fehlgeschlagen
-      not_payed: Du hast für das aktuelle Jahr noch keinen Mitgliedsbeitrag gezahlt.
     destroy:
       complete: Ausgeloggt
   password_resets:
@@ -41,6 +40,8 @@ de:
       success: Änderungen an der Person wurden gespeichert
     destroy:
       success: Person wurde erfoglreich gelöscht
+    destroy_sepa_mandate:
+      success: SEPA-Mandat erfoglreich gelöscht
     edit:
       submit: Personendaten speichern
     edit_addresses:
@@ -104,6 +105,7 @@ de:
       edit_payments: Zahlungen bearbeiten
       submit_payments: Zahlungen eintragen
       edit_sepa_mandate: SEPA-Mandat bearbeiten
+      delete_sepa_mandate: SEPA-Mandat löschen
       privacy: Datenschutz
       edit_privacy: Datenschutz einstellen
       groups: Rechte
