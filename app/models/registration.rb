@@ -8,6 +8,9 @@ class Registration < ApplicationRecord
 	belongs_to :event
 	belongs_to :person
 
+	# Verweis auf Zahlungen zu dieser Registrierung
+	has_many :registration_payments, dependent: :destroy
+
 	# Der Anmeldestatus des Teilnehmers
 	#  pending:   Die Person hat sich gerade erst angemeldet
 	#  confirmed: Die Person hat eine Platzzusage zur Veranstaltung
@@ -77,6 +80,26 @@ class Registration < ApplicationRecord
 
 	def effective_member_discount
 		person.member_at_time?(event.start) or person.member_at_time?(event.end)
+	end
+
+	def to_be_paid
+		if payment_complete or money_amount.nil? then
+			0
+		else
+			money_amount - registration_payments.sum(:money_amount)
+		end
+	end
+
+	def fully_paid?
+		if registration_payments.empty? then
+			# This is for legacy reasons:
+			# - Back in the really old days, the open registrations were considered unpaid and the confirmed ones paid
+			# - Later we had a payment_complete checkbox
+			# Both should still give the "correct" result here.
+			status != 'pending' or payment_complete
+		else
+			to_be_paid == 0
+		end
 	end
 
 	def self.status_active?(status)
