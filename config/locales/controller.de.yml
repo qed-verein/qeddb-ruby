@@ -66,6 +66,10 @@ de:
       success: Die Änderungen an deiner Anmeldung wurden erfolgreich gespeichert
     destroy:
       success: Anmeldung wurde erfoglreich gelöscht
+    pay_rest:
+      invalid_date: Das Ausführungsdatum ist kein valides Datum
+      no_rest_to_be_paid: Die Anmeldung war bereits vollständig bezahlt
+      success: Zahlung erfoglreich hinzugefügt
 
   hostels:
     create:

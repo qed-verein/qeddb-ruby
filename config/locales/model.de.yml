@@ -134,6 +134,12 @@ de:
         confirmed: bestätigt
         rejected: abgelehnt
         cancelled: abgesagt
+
+      registration_payment:
+        money_amount: Betrag
+        money_transfer_date: Geldeingang
+        comment: Kommentar
+
       address:
         country: Land
         city: Stadt

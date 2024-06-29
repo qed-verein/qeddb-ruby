@@ -131,6 +131,12 @@
 		<%= edit_registration_link(@registration) %>
 		<%= delete_registration_link(@registration) %>
 		<%= event_register_other_link(@registration.event) %>
+		<% if @registration_policy.edit_payments? %>
+		<%= form_with url: pay_rest_registration_path(@registration), method: :post do |form| %>
+			<%= form.date_field :pay_rest_date, id: :pay_rest_date, :required => true %>
+			<%= form.submit "Rest bezahlt" %>
+		<% end %>
+		<% end %>
 	</div>
 </article>
 </div>

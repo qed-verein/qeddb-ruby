@@ -60,6 +60,7 @@ Rails.application.routes.draw do
 			get 'self', to: 'registrations#edit_self'
 			put 'self', to: 'registrations#update_self'
 			patch 'self', to: 'registrations#update_self'
+			post 'pay_rest', to: 'registrations#pay_rest'
 		end
 	end
 
