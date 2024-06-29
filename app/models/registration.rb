@@ -11,6 +11,8 @@ class Registration < ApplicationRecord
 	# Verweis auf Zahlungen zu dieser Registrierung
 	has_many :registration_payments, dependent: :destroy
 
+	accepts_nested_attributes_for :registration_payments, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
+
 	# Der Anmeldestatus des Teilnehmers
 	#  pending:   Die Person hat sich gerade erst angemeldet
 	#  confirmed: Die Person hat eine Platzzusage zur Veranstaltung

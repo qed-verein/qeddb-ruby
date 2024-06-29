@@ -39,28 +39,55 @@
 			<dd><%= check_unknown(@registration.person.mobile_number) {|x|
 				mobile_phone_html(x)} %></dd>
 			<% end %>
+
+			<% if @registration_policy.view_private? %>
+				<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
+				<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount} %></dd>
+			<% end %>
 		</dl>
 	</section>
 
 	<% if @registration_policy.view_payments? %>
 	<section id="registration_status">
-		<h3>Zahlungen</h3>
+		<h3>Zahlungsinformationen</h3>
 		<dl class="aligned">
-			<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
-			<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount} %></dd>
-
 			<dt><%= Registration.human_attribute_name :payment_complete %>:</dt>
-			<dd><%= render_yes_no @registration.payment_complete %></dd>
+			<dd><%= render_yes_no @registration.fully_paid? %></dd>
 
-			<dt><%= Registration.human_attribute_name :money_transfer_date %>:</dt>
-			<dd><%= render_date @registration.money_transfer_date %></dd>
+			<% unless @registration.fully_paid? %>
+				<dt><%= Registration.human_attribute_name :to_be_paid %>:</dt>
+				<dd><%= number_to_currency @registration.to_be_paid %></dd>
+			<% end %>
+
+			<% if @registration.registration_payments.empty? %>
+				<dt><%= Registration.human_attribute_name :money_transfer_date %>:</dt>
+				<dd><%= render_date @registration.money_transfer_date %></dd>
+			<% end %>
 
 			<dt><%= Registration.human_attribute_name :effective_member_discount %>:</dt>
 			<dd><%= render_yes_no @registration.effective_member_discount %></dd>
 
 			<dt><%= Registration.human_attribute_name :other_discounts %>:</dt>
 			<dd><%= render_string @registration.other_discounts %></dd>
+
 		</dl>
+		<h3>Zahlungen</h3>
+		<% unless @registration.registration_payments.empty? %>
+			<dl class="aligned">
+				<% @registration.registration_payments.each do |payment| %>
+					<dt><%= render_date payment.money_transfer_date %></dt>
+					<dd>
+						<%= check_unknown(payment.money_amount) {number_to_currency payment.money_amount} %>
+						<% unless payment.comment.blank? %>
+							<br><%= payment.comment %>
+						<% end %>
+					</dd>
+				<% end %>
+			</dl>
+		<% else %>
+			Keine Zahlungen
+		<% end %>
+
 	</section>
 	<% end %>
 
