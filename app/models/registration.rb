@@ -117,6 +117,10 @@ class Registration < ApplicationRecord
 		(person ? person.full_name : "Unknown person")
 	end
 
+	def add_payment(date, amount, comment=nil)
+		registration_payments.create!(money_transfer_date: date, money_amount: amount, comment: comment)
+	end
+
 	private
 
 	# Prüft ob die zeitliche Reihenfolge von Anreise und Abreise korrekt ist.
