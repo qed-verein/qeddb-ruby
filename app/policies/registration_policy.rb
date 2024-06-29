@@ -33,7 +33,7 @@ class RegistrationPolicy
 			edit_general:        [:view_general],
 			edit_payments:       [:view_payments],
 			edit_additional:     [:view_additional],
-			view_private:        [:view_general, :view_payments, :view_additional],
+			view_private:        [:view_general, :view_additional],
 
 			by_other:            [],
 			by_member:           [:view_general],
