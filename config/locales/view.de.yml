@@ -7,3 +7,7 @@ de:
        generalinfo: Personendaten
        settings: Einstellungen
        additional_information: Weitere Informationen
+  outstanding_payments:
+    show:
+      title: Offene Posten
+

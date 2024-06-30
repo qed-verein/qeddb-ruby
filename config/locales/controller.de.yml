@@ -160,4 +160,6 @@ de:
       execution_date: Ausführen am
       export_failed: Export ist fehlgeschlagen, wahrscheinlich ist ein Mandat ungültig
       no_transactions: Es wurden keine Transaktionen ausgewählt
+    outstanding_payments:
+      view: Offene Posten
 

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
 	get '/admin', to: 'admin#show'
 
+	get '/outstanding_payments', action: :show, controller: 'outstanding_payments'
+
 	resources :versions, only: [:index, :show] do
 		patch 'revert', to: 'versions#revert', on: :member
 	end
