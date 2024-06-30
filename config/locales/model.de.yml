@@ -206,6 +206,7 @@ de:
         participants: Füge alle Teilnehmer dieser Veranstaltung automatisch hinzu.
         chairman: Alle angegebenen Gruppenmitglieder bekommen automatisch Vorstandsrechte.
         treasurer: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassiererrechte.
+        auditors: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassenprüfrechte.
         admins: Alle angegebenen Gruppenmitglieder bekommen automatisch Administratorrechte.
       group/mode:
         automatic: Diese Gruppe wurde vollautomatisch verwaltet. Es sind keine Änderungen möglich.

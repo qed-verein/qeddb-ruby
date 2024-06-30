@@ -21,7 +21,9 @@ testadmin:
   account_name: Testadmin
   first_name: Ma
   last_name: Din
+  joined: 2000-1-1
   paid_until: 2200-1-1
+  member_until: 2202-1-1
   email_address: testadmin@example.com
   comment: Adminaccount zum Testen
   <<: *DEFAULTS
@@ -30,16 +32,31 @@ testkassier:
   account_name: Testkassier
   first_name: Reis
   last_name: Sak
+  joined: 2000-1-1
   paid_until: 2200-1-1
+  member_until: 2202-1-1
   email_address: testkassier@example.com
   comment: Kassieraccount zum Testen
+  <<: *DEFAULTS
+
+testkassenprüfer:
+  account_name: Testkassenprüferin
+  first_name: Svenja
+  last_name: Prüfer
+  joined: 2000-1-1
+  paid_until: 2200-1-1
+  member_until: 2202-1-1
+  email_address: testkassenpruefer@example.com
+  comment: 'Kassenprüfer:inaccount zum Testen'
   <<: *DEFAULTS
 
 testvorstand:
   account_name: Testvorstand
   first_name: Von
   last_name: Radst
+  joined: 2000-1-1
   paid_until: 2200-1-1
+  member_until: 2202-1-1
   email_address: testvorstand@example.com
   comment: Vorstandsaccount zum Testen
   <<: *DEFAULTS
@@ -50,6 +67,7 @@ testmitglied:
   last_name: Geidl
   joined: 2000-1-1
   paid_until: 2200-1-1
+  member_until: 2202-1-1
   email_address: testmitglied@example.com
   comment: Mitgliederaccount zum Testen
   <<: *DEFAULTS

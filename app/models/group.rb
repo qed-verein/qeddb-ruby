@@ -32,10 +32,11 @@ class Group < ApplicationRecord
 	#   6) newsletter = Alle die Newsletter haben wollen
 	#   7) organizers = Organisatoren eines Veranstaltung
 	#   8) participants = Teilnehmer einer Veranstaltung
+	#   9) auditors = Kassenprüfer:innen
 
 	enum program: {chairman: 1, treasurer: 2, admins: 3,
 		members: 4, externals: 5, newsletter: 6,
-		organizers: 7, participants: 8}
+		organizers: 7, participants: 8, auditors: 9}
 
 	# Validierungen
 	validates :title, length: {maximum: 50}, presence: true, uniqueness: true

@@ -22,6 +22,12 @@ group_member:
     mode: automatic
     program: members
 
+group_auditor:
+    title: "Kassenprüfer:in"
+    description: "Diese Gruppe enthält alle Kassenprüfer:innen"
+    mode: editable
+    program: auditors
+
 group_gl:
     title: Allgemeine lineare Gruppe
     description: "Diese Gruppe enthält alle invertierbaren Matrizen"
@@ -32,17 +38,17 @@ group_sl:
     title: Spezielle lineare Gruppe
     description: "Diese Gruppe enthält alle invertierbaren Matrizen mit Determinate 1"
     mode: userdefined
-    
+
 group_o:
     title: Orthogonale Gruppe
     description: "Diese Gruppe enthält alle orthogonalen Matrizen"
     mode: userdefined
-    
+
 group_so:
     title: Spezielle orthogonale Gruppe
     description: "Diese Gruppe enthält alle orthogonalen Matrizen mit Determinate 1"
-    mode: userdefined 
-    
+    mode: userdefined
+
 group_q:
     title: Rationale Zahlen
     description: Additive Gruppe der rationalen Zahlen
