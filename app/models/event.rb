@@ -95,6 +95,7 @@ class Event < ApplicationRecord
 	end
 
 	def create_mailinglists
+		return if reference_line.blank?
 		email = reference_line.gsub(/ /, '').downcase
 		Mailinglist.create!(organizer_mailinglist_data(email))
 		Mailinglist.create!(participant_mailinglist_data(email))

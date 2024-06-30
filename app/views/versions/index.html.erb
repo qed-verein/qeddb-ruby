@@ -28,7 +28,7 @@ Dies ist eine einfache Versionsübersicht.
 		<td><%= item_type(version) %></td>
 		<td><%= item_name(version).truncate(50) %></td>
 		<td><%= version.index %></td>
-		<td><%= l version.created_at, format: :very_short if version.created_at %></td>
+		<td><%= l version.created_at, format: :short if version.created_at %></td>
 		<td><%= version.whodunnit %></td>
 		<td><%= t "activerecord.attributes.version/event." + version.event %></td>
 		<td><%= link_to 'Vergleich', version_path(version) %></td>

@@ -18,7 +18,7 @@ def email_address_html(address)
 end
 
 def telegram_html(address)
-	link_to "@"+ address, "https://t.me/#{URI.escape(address)}"
+	link_to "@"+ address, "https://t.me/#{CGI.escape(address)}"
 end
 
 def contact_html(contact)

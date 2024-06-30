@@ -39,5 +39,6 @@ module QeddbRuby
 		config.banking_name 				= "QED-Verein"
 		config.creditor_id 					= ENV["QEDDB_CREDITOR_ID"] 			 || "DE12QED1234EXAKT18"
 		config.kassier_email_address= ENV["QEDDB_KASSIER_EMAIL"] 		 || "kassier@example.com"
+		config.version_log_period   = ENV["QEDDB_VERSION_LOG_PERIOD"] ? ENV["QEDDB_VERSION_LOG_PERIOD"].to_i : 3.years
 	end
 end
