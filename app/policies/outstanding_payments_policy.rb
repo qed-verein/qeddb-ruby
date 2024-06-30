@@ -1,7 +1,7 @@
 class OutstandingPaymentsPolicy
 	include PunditImplications
 	define_implications({
-		by_treasurer: [:view]
+		by_treasurer: [:view, :export]
 	})
 
 	def initialize(user, unused)
