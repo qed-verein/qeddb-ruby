@@ -5,6 +5,8 @@ registration1:
   person: person1
   status: 1
   organizer: true
+  payment_complete: false
+  money_amount: 10
   arrival: 2002-02-20 20:20:20
   departure: 2112-12-21 21:12:00
   station_arrival: von hier komme ich

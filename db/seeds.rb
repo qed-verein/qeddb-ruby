@@ -52,6 +52,8 @@ group = Group.new({id: 6, title: "Newsletter an", mode: :automatic, program: :ne
 	 description: "Alle Personen, die Newsletter erhalten möchten"})
 group.save!
 
+group = Group.create!({id: 9, title: "Kassenprüfer:innen", mode: :editable, program: :auditors,
+	 description: "Diese Gruppe enthält die Kassenprüfer:innen des QEDs NUR während der Kassenprüfung"})
 end
 
 puts "Complete!"

@@ -169,6 +169,12 @@ class Person < ApplicationRecord
 		@is_chairman
 	end
 
+	# Ist diese Person Kassenprüfer:in
+	def auditor?
+		@is_auditor = Group.find_by(program: :auditors).has_member?(self) if @is_auditor.nil?
+		@is_auditor
+	end
+
 	# Ist die Person ein Organisator der Veranstaltung?
 	def organizer?(event)
 		organized_events.exists?(event.id)

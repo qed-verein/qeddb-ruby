@@ -22,7 +22,7 @@ group_so_entry_1:
     group: group_o
     groupable: testmitglied
     groupable_type: Person
- 
+
 group_q_entry_1:
     group: group_q
     groupable: group_z
@@ -39,18 +39,23 @@ group_q_entry_3:
 group_admin_entry_1:
     group: group_admin
     groupable_type: Person
-    groupable: testadmin   
+    groupable: testadmin
 group_admin_entry_2:
     group: group_admin
     groupable_type: Person
     groupable: admin
-    
+
 group_chairman_entry_1:
     group: group_chairman
     groupable_type: Person
     groupable: testvorstand
-    
+
 group_treasurer_entry_1:
     group: group_treasurer
     groupable_type: Person
     groupable: testkassier
+
+group_auditor_entry_1:
+    group: group_auditor
+    groupable_type: Person
+    groupable: testkassenprüfer

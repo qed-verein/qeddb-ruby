@@ -8,6 +8,11 @@ class Registration < ApplicationRecord
 	belongs_to :event
 	belongs_to :person
 
+	# Verweis auf Zahlungen zu dieser Registrierung
+	has_many :registration_payments, dependent: :destroy
+
+	accepts_nested_attributes_for :registration_payments, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
+
 	# Der Anmeldestatus des Teilnehmers
 	#  pending:   Die Person hat sich gerade erst angemeldet
 	#  confirmed: Die Person hat eine Platzzusage zur Veranstaltung
@@ -79,6 +84,26 @@ class Registration < ApplicationRecord
 		person.member_at_time?(event.start) or person.member_at_time?(event.end)
 	end
 
+	def to_be_paid
+		if payment_complete or money_amount.nil? then
+			0
+		else
+			money_amount - registration_payments.sum(:money_amount)
+		end
+	end
+
+	def fully_paid?
+		if registration_payments.empty? then
+			# This is for legacy reasons:
+			# - Back in the really old days, the open registrations were considered unpaid and the confirmed ones paid
+			# - Later we had a payment_complete checkbox
+			# Both should still give the "correct" result here.
+			status != 'confirmed' or payment_complete or money_amount == 0 or money_amount == nil
+		else
+			to_be_paid == 0
+		end
+	end
+
 	def self.status_active?(status)
 		['pending', 'confirmed'].include?(status)
 	end
@@ -90,6 +115,10 @@ class Registration < ApplicationRecord
 	def object_name
 		(event ? event.title : "Unknown event") + " » " +
 		(person ? person.full_name : "Unknown person")
+	end
+
+	def add_payment(date, amount, comment=nil)
+		registration_payments.create!(money_transfer_date: date, money_amount: amount, comment: comment)
 	end
 
 	private

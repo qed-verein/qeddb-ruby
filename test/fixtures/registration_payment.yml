@@ -1,0 +1,11 @@
+payment1:
+  registration: registration1
+  money_amount: 10
+  money_transfer_date: 2024-03-14
+  comment: ''
+
+payment2:
+  registration: registration1
+  money_amount: -13.37
+  money_transfer_date: 2024-06-28
+  comment: Auslage

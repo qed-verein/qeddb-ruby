@@ -33,6 +33,8 @@
 #	 Das können alle Vereinsvorstände tun
 # by_treasurer:
 #	 Das kann der Kassier tun
+# by_auditor:
+#	 Das können Kassenprüfer:innen tun
 # by_admin
 #   Das können Administratoren tun
 
@@ -64,6 +66,7 @@ class PersonPolicy
 			by_self:          [:by_member, :view_private, :edit_additional, :edit_settings, :view_sepa_mandate],
 			by_chairman:      [:by_self, :edit_personal, :create_person, :delete_person, :list_all_people],
 			by_treasurer:     [:by_chairman, :edit_payments, :edit_sepa_mandate],
+			by_admin:         [:by_member, :view_payments, :view_sepa_mandate],
 			by_admin:         [:by_treasurer]})
 
 	# Vergibt die Rechtestufen, je nachdem ob der Benutzer ein Mitglieder, Admin etc. ist
@@ -71,6 +74,7 @@ class PersonPolicy
 	def initialize(user, person)
 		grant :by_admin if user.admin?
 		grant :by_treasurer if user.treasurer?
+		grant :by_auditor if user.auditor?
 		grant :by_chairman if user.chairman?
 		grant :by_self if person.is_a?(Person) && user.id == person.id
 		grant :by_organizer if person.is_a?(Person) && user.organizer_of_person_now?(person)

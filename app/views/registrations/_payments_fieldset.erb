@@ -1,0 +1,7 @@
+<fieldset id="registration_payments_fieldset">
+	<legend><%= RegistrationPayment.model_name.human(count: :other) =%></legend>
+	Hier kann man Zahlungen zu dieser Veranstaltung eintragen:
+	<%= form.fields_for :registration_payments do |registration_payment| %>
+		<%= render partial: 'registration_payments/registration_payment_fields', locals: {form: registration_payment} %>
+	<% end %>
+</fieldset>

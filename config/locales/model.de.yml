@@ -120,6 +120,7 @@ de:
         other_discounts: Sonstige Ermäßigungen
         money_amount: Teilnahmebeitrag
         money_amount_short: Betrag
+        to_be_paid: Offener Betrag
         money_transfer_date: Geldeingang
         payment_complete: Vollständig Bezahlt
         payment_complete_short: Bezahlt
@@ -130,10 +131,16 @@ de:
         comment: Anmerkungen
         terms_of_service: Teilnahmebedingungen akzeptieren
       registration/status:
-        pending: offen
+        pending: angemeldet
         confirmed: bestätigt
         rejected: abgelehnt
         cancelled: abgesagt
+
+      registration_payment:
+        money_amount: Betrag
+        money_transfer_date: Geldeingang
+        comment: Kommentar
+
       address:
         country: Land
         city: Stadt
@@ -199,6 +206,7 @@ de:
         participants: Füge alle Teilnehmer dieser Veranstaltung automatisch hinzu.
         chairman: Alle angegebenen Gruppenmitglieder bekommen automatisch Vorstandsrechte.
         treasurer: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassiererrechte.
+        auditors: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassenprüfrechte.
         admins: Alle angegebenen Gruppenmitglieder bekommen automatisch Administratorrechte.
       group/mode:
         automatic: Diese Gruppe wurde vollautomatisch verwaltet. Es sind keine Änderungen möglich.

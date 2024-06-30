@@ -1,0 +1,12 @@
+<fieldset class="registration-payment">
+	<div class="aligned">
+		<%= form.label :money_amount %>
+		<%= form.number_field :money_amount, :step => 0.01 %>
+
+		<%= form.label :money_transfer_date %>
+		<%= form.date_field :money_transfer_date %>
+
+		<%= form.label :comment %>
+		<%= form.text_field :comment %>
+	</div>
+</fieldset>

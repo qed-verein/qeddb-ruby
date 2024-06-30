@@ -1,0 +1,48 @@
+<h1><%= t('.title') %></h1>
+
+<section id="outstanding_payments">
+
+<div class="actions">
+	<%= download_table_button('#outstanding_payments_table') %>
+	<% if policy(:outstanding_payments).export? %>
+		<%= icon_button 'Als JSON anzeigen', 'notes', outstanding_payments_path(format: :json) %>
+	<% end %>
+</div>
+
+<table class="outstanding_payments indexed_table" id="outstanding_payments_table">
+<thead>
+	<tr>
+		<th>#</th>
+		<th data-sort="string"><%= Person.human_attribute_name :first_name %></th>
+		<th data-sort="string"><%= Person.human_attribute_name :last_name %></th>
+		<th data-sort="string"><%= Event.model_name.human %></th>
+		<th data-sort="float"><%= Registration.human_attribute_name :money_amount %></th>
+		<th data-sort="float"><%= Registration.human_attribute_name :to_be_paid %></th>
+		<th data-sort="string"><%= SepaMandate.model_name.human %></th>
+	</tr>
+</thead>
+<tbody>
+	<% @registrations.each do |r| %>
+	<tr>
+		<td></td>
+		<td><%= link_to r.person.first_name, r.person %></td>
+		<td><%= link_to r.person.last_name, r.person %></td>
+		<td><%= link_to r.event.title, r %></td>
+		<td data-sort-value="<%= r.money_amount || 0 %>">
+			<%= check_unknown(r.money_amount) {|x| number_to_currency x} %>
+		</td>
+		<td data-sort-value="<%= r.to_be_paid || 0 %>">
+			<%= check_unknown(r.to_be_paid) {|x| number_to_currency x} %>
+		</td>
+		<td>
+			<%= render_yes_no(!r.person.sepa_mandate.nil?) %>
+		</td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+</section>
+
+<script>
+	$("#outstanding_payments_table").stupidtable();
+</script>
