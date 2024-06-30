@@ -69,13 +69,13 @@ class Person < ApplicationRecord
 
 	# Berechne das Ende des bezahlten Zeitraums
 	def paid_until_function
-		now = Time.now
+		now = Time.current
 		maximal_gap = 1.week # Vermeidet Lücken vom 31.12 -> 1.1
 
 		# TODO Fördermitgliedschaft
 		intervals = payments.where(payment_type: [:regular_member, :free_member, :sponsor_and_member]).pluck(:start, :end)
 		times = intervals.map{|s, e|
-			[[s - maximal_gap, 1], [e, -1]]}.flatten(1).sort
+			[[s.to_time - maximal_gap, 1], [e.to_time, -1]]}.flatten(1).sort
 
 		# Die Mitgliedschaft ist bis zum Ende des Beitrittsjahres kostenlos
 		if intervals.empty?
@@ -138,11 +138,11 @@ class Person < ApplicationRecord
 	# ********************
 
 	def member?
-		member_at_time?(Time.now)
+		member_at_time?(Time.current)
 	end
 
 	def member_at_time?(time)
-		!joined.nil? && joined <= time &&
+		!joined.nil? && joined.to_time <= time &&
 		!member_until.nil? && member_until > time
 	end
 

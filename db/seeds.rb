@@ -13,7 +13,7 @@ Person.transaction do
 		first_name:       "Adminis",
 		last_name:        "Trator",
 		account_name:     "Admin",
-		birthday:         Time.now,
+		birthday:         Time.current,
 		email_address:    "adminsistrator@email.de",
 		active:           true,
 		gender:           :male,

@@ -18,7 +18,7 @@
       </div>
       <div class="aligned">
         <%= form.label :execution_date, t('actions.export_sepa.execution_date') %>
-        <%= form.date_field :execution_date, {:required => true, value: Date.today + 14} %>
+        <%= form.date_field :execution_date, {:required => true, value: Date.current + 14} %>
       </div>
 
       <div class="actions">

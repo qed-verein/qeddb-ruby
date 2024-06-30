@@ -12,7 +12,7 @@ class SepaExportController < ApplicationController
 			if params[:year]
 				@year = params[:year].to_i
 			else
-				@year = Date.today.year
+				@year = Date.current.year
 			end
 			breadcrumb Person.model_name.human(count: :other), :people_path
 			breadcrumb "SEPA-Export Mitgliedschaft #{@year}", sepa_export_path(year: @year)
@@ -35,7 +35,7 @@ class SepaExportController < ApplicationController
 
 		to_use = params[:transactions].values.select {|transaction| transaction[:use] == "1"}
 		add_persons to_use
-		execution_date = Date.parse(params[:execution_date])
+		execution_date = Time.zone.parse(params[:execution_date])
 
 		begin
 			sepa_direct_debit = create_direct_debit to_use, execution_date
