@@ -98,7 +98,7 @@ class Registration < ApplicationRecord
 			# - Back in the really old days, the open registrations were considered unpaid and the confirmed ones paid
 			# - Later we had a payment_complete checkbox
 			# Both should still give the "correct" result here.
-			status != 'pending' or payment_complete
+			status != 'confirmed' or payment_complete
 		else
 			to_be_paid == 0
 		end
