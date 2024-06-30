@@ -123,7 +123,7 @@ class Event < ApplicationRecord
 
 	# Ist der Anmeldeschluss schon vorbei
 	def deadline_missed?
-		return !deadline.nil? && Date.today > deadline
+		return !deadline.nil? && Date.current > deadline
 	end
 
 	# Ist die Veranstaltung derzeit noch von Organisatoren bearbeitbar
