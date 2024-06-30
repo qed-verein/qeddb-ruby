@@ -131,7 +131,7 @@ de:
         comment: Anmerkungen
         terms_of_service: Teilnahmebedingungen akzeptieren
       registration/status:
-        pending: offen
+        pending: angemeldet
         confirmed: bestätigt
         rejected: abgelehnt
         cancelled: abgesagt
