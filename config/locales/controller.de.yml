@@ -32,6 +32,8 @@ de:
       success: Änderung an der Veranstaltung wurden gespeichert
     destroy:
       success: Veranstaltung wurde erfolgreich gelöscht
+    show:
+      unpaid: unbezahlt
 
   people:
     create:
