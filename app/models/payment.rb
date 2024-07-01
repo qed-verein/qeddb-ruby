@@ -33,7 +33,7 @@ class Payment < ApplicationRecord
 	after_save :update_membership_status
 
 	def is_membership_payment?
-		[:regular_member, :sponsor_and_member, :sponsor_member, :free_member].include?(payment_type)
+		[:regular_member, :sponsor_and_member, :sponsor_member, :free_member].include?(payment_type.to_sym)
 	end
 
 	def update_membership_status
