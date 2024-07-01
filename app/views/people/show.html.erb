@@ -139,7 +139,7 @@
 	<h3><%= Payment.model_name.human(count: :other) %></h3>
 	<% unless @person.payments.empty? %>
 		<dl class="aligned">
-			<% @person.payments.each_with_index do |payment, index| %>
+			<% @person.payments.reverse.each do |payment| %>
 				<% if payment.start && payment.end %>
 					<dt style="font-weight: normal; width: 20em"><%= render_date payment.start %> - <%= render_date payment.end %></dt>
 				<% elsif payment.transfer_date %>

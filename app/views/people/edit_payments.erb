@@ -7,9 +7,6 @@
 	<fieldset>
 	<%= render partial: "shared/errors", locals: {object: @person} %>
 	<%= render partial: 'payments_fieldset', locals: {form: form} %>
-	<div class="actions">
-		<%= form.submit t('.submit') %>
-	</div>
 	</fieldset>
 <% end %>
 </div>
