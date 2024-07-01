@@ -166,6 +166,7 @@ de:
         interval: Zeitraum
         amount: Betrag
         comment: Anmerkung
+        transfer_date: Geldeingang
         _destroy: Löschen
       payment/payment_type:
         regular_member: Mitgliedsbeitrag

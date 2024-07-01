@@ -25,10 +25,16 @@ class Payment < ApplicationRecord
 
 	validates :comment, length: { maximum: 1000 }
 	validates :payment_type, inclusion: { in: payment_types.keys }
-	validates :start, :end, presence: true
+	validates :start, :end, presence: true, if: :is_membership_payment?
+	validates :transfer_date, presence: true, on: :update, unless: -> { transfer_date_was.nil? }
+	validates :transfer_date, presence: true, on: :create
 
 	# Aktualisiere den Mitgliedsstatus einer Person, wenn eine Zahlung eintragen wird
 	after_save :update_membership_status
+
+	def is_membership_payment?
+		[:regular_member, :sponsor_and_member, :sponsor_member, :free_member].include?(payment_type)
+	end
 
 	def update_membership_status
 		person.compute_membership_status

@@ -142,6 +142,8 @@
 			<% @person.payments.each_with_index do |payment, index| %>
 				<% if payment.start && payment.end %>
 					<dt style="font-weight: normal; width: 20em"><%= render_date payment.start %> - <%= render_date payment.end %></dt>
+				<% elsif payment.transfer_date %>
+					<dt style="font-weight: normal; width: 20em"><%= render_date payment.transfer_date %></dt>
 				<% end %>
 				<dd><i>(<%= Payment.human_enum_value(:payment_type, payment.payment_type) %>)</i>
 				<% if payment.amount %>
