@@ -164,6 +164,7 @@ module BankingStatementImportHelper
 				payment_type: :sponsor_member,
 				start: year_date.beginning_of_year,
 				end: year_date.end_of_year,
+				transfer_date: payment[:payment_date],
 				amount: payment[:amount]
 			)
 			"Fördermitgliedschaft für #{payment[:person].full_name} für das Jahr #{payment[:year]} angelegt."
