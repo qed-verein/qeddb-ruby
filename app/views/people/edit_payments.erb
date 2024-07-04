@@ -13,24 +13,21 @@
 
 <script>
 	const membership_fee = <%= Rails.configuration.membership_fee %>;
-	for(const date_elem of $("input[type=date]")) {
-		date_elem.addEventListener("focus", (ev) => {
-			const elem = ev.target;
-			if (elem.value == '') {
-				if(elem.id.endsWith("end")) {
-					const start_year = ($("#" + elem.id.replace("end", "start"))[0]?.valueAsDate ?? new Date()).getFullYear();
-					const amount = $("#" + elem.id.replace("end", "amount"))[0]?.valueAsNumber;
-					const years = Number.isNaN(amount) ? 1 : amount / membership_fee;
 
-					elem.value = `${start_year + years - 1}-12-31`;
-				} else if(elem.id.endsWith("start")) {
-					// Using valueAsDate here is horribly annoying with respect to time zones (just assigning new Date(year, 0, 1) will produce spam)
-					elem.value = `${(new Date()).getFullYear()}-01-01`;
-				} else {
-					elem.valueAsDate = new Date();
-				}
-			}
-		});
+	function setDate(elem) {
+		if(elem.id.endsWith("end")) {
+			const start_year = ($("#" + elem.id.replace("end", "start"))[0]?.valueAsDate ?? new Date()).getFullYear();
+			const amount = $("#" + elem.id.replace("end", "amount"))[0]?.valueAsNumber;
+			const years = Number.isNaN(amount) ? 1 : amount / membership_fee;
+
+			elem.value = `${start_year + years - 1}-12-31`;
+		} else if(elem.id.endsWith("start")) {
+			// Using valueAsDate here is horribly annoying with respect to time zones (just assigning new Date(year, 0, 1) will produce spam)
+			elem.value = `${(new Date()).getFullYear()}-01-01`;
+		} else {
+			setToToday(elem);
+		}
 	}
+	enableDateSetting({setter: setDate});
 </script>
 <% end %>
