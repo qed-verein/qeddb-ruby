@@ -84,7 +84,7 @@ class RegistrationsController < ApplicationController
 		end
 
 
-		@registration.registration_payments.create!(money_transfer_date: date, money_amount: @registration.to_be_paid)
+		@registration.add_transfer(date, @registration.to_be_paid)
 		redirect_to @registration, notice: t('.success')
 	end
 

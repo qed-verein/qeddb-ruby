@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_01_091130) do
+ActiveRecord::Schema.define(version: 2024_07_01_163559) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 2024_07_01_091130) do
     t.text "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "payment_type", default: 0
+    t.string "category"
     t.index ["registration_id"], name: "index_registration_payments_on_registration_id"
   end
 

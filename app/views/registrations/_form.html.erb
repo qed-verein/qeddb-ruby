@@ -20,26 +20,9 @@
 	</div>
 </fieldset>
 <% end %>
-<% if @registration_policy.edit_payments? %>
-<% 1.times {@registration.registration_payments.build} %>
-<hr>
-<fieldset class="payments">
-	<legend>Zahlungen</legend>
-	<%= form.fields_for :registration_payments do |registration_payment| %>
-		<%= render partial: 'registration_payments/registration_payment_fields', locals: {form: registration_payment} %>
-	<% end %>
 
-	<legend>Legacy-Zahlungen, möglichst nicht benutzen</legend>
-	<div class="aligned">
-	<%= form.label :payment_complete %>
-		<%= form.check_box :payment_complete, id: :registration_payment_complete %>
-	<%= form.label :money_transfer_date %>
-		<%= form.date_field :money_transfer_date, id: :registration_money_transfer_date %>
-	<%= form.label :other_discounts %>
-		<%= form.text_field :other_discounts, id: :registration_other_discounts %>
-	</div>
-</fieldset>
-<% end %>
+<%= render partial: 'payments_fieldset', locals: {form: form} %>
+
 <% if @registration_policy.edit_additional? %>
 <hr>
 <fieldset class="transport">

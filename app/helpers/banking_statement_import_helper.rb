@@ -171,7 +171,7 @@ module BankingStatementImportHelper
 		else
 
 			registration = payment[:registration]
-			registration.add_payment(payment[:payment_date], payment[:amount])
+			registration.add_transfer(payment[:payment_date], payment[:amount])
 			registration.status = :confirmed
 			registration.save!
 			"Veranstaltung #{payment[:event].title} für Person #{payment[:person].full_name} bezahlt."

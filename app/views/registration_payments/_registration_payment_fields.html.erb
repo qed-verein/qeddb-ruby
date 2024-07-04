@@ -1,5 +1,11 @@
 <fieldset class="registration-payment">
 	<div class="aligned">
+		<%= form.label :payment_type %>
+		<%= form.select :payment_type, RegistrationPayment.human_enum_options(:payment_types), {include_blank: "Keine Zahlung"}, class: "payment-type", data: {:index => form.options[:child_index] } %>
+
+		<%= form.label :category, class: "category-#{form.options[:child_index]}" %>
+		<%= form.text_field :category, list: :category_list, class: "category-#{form.options[:child_index]}" %>
+
 		<%= form.label :money_amount %>
 		<%= form.number_field :money_amount, :step => 0.01 %>
 
