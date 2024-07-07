@@ -5,9 +5,13 @@ class AddMoneyTransferDateToPayments < ActiveRecord::Migration[6.1]
       Payment.reset_column_information
       Payment.where('start = end').update_all('transfer_date = start')
       Payment.where(transfer_date: nil).each do |payment|
-        if /(\d\d).(\d\d).(20\d\d)/.match(payment.comment) then
-          payment.update!(transfer_date: Date.new($3.to_i,$2.to_i,$1.to_i))
-        end
+        next unless /(\d\d).(\d\d).(20\d\d)/.match(payment.comment)
+
+        payment.update!(transfer_date: Date.new(
+         ::Regexp.last_match(3).to_i,
+         ::Regexp.last_match(2).to_i,
+         ::Regexp.last_match(1).to_i
+        ))
       end
     end
   end

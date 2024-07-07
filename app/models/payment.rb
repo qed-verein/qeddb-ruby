@@ -20,25 +20,25 @@ class Payment < ApplicationRecord
 	#  other: sonstige
 	#  free_member: kostenlose Mitgliedschaft (Preis o.ä.)
 	#  sponsor_and_member: Fördermitgliedschaft mit Mitgliedschaft
-	enum payment_type: { regular_member: 1, sponsor_member: 2, donation: 3, other: 4, free_member: 5,
-																						sponsor_and_member: 6 }
+	enum payment_type: {regular_member: 1, sponsor_member: 2, donation: 3, other: 4, free_member: 5,
+																						sponsor_and_member: 6}
 
-	validates :comment, length: { maximum: 1000 }
-	validates :payment_type, inclusion: { in: payment_types.keys }
-	validates :start, :end, presence: true, if: :is_membership_payment?
+	validates :comment, length: {maximum: 1000}
+	validates :payment_type, inclusion: {in: payment_types.keys}
+	validates :start, :end, presence: true, if: :membership_payment?
 	validates :transfer_date, presence: true, on: :update, unless: -> { transfer_date_was.nil? }
 	validates :transfer_date, presence: true, on: :create
 
 	# Aktualisiere den Mitgliedsstatus einer Person, wenn eine Zahlung eintragen wird
 	after_save :update_membership_status
 
-	def is_membership_payment?
+	def membership_payment?
 		[:regular_member, :sponsor_and_member, :sponsor_member, :free_member].include?(payment_type.to_sym)
 	end
 
 	def update_membership_status
 		person.compute_membership_status
-		person.update({ paid_until: person.paid_until, member_until: person.member_until })
+		person.update({paid_until: person.paid_until, member_until: person.member_until})
 	end
 
 	def object_name
