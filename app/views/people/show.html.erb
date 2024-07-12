@@ -150,13 +150,15 @@
           <% unless @person.payments.empty? %>
             <dl class="aligned">
               <% @person.payments.reverse.each do |payment| %>
-                <% if payment.start && payment.end %>
-                  <dt style="font-weight: normal; width: 20em"><%= render_date payment.start %>
+                <dt style="font-weight: normal; width: 20em" id="payment-<%= payment.id %>">
+                  <% if payment.start && payment.end %>
+                    <%= render_date payment.start %>
                     -
-                    <%= render_date payment.end %></dt>
-                <% elsif payment.transfer_date %>
-                  <dt style="font-weight: normal; width: 20em"><%= render_date payment.transfer_date %></dt>
-                <% end %>
+                    <%= render_date payment.end %>
+                  <% elsif payment.transfer_date %>
+                    <%= render_date payment.transfer_date %>
+                  <% end %>
+                </dt>
                 <dd><i>(<%= Payment.human_enum_value(:payment_type, payment.payment_type) %>)</i>
                   <% if payment.amount %>
                     <br><%= Payment.human_attribute_name :amount %>
