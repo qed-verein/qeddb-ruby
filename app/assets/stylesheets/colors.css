@@ -61,6 +61,10 @@ tr:nth-of-type(odd) td {
 	background-color: var(--bg-color-4);
 }
 
+.panel :target, fieldset :target, .panel dt:target + dd, fieldset dt:target + dd {
+	background-color: var(--bg-color-1);
+}
+
 dt {
 	color: var(--text-color-1)
 }
