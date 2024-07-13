@@ -1,0 +1,59 @@
+<h1><%= t(".title") %></h1>
+
+<section id="finance_review">
+
+  <div class="flexlayout">
+    <%= form_with scope: :finance_review, method: :get do |form| %>
+      <fieldset>
+        <div class="aligned">
+          <%= form.label :start %>
+          <%= form.date_field :start, value: @filter[:start] %>
+          <%= form.label :end %>
+          <%= form.date_field :end, value: @filter[:end] %>
+
+          <%= form.label :reason %>
+          <%= form.select :reason,
+                      payment_reasons,
+                      selected: @filter[:reason],
+                      include_blank: t(".reasons.blank") %>
+
+        </div>
+        <div class="actions">
+          <%= form.submit %>
+          <%= download_table_button("#finance_review_table") %>
+          <% if policy(:outstanding_payments).export? %>
+            <%= icon_button "Als JSON anzeigen", "notes", finance_review_path(format: :json) %>
+          <% end %>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+
+  <table class="finance_review_table indexed_table" id="finance_review_table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th data-sort="string"><%= Person.human_attribute_name :first_name %></th>
+        <th data-sort="string"><%= Person.human_attribute_name :last_name %></th>
+        <th data-sort="float"><%= Payment.human_attribute_name :amount %></th>
+        <th data-sort="string"><%= Payment.human_attribute_name :transfer_date %></th>
+        <th data-sort="string"><%= t(".type") %></th>
+        <th data-sort="string"><%= t(".scope") %></th>
+        <th data-sort="string"><%= Payment.human_attribute_name :comment %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payments.each do |payment| %>
+        <% if payment.instance_of? RegistrationPayment %>
+          <%= render partial: "registration_payment_row", locals: { payment: payment } %>
+        <% else %>
+          <%= render partial: "payment_row", locals: { payment: payment } %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<script>
+$("#finance_review_table").stupidtable();
+</script>

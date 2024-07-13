@@ -97,6 +97,16 @@ de:
     destroy:
       success: Emailverteiler wurde erfoglreich gelöscht
 
+  finance_review:
+    show:
+      type: Typ
+      scope: Betrifft
+      general: Generell
+      reason: Grund
+      reasons:
+        membership: Mitgliedschaft
+        blank: Alle
+
   actions:
     person:
       new: Neue Person eintragen
@@ -164,4 +174,5 @@ de:
       no_transactions: Es wurden keine Transaktionen ausgewählt
     outstanding_payments:
       view: Offene Posten
-
+    finance_review:
+      view: Finanzübersicht

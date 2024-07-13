@@ -75,7 +75,7 @@
 		<% unless @registration.registration_payments.empty? %>
 			<dl class="aligned">
 				<% @registration.registration_payments.each do |payment| %>
-					<dt><%= render_date payment.money_transfer_date %></dt>
+					<dt id="payment-<%= payment.id %>"><%= render_date payment.money_transfer_date %></dt>
 					<dd>
 						<%= check_unknown(payment.money_amount) {number_to_currency payment.money_amount} %>
 						<% unless payment.comment.blank? %>

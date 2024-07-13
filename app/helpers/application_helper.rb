@@ -49,6 +49,14 @@ def render_datetime(time, format = :short)
 	check_unknown(time) {time_tag time.localtime, l(time.localtime, format: format)}
 end
 
+def date_table_cell(date)
+	tag.td render_date(date), data: {sort_value: date || 0}
+end
+
+def money_table_cell(amount)
+	tag.td check_unknown(amount) { |a| number_to_currency(a) }, data: {sort_value: amount || 0}
+end
+
 def authorize_json_export(policy, json)
 	if policy.export?
 		yield
@@ -61,5 +69,4 @@ end
 def admin_email_link
 	mail_to Rails.configuration.admin_email_address
 end
-
 end
