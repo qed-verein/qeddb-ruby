@@ -2,8 +2,8 @@ class OutstandingPaymentsPolicy
 	include PunditImplications
 	define_implications(
 		{
-			by_treasurer: [:view, :export],
-			by_auditor: [:view]
+			by_auditor: [:view],
+			by_treasurer: [:by_auditor, :export]
 		}
 	)
 
