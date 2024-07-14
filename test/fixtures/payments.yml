@@ -11,6 +11,7 @@ payment1:
   amount: 5 100
   payment_type: 1
   comment: Kommentar
+  transfer_date: 2000-1-1
 
 payment2:
   person: person2
@@ -19,7 +20,7 @@ payment2:
   amount: 5
   payment_type: 1
   comment: Kommentar
-  
+  transfer_date: 2000-1-1
 
 payments_testmitglied_1:
   person: testmitglied
@@ -27,8 +28,10 @@ payments_testmitglied_1:
   end: 2100-1-1
   amount: 5
   payment_type: 1
+
 payments_testmitglied_2:
   person: testmitglied
+  transfer_date: 2024-05-01
   start: 2100-1-1,
   end: 2200-1-1
   amount: 5
