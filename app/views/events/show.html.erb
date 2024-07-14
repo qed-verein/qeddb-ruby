@@ -1,147 +1,175 @@
 <% provide :title, @event.title %>
 
 <% if @event_policy.view_basic? %>
-<div class="flexlayout">
-<article id="event" class="panel">
-	<h2><%= @event.title %></h2>
+  <div class="flexlayout">
+    <article id="event" class="panel">
+      <h2><%= @event.title %></h2>
 
-	<div class="flexlayout">
-	<section id="event_general_information">
-		<h3>Informationen</h3>
-		<dl>
-			<dt><%= Event.human_attribute_name :homepage %>:</dt>
-			<dd><%= check_blank(@event.homepage) {link_to @event.homepage, @event.homepage} %></dd>
+      <div class="flexlayout">
+        <section id="event_general_information">
+          <h3>Informationen</h3>
+          <dl>
+            <dt><%= Event.human_attribute_name :homepage %>:</dt>
+            <dd><%= check_blank(@event.homepage) { link_to @event.homepage, @event.homepage } %></dd>
 
-			<dt><%= Event.human_attribute_name :start%>:</dt>
-			<dd><%= render_date @event.start %></dd>
+            <dt><%= Event.human_attribute_name :start %>:</dt>
+            <dd><%= render_date @event.start %></dd>
 
-			<dt><%= Event.human_attribute_name :end%>:</dt>
-			<dd><%= render_date @event.end %></dd>
+            <dt><%= Event.human_attribute_name :end %>:</dt>
+            <dd><%= render_date @event.end %></dd>
 
-			<% unless @event.hostel.nil? %>
-			<dt>Unterkunft:</dt>
-			<dd><%= hostel_link(@event.hostel) %></dd>
+            <% unless @event.hostel.nil? %>
+              <dt>Unterkunft:</dt>
+              <dd><%= hostel_link(@event.hostel) %></dd>
 
-			<dt>Adresse der Unterkunft:</dt>
-			<dd><%= render_inline_address(@event.hostel.address) %></dd>
-			<% end %>
+              <dt>Adresse der Unterkunft:</dt>
+              <dd><%= render_inline_address(@event.hostel.address) %></dd>
+            <% end %>
 
-			<% unless @event.organizer_email_address.nil? %>
-			<dt><%= Event.human_attribute_name :organizer_email_address %>:</dt>
-			<dd><%= mail_to @event.organizer_email_address %></dd>
-			<% end %>
+            <% unless @event.organizer_email_address.nil? %>
+              <dt><%= Event.human_attribute_name :organizer_email_address %>:</dt>
+              <dd><%= mail_to @event.organizer_email_address %></dd>
+            <% end %>
 
-			<% unless @event.participant_email_address.nil? %>
-			<dt><%= Event.human_attribute_name :participant_email_address %>:</dt>
-			<dd><%= mail_to @event.participant_email_address %></dd>
-			<% end %>
+            <% unless @event.participant_email_address.nil? %>
+              <dt><%= Event.human_attribute_name :participant_email_address %>:</dt>
+              <dd><%= mail_to @event.participant_email_address %></dd>
+            <% end %>
 
-			<dt><%= Event.human_attribute_name :deadline%>:</dt>
-			<dd><%= render_date @event.deadline %></dd>
+            <dt><%= Event.human_attribute_name :deadline %>:</dt>
+            <dd><%= render_date @event.deadline %></dd>
 
-			<dt><%= Event.human_attribute_name :cost%>:</dt>
-			<dd>insgesamt <%= number_to_currency @event.cost %> (für Mitglieder)</dd>
+            <dt><%= Event.human_attribute_name :cost %>:</dt>
+            <dd>insgesamt
+              <%= number_to_currency @event.cost %>
+              (für Mitglieder)</dd>
 
-			<dt><%= Event.human_attribute_name :max_participants %>:</dt>
-			<dd>maximal <%= @event.max_participants %> Teilnehmer</dd>
+            <dt><%= Event.human_attribute_name :max_participants %>:</dt>
+            <dd>maximal
+              <%= @event.max_participants %>
+              Teilnehmer</dd>
 
-			<dt><%= Event.human_attribute_name :comment %>:</dt>
-			<dd><%= render_string @event.comment %></dd>
+            <dt><%= Event.human_attribute_name :comment %>:</dt>
+            <dd><%= render_string @event.comment %></dd>
 
-      <dt><%=  Event.human_attribute_name :reference_line  %></dt>
-			<% if @registration_of_current_user.nil? %>
-        <dd><%= @event.reference_line %></dd>
-      <% else %>
-        <dd><%= @registration_of_current_user.reference_line %></dd>
-			<% end %>
-		</dl>
-	</section>
+            <dt><%= Event.human_attribute_name :reference_line %></dt>
+            <% if @registration_of_current_user.nil? %>
+              <dd><%= @event.reference_line %></dd>
+            <% else %>
+              <dd><%= @registration_of_current_user.reference_line %></dd>
+            <% end %>
+          </dl>
+        </section>
 
-	<section id="event_registrations">
-		<h3><%= Registration.model_name.human(count: :other) %></h3>
+        <section id="event_registrations">
+          <h3><%= Registration.model_name.human(count: :other) %></h3>
 
-		<dl>
-			<dt>Status:</dt>
-			<dd>
+          <dl>
+            <dt>Status:</dt>
+            <dd>
 
-			<% if @event.full? %>
-				Diese Veranstaltung ist voll. Eine Anmeldung ist daher derzeit nicht möglich.<br>
-			<% end %>
+              <% if @event.full? %>
+                Diese Veranstaltung ist voll. Eine Anmeldung ist daher derzeit
+                nicht möglich.<br>
+              <% end %>
 
-			<% if @event.deadline_missed? %>
-				Der Anmeldeschluss ist bereits vorbei. Eine Anmeldung zu dieser Veranstaltung ist leider nicht mehr möglich.<br>
-			<% end %>
+              <% if @event.deadline_missed? %>
+                Der Anmeldeschluss ist bereits vorbei. Eine Anmeldung zu dieser
+                Veranstaltung ist leider nicht mehr möglich.<br>
+              <% end %>
 
-			<% if @event.can_create_registration? %>
-				Für diese Veranstaltung gibt es noch freie Plätze. Eine Anmeldung ist somit möglich.
-			<% end %>
+              <% if @event.can_create_registration? %>
+                Für diese Veranstaltung gibt es noch freie Plätze. Eine
+                Anmeldung ist somit möglich.
+              <% end %>
+              <% if !@event.still_organizable? && @event_policy.by_organizer? && !@event_policy.by_admin? %>
+                Diese Veranstaltung ist bereits archiviert und kann von
+                Organisatoren nicht mehr geändert werden.<br>
+              <% end %>
+            </dd>
 
-			<% if !@event.still_organizable? && @event_policy.by_organizer? && !@event_policy.by_admin? %>
-				Diese Veranstaltung ist bereits archiviert und kann von Organisatoren nicht mehr geändert werden.<br>
-			<% end %>
-			</dd>
+            <dt>Organisatoren:</dt>
+            <dd>
+              <% organizer_regs = @event.registrations.where(organizer: true) %>
+              <% unless organizer_regs.empty? %>
+                <%= organizer_regs.map { |r| registration_link_with_name r }.join(", ").html_safe %>
+              <% else %>
+                Für diese Veranstaltung sind bislang keine Organisatoren
+                eingetragen.
+              <% end %>
+            </dd>
 
-			<dt>Organisatoren:</dt>
-			<dd>
-			<% organizer_regs = @event.registrations.where(organizer: true) %>
-			<% unless organizer_regs.empty? %>
-				<%= organizer_regs.map {|r| registration_link_with_name r}.join(", ").html_safe %>
-			<% else %>
-				Für diese Veranstaltung sind bislang keine Organisatoren eingetragen.
-			<% end %>
-			</dd>
+            <% if @event_policy.list_participants? %>
+              <dt>Anzahl:</dt>
+              <dd>
+                Insgesamt
+                <%= pluralize @event.participants.count, "Teilnehmer", "Teilnehmer" %>
+                geplant:
+                <i><%= Person
+                    .genders
+                    .keys
+                    .map do |key|
+                      count = @event.participants.where(gender: key).count
+                      count.to_s + " " + Person.human_enum_value(:gender, key) if count > 0
+                    end
+                    .compact
+                    .join(", ") %></i>
+                <br>
+                Status der Anmeldungen:
+                <i><%= Registration
+                    .statuses
+                    .keys
+                    .map do |key|
+                      count = @event.people.where("registrations.status" => key).count
+                      if count > 0
+                        count.to_s + " " + Registration.human_enum_value(:status, key)
+                      else
+                        nil
+                      end
+                    end
+                    .compact
+                    .join(", ") %></i>
+              </dd>
 
-			<% if @event_policy.list_participants? %>
-			<dt>Anzahl:</dt>
-			<dd>
-			Insgesamt <%= pluralize @event.participants.count, "Teilnehmer", "Teilnehmer" %> geplant:
-			<i><%= Person.genders.keys.map {|key|
-					count = @event.participants.where(gender: key).count
-					count.to_s + " " + Person.human_enum_value(:gender, key) if count > 0}.compact.join(", ")
-			%></i>
-			<br>
-			Status der Anmeldungen:
-			<i><%= Registration.statuses.keys.map {|key|
-					count = @event.people.where('registrations.status' => key).count
-					count > 0 ? count.to_s + " " + Registration.human_enum_value(:status, key) : nil}.compact.join(", ")
-			 %></i>
-			</dd>
+              <dt>Teilnehmerliste:</dt>
+              <dd style="grid-column: span 2; justify-self: center">
+                <% unless @event.registrations.empty? %>
+                  <ul>
+                    <% @event.registrations.each do |registration| %>
+                      <li><%= registration_link_with_name_fancy registration %></li>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  Für diese Veranstaltung haben sich bislang keine Teilnehmer
+                  angemeldet.
+                <% end %>
+              </dd>
+            <% end %>
+          </dl>
+        </section>
+      </div>
 
-			<dt>Teilnehmerliste:</dt>
-			<dd style="grid-column: span 2; justify-self: center">
-			<% unless @event.registrations.empty? %>
-			<ul>
-				<% @event.registrations.each do |registration| %>
-					<li><%= registration_link_with_name_fancy registration %></li>
-				<% end %>
-			</ul>
-			<% else %>
-			Für diese Veranstaltung haben sich bislang keine Teilnehmer angemeldet.
-			<% end %>
-			</dd>
-			<% end %>
-		</dl>
-	</section>
-	</div>
-
-	<% unless @event_policy.register_self? %>
-	<p class="notice" style="text-align: center">
-	Du kannst dich zu dieser Veranstaltung nicht mehr anmelden.</p>
-	<% end %>
-	<div class="actions">
-		<%= event_register_self_link(@event) %>
-		<% if @event_policy.list_participants? %>
-			<%= icon_button 'Als Tabelle anzeigen', 'grid_on', registrations_as_table_event_path(@event) %>
-		<% end %>
-		<% if @event_policy.export? %>
-			<%= icon_button 'Als JSON anzeigen', 'notes', event_path(@event, format: :json) %>
-		<% end %>
-		<br>
-		<%= event_register_other_link(@event) %>
-		<%= edit_event_link(@event) %>
-		<%= delete_event_link(@event) %>
-		<%= sepa_export_button(event_id=@event.id) %>
-	</div>
-</article>
-</div>
+      <% unless @event_policy.register_self? %>
+        <p class="notice" style="text-align: center">
+          Du kannst dich zu dieser Veranstaltung nicht mehr anmelden.</p>
+      <% end %>
+      <div class="actions">
+        <%= event_register_self_link(@event) %>
+        <% if @event_policy.list_participants? %>
+          <%= icon_button "Als Tabelle anzeigen",
+          "grid_on",
+          registrations_as_table_event_path(@event) %>
+        <% end %>
+        <% if @event_policy.export? %>
+          <%= icon_button "Als JSON anzeigen", "notes", event_path(@event, format: :json) %>
+        <% end %>
+        <br>
+        <%= event_register_other_link(@event) %>
+        <%= edit_event_link(@event) %>
+        <%= edit_payments_event_link(@event) %>
+        <%= delete_event_link(@event) %>
+        <%= sepa_export_button(event_id = @event.id) %>
+      </div>
+    </article>
+  </div>
 <% end %>
