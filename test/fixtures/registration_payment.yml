@@ -1,11 +1,22 @@
 payment1:
   registration: registration1
+  payment_type: 1
+  category: Einkauf
   money_amount: 10
   money_transfer_date: 2024-03-14
   comment: ''
 
 payment2:
   registration: registration1
+  payment_type: 2
   money_amount: -13.37
   money_transfer_date: 2024-06-28
   comment: Auslage
+
+payment3:
+  registration: registration2
+  payment_type: 1
+  category: Kostüm
+  money_amount: -3.14
+  money_transfer_date: 2024-03-14
+  comment: ''
