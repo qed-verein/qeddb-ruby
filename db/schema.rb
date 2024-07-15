@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_01_163559) do
+ActiveRecord::Schema.define(version: 2024_07_14_093020) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 2024_07_01_163559) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_contacts_on_person_id"
+  end
+
+  create_table "event_payments", force: :cascade do |t|
+    t.integer "event_id"
+    t.date "money_transfer_date"
+    t.decimal "money_amount", precision: 10, scale: 2
+    t.string "category"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_event_payments_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|

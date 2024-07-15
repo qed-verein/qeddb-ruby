@@ -1,0 +1,17 @@
+<tr>
+  <% event = payment.event %>
+  <td></td>
+  <td>QED e.V.</td>
+  <td>-</td>
+  <%= money_table_cell(payment.money_amount) %>
+  <%= date_table_cell(payment.money_transfer_date) %>
+  <td>
+    <%= payment.category %>
+  </td>
+  <td>
+    <%= link_to event.title, event_path(event, anchor: "payment-#{payment.id}") %>
+  </td>
+  <td>
+    <%= payment.comment %>
+  </td>
+</tr>

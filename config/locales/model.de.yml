@@ -48,6 +48,9 @@ de:
       sepa_mandate:
         one: SEPA-Mandat
         other: SEPA-Mandate
+      event_payment:
+        one: Veranstaltungszahlung
+        other: Veranstaltungszahlungen
     attributes:
       person:
         account_name: Benutzername
@@ -146,6 +149,21 @@ de:
         transfer: Überweisung
         expense: Auslage
       registration_payment/category:
+        shopping: Einkauf
+        talk_gift: Vortragsgeschenk
+        deposit: Pfand
+        organizer_gift: Orgageschenk
+        transportation: Transport
+        talk_materials: Vortragsmaterial
+
+      event_payment:
+        money_amount: Betrag
+        money_transfer_date: Geldeingang
+        comment: Kommentar
+        category: Kategorie
+
+      event_payment/category:
+        hostel: Unterkunft
         shopping: Einkauf
         talk_gift: Vortragsgeschenk
         deposit: Pfand

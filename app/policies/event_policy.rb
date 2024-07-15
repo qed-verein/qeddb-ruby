@@ -25,18 +25,24 @@ class EventPolicy
 			by_member:      [:by_other, :view_event],
 			by_participant: [:by_member],
 			by_organizer:   [:by_participant, :edit_event, :register_other, :export],
-			by_admin:       [:by_organizer, :create_event, :delete_event]})
+			by_admin:       [:by_organizer, :create_event, :delete_event],
+			by_treasurer:   [:by_admin, :edit_payments, :view_payments]})
 
 	def initialize(user, event)
 		grant :by_admin if user.admin? || user.chairman?
 		grant :by_organizer if event.is_a?(Event) && user.organizer?(event) && event.still_organizable?
 		grant :by_participant if event.is_a?(Event) && user.participant?(event)
 		grant :by_member if user.member?
+		grant :by_treasurer if user.treasurer?
 		grant :by_other
 	end
 
 	def permitted_attributes
-		[:title, :homepage, :start, :end, :deadline, :reference_line,
-			:cost, :max_participants, :hostel_id, :comment]
+		editable = []
+
+		editable.push :title, :homepage, :start, :end, :deadline, :reference_line, :cost, :max_participants, :hostel_id, :comment if edit_event?
+		editable.push({event_payments_attributes: [:id, :money_transfer_date, :money_amount, :category, :comment, :_destroy]}) if edit_payments?
+
+		editable
 	end
 end

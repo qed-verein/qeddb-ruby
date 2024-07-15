@@ -1,0 +1,17 @@
+<% 1.times { @event.event_payments.build } %>
+
+<% if @event_policy.edit_payments? %>
+  <div class="flexlayout">
+    <%= form_with(model: @event, local: true) do |form| %>
+      <%= hidden_field_tag "formular", "edit_payments" %>
+      <fieldset>
+        <%= render partial: "shared/errors", locals: { object: @event } %>
+        <%= render partial: "event_payments_fieldset", locals: { form: form } %>
+      </fieldset>
+    <% end %>
+  </div>
+
+  <script>
+	enableDateSetting();
+  </script>
+<% end %>

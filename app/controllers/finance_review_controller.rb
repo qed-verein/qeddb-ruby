@@ -24,11 +24,12 @@ class FinanceReviewController < ApplicationController
 	def registration_payments
 		case @filter[:reason]
 		when ""
-			RegistrationPayment.where(money_transfer_date: @filter[:date_range])
+			RegistrationPayment.where(money_transfer_date: @filter[:date_range]) + EventPayment.where(money_transfer_date: @filter[:date_range])
 		when "membership"
 			[]
 		else
-			RegistrationPayment.joins(:registration).where(registration: {:event_id => @filter[:reason]}, money_transfer_date: @filter[:date_range])
+			RegistrationPayment.joins(:registration).where(registration: {:event_id => @filter[:reason]}, money_transfer_date: @filter[:date_range]) +
+			 EventPayment.where(:id => @filter[:reason], money_transfer_date: @filter[:date_range])
 		end
 	end
 

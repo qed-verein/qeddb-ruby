@@ -147,6 +147,21 @@
             <% end %>
           </dl>
         </section>
+        <% if @event_policy.view_payments? %>
+          <section id="event_payments">
+            <h3><%= EventPayment.model_name.human(count: :other) %></h3>
+            <dl>
+              <% @event.event_payments.each do |event_payment| %>
+                <dt id="payment-<%= event_payment.id %>"><%= event_payment.money_transfer_date %>,
+                  <%= event_payment.category %></dt>
+                <dd><%= number_to_currency (event_payment.money_amount) %><% unless event_payment.comment.blank? %>,
+                    <%= event_payment.comment %>
+                  <% end %>
+                </dd>
+              <% end %>
+            </dl>
+          </section>
+        <% end %>
       </div>
 
       <% unless @event_policy.register_self? %>

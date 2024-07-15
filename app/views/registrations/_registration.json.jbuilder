@@ -23,7 +23,7 @@ json.extract! registration, :payment_complete, :money_amount, :money_transfer_da
 
 if policy(registration).view_payments?
 	json.registration_payments do
-		json.array! registration.registration_payments, partial: 'registration_payments/registration_payment', as: :registration_payment
+		json.array! registration.registration_payments, partial: 'registration_payments/registration_payment', as: :registration_payment, modules: []
 	end
 end
 json.url registration_url(registration, format: :json)

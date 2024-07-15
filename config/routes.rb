@@ -71,6 +71,7 @@ Rails.application.routes.draw do
 		member do
 			get 'registrations_as_table'
 			get 'edit_own_registration'
+			get 'edit_payments'
 		end
 
 		get 'register_other', to: 'registrations#select_person', as: 'select_person'

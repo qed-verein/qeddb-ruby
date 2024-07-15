@@ -34,6 +34,8 @@ de:
       success: Veranstaltung wurde erfolgreich gelöscht
     show:
       unpaid: unbezahlt
+    edit_payments:
+      submit: Zahlungen speichern
 
   people:
     create:
@@ -133,6 +135,7 @@ de:
       register_self: Zur Veranstaltung anmelden
       register_other: Teilnehmer hinzufügen
       edit_own_registration: Eigene Anmeldung bearbeiten
+      edit_payments: Zahlungen bearbeiten
     registration:
       edit: Anmeldung bearbeiten
       delete: Anmeldung löschen

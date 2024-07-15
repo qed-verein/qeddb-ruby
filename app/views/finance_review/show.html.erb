@@ -36,7 +36,7 @@
         <th data-sort="string"><%= Person.human_attribute_name :first_name %></th>
         <th data-sort="string"><%= Person.human_attribute_name :last_name %></th>
         <th data-sort="float"><%= Payment.human_attribute_name :amount %></th>
-        <th data-sort="string"><%= Payment.human_attribute_name :transfer_date %></th>
+        <th data-sort="string" data-sort-onload="yes" data-sort-default="desc"><%= Payment.human_attribute_name :transfer_date %></th>
         <th data-sort="string"><%= t(".type") %></th>
         <th data-sort="string"><%= t(".scope") %></th>
         <th data-sort="string"><%= Payment.human_attribute_name :comment %></th>
@@ -44,9 +44,12 @@
     </thead>
     <tbody>
       <% @payments.each do |payment| %>
-        <% if payment.instance_of? RegistrationPayment %>
+        <% case payment
+        when RegistrationPayment %>
           <%= render partial: "registration_payment_row", locals: { payment: payment } %>
-        <% else %>
+        <% when EventPayment %>
+          <%= render partial: "event_payment_row", locals: { payment: payment } %>
+        <% when Payment %>
           <%= render partial: "payment_row", locals: { payment: payment } %>
         <% end %>
       <% end %>
