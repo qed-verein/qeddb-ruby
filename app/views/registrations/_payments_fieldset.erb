@@ -18,7 +18,7 @@
 		<%= form.text_field :other_discounts, id: :registration_other_discounts %>
 	</div>
 	<datalist id="category_list">
-		<%= registration_payment_categories.map{|cat| tag.option value: RegistrationPayment.human_attribute_name("category.#{cat}") }.join.html_safe %>
+		<%= registration_payment_categories.map{|cat| tag.option value: RegistrationPayment.human_attribute_name("category.#{cat}") }.sort.join.html_safe %>
 	</datalist>
 </fieldset>
 <% end %>
