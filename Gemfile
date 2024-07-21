@@ -2,16 +2,10 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Ruby interpreter version
-ruby '>= 2.7.0', '< 3.0.0'
+ruby '>= 3.0.0'
 
 # Workaround for https://github.com/ffi/ffi/issues/1105
 gem 'ffi', '~> 1.16.3'
-
-# Require last nokogiri version supporting ruby 2.7
-gem 'nokogiri', '~> 1.15.6'
-
-# Restrict psych version to support Ruby 2.7
-gem 'psych', '~> 3.1.0'
 
 # MYSQL database adapter
 gem 'mysql2'
@@ -87,7 +81,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'webdrivers'
+  gem 'webdrivers', "~> 5.3.0"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
