@@ -41,7 +41,7 @@ class RegistrationPolicy
 			by_member:           [:view_general],
 			by_participant:      [:by_other, :view_general, :view_additional],
 			by_self:             [:by_participant, :view_private, :edit_additional, :view_payments],
-			by_organizer:        [:by_self, :edit_general, :export],
+			by_organizer:        [:by_participant, :view_private, :edit_additional, :edit_general, :export],
 			by_chairman:         [:by_organizer, :delete_registration],
 			by_treasurer:        [:by_chairman, :edit_payments],
 			by_auditor:			 [:by_participant, :view_payments], # TODO: Check if that is everything reasonable
