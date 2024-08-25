@@ -2,38 +2,41 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Ruby interpreter version
-ruby '>= 2.5.0'
+ruby '>= 3.0.0'
+
+# Workaround for https://github.com/ffi/ffi/issues/1105
+gem 'ffi', '~> 1.16.3'
 
 # MYSQL database adapter
 gem 'mysql2'
 
 ## PaperTrail for Version managment
-gem 'paper_trail', '~> 11.1.0'
+gem 'paper_trail', '~> 14.0.0'
 # Pundit for Authorization
-gem 'pundit',  '~> 2.1.0'
+gem 'pundit', '~> 2.3.0'
 # Pundit Implications to handle permission implications
 gem 'pundit_implications', '~> 0.1.0'
 # Sorcery for Authentification
-gem 'sorcery', '~> 0.16.0'
+gem 'sorcery', '~> 0.17.0'
 # awesome_print for Object Rendering
 gem 'awesome_print', '~> 1.8.0'
 # pagy for Paging
 gem 'pagy', '~> 3.8.3'
 # scenic for migrating views
-gem 'scenic', '~> 1.5.0'
+gem 'scenic', '~> 1.8.0'
 gem 'scenic_sqlite_adapter'
 gem 'scenic-mysql_adapter'
 # loaf for breadcrumbs
-gem 'loaf'
+gem 'loaf', '~> 0.10.0'
 # icons for buttons
 gem 'material_icons', '~> 2.2.1'
 # JQuery
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.6.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.4'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+gem 'sqlite3', '~> 1.6'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -78,7 +81,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'webdrivers'
+  gem 'webdrivers', "~> 5.3.0"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
