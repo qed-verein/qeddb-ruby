@@ -40,7 +40,7 @@ class RegistrationPolicy
 			by_other:            [],
 			by_member:           [:view_general],
 			by_participant:      [:by_other, :view_general, :view_additional],
-			by_self:             [:by_participant, :view_private, :edit_additional],
+			by_self:             [:by_participant, :view_private, :edit_additional, :view_payments],
 			by_organizer:        [:by_self, :edit_general, :export],
 			by_chairman:         [:by_organizer, :delete_registration],
 			by_treasurer:        [:by_chairman, :edit_payments],
