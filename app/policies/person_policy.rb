@@ -66,8 +66,7 @@ class PersonPolicy
 			by_self:          [:by_member, :view_private, :edit_additional, :edit_settings, :view_sepa_mandate],
 			by_chairman:      [:by_self, :edit_personal, :create_person, :delete_person, :list_all_people],
 			by_treasurer:     [:by_chairman, :edit_payments, :edit_sepa_mandate],
-			by_admin:         [:by_member, :view_payments, :view_sepa_mandate],
-			by_admin:         [:by_treasurer]})
+			by_admin:         [:by_chairman]})
 
 	# Vergibt die Rechtestufen, je nachdem ob der Benutzer ein Mitglieder, Admin etc. ist
 	# Dabei werden obige Implikationen automatisch berücksichtigt.
