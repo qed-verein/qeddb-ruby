@@ -1,76 +1,75 @@
-<% url = (mode == :new ? event_register_person_path(@event, @person) : @registration) %>
+<% url =
+  (mode == :new ? event_register_person_path(@event, @person) : @registration) %>
 <%= form_with(model: @registration, url: url, local: true) do |form| %>
-<%= render partial: "shared/errors", locals: {object: @registration} %>
+  <%= render partial: "shared/errors", locals: { object: @registration } %>
 
-<% if @registration_policy.edit_general? %>
-<fieldset>
-<fieldset class="generalinfo">
-	<legend>Allgemeines</legend>
-	<div class="aligned">
-	<%= form.label :event %>
-		<%= event_link @registration.event %>
-	<%= form.label :person %>
-		<%= person_link @registration.person %>
-	<%= form.label :status %>
-		<%= form.select :status, Registration.human_enum_options(:statuses), id: :registration_state %>
-	<%= form.label :organizer %>
-		<%= form.check_box :organizer, id: :registration_organizer %>
-	<%= form.label :money_amount %>
-		<%= form.text_field :money_amount, id: :registration_money_amount %>
-	</div>
-</fieldset>
+  <fieldset>
+    <% if @registration_policy.edit_general? %>
+      <fieldset class="generalinfo">
+        <legend>Allgemeines</legend>
+        <div class="aligned">
+          <%= form.label :event %>
+          <%= event_link @registration.event %>
+          <%= form.label :person %>
+          <%= person_link @registration.person %>
+          <%= form.label :status %>
+          <%= form.select :status,
+                      Registration.human_enum_options(:statuses),
+                      id: :registration_state %>
+          <%= form.label :organizer %>
+          <%= form.check_box :organizer, id: :registration_organizer %>
+          <%= form.label :money_amount %>
+          <%= form.text_field :money_amount, id: :registration_money_amount %>
+        </div>
+      </fieldset>
+    <% end %>
+
+    <%= render partial: "payments_fieldset", locals: { form: form } %>
+
+    <% if @registration_policy.edit_additional? %>
+      <hr>
+      <fieldset class="transport">
+        <legend>An- und Abreise</legend>
+
+        <div class="aligned">
+          <%= form.label :arrival %>
+          <%= form.datetime_field :arrival, id: :registration_arrival %>
+          <%= form.label :departure %>
+          <%= form.datetime_field :departure, id: :registration_departure %>
+          <%= form.label :nights_stay %>
+          <%= form.number_field :nights_stay, id: :registration_nights_stay, min: 0 %>
+
+          <%= form.label :station_arrival %>
+          <%= form.text_field :station_arrival, id: :registration_station_arrival %>
+          <%= form.label :station_departure %>
+          <%= form.text_field :station_departure, id: :registration_station_departure %>
+
+          <%= form.label :railway_discount %>
+          <%= form.text_field :railway_discount, id: :registration_railway_discount %>
+        </div>
+      </fieldset>
+      <hr>
+      <fieldset class="misc">
+        <legend>Sonstiges</legend>
+
+        <%= form.label :meal_preference %>
+        <%= form.text_area :meal_preference,
+                       id: :registration_meal_preference,
+                       rows: 3,
+                       cols: 80 %>
+        <%= form.label :talks %>
+        <%= form.text_area :talks, id: :registration_talks, rows: 3, cols: 80 %>
+        <%= form.label :comment %>
+        <%= form.text_area :comment, id: :registration_comment, rows: 3, cols: 80 %>
+      </fieldset>
+      <hr>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </fieldset>
 <% end %>
-<% if @registration_policy.edit_payments? %>
-<hr>
-<fieldset class="payments">
-	<legend>Zahlungen</legend>
-	<div class="aligned">
-	<%= form.label :payment_complete %>
-		<%= form.check_box :payment_complete, id: :registration_payment_complete %>
-	<%= form.label :money_transfer_date %>
-		<%= form.date_field :money_transfer_date, id: :registration_money_transfer_date %>
-	<%= form.label :other_discounts %>
-		<%= form.text_field :other_discounts, id: :registration_other_discounts %>
-	</div>
-</fieldset>
-<% end %>
-<% if @registration_policy.edit_additional? %>
-<hr>
-<fieldset class="transport">
-	<legend>An- und Abreise</legend>
 
-	<div class="aligned">
-	<%= form.label :arrival %>
-	<%= form.datetime_field :arrival, id: :registration_arrival %>
-	<%= form.label :departure %>
-	<%= form.datetime_field :departure, id: :registration_departure %>
-	<%= form.label :nights_stay %>
-	<%= form.number_field :nights_stay, id: :registration_nights_stay, min: 0 %>
-
-	<%= form.label :station_arrival %>
-	<%= form.text_field :station_arrival, id: :registration_station_arrival %>
-	<%= form.label :station_departure %>
-	<%= form.text_field :station_departure, id: :registration_station_departure %>
-
-	<%= form.label :railway_discount %>
-	<%= form.text_field :railway_discount, id: :registration_railway_discount %>
-	</div>
-</fieldset>
-<hr>
-<fieldset class="misc">
-	<legend>Sonstiges</legend>
-
-	<%= form.label :meal_preference %>
-	<%= form.text_area :meal_preference, id: :registration_meal_preference, rows: 3, cols: 80 %>
-	<%= form.label :talks %>
-	<%= form.text_area :talks, id: :registration_talks, rows: 3, cols: 80 %>
-	<%= form.label :comment %>
-	<%= form.text_area :comment, id: :registration_comment, rows: 3, cols: 80 %>
-</fieldset>
-<hr>
-<div class="actions">
-	<%= form.submit %>
-</div>
-</fieldset>
-<% end %>
-<% end %>
+<script>
+	enableDateSetting();
+</script>

@@ -1,0 +1,23 @@
+<tr>
+  <% registration = payment.registration %>
+  <% person = registration.person %>
+  <td></td>
+  <td><%= link_to person.first_name, person %></td>
+  <td><%= link_to person.last_name, person %></td>
+  <%= money_table_cell(payment.money_amount) %>
+  <%= date_table_cell(payment.money_transfer_date) %>
+  <td>
+    <%= RegistrationPayment.human_enum_value(:payment_type, payment.payment_type) %>
+    <% unless payment.category.blank? %>
+      -
+      <%= payment.category %>
+    <% end %>
+  </td>
+  <td>
+    <%= link_to registration.event.title,
+    registration_path(registration, anchor: "payment-#{payment.id}") %>
+  </td>
+  <td>
+    <%= payment.comment %>
+  </td>
+</tr>

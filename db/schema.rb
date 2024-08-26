@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_23_100539) do
+ActiveRecord::Schema.define(version: 2024_07_14_093020) do
+
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
     t.integer "addressable_id"
@@ -47,6 +48,17 @@ ActiveRecord::Schema.define(version: 2024_06_23_100539) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_contacts_on_person_id"
+  end
+
+  create_table "event_payments", force: :cascade do |t|
+    t.integer "event_id"
+    t.date "money_transfer_date"
+    t.decimal "money_amount", precision: 10, scale: 2
+    t.string "category"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_event_payments_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -108,6 +120,7 @@ ActiveRecord::Schema.define(version: 2024_06_23_100539) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "transfer_date"
     t.index ["person_id"], name: "index_payments_on_person_id"
   end
 
@@ -144,6 +157,18 @@ ActiveRecord::Schema.define(version: 2024_06_23_100539) do
     t.index ["account_name"], name: "index_people_on_account_name"
     t.index ["email_address"], name: "index_people_on_email_address"
     t.index ["reset_password_token"], name: "index_people_on_reset_password_token"
+  end
+
+  create_table "registration_payments", force: :cascade do |t|
+    t.integer "registration_id"
+    t.date "money_transfer_date"
+    t.decimal "money_amount", precision: 10, scale: 2
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "payment_type", default: 0
+    t.string "category"
+    t.index ["registration_id"], name: "index_registration_payments_on_registration_id"
   end
 
   create_table "registrations", force: :cascade do |t|

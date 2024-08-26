@@ -32,6 +32,10 @@ de:
       success: Änderung an der Veranstaltung wurden gespeichert
     destroy:
       success: Veranstaltung wurde erfolgreich gelöscht
+    show:
+      unpaid: unbezahlt
+    edit_payments:
+      submit: Zahlungen speichern
 
   people:
     create:
@@ -66,6 +70,10 @@ de:
       success: Die Änderungen an deiner Anmeldung wurden erfolgreich gespeichert
     destroy:
       success: Anmeldung wurde erfoglreich gelöscht
+    pay_rest:
+      invalid_date: Das Ausführungsdatum ist kein valides Datum
+      no_rest_to_be_paid: Die Anmeldung war bereits vollständig bezahlt
+      success: Zahlung erfoglreich hinzugefügt
 
   hostels:
     create:
@@ -90,6 +98,16 @@ de:
       success: Änderungen an der Emailverteiler wurden gespeichert
     destroy:
       success: Emailverteiler wurde erfoglreich gelöscht
+
+  finance_review:
+    show:
+      type: Typ
+      scope: Betrifft
+      general: Generell
+      reason: Grund
+      reasons:
+        membership: Mitgliedschaft
+        blank: Alle
 
   actions:
     person:
@@ -117,6 +135,7 @@ de:
       register_self: Zur Veranstaltung anmelden
       register_other: Teilnehmer hinzufügen
       edit_own_registration: Eigene Anmeldung bearbeiten
+      edit_payments: Zahlungen bearbeiten
     registration:
       edit: Anmeldung bearbeiten
       delete: Anmeldung löschen
@@ -156,4 +175,7 @@ de:
       execution_date: Ausführen am
       export_failed: Export ist fehlgeschlagen, wahrscheinlich ist ein Mandat ungültig
       no_transactions: Es wurden keine Transaktionen ausgewählt
-
+    outstanding_payments:
+      view: Offene Posten
+    finance_review:
+      view: Finanzübersicht

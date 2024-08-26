@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
 	get '/admin', to: 'admin#show'
 
+	get '/outstanding_payments', action: :show, controller: 'outstanding_payments'
+	get '/finance_review', action: :show, controller: 'finance_review'
+
 	resources :versions, only: [:index, :show] do
 		patch 'revert', to: 'versions#revert', on: :member
 	end
@@ -60,6 +63,7 @@ Rails.application.routes.draw do
 			get 'self', to: 'registrations#edit_self'
 			put 'self', to: 'registrations#update_self'
 			patch 'self', to: 'registrations#update_self'
+			post 'pay_rest', to: 'registrations#pay_rest'
 		end
 	end
 
@@ -67,6 +71,7 @@ Rails.application.routes.draw do
 		member do
 			get 'registrations_as_table'
 			get 'edit_own_registration'
+			get 'edit_payments'
 		end
 
 		get 'register_other', to: 'registrations#select_person', as: 'select_person'

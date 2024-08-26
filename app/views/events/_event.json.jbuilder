@@ -7,14 +7,20 @@ rmodules = modules.include?(:person_summary) ? [:person_summary] : []
 
 if modules.include? :registrations_summary
 	json.registrations_summary do
-		json.array! event.registrations, partial: 'registrations/registration_summary_for_event', 
+		json.array! event.registrations, partial: 'registrations/registration_summary_for_event',
 			as: :registration, locals: {modules: rmodules}
 	end
 end
 
 if modules.include? :registrations
 	json.registrations do
-		json.array! event.registrations, partial: 'registrations/registration', as: :registration, 
+		json.array! event.registrations, partial: 'registrations/registration', as: :registration,
 			locals: {modules: rmodules}
+	end
+end
+
+if modules.include? :payments
+	json.payments do
+		json.array! event.event_payments, partial: 'event_payments/event_payment', as: :event_payment, modules: []
 	end
 end

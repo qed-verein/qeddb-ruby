@@ -1,0 +1,22 @@
+<fieldset id="event_payments_fieldset">
+  <legend><%= EventPayment.model_name.human(count: :other) %></legend>
+  <div class="actions">
+    <%= form.submit t("events.edit_payments.submit") %>
+  </div>
+  Hier kann man gezahlte Mitgliedsbeiträge eintragen:
+  <%= form.fields_for :event_payments, @event.event_payments.reverse do |event_payment| %>
+    <%= render partial: "event_payments/event_payment_fields",
+    locals: {
+      form: event_payment,
+    } %>
+  <% end %>
+
+  <datalist id="category_list">
+    <%= event_payment_categories
+      .map do |cat|
+        tag.option value: EventPayment.human_attribute_name("category.#{cat}")
+      end
+      .join
+      .html_safe %>
+  </datalist>
+</fieldset>

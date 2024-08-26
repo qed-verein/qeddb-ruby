@@ -8,6 +8,11 @@ class Registration < ApplicationRecord
 	belongs_to :event
 	belongs_to :person
 
+	# Verweis auf Zahlungen zu dieser Registrierung
+	has_many :registration_payments, dependent: :destroy
+
+	accepts_nested_attributes_for :registration_payments, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
+
 	# Der Anmeldestatus des Teilnehmers
 	#  pending:   Die Person hat sich gerade erst angemeldet
 	#  confirmed: Die Person hat eine Platzzusage zur Veranstaltung
@@ -18,7 +23,7 @@ class Registration < ApplicationRecord
 	# Validierungen
 	validates :person, :event, presence: true
 	validates :person, uniqueness: {scope: :event, message:
-		Proc.new {|reg, _| sprintf("%s ist bereits zur Veranstaltung angemeldet", reg.person.full_name)}}
+		proc {|reg, _| format('%s ist bereits zur Veranstaltung angemeldet', reg.person.full_name)}}
 	validates :status, inclusion: {in: Registration.statuses.keys}
 	validates :organizer, inclusion: {in: [true, false]}
 
@@ -27,7 +32,7 @@ class Registration < ApplicationRecord
 
 	# member_discount ist deprecated, man sollte stattdessen effective_member_discount nutzen.
 	# Wir wollen member_discount jedoch nicht löschen, falls wir doch einen rollback brauchen.
-	with_options if: Proc.new {|reg| reg.payment_complete} do
+	with_options if: :payment_complete? do
 		validates :member_discount, inclusion: {in: [true, false, nil]}
 		validates :money_transfer_date, presence: true
 		validates :money_amount, presence: true
@@ -40,7 +45,8 @@ class Registration < ApplicationRecord
 
 	# Teilnehmer muss Teilnahmebedingungen akzepteren
 	attr_accessor :terms_of_service
-	validates :terms_of_service, acceptance: {message: "Teilnahmebedingungen müssen akzeptiert werden"}
+
+	validates :terms_of_service, acceptance: {message: 'Teilnahmebedingungen müssen akzeptiert werden'}
 
 	validate :max_participants_not_exceeded
 
@@ -58,17 +64,17 @@ class Registration < ApplicationRecord
 			self.arrival = event.start if arrival.blank?
 			self.departure = event.end if departure.blank?
 			self.money_amount = event.cost if money_amount.nil?
- 			max_days = ((self.departure.middle_of_day - self.arrival.middle_of_day) / 1.day).round
- 			self.nights_stay = max_days if nights_stay.blank?
+			max_days = ((departure.middle_of_day - arrival.middle_of_day) / 1.day).round
+			self.nights_stay = max_days if nights_stay.blank?
 		end
 
 		# Übernehme Standardeinstellungen zu Bahnhöfen, Essenswünschen etc. aus den Personendaten
-		unless person.nil?
-			self.station_arrival = person.railway_station if station_arrival.blank?
-			self.station_departure = person.railway_station if station_departure.blank?
-			self.railway_discount = person.railway_discount if railway_discount.blank?
-			self.meal_preference = person.meal_preference if meal_preference.blank?
-		end
+		return if person.nil?
+
+		self.station_arrival = person.railway_station if station_arrival.blank?
+		self.station_departure = person.railway_station if station_departure.blank?
+		self.railway_discount = person.railway_discount if railway_discount.blank?
+		self.meal_preference = person.meal_preference if meal_preference.blank?
 	end
 
 	def reference_line
@@ -77,6 +83,26 @@ class Registration < ApplicationRecord
 
 	def effective_member_discount
 		person.member_at_time?(event.start) or person.member_at_time?(event.end)
+	end
+
+	def to_be_paid
+		if payment_complete || money_amount.nil?
+			0
+		else
+			money_amount - registration_payments.sum(:money_amount)
+		end
+	end
+
+	def fully_paid?
+		if registration_payments.empty?
+			# This is for legacy reasons:
+			# - Back in the really old days, the open registrations were considered unpaid and the confirmed ones paid
+			# - Later we had a payment_complete checkbox
+			# Both should still give the "correct" result here.
+			status != 'confirmed' or payment_complete or money_amount.nil? or money_amount.zero?
+		else
+			to_be_paid.zero?
+		end
 	end
 
 	def self.status_active?(status)
@@ -88,17 +114,22 @@ class Registration < ApplicationRecord
 	end
 
 	def object_name
-		(event ? event.title : "Unknown event") + " » " +
-		(person ? person.full_name : "Unknown person")
+		"#{event ? event.title : 'Unknown event'} » #{person ? person.full_name : 'Unknown person'}"
+	end
+
+	def add_transfer(date, amount, comment = nil)
+		registration_payments.create!(
+			payment_type: :transfer, money_transfer_date: date, money_amount: amount, comment: comment
+		)
 	end
 
 	private
 
 	# Prüft ob die zeitliche Reihenfolge von Anreise und Abreise korrekt ist.
 	def time_ordering
-		if arrival.present? && departure.present? && arrival >= departure
-			errors.add :arrival, " muss früher als #{Registration.human_attribute_name :departure} sein"
-		end
+		return unless arrival.present? && departure.present? && arrival >= departure
+
+		errors.add :arrival, " muss früher als #{Registration.human_attribute_name :departure} sein"
 	end
 
 	# Prüft ob noch Plätze für Anmeldung verfügbar sind.
@@ -110,8 +141,8 @@ class Registration < ApplicationRecord
 		# Bei einer Absage brauchen wir einen Platz weniger
 		count -= 1 if !active? && Registration.status_active?(status_was)
 
-		unless count <= event.max_participants
-			errors.add :base, "Die Anzahl der angemeldeten Teilnehmer darf das Teilnehmerlimit nicht übersteigen"
-		end
+		return if count <= event.max_participants
+
+		errors.add :base, 'Die Anzahl der angemeldeten Teilnehmer darf das Teilnehmerlimit nicht übersteigen'
 	end
 end

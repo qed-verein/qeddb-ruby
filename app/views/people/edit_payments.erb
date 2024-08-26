@@ -7,10 +7,27 @@
 	<fieldset>
 	<%= render partial: "shared/errors", locals: {object: @person} %>
 	<%= render partial: 'payments_fieldset', locals: {form: form} %>
-	<div class="actions">
-		<%= form.submit t('.submit') %>
-	</div>
 	</fieldset>
 <% end %>
 </div>
+
+<script>
+	const membership_fee = <%= Rails.configuration.membership_fee %>;
+
+	function setDate(elem) {
+		if(elem.id.endsWith("end")) {
+			const start_year = ($("#" + elem.id.replace("end", "start"))[0]?.valueAsDate ?? new Date()).getFullYear();
+			const amount = $("#" + elem.id.replace("end", "amount"))[0]?.valueAsNumber;
+			const years = Number.isNaN(amount) ? 1 : amount / membership_fee;
+
+			elem.value = `${start_year + years - 1}-12-31`;
+		} else if(elem.id.endsWith("start")) {
+			// Using valueAsDate here is horribly annoying with respect to time zones (just assigning new Date(year, 0, 1) will produce spam)
+			elem.value = `${(new Date()).getFullYear()}-01-01`;
+		} else {
+			setToToday(elem);
+		}
+	}
+	enableDateSetting({setter: setDate});
+</script>
 <% end %>

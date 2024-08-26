@@ -164,14 +164,14 @@ module BankingStatementImportHelper
 				payment_type: :sponsor_member,
 				start: year_date.beginning_of_year,
 				end: year_date.end_of_year,
+				transfer_date: payment[:payment_date],
 				amount: payment[:amount]
 			)
 			"Fördermitgliedschaft für #{payment[:person].full_name} für das Jahr #{payment[:year]} angelegt."
 		else
 
 			registration = payment[:registration]
-			registration.payment_complete = true
-			registration.money_transfer_date = payment[:payment_date]
+			registration.add_transfer(payment[:payment_date], payment[:amount])
 			registration.status = :confirmed
 			registration.save!
 			"Veranstaltung #{payment[:event].title} für Person #{payment[:person].full_name} bezahlt."

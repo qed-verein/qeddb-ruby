@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
 	breadcrumb Event.model_name.human(count: :other), :events_path
 
-	before_action :set_registration, only: [:show, :edit, :update, :destroy, :edit_self, :update_self]
+	before_action :set_registration, only: [:show, :edit, :update, :destroy, :edit_self, :update_self, :pay_rest]
 	before_action :set_event_and_person,
 		only: [:new, :create, :new_self, :create_self, :select_person, :with_selected_person, :edit_self]
 	before_action :basic_authorization
@@ -68,6 +68,24 @@ class RegistrationsController < ApplicationController
 	def destroy
 		@registration.destroy
 		redirect_to event_url(@registration.event), notice: t('.success')
+	end
+
+	def pay_rest
+		begin
+			date = Date.parse(params[:pay_rest_date])
+		rescue ArgumentError
+			return redirect_to @registration, alert: t('.invalid_date')
+		end
+
+		amount = @registration.to_be_paid
+
+		if amount == 0 then
+			return redirect_to @registration, alert: t('.no_rest_to_be_paid')
+		end
+
+
+		@registration.add_transfer(date, @registration.to_be_paid)
+		redirect_to @registration, notice: t('.success')
 	end
 
 	# ****************************************************************************
@@ -151,6 +169,8 @@ class RegistrationsController < ApplicationController
 				authorize @registration, :edit_additional?
 			when :destroy
 				authorize @registration, :delete_registration?
+			when :pay_rest
+				authorize @registration, :edit_payments?
 			else
 				raise Pundit::NotAuthorizedError({query: action_name, record: @registration})
 		end

@@ -1,0 +1,49 @@
+<% if @registration_policy.edit_payments? %>
+<% 1.times {@registration.registration_payments.build} %>
+<hr>
+<fieldset class="payments">
+	<legend>Zahlungen</legend>
+	<%= form.fields_for :registration_payments do |registration_payment| %>
+		<%= render partial: 'registration_payments/registration_payment_fields', locals: {form: registration_payment} %>
+	<% end %>
+
+	<hr>
+	<legend>Legacy-Zahlungen, möglichst nicht benutzen</legend>
+	<div class="aligned">
+	<%= form.label :payment_complete %>
+		<%= form.check_box :payment_complete, id: :registration_payment_complete %>
+	<%= form.label :money_transfer_date %>
+		<%= form.date_field :money_transfer_date, id: :registration_money_transfer_date %>
+	<%= form.label :other_discounts %>
+		<%= form.text_field :other_discounts, id: :registration_other_discounts %>
+	</div>
+	<datalist id="category_list">
+		<%= registration_payment_categories.map{|cat| tag.option value: RegistrationPayment.human_attribute_name("category.#{cat}") }.sort.join.html_safe %>
+	</datalist>
+</fieldset>
+<% end %>
+
+<script>
+	function updateHiding(elem) {
+		const index = elem.dataset.index;
+		const category_enabled = elem.value === "expense";
+		$(`.category-${index}`).each((_, elem) => {
+			if (category_enabled) {
+				elem.style.display = '';
+				if (!elem.value) {
+					elem.value = elem.dataset.old_value ?? '';
+				}
+			} else {
+				elem.style.display = 'none'
+				// If we change from expense to not expense we MUST send an empty category,
+				// otherwise the model will not update the category. Store the old value
+				// for reuse if we change back before submitting.
+				elem.dataset.old_value = elem.value;
+				elem.value = '';
+			}
+		});
+	}
+	$(".payment-type").each((_,elem) => elem.addEventListener("change", ev => updateHiding(ev.target)))
+	$(".payment-type").each((_,elem) => updateHiding(elem))
+
+</script>

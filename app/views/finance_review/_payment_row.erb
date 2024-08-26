@@ -1,0 +1,26 @@
+<tr>
+  <% person = payment.person %>
+  <td></td>
+  <td><%= link_to person.first_name, person %></td>
+  <td><%= link_to person.last_name, person %></td>
+  <%= money_table_cell(payment.amount) %>
+  <%= date_table_cell(payment.transfer_date) %>
+  <td>
+    <%= Payment.human_enum_value(:payment_type, payment.payment_type) %>
+  </td>
+
+  <td data-sort-value="<%= payment.start.blank? ? "-" : payment.start %>">
+    <%= link_to person_path(payment.person, anchor: "payment-#{payment.id}") do %>
+      <% if payment.start and payment.end %>
+        <%= render_date payment.start %>
+        -
+        <%= render_date payment.end %>
+      <% else %>
+        <%= t(".general") %>
+      <% end %>
+    <% end %>
+  </td>
+  <td>
+    <%= payment.comment %>
+  </td>
+</tr>

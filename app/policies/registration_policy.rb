@@ -23,6 +23,8 @@
 #	 Das können alle Vereinsvorstände tun
 # by_treasurer:
 #	 Das kann der Kassier tun
+# by_auditor:
+#	 Das dürfen Kassenprüfer:innen tun
 # by_admin
 #   Das dürfen Administratoren tun
 
@@ -33,21 +35,23 @@ class RegistrationPolicy
 			edit_general:        [:view_general],
 			edit_payments:       [:view_payments],
 			edit_additional:     [:view_additional],
-			view_private:        [:view_general, :view_payments, :view_additional],
+			view_private:        [:view_general, :view_additional],
 
 			by_other:            [],
 			by_member:           [:view_general],
 			by_participant:      [:by_other, :view_general, :view_additional],
-			by_self:             [:by_participant, :view_private, :edit_additional],
-			by_organizer:        [:by_self, :edit_general, :export],
+			by_self:             [:by_participant, :view_private, :edit_additional, :view_payments],
+			by_organizer:        [:by_participant, :view_private, :edit_additional, :edit_general, :export],
 			by_chairman:         [:by_organizer, :delete_registration],
-			by_treasurer:        [:by_chairman, :edit_payments],
-			by_admin:            [:by_treasurer]})
+			by_treasurer:        [:by_chairman, :view_payments, :edit_payments],
+			by_auditor:			 [:by_participant, :view_payments], # TODO: Check if that is everything reasonable
+			by_admin:            [:by_chairman]})
 
 	# TODO Rechtesystem für Veranstaltung und Person prüfen
 	def initialize(user, reg)
 		grant :by_admin if user.admin?
 		grant :by_treasurer if user.treasurer?
+		grant :by_auditor if user.auditor?
 		grant :by_chairman if user.chairman?
 		grant :by_organizer if reg.is_a?(Registration) &&
 			user.organizer?(reg.event) && reg.event.still_organizable?
@@ -70,6 +74,8 @@ class RegistrationPolicy
 		end
 		if edit_payments?
 			editable.push :payment_complete, :money_transfer_date, :other_discounts
+			editable.push({registration_payments_attributes:
+				[:id, :payment_type, :category, :money_transfer_date, :money_amount, :comment, :_destroy]})
 		end
 		editable
 	end

@@ -14,6 +14,9 @@ class EventsController < ApplicationController
 		render 'as_table'
 	end
 
+	def edit_payments
+	end
+
 	def show
 	end
 
@@ -37,7 +40,9 @@ class EventsController < ApplicationController
 		if @event.update(permitted_attributes(@event))
 			redirect_to @event, notice: t('.success')
 		else
-			render :edit
+			pages = ['edit', 'edit_payments']
+			action = pages.include?(params[:formular]) ? params[:formular] : 'edit'
+			render action
 		end
 	end
 
@@ -80,6 +85,8 @@ class EventsController < ApplicationController
 				authorize Event, :list_events?
 			when :edit_own_registration
 				skip_authorization
+			when :edit_payments
+				authorize @event, :edit_payments?
 			else
 				raise Pundit::NotAuthorizedError, "Event/" + action_name.to_s + " not authorized"
 		end

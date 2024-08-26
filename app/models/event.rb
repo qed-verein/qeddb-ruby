@@ -24,12 +24,16 @@ class Event < ApplicationRecord
 	has_many :organizers, -> {where(registrations: {organizer: true})},
 		source: :person, through: :registrations
 
+	has_many :event_payments, dependent: :destroy
+
 	# Rechtegruppen für Organisatoren und Teilnehmer
 	has_one :organizer_group, -> {where(program: :organizers)}, class_name: 'Group', dependent: :destroy
 	has_one :participant_group, -> {where(program: :participants)}, class_name: 'Group', dependent: :destroy
 
 	#~ has_one :organizer_mailing_list, :through :organizer_group, class_name: 'Mailinglist'
 	#~ has_one :participant_mailing_list, :through :participant_group,  class_name: 'Mailinglist'
+
+	accepts_nested_attributes_for :event_payments, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 
 	# Verweis auf die Unterkunft
 	belongs_to :hostel, optional: true

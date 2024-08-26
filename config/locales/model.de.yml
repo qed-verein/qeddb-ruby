@@ -48,6 +48,9 @@ de:
       sepa_mandate:
         one: SEPA-Mandat
         other: SEPA-Mandate
+      event_payment:
+        one: Veranstaltungszahlung
+        other: Veranstaltungszahlungen
     attributes:
       person:
         account_name: Benutzername
@@ -120,6 +123,7 @@ de:
         other_discounts: Sonstige Ermäßigungen
         money_amount: Teilnahmebeitrag
         money_amount_short: Betrag
+        to_be_paid: Offener Betrag
         money_transfer_date: Geldeingang
         payment_complete: Vollständig Bezahlt
         payment_complete_short: Bezahlt
@@ -130,10 +134,43 @@ de:
         comment: Anmerkungen
         terms_of_service: Teilnahmebedingungen akzeptieren
       registration/status:
-        pending: offen
+        pending: angemeldet
         confirmed: bestätigt
         rejected: abgelehnt
         cancelled: abgesagt
+
+      registration_payment:
+        payment_type: Zahlungsart
+        money_amount: Betrag
+        money_transfer_date: Geldeingang
+        comment: Kommentar
+        category: Kategorie
+      registration_payment/payment_type:
+        transfer: Überweisung
+        expense: Auslage
+      registration_payment/category:
+        shopping: Einkauf
+        talk_gift: Vortragsgeschenk
+        deposit: Pfand
+        organizer_gift: Orgageschenk
+        transportation: Transport
+        talk_materials: Vortragsmaterial
+
+      event_payment:
+        money_amount: Betrag
+        money_transfer_date: Geldeingang
+        comment: Kommentar
+        category: Kategorie
+
+      event_payment/category:
+        hostel: Unterkunft
+        shopping: Einkauf
+        talk_gift: Vortragsgeschenk
+        deposit: Pfand
+        organizer_gift: Orgageschenk
+        transportation: Transport
+        talk_materials: Vortragsmaterial
+
       address:
         country: Land
         city: Stadt
@@ -159,6 +196,7 @@ de:
         interval: Zeitraum
         amount: Betrag
         comment: Anmerkung
+        transfer_date: Geldeingang
         _destroy: Löschen
       payment/payment_type:
         regular_member: Mitgliedsbeitrag
@@ -199,6 +237,7 @@ de:
         participants: Füge alle Teilnehmer dieser Veranstaltung automatisch hinzu.
         chairman: Alle angegebenen Gruppenmitglieder bekommen automatisch Vorstandsrechte.
         treasurer: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassiererrechte.
+        auditors: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassenprüfrechte.
         admins: Alle angegebenen Gruppenmitglieder bekommen automatisch Administratorrechte.
       group/mode:
         automatic: Diese Gruppe wurde vollautomatisch verwaltet. Es sind keine Änderungen möglich.

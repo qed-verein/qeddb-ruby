@@ -1,269 +1,291 @@
 <div class="flexlayout">
-<article class="panel">
-<h2><%= @person.full_name %></h2>
-<% if @person_policy.view_public? %>
-<div class="flexlayout">
-<section id="person_general_information">
-	<h3><%= t 'sections.person.generalinfo' %></h3>
-	<dl class="aligned">
-		<% if @person_policy.view_private? %>
-		<dt><%= Person.human_attribute_name :account_name  %>:</dt>
-		<dd><%= @person.account_name %></dd>
-		<% end %>
+  <article class="panel">
+    <h2><%= @person.full_name %></h2>
+    <div class="flexlayout">
+      <% if @person_policy.view_public? %>
+        <section id="person_general_information">
+          <h3><%= t "sections.person.generalinfo" %></h3>
+          <dl class="aligned">
+            <% if @person_policy.view_private? %>
+              <dt><%= Person.human_attribute_name :account_name %>:</dt>
+              <dd><%= @person.account_name %></dd>
+            <% end %>
 
-		<dt><%= Person.human_attribute_name :first_name %>:</dt>
-		<dd><%= @person.first_name %></dd>
+            <dt><%= Person.human_attribute_name :first_name %>:</dt>
+            <dd><%= @person.first_name %></dd>
 
-		<dt><%= Person.human_attribute_name :last_name %>:</dt>
-		<dd><%= @person.last_name %></dd>
+            <dt><%= Person.human_attribute_name :last_name %>:</dt>
+            <dd><%= @person.last_name %></dd>
 
-		<% if @person_policy.view_private? || @person.publish_email %>
-		<dt><%= Person.human_attribute_name :email_address  %>:</dt>
-		<dd><%= mail_to @person.email_address %></dd>
-		<% end %>
+            <% if @person_policy.view_private? || @person.publish_email %>
+              <dt><%= Person.human_attribute_name :email_address %>:</dt>
+              <dd><%= mail_to @person.email_address %></dd>
+            <% end %>
 
-		<% if @person_policy.view_private? || @person.publish_birthday %>
-		<dt><%= Person.human_attribute_name :birthday %>:</dt>
-		<dd><%= render_date @person.birthday %></dd>
-		<% end %>
+            <% if @person_policy.view_private? || @person.publish_birthday %>
+              <dt><%= Person.human_attribute_name :birthday %>:</dt>
+              <dd><%= render_date @person.birthday %></dd>
+            <% end %>
 
-		<dt><%= Person.human_attribute_name :gender %>:</dt>
-		<dd><%= Person.human_enum_value(:gender, @person.gender) %></dd>
+            <dt><%= Person.human_attribute_name :gender %>:</dt>
+            <dd><%= Person.human_enum_value(:gender, @person.gender) %></dd>
 
-		<dt><%= Person.human_attribute_name :joined %>:</dt>
-		<dd><%= render_date @person.joined %></dd>
+            <dt><%= Person.human_attribute_name :joined %>:</dt>
+            <dd><%= render_date @person.joined %></dd>
 
-		<dt><%= Person.human_attribute_name :quitted %>:</dt>
-		<dd><%= render_date @person.quitted %></dd>
+            <dt><%= Person.human_attribute_name :quitted %>:</dt>
+            <dd><%= render_date @person.quitted %></dd>
 
-		<% if @person_policy.view_payments? %>
-		<dt><%= Person.human_attribute_name :member_until %>:</dt>
-		<dd><%= render_date @person.member_until %></dd>
+            <% if @person_policy.view_payments? %>
+              <dt><%= Person.human_attribute_name :member_until %>:</dt>
+              <dd><%= render_date @person.member_until %></dd>
 
-		<dt><%= Person.human_attribute_name :paid_until %>:</dt>
-		<dd><%= render_date @person.paid_until %></dd>
-		<% end %>
+              <dt><%= Person.human_attribute_name :paid_until %>:</dt>
+              <dd><%= render_date @person.paid_until %></dd>
+            <% end %>
 
-		<dt><%= Person.human_attribute_name :member %>:</dt>
-		<dd><%= render_yes_no @person.member? %></dd>
+            <dt><%= Person.human_attribute_name :member %>:</dt>
+            <dd><%= render_yes_no @person.member? %></dd>
 
-		<dt><%= Person.human_attribute_name :active %>:</dt>
-		<dd><%= render_yes_no @person.active %></dd>
-	</dl>
-</section>
-<% end %>
+            <dt><%= Person.human_attribute_name :active %>:</dt>
+            <dd><%= render_yes_no @person.active %></dd>
+          </dl>
+        </section>
+      <% end %>
 
-<% if @person_policy.view_additional? %>
-<section id="person_additional_information">
-	<h3><%= t 'sections.person.additional_information' %></h3>
-	<dl class="aligned">
-		<dt><%= Person.human_attribute_name :railway_station %>:</dt>
-		<dd><%= render_string @person.railway_station %></dd>
+      <% if @person_policy.view_additional? %>
+        <section id="person_additional_information">
+          <h3><%= t "sections.person.additional_information" %></h3>
+          <dl class="aligned">
+            <dt><%= Person.human_attribute_name :railway_station %>:</dt>
+            <dd><%= render_string @person.railway_station %></dd>
 
-		<dt><%= Person.human_attribute_name :railway_discount %>:</dt>
-		<dd><%= render_string @person.railway_discount %></dd>
+            <dt><%= Person.human_attribute_name :railway_discount %>:</dt>
+            <dd><%= render_string @person.railway_discount %></dd>
 
-		<dt><%= Person.human_attribute_name :meal_preference %>:</dt>
-		<dd><%= render_string @person.meal_preference %></dd>
+            <dt><%= Person.human_attribute_name :meal_preference %>:</dt>
+            <dd><%= render_string @person.meal_preference %></dd>
 
-		<dt><%= Person.human_attribute_name :comment %>:</dt>
-		<dd><%= render_string @person.comment %></dd>
-	</dl>
-</section>
-<% end %>
-</div>
+            <dt><%= Person.human_attribute_name :comment %>:</dt>
+            <dd><%= render_string @person.comment %></dd>
+          </dl>
+        </section>
+      <% end %>
+    </div>
 
-<div class="actions">
-	<%= edit_general_person_link(@person) %>
-</div>
+    <div class="actions">
+      <%= edit_general_person_link(@person) %>
+    </div>
 
-<hr>
+    <hr>
 
-<div class="flexlayout">
-<% if @person_policy.view_addresses? %>
-<section id="person_addresses">
-	<h3><%= Address.model_name.human(count: :other) %></h3>
-	<% unless @person.addresses.empty? %>
-		<dl class="aligned">
-			<% @person.addresses.each_with_index do |address, index| %>
-				<dt><%= index == 0 ? "Hauptadresse:" : "Weitere Adresse:" %></dt>
-				<dd><%= render partial: 'addresses/address', object: address  %></dd>
-			<% end %>
-		</dl>
-	<% else %>
-		<i>Keine Adressen vorhanden.</i>
-	<% end %>
-</section>
-<% end %>
+    <div class="flexlayout">
+      <% if @person_policy.view_addresses? %>
+        <section id="person_addresses">
+          <h3><%= Address.model_name.human(count: :other) %></h3>
+          <% unless @person.addresses.empty? %>
+            <dl class="aligned">
+              <% @person.addresses.each_with_index do |address, index| %>
+                <dt><%= index == 0 ? "Hauptadresse:" : "Weitere Adresse:" %></dt>
+                <dd><%= render partial: "addresses/address", object: address %></dd>
+              <% end %>
+            </dl>
+          <% else %>
+            <i>Keine Adressen vorhanden.</i>
+          <% end %>
+        </section>
+      <% end %>
 
-<% if @person_policy.view_contacts? %>
-<section id="person_contacts">
-	<h3><%= Contact.model_name.human(count: :other) %></h3>
-	<% unless @person.contacts.empty? %>
-		<dl class="aligned">
-			<% @person.contacts.each do |contact| %>
-				<dt><%= contact.protocol + ":" %></dt>
-				<dd><%= contact_html(contact) %></dd>
-			<% end %>
-		</dl>
-	<% else %>
-		<i>Keine Kontaktnummern vorhanden.</i>
-	<% end %>
-</section>
-<% end %>
-</div>
-<div class="actions">
-	<%= edit_addresses_person_link(@person) %>
-</div>
-<hr>
+      <% if @person_policy.view_contacts? %>
+        <section id="person_contacts">
+          <h3><%= Contact.model_name.human(count: :other) %></h3>
+          <% unless @person.contacts.empty? %>
+            <dl class="aligned">
+              <% @person.contacts.each do |contact| %>
+                <dt><%= contact.protocol + ":" %></dt>
+                <dd><%= contact_html(contact) %></dd>
+              <% end %>
+            </dl>
+          <% else %>
+            <i>Keine Kontaktnummern vorhanden.</i>
+          <% end %>
+        </section>
+      <% end %>
+    </div>
+    <div class="actions">
+      <%= edit_addresses_person_link(@person) %>
+    </div>
+    <hr>
 
-<% if @person_policy.view_settings? %>
-<div class="flexlayout">
-<section id="person_privacy">
-	<h3><%= t 'sections.person.settings' %></h3>
-	<p style="max-width: 30em">
-		<%= [:photos_allowed, :publish_birthday, :publish_email, :publish_address, :newsletter, :publish].map {|attr|
-			Person.human_attribute_name attr if @person.send(attr)}.compact.join(", ") %></span>
-	</p>
-</section>
-</div>
-<div class="actions">
-	<%= edit_privacy_person_link(@person) %>
-</div>
-<hr>
-<% end %>
+    <% if @person_policy.view_settings? %>
+      <div class="flexlayout">
+        <section id="person_privacy">
+          <h3><%= t "sections.person.settings" %></h3>
+          <p style="max-width: 30em">
+            <span>
+              <%= %i[
+                photos_allowed
+                publish_birthday
+                publish_email
+                publish_address
+                newsletter
+                publish
+              ]
+                .map { |attr| Person.human_attribute_name attr if @person.send(attr) }
+                .compact
+                .join(", ") %></span>
+          </p>
+        </section>
+      </div>
+      <div class="actions">
+        <%= edit_privacy_person_link(@person) %>
+      </div>
+      <hr>
+    <% end %>
 
-<% if @person_policy.view_payments? %>
-<div class="flexlayout">
-<section id="person_payments">
-	<h3><%= Payment.model_name.human(count: :other) %></h3>
-	<% unless @person.payments.empty? %>
-		<dl class="aligned">
-			<% @person.payments.each_with_index do |payment, index| %>
-				<% if payment.start && payment.end %>
-					<dt style="font-weight: normal; width: 20em"><%= render_date payment.start %> - <%= render_date payment.end %></dt>
-				<% end %>
-				<dd><i>(<%= Payment.human_enum_value(:payment_type, payment.payment_type) %>)</i>
-				<% if payment.amount %>
-					<br><%= Payment.human_attribute_name :amount %>
-					<%= number_to_currency payment.amount %>
-				<% end %>
-				<% unless payment.comment.blank? %>
-					<br><%= payment.comment %>
-				<% end %></dd>
-			<% end %>
-		</dl>
-	<% else %>
-		<i>Keine Zahlungen vorhanden.</i>
-	<% end %>
-</section>
-</div>
-<div class="actions">
-	<%= edit_payments_person_link(@person) %>
-</div>
-<hr>
-<% end %>
+    <% if @person_policy.view_payments? %>
+      <div class="flexlayout">
+        <section id="person_payments">
+          <h3><%= Payment.model_name.human(count: :other) %></h3>
+          <% unless @person.payments.empty? %>
+            <dl class="aligned">
+              <% @person.payments.reverse.each do |payment| %>
+                <dt style="font-weight: normal; width: 20em" id="payment-<%= payment.id %>">
+                  <% if payment.start && payment.end %>
+                    <%= render_date payment.start %>
+                    -
+                    <%= render_date payment.end %>
+                  <% elsif payment.transfer_date %>
+                    <%= render_date payment.transfer_date %>
+                  <% end %>
+                </dt>
+                <dd><i>(<%= Payment.human_enum_value(:payment_type, payment.payment_type) %>)</i>
+                  <% if payment.amount %>
+                    <br><%= Payment.human_attribute_name :amount %>
+                    <%= number_to_currency payment.amount %>
+                  <% end %>
+                  <% unless payment.comment.blank? %>
+                    <br><%= payment.comment %>
+                  <% end %></dd>
+              <% end %>
+            </dl>
+          <% else %>
+            <i>Keine Zahlungen vorhanden.</i>
+          <% end %>
+        </section>
+      </div>
+      <div class="actions">
+        <%= edit_payments_person_link(@person) %>
+      </div>
+      <hr>
+    <% end %>
 
-<% if @person_policy.view_sepa_mandate? %>
-	<div class="flexlayout">
-		<section id="person_sepa_mandate">
-			<h3><%= SepaMandate.model_name.human(count: :other) %></h3>
-			<% if @person.sepa_mandate.nil? %>
-			<i>Kein SEPA-Mandat hinterlegt.</i>
-			<% else %>
-				<dl>
-					<dt><%= SepaMandate.human_attribute_name :mandate_reference %></dt>
-					<dd><%= @person.sepa_mandate.mandate_reference %></dd>
+    <% if @person_policy.view_sepa_mandate? %>
+      <div class="flexlayout">
+        <section id="person_sepa_mandate">
+          <h3><%= SepaMandate.model_name.human(count: :other) %></h3>
+          <% if @person.sepa_mandate.nil? %>
+            <i>Kein SEPA-Mandat hinterlegt.</i>
+          <% else %>
+            <dl>
+              <dt><%= SepaMandate.human_attribute_name :mandate_reference %></dt>
+              <dd><%= @person.sepa_mandate.mandate_reference %></dd>
 
-					<dt><%= SepaMandate.human_attribute_name :signature_date %></dt>
-					<dd><%= render_date @person.sepa_mandate.signature_date %></dd>
+              <dt><%= SepaMandate.human_attribute_name :signature_date %></dt>
+              <dd><%= render_date @person.sepa_mandate.signature_date %></dd>
 
-					<dt><%= SepaMandate.human_attribute_name :iban %></dt>
-					<dd><%= @person.sepa_mandate.iban %></dd>
+              <dt><%= SepaMandate.human_attribute_name :iban %></dt>
+              <dd><%= @person.sepa_mandate.iban %></dd>
 
-					<dt><%= SepaMandate.human_attribute_name :bic %></dt>
-					<dd><%= @person.sepa_mandate.bic %></dd>
+              <dt><%= SepaMandate.human_attribute_name :bic %></dt>
+              <dd><%= @person.sepa_mandate.bic %></dd>
 
-					<dt><%= SepaMandate.human_attribute_name :name_account_holder %></dt>
-					<dd><%= @person.sepa_mandate.name_account_holder %></dd>
+              <dt><%= SepaMandate.human_attribute_name :name_account_holder %></dt>
+              <dd><%= @person.sepa_mandate.name_account_holder %></dd>
 
-					<dt><%= SepaMandate.human_attribute_name :sequence_type %></dt>
-					<dd><%= @person.sepa_mandate.sequence_type %></dd>
+              <dt><%= SepaMandate.human_attribute_name :sequence_type %></dt>
+              <dd><%= @person.sepa_mandate.sequence_type %></dd>
 
-					<% if not @person.sepa_mandate.sponsor_membership.nil? %>
-						<dt><%= SepaMandate.human_attribute_name :sponsor_membership %></dt>
-						<dd><%= number_to_currency @person.sepa_mandate.sponsor_membership %></dd>
-					<% end %>
-				</dl>
-			<% end %>
-		</section>
-	</div>
-	<div class="actions">
-		<%= edit_sepa_mandate_person_link(@person) %>
-	</div>
-	<hr>
-<% end %>
+              <% if not @person.sepa_mandate.sponsor_membership.nil? %>
+                <dt><%= SepaMandate.human_attribute_name :sponsor_membership %></dt>
+                <dd><%= number_to_currency @person.sepa_mandate.sponsor_membership %></dd>
+              <% end %>
+            </dl>
+          <% end %>
+        </section>
+      </div>
+      <div class="actions">
+        <%= edit_sepa_mandate_person_link(@person) %>
+      </div>
+      <hr>
+    <% end %>
 
-<% if @person_policy.view_private? %>
-<div class="flexlayout">
-<div>
+    <% if @person_policy.view_private? %>
+      <div class="flexlayout">
+        <div>
+          <!--
+          <section id="person_groups_explicit">
+            <h3><%= Affiliation.model_name.human(count: :other) %></h3>
 
-<!-- <section id="person_groups_explicit">
-	<h3><%= Affiliation.model_name.human(count: :other) %></h3>
+            <% unless @person.affiliations.empty? %>
+              <dl class="aligned">
+                <% @person.affiliations.each do |aff| %>
+                  <dt><%= group_link aff.group %></dt>
+                  <dd>
+                    <% if aff.start
+                      concat "von "
+                      concat render_date aff.start
+                    end %>
+                    <% if aff.end
+                      concat "bis "
+                      concat render_date aff.end
+                    end %>
+                  </dd>
+                <% end %>
+              </dl>
+            <% else %>
+              <p><i>Diese Person wurde bislang in keine Gruppen eingetragen.</i></p>
+            <% end %>
+          </section>
+          -->
+          <section id="person_groups_automatic">
+            <h3><%= Group.model_name.human(count: :other) %></h3>
+            <% groups = @person.groups.select { |group| group.event_id.nil? } %>
+            <% unless groups.empty? %>
+              <% groups.each do |group| %>
+                <span style="margin: 0.5em"><%= group_link group %></span>
+              <% end %>
+            <% else %>
+              <p><i>Keine Gruppen zugewiesen.</i></p>
+            <% end %>
+          </section>
+        </div>
+      </div>
+      <hr>
+    <% end %>
 
-	<% unless @person.affiliations.empty? %>
-		<dl class="aligned">
-		<% @person.affiliations.each do |aff| %>
-			<dt><%= group_link aff.group %></dt>
-			<dd>
-			<% if aff.start then concat "von "; concat render_date aff.start; end %>
-			<% if aff.end then concat "bis "; concat render_date aff.end; end %>
-			</dd>
-		<% end %>
-		</dl>
-	<% else %>
-		<p><i>Diese Person wurde bislang in keine Gruppen eingetragen.</i></p>
-	<% end %>
-</section>-->
+    <% if policy(@person).view_public? %>
+      <div class="flexlayout">
+        <section id="person_registrations">
+          <h3>Anmeldungen</h3>
 
-<section id="person_groups_automatic">
-	<h3><%= Group.model_name.human(count: :other) %></h3>
-	<% groups = @person.groups.select {|group| group.event_id.nil?} %>
-	<% unless groups.empty? %>
-		<% groups.each do |group| %>
-			<span style="margin: 0.5em"><%= group_link group %></span>
-		<% end %>
-	<% else %>
-		<p><i>Keine Gruppen zugewiesen.</i></p>
-	<% end %>
-</section>
-</div>
-</div>
-<hr>
-<% end %>
+          <% unless @person.registrations.empty? %>
+            Diese Person hat sich zu folgenden Veranstaltungen angemeldet:
+            <ul>
+              <% @person.registrations.each do |r| %>
+                <li><%= registration_link_with_event_fancy r %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p><i>Keine Anmeldungen vorhanden.</i></p>
+          <% end %>
+        </section>
+      </div>
+      <hr>
+    <% end %>
 
-<% if policy(@person).view_public? %>
-<div class="flexlayout">
-<section id="person_registrations">
-	<h3>Anmeldungen</h3>
-
-	<% unless @person.registrations.empty? %>
-		Diese Person hat sich zu folgenden Veranstaltungen angemeldet:
-		<ul>
-			<% @person.registrations.each do |r| %>
-				<li><%= registration_link_with_event_fancy r %></li>
-			<% end %>
-		</ul>
-	<% else %>
-		<p><i>Keine Anmeldungen vorhanden.</i></p>
-	<% end %>
-</section>
-</div>
-<hr>
-<% end %>
-
-<div class="actions">
-	<%= delete_person_link(@person) %>
-</div>
-</article>
+    <div class="actions">
+      <%= delete_person_link(@person) %>
+    </div>
+  </article>
 </div>

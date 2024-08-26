@@ -2,8 +2,22 @@
 de:
   helpers:
     reset: Zurücksetzen
+    submit:
+      finance_review:
+        submit: Filtern
+    label:
+      finance_review:
+        reason: Grund
+        start: Von
+        end: Bis
   sections:
      person:
        generalinfo: Personendaten
        settings: Einstellungen
        additional_information: Weitere Informationen
+  outstanding_payments:
+    show:
+      title: Offene Posten
+  finance_review:
+    show:
+      title: Finanzübersicht

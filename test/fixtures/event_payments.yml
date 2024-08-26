@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+event_payment1:
+  event: event_mathematikerkonferenz
+  money_amount: -100
+  category: Unterkunft
+  money_transfer_date: 2024-03-14
+  comment: 'Ziemlich günstig'
+
+event_payment2:
+  event: event_mathematikerkonferenz
+  money_amount: 30
+  category: Sponsoring
+  money_transfer_date: 2023-03-14
+  comment: 'Von TOS'
+
+event_payment3:
+  event: event_physikerkonferenz
+  money_amount: -10
+  category: Transport
+  money_transfer_date: 2024-06-28

@@ -33,6 +33,11 @@ def event_register_self_link(event)
 	end
 end
 
+def edit_payments_event_link(event)
+	return nil unless policy(event).edit_payments?
+	icon_button t('actions.event.edit_payments'), "attach_money", edit_payments_event_path(event)
+end
+
 def edit_event_link(event)
 	return nil unless policy(event).edit_event?
 	icon_button t('actions.event.edit'), 'edit', edit_event_path(event)

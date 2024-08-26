@@ -3,7 +3,8 @@ module RegistrationsHelper
 def registration_information(reg)
 	words = []
 	words.push "Orga" if reg.organizer
-	words.push Registration.human_enum_value(:status, reg.status) if reg.status.to_sym != :confirmed
+	words.push Registration.human_enum_value(:status, reg.status) unless [:confirmed, :pending].include?(reg.status.to_sym)
+	words.push t('.unpaid') unless reg.fully_paid?
 	words.empty? ? "" : tag.i {"(" + words.join(", ") + ")"}
 end
 

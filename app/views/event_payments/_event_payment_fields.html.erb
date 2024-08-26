@@ -1,0 +1,15 @@
+<fieldset class="event-payment">
+  <div class="aligned">
+    <%= form.label :category %>
+    <%= form.text_field :category, list: :category_list %>
+
+    <%= form.label :money_amount %>
+    <%= form.number_field :money_amount, step: 0.01 %>
+
+    <%= form.label :money_transfer_date %>
+    <%= form.date_field :money_transfer_date %>
+
+    <%= form.label :comment %>
+    <%= form.text_field :comment %>
+  </div>
+</fieldset>
