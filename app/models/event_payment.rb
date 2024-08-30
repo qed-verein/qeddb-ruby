@@ -4,7 +4,7 @@ class EventPayment < ApplicationRecord
 
 	# Zu dieser Veranstaltung gehört die Zahlung
 	belongs_to :event
-	default_scope { order(end: :desc) }
+	default_scope { order(money_transfer_date: :desc) }
 
 	# Validierungen
 	validates :event, :money_transfer_date, :money_amount, :category, presence: true
