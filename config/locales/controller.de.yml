@@ -56,6 +56,8 @@ de:
       submit: SEPA-Mandat speichern
     edit_privacy:
       submit: Einstellungen speichern
+    show:
+      unpaid: unbezahlt
 
   registrations:
     event_full: Für diese Veranstaltung sind keine freien Plätze mehr vorhanden. Eine Anmeldung zu dieser Veranstaltung ist leider nicht mehr möglich.
