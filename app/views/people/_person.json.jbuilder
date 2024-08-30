@@ -18,9 +18,10 @@ if modules.include? :contacts
 end
 if modules.include? :payments
 	json.payments do
-		json.array! person.payments, partial: 'payments/payment', as: :payment
+		json.array! person.payments, partial: 'payments/payment', as: :payment, locals: {modules: []}
 	end
 end
+
 if modules.include? :registrations
 	json.registrations_summary do
 		json.array! person.registrations, partial: 'registrations/registration_summary_for_person',
