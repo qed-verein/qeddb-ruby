@@ -99,7 +99,7 @@ class Registration < ApplicationRecord
 			# - Back in the really old days, the open registrations were considered unpaid and the confirmed ones paid
 			# - Later we had a payment_complete checkbox
 			# Both should still give the "correct" result here.
-			status != 'confirmed' or payment_complete or money_amount.nil? or money_amount.zero?
+			status == 'confirmed' or payment_complete or money_amount.nil? or money_amount.zero?
 		else
 			to_be_paid.zero?
 		end
