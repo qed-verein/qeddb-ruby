@@ -270,7 +270,7 @@
           <h3>Anmeldungen</h3>
 
           <% unless @person.registrations.empty? %>
-            Diese Person hat sich zu folgenden Veranstaltungen angemeldet:
+            Diese Person hat sich zu folgenden Veranstaltungen angemeldet: (<%= pluralize @person.registrations.count {|reg| reg.active? }, "Teilnahme", "Teilnahmen"%>, <%= pluralize @person.registrations.count {|reg| not reg.active? }, "Absage", "Absagen" %>, <%= @person.registrations.count { |reg| reg.organizer }%> organisiert)
             <ul>
               <% @person.registrations.each do |r| %>
                 <li><%= registration_link_with_event_fancy r %></li>
