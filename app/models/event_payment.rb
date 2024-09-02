@@ -8,4 +8,8 @@ class EventPayment < ApplicationRecord
 
 	# Validierungen
 	validates :event, :money_transfer_date, :money_amount, :category, presence: true
+
+	def object_name
+		"#{event ? event.title : 'Unknown event'}"
+	end
 end

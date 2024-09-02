@@ -51,6 +51,9 @@ de:
       event_payment:
         one: Veranstaltungszahlung
         other: Veranstaltungszahlungen
+      registration_payment:
+        one: Teilnehmerzahlung
+        other: Teilnehmerzahlungen
     attributes:
       person:
         account_name: Benutzername

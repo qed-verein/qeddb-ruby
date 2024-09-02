@@ -13,4 +13,9 @@ class RegistrationPayment < ApplicationRecord
 	validates :payment_type, inclusion: {in: payment_types.keys}
 	validates :category, presence: true, if: :expense?
 	validates :category, absence: true, unless: :expense?
+	
+	def object_name
+		"#{registration && registration.event ? registration.event.title : 'Unknown event'} » " +
+            "#{registration && registration.event ? registration && registration.person.full_name : 'Unknown person'}"
+	end
 end
