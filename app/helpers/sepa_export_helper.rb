@@ -40,10 +40,10 @@ module SepaExportHelper
 	def get_transactions_for_event(event)
 		event
 			.registrations
-			.where(payment_complete: false, money_amount: 1..)
-			.reject { |registration| registration.person.sepa_mandate.nil? }
+			.joins(:person => :sepa_mandate)
 			# Falls Leute NUR der Abbuchung der Fördermitgliedschaft zugestimmt haben, dürfen wir sie keine Events damit zahlen lassen.
-			.select { |registration| registration.person.sepa_mandate.allow_all_payments }
+			.where(:sepa_mandates => {:allow_all_payments => true})
+			.reject { |registration| registration.to_be_paid <= 0 }
 			.map do |registration|
 				{
 					person: registration.person,
