@@ -73,7 +73,7 @@ module SepaExportHelper
 				instruction: transaction[:instruction],
 				local_instrument: 'CORE',
 				sequence_type: 'FRST',
-				requested_date: execution_date,
+				requested_date: execution_date.to_date,
 				batch_booking: true
 			)
 		end
