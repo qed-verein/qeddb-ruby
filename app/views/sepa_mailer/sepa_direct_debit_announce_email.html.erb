@@ -1,6 +1,6 @@
 <p>Hallo <%= @person.first_name %></p>
 
-<p>am <%= render_date @execution_date %> wird der Quod Erat Demonstrandum e.V. <%= @amount %>€ unter dem Verwendungungzweck "<%= @reference_line %>" über dieses SEPA-Lastschriftmandat abbuchen:</p>
+<p>am <%= render_date @execution_date %> wird der Quod Erat Demonstrandum e.V. <%= number_to_currency @amount %> unter dem Verwendungungzweck "<%= @reference_line %>" über dieses SEPA-Lastschriftmandat abbuchen:</p>
 <table>
   <tr>
     <td>

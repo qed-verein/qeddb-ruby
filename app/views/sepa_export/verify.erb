@@ -47,7 +47,7 @@
               <%= form.check_box "transactions[#{index}][use]", {:checked => true} %>
             </td>
             <td><%= form.label "transactions[#{index}][use]", transaction[:person].full_name %></td>
-            <td><%= transaction[:amount] %></td>
+            <td><%= number_to_currency transaction[:amount] %></td>
             <td><%= transaction[:reference_line] %></td>
           </tr>
         <% end %>

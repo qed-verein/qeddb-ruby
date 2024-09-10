@@ -39,8 +39,9 @@ class SepaExportController < ApplicationController
 
 		begin
 			sepa_direct_debit = create_direct_debit to_use, execution_date
-		rescue
+		rescue => e
 			flash[:error] = t("actions.export_sepa.export_failed")
+			logger.error e
 			return redirect_back_or_to sepa_export_path(event_id: @event, year: @year)
 		end
 

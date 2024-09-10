@@ -10,33 +10,40 @@ module SepaExportHelper
 		Person
 			.where(paid_until: ..cutoff_date)
 			.where(member_until: cutoff_date..)
-			.reject { |person| person.sepa_mandate.nil? }
+			.where.not(sepa_mandate: nil)
+			.joins(:sepa_mandate)
+			.where(:sepa_mandate => {:sponsor_membership => nil})
+			.to_a
 			.map do |person|
-				if person.sepa_mandate.sponsor_membership.nil?
-					{
-						person: person,
-						reference_line: "Mitgliedschaft #{year}, #{person.reference_line}",
-						amount: Rails.configuration.membership_fee,
-						instruction: "M#{year} #{person.id}"
-					}
-				else
-					{
-						person: person,
-						reference_line: "Foerdermitgliedschaft #{year}, #{person.reference_line}",
-						amount: person.sepa_mandate.sponsor_membership,
-						instruction: "F#{year} #{person.id}"
-					}
-				end
+				{
+					person: person,
+					reference_line: "Mitgliedschaft #{year}, #{person.reference_line}",
+					amount: Rails.configuration.membership_fee,
+					instruction: "M#{year} #{person.id}"
+				}
+			end +
+		 Person
+			.where.not(sepa_mandate: nil)
+			.joins(:sepa_mandate)
+			.where.not(:sepa_mandate => {:sponsor_membership => nil})
+			.to_a
+			.map do |person|
+				{
+					person: person,
+					reference_line: "Foerdermitgliedschaft #{year}, #{person.reference_line}",
+					amount: person.sepa_mandate.sponsor_membership + (person.paid_until < cutoff_date ? Rails.configuration.membership_fee : 0),
+					instruction: "F#{year} #{person.id}"
+				}
 			end
 	end
 
 	def get_transactions_for_event(event)
 		event
 			.registrations
-			.where(payment_complete: false, money_amount: 1..)
-			.reject { |registration| registration.person.sepa_mandate.nil? }
+			.joins(:person => :sepa_mandate)
 			# Falls Leute NUR der Abbuchung der Fördermitgliedschaft zugestimmt haben, dürfen wir sie keine Events damit zahlen lassen.
-			.select { |registration| registration.person.sepa_mandate.allow_all_payments }
+			.where(:sepa_mandates => {:allow_all_payments => true})
+			.reject { |registration| registration.to_be_paid <= 0 }
 			.map do |registration|
 				{
 					person: registration.person,
@@ -73,7 +80,7 @@ module SepaExportHelper
 				instruction: transaction[:instruction],
 				local_instrument: 'CORE',
 				sequence_type: 'FRST',
-				requested_date: execution_date,
+				requested_date: execution_date.to_date,
 				batch_booking: true
 			)
 		end
