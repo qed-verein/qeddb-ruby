@@ -231,12 +231,12 @@ class Person < ApplicationRecord
 		self.active = true if active.nil?
 		self.meal_preference = "" if self.meal_preference.nil?
 		self.comment = "" if self.comment.nil?
-		self.newsletter = true if newsletter.nil?
-		self.photos_allowed = true if photos_allowed.nil?
-		self.publish = true if publish.nil?
-		self.publish_birthday = true if publish_birthday.nil?
-		self.publish_email = true if publish_email.nil?
-		self.publish_address = true if publish_address.nil?
+		self.newsletter = false if newsletter.nil?
+		self.photos_allowed = false if photos_allowed.nil?
+		self.publish = false if publish.nil?
+		self.publish_birthday = false if publish_birthday.nil?
+		self.publish_email = false if publish_email.nil?
+		self.publish_address = false if publish_address.nil?
 	end
 
 	def object_name
