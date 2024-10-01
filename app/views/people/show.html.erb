@@ -222,31 +222,6 @@
     <% if @person_policy.view_private? %>
       <div class="flexlayout">
         <div>
-          <!--
-          <section id="person_groups_explicit">
-            <h3><%= Affiliation.model_name.human(count: :other) %></h3>
-
-            <% unless @person.affiliations.empty? %>
-              <dl class="aligned">
-                <% @person.affiliations.each do |aff| %>
-                  <dt><%= group_link aff.group %></dt>
-                  <dd>
-                    <% if aff.start
-                      concat "von "
-                      concat render_date aff.start
-                    end %>
-                    <% if aff.end
-                      concat "bis "
-                      concat render_date aff.end
-                    end %>
-                  </dd>
-                <% end %>
-              </dl>
-            <% else %>
-              <p><i>Diese Person wurde bislang in keine Gruppen eingetragen.</i></p>
-            <% end %>
-          </section>
-          -->
           <section id="person_groups_automatic">
             <h3><%= Group.model_name.human(count: :other) %></h3>
             <% groups = @person.groups.select { |group| group.event_id.nil? } %>
