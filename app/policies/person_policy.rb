@@ -102,7 +102,7 @@ class PersonPolicy
 		end
 		if edit_settings?
 			editable.push :password, :password_confirmation, :email_address,
-				:newsletter, :photos_allowed, :publish_birthday, :publish_email, :publish_address, :publish
+				:newsletter, :publish_birthday, :publish_email, :publish_address, :publish
 		end
 		if edit_personal?
 			editable.push :account_name,  :first_name, :last_name, :birthday, :gender, :joined, :quitted, :active

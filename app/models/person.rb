@@ -232,7 +232,6 @@ class Person < ApplicationRecord
 		self.meal_preference = "" if self.meal_preference.nil?
 		self.comment = "" if self.comment.nil?
 		self.newsletter = false if newsletter.nil?
-		self.photos_allowed = false if photos_allowed.nil?
 		self.publish = false if publish.nil?
 		self.publish_birthday = false if publish_birthday.nil?
 		self.publish_email = false if publish_email.nil?

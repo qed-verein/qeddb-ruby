@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_14_093020) do
+ActiveRecord::Schema.define(version: 2024_10_01_220224) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
@@ -137,7 +137,6 @@ ActiveRecord::Schema.define(version: 2024_07_14_093020) do
     t.date "paid_until"
     t.date "member_until"
     t.boolean "newsletter"
-    t.boolean "photos_allowed"
     t.boolean "publish_birthday"
     t.boolean "publish_email"
     t.boolean "publish_address"
