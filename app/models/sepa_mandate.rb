@@ -15,5 +15,9 @@ class SepaMandate < ApplicationRecord
     update(sequence_type: :recurring_use)
   end
 
+  def object_name
+    "#{person ? person.full_name : 'Unknown person'}"
+  end
+
   # TODO: IBAN-Validierung?
 end
