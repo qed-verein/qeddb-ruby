@@ -4,7 +4,9 @@ def registration_information(reg)
 	words = []
 	words.push "Orga" if reg.organizer
 	words.push Registration.human_enum_value(:status, reg.status) unless [:confirmed, :pending].include?(reg.status.to_sym)
-	words.push t('.unpaid') unless reg.fully_paid?
+    if policy(reg).view_payments?
+        words.push t('.unpaid') unless reg.fully_paid?
+    end
 	words.empty? ? "" : tag.i {"(" + words.join(", ") + ")"}
 end
 
