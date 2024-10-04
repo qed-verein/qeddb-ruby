@@ -29,7 +29,7 @@ class FinanceReviewController < ApplicationController
 			[]
 		else
 			RegistrationPayment.joins(:registration).where(registration: {:event_id => @filter[:reason]}, money_transfer_date: @filter[:date_range]) +
-			 EventPayment.where(:id => @filter[:reason], money_transfer_date: @filter[:date_range])
+			 EventPayment.where(:event_id => @filter[:reason], money_transfer_date: @filter[:date_range])
 		end
 	end
 
