@@ -17,25 +17,25 @@ class FinanceReviewController < ApplicationController
 			start: parse_date(params.dig(:finance_review, :start), Date.today.beginning_of_year),
 			end: parse_date(params.dig(:finance_review, :end), Date.today.end_of_year)
 		}
-		@filter[:date_range] = @filter[:start]..@filter[:end]
-		@payments = membership_payments + registration_payments
+		date_range = @filter[:start]..@filter[:end]
+		@payments = membership_payments(date_range) + registration_payments(date_range)
 	end
 
-	def registration_payments
+	def registration_payments(date_range)
 		case @filter[:reason]
 		when ""
-			RegistrationPayment.where(money_transfer_date: @filter[:date_range]) + EventPayment.where(money_transfer_date: @filter[:date_range])
+			RegistrationPayment.where(money_transfer_date: date_range) + EventPayment.where(money_transfer_date: date_range)
 		when "membership"
 			[]
 		else
-			RegistrationPayment.joins(:registration).where(registration: {:event_id => @filter[:reason]}, money_transfer_date: @filter[:date_range]) +
-			 EventPayment.where(:event_id => @filter[:reason], money_transfer_date: @filter[:date_range])
+			RegistrationPayment.joins(:registration).where(registration: {:event_id => @filter[:reason]}, money_transfer_date: date_range) +
+			 EventPayment.where(:event_id => @filter[:reason], money_transfer_date: date_range)
 		end
 	end
 
-	def membership_payments
+	def membership_payments(date_range)
 		if @filter[:reason].blank? || @filter[:reason] == "membership"
-			Payment.where(transfer_date: @filter[:date_range])
+			Payment.where(transfer_date: date_range)
 		else
 			[]
 		end
