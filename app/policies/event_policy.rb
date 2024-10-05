@@ -26,7 +26,8 @@ class EventPolicy
 			by_participant: [:by_member],
 			by_organizer:   [:by_participant, :edit_event, :register_other, :export],
 			by_admin:       [:by_organizer, :create_event, :delete_event],
-			by_treasurer:   [:by_admin, :edit_payments, :view_payments]})
+			by_treasurer:   [:by_admin, :edit_payments, :view_payments],
+			by_auditor:		[:by_member, :export]})
 
 	def initialize(user, event)
 		grant :by_admin if user.admin? || user.chairman?
@@ -34,6 +35,7 @@ class EventPolicy
 		grant :by_participant if event.is_a?(Event) && user.participant?(event)
 		grant :by_member if user.member?
 		grant :by_treasurer if user.treasurer?
+		grant :by_auditor if user.auditor?
 		grant :by_other
 	end
 
