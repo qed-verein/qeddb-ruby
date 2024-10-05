@@ -125,7 +125,7 @@ de:
         other_discounts: Sonstige Ermäßigungen
         money_amount: Teilnahmebeitrag
         money_amount_short: Betrag
-        to_be_paid: Offener Betrag
+        to_be_paid_short: Offen
         money_transfer_date: Geldeingang
         payment_complete: Vollständig Bezahlt
         payment_complete_short: Bezahlt
