@@ -44,7 +44,7 @@ class RegistrationPolicy
 			by_organizer:        [:by_participant, :view_private, :edit_additional, :edit_general, :export],
 			by_chairman:         [:by_organizer, :delete_registration],
 			by_treasurer:        [:by_chairman, :view_payments, :edit_payments],
-			by_auditor:			 [:by_participant, :view_payments], # TODO: Check if that is everything reasonable
+			by_auditor:			 [:by_participant, :view_payments, :export], # TODO: Check if that is everything reasonable
 			by_admin:            [:by_chairman]})
 
 	# TODO Rechtesystem für Veranstaltung und Person prüfen
