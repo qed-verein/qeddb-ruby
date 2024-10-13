@@ -43,6 +43,11 @@ def edit_event_link(event)
 	icon_button t('actions.event.edit'), 'edit', edit_event_path(event)
 end
 
+def finances_link(event)
+	return nil unless policy(event).view_payments?
+	icon_button t('actions.event.finances'), "attach_money", finances_event_path(event)
+end
+
 def delete_event_link(event)
 	return nil unless policy(event).delete_event?
 	link_to event, method: :delete, class: 'button',

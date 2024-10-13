@@ -21,3 +21,6 @@ de:
   finance_review:
     show:
       title: Finanzübersicht
+  events:
+    finances:
+      title: Finanzübersicht %{event_title}
