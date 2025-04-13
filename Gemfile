@@ -88,3 +88,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "sepa_king", "~> 0.14.0"
+
+
+# Workaround: https://stackoverflow.com/questions/79360526/uninitialized-constant-activesupportloggerthreadsafelevellogger-nameerror
+gem 'concurrent-ruby', "1.3.4"
+# Nokogiri 1.18 requires newer Ruybgems 3.3.22 not in Debian 12
+gem 'nokogiri', "~> 1.17.2"
