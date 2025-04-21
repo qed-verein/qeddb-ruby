@@ -18,15 +18,15 @@
           </dd>
           <dt>Teilnahmebeiträge (geplant)</dt>
           <dd>
-            <%= number_to_currency(@event.registrations.sum{ |r| r.money_amount || 0 }) %>
+            <%= @event.registrations.count{ |r| (r.money_amount || 0) != 0 }%> für <%= number_to_currency(@event.registrations.sum{ |r| r.money_amount || 0 }) %>
           </dd>
           <dt>Eingehende Überweisungen</dt>
           <dd>
-            <%= number_to_currency(@transfers[:positive]) %>
+            <%= @transfers[:positive].length %> für <%= number_to_currency(@transfers[:positive].sum) %>
           </dd>
           <dt>Ausgehende Überweisungen</dt>
           <dd>
-            <%= number_to_currency(@transfers[:negative]) %>
+            <%= @transfers[:negative].length %> für <%= number_to_currency(@transfers[:negative].sum) %>
           </dd>
         </dl>
         </section>

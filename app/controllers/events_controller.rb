@@ -115,8 +115,8 @@ class EventsController < ApplicationController
 		transfers = registration_payments.select { |x| x.payment_type.to_sym == :transfer }
 		@transfers = {
 			:payments => transfers,
-			:negative => transfers.map(&:money_amount).select(&:negative?).sum,
-			:positive => transfers.map(&:money_amount).select(&:positive?).sum
+			:negative => transfers.map(&:money_amount).select(&:negative?),
+			:positive => transfers.map(&:money_amount).select(&:positive?)
 		}
 		@payments = (@event.event_payments.all + registration_payments.reject do |x|
 			x.category.blank?
