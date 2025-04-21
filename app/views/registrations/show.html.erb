@@ -40,7 +40,7 @@
 				mobile_phone_html(x)} %></dd>
 			<% end %>
 
-			<% if @registration_policy.view_private? %>
+			<% if @registration_policy.view_private? || @registration_policy.view_payments? %>
 				<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
 				<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount} %></dd>
 			<% end %>
