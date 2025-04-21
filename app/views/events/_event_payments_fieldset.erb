@@ -3,7 +3,7 @@
   <div class="actions">
     <%= form.submit t("events.edit_payments.submit") %>
   </div>
-  Hier kann man gezahlte Mitgliedsbeiträge eintragen:
+  Hier kann man jegliche Zahlungen, die allgemein mit Veranstaltungen zu tun haben, eintragen.
   <%= form.fields_for :event_payments, @event.event_payments.reverse do |event_payment| %>
     <%= render partial: "event_payments/event_payment_fields",
     locals: {
