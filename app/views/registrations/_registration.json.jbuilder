@@ -18,8 +18,14 @@ end
 json.extract! registration, :status, :organizer
 json.extract! registration, :arrival, :departure, :nights_stay,
 	:station_arrival, :station_departure, :railway_discount, :meal_preference, :talks, :comment
-json.extract! registration, :payment_complete, :money_amount, :money_transfer_date,
-	:effective_member_discount,  :other_discounts, :reference_line
+
+if policy(registration).view_payments? || policy(registration).edit_general?
+	json.extract! registration, :payment_complete, :money_amount, :money_transfer_date,
+		:effective_member_discount,  :other_discounts, :reference_line, :effective_money_amount
+	json.charge_modifiers do
+		json.array! registration.charge_modifiers, partial: 'charge_modifiers/charge_modifier', as: :charge_modifier, modules: []
+	end
+end
 
 if policy(registration).view_payments?
 	json.registration_payments do

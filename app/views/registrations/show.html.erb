@@ -42,7 +42,26 @@
 
 			<% if @registration_policy.view_private? || @registration_policy.view_payments? %>
 				<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
-				<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount} %></dd>
+				<% money_to_show = check_unknown(@registration.effective_money_amount) {number_to_currency @registration.effective_money_amount}  %>
+				<dd>
+					<% if @registration.charge_modifiers.blank? %>
+						<%= money_to_show %>
+					<%else %>
+						<details class="inline-details">
+							<summary>
+								<%= money_to_show %>
+							</summary>
+							<dl>
+								<dt><%= Registration.human_attribute_name :money_amount %></dt>
+								<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount}  %></dd>
+								<% @registration.charge_modifiers.each do |mod| %>
+									<dt><%= mod.reason %></dt>
+									<dd><%= check_unknown(mod.money_amount) {number_to_currency mod.money_amount}  %></dd>
+								<% end %>
+							</dl>
+						</details>
+					<%end %>
+				</dd>
 			<% end %>
 		</dl>
 	</section>
@@ -53,7 +72,6 @@
 		<dl class="aligned">
 			<dt><%= Registration.human_attribute_name :payment_complete %>:</dt>
 			<dd><%= render_yes_no @registration.fully_paid? %></dd>
-
 			<% unless @registration.fully_paid? %>
 				<dt><%= Registration.human_attribute_name :to_be_paid %>:</dt>
 				<dd><%= number_to_currency @registration.to_be_paid %></dd>

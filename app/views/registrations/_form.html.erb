@@ -24,6 +24,7 @@
       </fieldset>
     <% end %>
 
+    <%= render partial: "modifiers_fieldset", locals: { form: form } %>
     <%= render partial: "payments_fieldset", locals: { form: form } %>
 
     <% if @registration_policy.edit_additional? %>
@@ -71,5 +72,5 @@
 <% end %>
 
 <script>
-	enableDateSetting();
+  enableDateSetting();
 </script>

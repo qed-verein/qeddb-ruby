@@ -66,6 +66,7 @@ class RegistrationPolicy
 		editable = []
 		if edit_general?
 			editable.push :event_id, :person_id, :status, :organizer, :money_amount
+			editable.push({charge_modifiers_attributes: [ :id, :reason, :money_amount, :comment, :_destroy ]})
 		end
 		if edit_additional?
 			editable.push :arrival, :departure, :nights_stay,
