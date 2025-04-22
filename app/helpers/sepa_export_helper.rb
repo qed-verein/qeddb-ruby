@@ -48,7 +48,7 @@ module SepaExportHelper
 				{
 					person: registration.person,
 					reference_line: registration.reference_line,
-					amount: registration.money_amount,
+					amount: registration.to_be_paid,
 					instruction: "E#{event.id} #{registration.person.id}"
 				}
 			end

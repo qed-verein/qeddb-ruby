@@ -22,7 +22,7 @@
           <%= form.submit %>
           <%= download_table_button("#finance_review_table") %>
           <% if policy(:outstanding_payments).export? %>
-            <%= icon_button "Als JSON anzeigen", "notes", finance_review_path(format: :json) %>
+            <%= icon_button "Als JSON anzeigen", "notes", finance_review_path(format: :json, finance_review: @filter) %>
           <% end %>
         </div>
       </fieldset>

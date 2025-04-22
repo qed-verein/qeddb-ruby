@@ -1,0 +1,23 @@
+<% if @registration_policy.edit_general? %>
+  <% 1.times { @registration.charge_modifiers.build } %>
+  <hr>
+  <fieldset class="modifiers">
+    <legend>Rabatte und Zuschläge</legend>
+    <i class="hint">Positive Zahlen sind Rabatte, negative Zahlen sind Zuschläge</i>
+    <%= form.fields_for :charge_modifiers do |charge_modifier| %>
+      <%= render partial: "charge_modifiers/charge_modifier_fields",
+      locals: {
+        form: charge_modifier,
+      } %>
+    <% end %>
+
+    <datalist id="reason_list">
+      <%= charge_modifier_reasons
+        .map do |reason|
+          tag.option value: ChargeModifier.human_attribute_name("reason.#{reason}")
+        end
+        .join
+        .html_safe %>
+    </datalist>
+  </fieldset>
+<% end %>

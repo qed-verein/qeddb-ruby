@@ -1,0 +1,70 @@
+<% provide :title, t('.title', event_title: @event.title) %>
+
+<% if @event_policy.view_payments? %>
+  <div class="flexlayout">
+    <article id="event" class="panel">
+      <h1><%= @event.title %></h1>
+      <div class="flexlayout">
+        <h2>Zusammenfassung</h2>
+        <section>
+        <dl>
+          <dt>Forderungen</dt>
+          <dd>
+            <%= @open[:positive].length %> offen für <%= number_to_currency(@open[:positive].sum) %>
+          </dd>
+          <dt>Verbindlichkeiten</dt>
+          <dd>
+            <%= @open[:negative].length %> offen für <%= number_to_currency(-@open[:negative].sum) %>
+          </dd>
+          <dt>Teilnahmebeiträge (geplant)</dt>
+          <dd>
+            <%= @event.registrations.count{ |r| (r.money_amount || 0) != 0 }%> für <%= number_to_currency(@event.registrations.sum{ |r| r.money_amount || 0 }) %>
+          </dd>
+          <dt>Eingehende Überweisungen</dt>
+          <dd>
+            <%= @transfers[:positive].length %> für <%= number_to_currency(@transfers[:positive].sum) %>
+          </dd>
+          <dt>Ausgehende Überweisungen</dt>
+          <dd>
+            <%= @transfers[:negative].length %> für <%= number_to_currency(@transfers[:negative].sum) %>
+          </dd>
+        </dl>
+        </section>
+
+      </div>
+      <div class="flexlayout">
+        <h2> Auslagen </h2>
+        <% @payments.each_pair do |type, info| %>
+          <section>
+            <h3><%= type %></h3>
+            <span>
+              Insgesamt <%= number_to_currency info[:sum] %> (= <%= number_to_currency(info[:negative]) %> + <%= number_to_currency(info[:positive]) %>)
+            </span>
+            <dl>
+              <% info[:payments].each do |payment| %>
+                <dt id="payment-<%= payment.id %>">
+                  <%= link_to render_date(payment.money_transfer_date),
+                    (payment.instance_of? RegistrationPayment) ?
+                    registration_path(payment.registration, anchor: "payment-#{payment.id}"):
+                    event_path(@event, anchor: "payment-#{payment.id}")
+                  %>
+                </dt>
+                <dd>
+                  <strong>
+                    <% if (payment.instance_of? RegistrationPayment) %>
+                    <% person = payment.registration.person %>
+                    <%= person.first_name %> <%= person.last_name -%>
+                  <% else %>
+                    QED e.V.<% end %></strong>,
+                  <%= check_unknown(payment.money_amount) {number_to_currency payment.money_amount} %>
+                  <% unless payment.comment.blank? %>
+                    </br><%=  payment.comment %>
+                <% end %>
+              <% end %>
+            </dl>
+          </section>
+        <% end %>
+      </div>
+    </article>
+  </div>
+<% end %>

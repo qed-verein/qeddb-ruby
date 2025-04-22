@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_10_01_220224) do
+ActiveRecord::Schema.define(version: 2025_04_21_095135) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "addressable_type"
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 2024_10_01_220224) do
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_affiliations_on_group_id"
     t.index ["groupable_type", "groupable_id"], name: "index_affiliations_on_groupable_type_and_groupable_id"
+  end
+
+  create_table "charge_modifiers", force: :cascade do |t|
+    t.integer "registration_id"
+    t.decimal "money_amount", precision: 10, scale: 2
+    t.string "reason"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["registration_id"], name: "index_charge_modifiers_on_registration_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -137,6 +147,7 @@ ActiveRecord::Schema.define(version: 2024_10_01_220224) do
     t.date "paid_until"
     t.date "member_until"
     t.boolean "newsletter"
+    t.boolean "photos_allowed"
     t.boolean "publish_birthday"
     t.boolean "publish_email"
     t.boolean "publish_address"

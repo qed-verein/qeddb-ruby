@@ -456,6 +456,14 @@ fieldset .flexlayout, .panel .flexlayout {
 	padding: 1.0em;
 }
 
+.inline-details {
+	display: inline-block;
+}
+
+.inline-details > summary {
+	margin: inherit;
+	font: inherit;
+}
 
 /* Für Tabellen sortieren und nummerieren */
 

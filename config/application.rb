@@ -27,7 +27,8 @@ module QeddbRuby
 
 		config.lock_event_after_end = 100.year
 		config.max_deferred_payment = 2.year
-		config.membership_fee 			= 5
+		config.membership_fee 		= 5
+		config.external_surcharge	= 15
 		config.admin_email_address  = ENV["QEDDB_ADMIN_EMAIL"]       || "admin@example.com"
 		config.system_email_address = ENV["QEDDB_SYSTEM_EMAIL"]      || "qeddb@example.com"
 		config.database_title       = ENV["QEDDB_TITLE"]             || "QED-Datenbank"
