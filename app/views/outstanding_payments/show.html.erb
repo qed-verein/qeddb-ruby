@@ -2,11 +2,16 @@
 
 <section id="outstanding_payments">
 
+<div class="flexlayout">
+<fieldset>
+		<%= checkbox("unhide_future", "Auch zukünftige Veranstaltungen anzeigen", false) %>
 <div class="actions">
 	<%= download_table_button('#outstanding_payments_table') %>
 	<% if policy(:outstanding_payments).export? %>
 		<%= icon_button 'Als JSON anzeigen', 'notes', outstanding_payments_path(format: :json) %>
 	<% end %>
+</div>
+</fieldset>
 </div>
 
 <table class="outstanding_payments indexed_table" id="outstanding_payments_table">
@@ -23,7 +28,7 @@
 </thead>
 <tbody>
 	<% @registrations.each do |r| %>
-	<tr>
+	<tr class='<%= 'future' if r.event.end > Time.current %>'>
 		<td></td>
 		<td><%= link_to r.person.first_name, r.person %></td>
 		<td><%= link_to r.person.last_name, r.person %></td>
@@ -43,6 +48,11 @@
 </table>
 </section>
 
+
 <script>
+$(function(){
 	$("#outstanding_payments_table").stupidtable();
+    hideRow($('#unhide_future'), '.future', false);
+  })
+	$('#unhide_future').click(function() { hideRow(this, '.future', false); });
 </script>
