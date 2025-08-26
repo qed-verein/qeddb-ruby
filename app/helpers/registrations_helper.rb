@@ -16,14 +16,16 @@ def registration_information(reg)
 end
 
 def registration_link_with_name(registration)
+	return nil if registration.status == 'dummy' && !policy(registration).view_dummy?
 	return registration.person.full_name unless policy(registration).view_general?
 	link_to registration.person.full_name, registration_path(registration)
 end
 
 def registration_link_with_name_fancy(registration)
+	return nil if registration.status == 'dummy' && !policy(registration).view_dummy?
 	return registration.person.full_name unless policy(registration).view_general?
 	text = registration.person.full_name
-	text = content_tag :del, text if registration.status == 'rejected' || registration.status == 'cancelled'
+	text = content_tag :del, text if ['rejected', 'cancelled', 'dummy'].include?(registration.status)
 	tag.div style: 'display: inline-block' do
 		concat link_to(text, registration_path(registration))
 		concat " "
@@ -32,9 +34,10 @@ def registration_link_with_name_fancy(registration)
 end
 
 def registration_link_with_event_fancy(registration)
+	return nil if registration.status == 'dummy' && !policy(registration).view_dummy?
 	return registration.person.full_name unless policy(registration).view_general?
 	text = registration.event.title
-	text = content_tag :del, text if registration.status == 'rejected' || registration.status == 'cancelled'
+	text = content_tag :del, text if ['rejected', 'cancelled', 'dummy'].include?(registration.status)
 	[link_to(text, registration_path(registration)), " ", registration_information(registration)].join.html_safe
 end
 

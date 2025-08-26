@@ -7,6 +7,8 @@
 #	 Seminarbeiträge des Teilnehmer
 # view_private:
 #	 Anzeige von privaten Daten des Teilnehmer (wie Geburtstag)
+# view_dummy:
+#	 Anzeige von dummy-Anmeldungen
 # delete_registration
 #	 Anmeldung löschen
 # by_other:
@@ -35,7 +37,7 @@ class RegistrationPolicy
 			edit_general:        [:view_general],
 			edit_payments:       [:view_payments],
 			edit_additional:     [:view_additional],
-			view_private:        [:view_general, :view_additional],
+			view_private:        [:view_general, :view_additional, :view_dummy],
 
 			by_other:            [],
 			by_member:           [:view_general],

@@ -143,6 +143,7 @@ de:
         confirmed: bestätigt
         rejected: abgelehnt
         cancelled: abgesagt
+        dummy: dummy
 
       registration_payment:
         payment_type: Zahlungsart

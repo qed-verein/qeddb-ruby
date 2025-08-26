@@ -9,6 +9,8 @@
 #   Die Person kann nur sich selber anmelden
 # list_participants:
 #	 Liste der Teilnehmer anzeigen
+# list_dummy:
+#	 Liste der dummy-Teilis anzeigen
 # by_other, by_member, by_participant, by_organizer, by_chairman etc.
 #	 Analog wie bei Registrierungen
 
@@ -19,7 +21,7 @@ class EventPolicy
 			view_event:     [:view_basic, :list_participants],
 			edit_event:     [:view_event],
 			register_other: [:register_self],
-			export:         [:list_participants, :list_private_fields],
+			export:         [:list_participants, :list_private_fields, :list_dummy],
 
 			by_other:       [:view_basic, :list_events, :register_self],
 			by_member:      [:by_other, :view_event],
