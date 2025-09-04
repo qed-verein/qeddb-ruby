@@ -3,7 +3,7 @@
   <hr>
   <fieldset class="modifiers">
     <legend>Rabatte und Zuschläge</legend>
-    <i class="hint">Positive Zahlen sind Rabatte, negative Zahlen sind Zuschläge</i>
+    <i class="hint">Negative Zahlen sind Rabatte, positive Zahlen sind Zuschläge</i>
     <%= form.fields_for :charge_modifiers do |charge_modifier| %>
       <%= render partial: "charge_modifiers/charge_modifier_fields",
       locals: {

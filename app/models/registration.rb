@@ -79,7 +79,7 @@ class Registration < ApplicationRecord
 		self.station_departure = person.railway_station if station_departure.blank?
 		self.railway_discount = person.railway_discount if railway_discount.blank?
 		self.meal_preference = person.meal_preference if meal_preference.blank?
-		charge_modifiers.new(reason: "extern", money_amount: -Rails.configuration.external_surcharge) if charge_modifiers.blank? && !effective_member_discount
+		charge_modifiers.new(reason: "extern", money_amount: Rails.configuration.external_surcharge) if charge_modifiers.blank? && !effective_member_discount
 	end
 
 	def reference_line
@@ -94,7 +94,7 @@ class Registration < ApplicationRecord
 		if money_amount.nil?
 			nil
 		else
-			money_amount - charge_modifiers.sum(:money_amount)
+			money_amount + charge_modifiers.sum(:money_amount)
 		end
 	end
 
