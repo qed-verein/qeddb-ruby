@@ -102,4 +102,6 @@ gem "csv", "~> 3.3"
 
 gem "stringio", "~> 3.1"
 
+# Compatiblity to Ruby 3.1
 gem "zeitwerk", "~> 2.6.0"
+gem "erb", "~> 4.0"
