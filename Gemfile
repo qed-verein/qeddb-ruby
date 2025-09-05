@@ -82,9 +82,22 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'webdrivers', "~> 5.3.0"
+  gem "drb", "~> 2.2"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "sepa_king", "~> 0.14.0"
+
+
+# Workaround: https://stackoverflow.com/questions/79360526/uninitialized-constant-activesupportloggerthreadsafelevellogger-nameerror
+gem 'concurrent-ruby', "1.3.4"
+# Nokogiri 1.18 requires newer Ruybgems 3.3.22 not in Debian 12
+gem 'nokogiri', "~> 1.17.2"
+
+gem "mutex_m", "~> 0.3.0"
+
+gem "csv", "~> 3.3"
+
+gem "stringio", "~> 3.1"
