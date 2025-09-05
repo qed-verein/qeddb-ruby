@@ -63,7 +63,8 @@ de:
 
   registrations:
     event_full: Für diese Veranstaltung sind keine freien Plätze mehr vorhanden. Eine Anmeldung zu dieser Veranstaltung ist leider nicht mehr möglich.
-    deadline_missed: Der Anmeldeschluss ist bereits vorbei. Eine Anmeldung zu dieser Veranstaltung oder eine Änderung der Anmeldedaten ist leider nicht mehr möglich.
+    deadline_missed: Der Anmeldeschluss ist bereits vorbei. Eine Anmeldung zu dieser Veranstaltung ist leider nicht mehr möglich.
+    event_has_ended: Die Veranstaltung ist bereits vorbei. Änderungen an der Anmeldung sind leider nicht mehr möglich.
     create:
       success: Anmeldung wurde erfolgreich eingetragen
     create_self:

@@ -117,18 +117,23 @@ class Event < ApplicationRecord
 
 	# Können Anmeldungen von Teilnehmern geändert werden?
 	def can_edit_registration?
-		!deadline_missed? # TODO: Separate Deadline zum Bearbeiten der Anmeldedaten?
+		# Teilnehmer dürfen ihre eigenen Daten bis Veranstaltungsende ändern
+		!has_ended?
 	end
 
 	# Prüft ob die Veranstaltung schon ausgebucht ist
 	def full?
-		# TODO evenutell nur Teilehnmer mit Status = confirmed?
+		# TODO eventuell nur Teilnehmer mit Status = confirmed?
 		max_participants.nil? || participants.count >= max_participants
 	end
 
 	# Ist der Anmeldeschluss schon vorbei
 	def deadline_missed?
 		return !deadline.nil? && Date.current > deadline
+	end
+
+	def has_ended?
+		return !self.end.nil? && Date.current > self.end
 	end
 
 	# Ist die Veranstaltung derzeit noch von Organisatoren bearbeitbar
