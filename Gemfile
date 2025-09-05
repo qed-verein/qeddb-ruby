@@ -101,3 +101,5 @@ gem "mutex_m", "~> 0.3.0"
 gem "csv", "~> 3.3"
 
 gem "stringio", "~> 3.1"
+
+gem "zeitwerk", "~> 2.6.0"
