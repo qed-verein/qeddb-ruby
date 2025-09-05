@@ -6,8 +6,9 @@ Die Implementierung erfolgte mit Ruby on Rails Version 6 (https://rubyonrails.or
 Voraussetzungen
 ============
 
-* ruby mit Version >= 2.5.0
+* ruby mit Version >= 3.0.0
 * yarn
+* mysql
 * sqlite mit Version >= 3
 
 
@@ -15,13 +16,17 @@ Installation
 ============
 
 Im GIT-Repository sind lediglich die Quelltextdateien für die QEDDB.
-Die zugehörigen Abhängigkeiten sind *nicht* im GIT-Repositiry enthalten. Diese können nach dem Klonen mit
+Die zugehörigen Abhängigkeiten sind *nicht* im GIT-Repository enthalten. Diese können nach dem Klonen mit
 
     gem install bundle
     bundle config set --local path 'vendor/bundle'
     bundle install
 
 ins Verzeichnis vendor/bundle nachinstalliert werden. Zur Installation muss das Ruby-Paket bundle zur Verfügung stehen.
+Anmerkung für MacOS: Vor `bundle install` muss zusätzlich folgender Befehl ausgeführt werden, damit die Installation von `mysql2` funktioniert:
+
+    bundle config --local build.mysql2 "--with-opt-dir=$(brew --prefix openssl) --with-ldflags=-L/opt/homebrew/opt/zstd/lib --with-cflags='-Wno-incompatible-function-pointer-types -Wno-error=implicit-function-declaration'"
+
 Anschließend müssen die JavaScript-Abhängigkeiten mit yarn installiert werden
 
     yarnpkg install
@@ -38,6 +43,10 @@ aufgerufen werden. Dieser Befehl erstellt auch einen Benutzer "Admin" mit Passwo
 Anschließend lassen sich zum Rumspielen die Daten der Testcases importieren.
 
     bin/rails db:fixtures:load
+
+Der Server kann jetzt lokal gestartet werden:
+
+    bundle exec bin/rails server
 
 Konfiguration
 ======================
