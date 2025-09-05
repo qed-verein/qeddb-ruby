@@ -105,3 +105,4 @@ gem "stringio", "~> 3.1"
 # Compatiblity to Ruby 3.1
 gem "zeitwerk", "~> 2.6.0"
 gem "erb", "~> 4.0"
+gem "multi_xml", "= 0.7.1"
