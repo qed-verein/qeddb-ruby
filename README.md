@@ -55,11 +55,16 @@ In config/application.rb befinden sich die Einstellungen zum Konfigurieren
 Beim Updaten
 ======================
 Neue Abhängigkeiten herunterladen
- bundle update
+
+    bundle update
+
 Neue CSS/JS vorcompilieren
- rake assets:precompile
+
+    rake assets:precompile
+
 Migrations laufen lassen
- rails db:migrate
+
+    rails db:migrate
 
 Verzeichnisstruktur
 ======================
