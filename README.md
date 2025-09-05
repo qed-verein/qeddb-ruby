@@ -46,7 +46,11 @@ Anschließend lassen sich zum Rumspielen die Daten der Testcases importieren.
 
 Der Server kann jetzt lokal gestartet werden:
 
-    bundle exec bin/rails server
+    bin/rails server
+
+Die Unit Tests können mit diesem Befehl ausgeführt werden:
+
+    bin/rails test
 
 Konfiguration
 ======================
