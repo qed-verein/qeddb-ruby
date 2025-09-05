@@ -34,6 +34,7 @@ de:
       success: Veranstaltung wurde erfolgreich gelöscht
     show:
       unpaid: unbezahlt
+      overpaid: überbezahlt
     edit_payments:
       submit: Zahlungen speichern
 
@@ -57,6 +58,7 @@ de:
     edit_privacy:
       submit: Einstellungen speichern
     show:
+      overpaid: überbezahlt
       unpaid: unbezahlt
 
   registrations:
@@ -138,6 +140,7 @@ de:
       register_other: Teilnehmer hinzufügen
       edit_own_registration: Eigene Anmeldung bearbeiten
       edit_payments: Zahlungen bearbeiten
+      finances: Finanzübersicht
     registration:
       edit: Anmeldung bearbeiten
       delete: Anmeldung löschen

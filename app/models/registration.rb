@@ -10,15 +10,19 @@ class Registration < ApplicationRecord
 
 	# Verweis auf Zahlungen zu dieser Registrierung
 	has_many :registration_payments, dependent: :destroy
+	# Verweise auf Rabatte/Zuschläge
+	has_many :charge_modifiers, dependent: :destroy
 
 	accepts_nested_attributes_for :registration_payments, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
+	accepts_nested_attributes_for :charge_modifiers, allow_destroy: true, reject_if: proc {|a| reject_blank_entries a}
 
 	# Der Anmeldestatus des Teilnehmers
 	#  pending:   Die Person hat sich gerade erst angemeldet
 	#  confirmed: Die Person hat eine Platzzusage zur Veranstaltung
 	#  rejected:  Die Person wurde abgelehnt
 	#  cancelled: Die Person hat von sich aus abgesagt
-	enum status: {pending: 1, confirmed: 2, rejected: 3, cancelled: 4}
+	#  dummy:     Die Person ist ausschließlich aus technischen Gründen angemeldet (bspw. um eine zugehörige Zahlung einzutragen)
+	enum status: {pending: 1, confirmed: 2, rejected: 3, cancelled: 4, dummy: 5}
 
 	# Validierungen
 	validates :person, :event, presence: true
@@ -75,6 +79,7 @@ class Registration < ApplicationRecord
 		self.station_departure = person.railway_station if station_departure.blank?
 		self.railway_discount = person.railway_discount if railway_discount.blank?
 		self.meal_preference = person.meal_preference if meal_preference.blank?
+		charge_modifiers.new(reason: "extern", money_amount: Rails.configuration.external_surcharge) if charge_modifiers.blank? && !effective_member_discount
 	end
 
 	def reference_line
@@ -85,11 +90,19 @@ class Registration < ApplicationRecord
 		person.member_at_time?(event.start) or person.member_at_time?(event.end)
 	end
 
+	def effective_money_amount
+		if money_amount.nil?
+			nil
+		else
+			money_amount + charge_modifiers.sum(:money_amount)
+		end
+	end
+
 	def to_be_paid
 		if payment_complete || money_amount.nil?
 			0
 		else
-			money_amount - registration_payments.sum(:money_amount)
+			effective_money_amount - registration_payments.sum(:money_amount)
 		end
 	end
 

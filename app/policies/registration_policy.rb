@@ -7,6 +7,8 @@
 #	 Seminarbeiträge des Teilnehmer
 # view_private:
 #	 Anzeige von privaten Daten des Teilnehmer (wie Geburtstag)
+# view_dummy:
+#	 Anzeige von dummy-Anmeldungen
 # delete_registration
 #	 Anmeldung löschen
 # by_other:
@@ -35,7 +37,7 @@ class RegistrationPolicy
 			edit_general:        [:view_general],
 			edit_payments:       [:view_payments],
 			edit_additional:     [:view_additional],
-			view_private:        [:view_general, :view_additional],
+			view_private:        [:view_general, :view_additional, :view_dummy],
 
 			by_other:            [],
 			by_member:           [:view_general],
@@ -44,7 +46,7 @@ class RegistrationPolicy
 			by_organizer:        [:by_participant, :view_private, :edit_additional, :edit_general, :export],
 			by_chairman:         [:by_organizer, :delete_registration],
 			by_treasurer:        [:by_chairman, :view_payments, :edit_payments],
-			by_auditor:			 [:by_participant, :view_payments], # TODO: Check if that is everything reasonable
+			by_auditor:			 [:by_participant, :view_payments, :export], # TODO: Check if that is everything reasonable
 			by_admin:            [:by_chairman]})
 
 	# TODO Rechtesystem für Veranstaltung und Person prüfen
@@ -66,6 +68,7 @@ class RegistrationPolicy
 		editable = []
 		if edit_general?
 			editable.push :event_id, :person_id, :status, :organizer, :money_amount
+			editable.push({charge_modifiers_attributes: [ :id, :reason, :money_amount, :comment, :_destroy ]})
 		end
 		if edit_additional?
 			editable.push :arrival, :departure, :nights_stay,

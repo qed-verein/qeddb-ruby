@@ -44,6 +44,8 @@ Anschließend lassen sich zum Rumspielen die Daten der Testcases importieren.
 
     bin/rails db:fixtures:load
 
+Testnutzernamen: Admin, carlfriedrichgauss, leonhardeuler, pierredefermat, Testadmin, Testextern, Testkassenprüferin, Testkassier, Testmitglied, Testvorstand
+
 Der Server kann jetzt lokal gestartet werden:
 
     bin/rails server

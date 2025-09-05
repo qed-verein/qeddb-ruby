@@ -54,6 +54,9 @@ de:
       registration_payment:
         one: Teilnehmerzahlung
         other: Teilnehmerzahlungen
+      charge_modifier:
+        one: Rabatt/Zuschlag
+        other: Rabatte/Zuschläge
     attributes:
       person:
         account_name: Benutzername
@@ -125,7 +128,7 @@ de:
         other_discounts: Sonstige Ermäßigungen
         money_amount: Teilnahmebeitrag
         money_amount_short: Betrag
-        to_be_paid: Offener Betrag
+        to_be_paid_short: Offen
         money_transfer_date: Geldeingang
         payment_complete: Vollständig Bezahlt
         payment_complete_short: Bezahlt
@@ -140,6 +143,7 @@ de:
         confirmed: bestätigt
         rejected: abgelehnt
         cancelled: abgesagt
+        dummy: dummy
 
       registration_payment:
         payment_type: Zahlungsart
@@ -157,6 +161,19 @@ de:
         organizer_gift: Orgageschenk
         transportation: Transport
         talk_materials: Vortragsmaterial
+
+      charge_modifier:
+        money_amount: Betrag
+        comment: Kommentar
+        reason: Grund
+      charge_modifier/reason:
+        talk_discount: Vortrag gehalten
+        course_discount: Kurs gehalten
+        external_surcharge: extern
+        organizer_discount: georgat
+        partial_stay_discount: teilweise abwesend
+        event_report_discount: Seminarbericht geschrieben
+        main_building_surcharge: Haupthauszuschlag
 
       event_payment:
         money_amount: Betrag

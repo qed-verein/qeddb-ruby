@@ -4,21 +4,28 @@ def registration_information(reg)
 	words = []
 	words.push "Orga" if reg.organizer
 	words.push Registration.human_enum_value(:status, reg.status) unless [:confirmed, :pending].include?(reg.status.to_sym)
-    if policy(reg).view_payments?
-        words.push t('.unpaid') unless reg.fully_paid?
-    end
+	if policy(reg).view_payments? && !reg.fully_paid?
+		amount_open = reg.to_be_paid
+		if amount_open.positive?
+			words.push t('.unpaid')
+		elsif amount_open.negative?
+			words.push t('.overpaid')
+		end
+	end
 	words.empty? ? "" : tag.i {"(" + words.join(", ") + ")"}
 end
 
 def registration_link_with_name(registration)
+	return nil if registration.status == 'dummy' && !policy(registration).view_dummy?
 	return registration.person.full_name unless policy(registration).view_general?
 	link_to registration.person.full_name, registration_path(registration)
 end
 
 def registration_link_with_name_fancy(registration)
+	return nil if registration.status == 'dummy' && !policy(registration).view_dummy?
 	return registration.person.full_name unless policy(registration).view_general?
 	text = registration.person.full_name
-	text = content_tag :del, text if registration.status == 'rejected' || registration.status == 'cancelled'
+	text = content_tag :del, text if ['rejected', 'cancelled', 'dummy'].include?(registration.status)
 	tag.div style: 'display: inline-block' do
 		concat link_to(text, registration_path(registration))
 		concat " "
@@ -27,9 +34,10 @@ def registration_link_with_name_fancy(registration)
 end
 
 def registration_link_with_event_fancy(registration)
-    return registration.person.full_name unless policy(registration).view_general?
+	return nil if registration.status == 'dummy' && !policy(registration).view_dummy?
+	return registration.person.full_name unless policy(registration).view_general?
 	text = registration.event.title
-	text = content_tag :del, text if registration.status == 'rejected' || registration.status == 'cancelled'
+	text = content_tag :del, text if ['rejected', 'cancelled', 'dummy'].include?(registration.status)
 	[link_to(text, registration_path(registration)), " ", registration_information(registration)].join.html_safe
 end
 

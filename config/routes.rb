@@ -72,6 +72,7 @@ Rails.application.routes.draw do
 			get 'registrations_as_table'
 			get 'edit_own_registration'
 			get 'edit_payments'
+			get 'finances'
 		end
 
 		get 'register_other', to: 'registrations#select_person', as: 'select_person'

@@ -40,9 +40,28 @@
 				mobile_phone_html(x)} %></dd>
 			<% end %>
 
-			<% if @registration_policy.view_private? %>
+			<% if @registration_policy.view_private? || @registration_policy.view_payments? %>
 				<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
-				<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount} %></dd>
+				<% money_to_show = check_unknown(@registration.effective_money_amount) {number_to_currency @registration.effective_money_amount}  %>
+				<dd>
+					<% if @registration.charge_modifiers.blank? %>
+						<%= money_to_show %>
+					<%else %>
+						<details class="inline-details">
+							<summary>
+								<%= money_to_show %>
+							</summary>
+							<dl>
+								<dt><%= Registration.human_attribute_name :money_amount %></dt>
+								<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount}  %></dd>
+								<% @registration.charge_modifiers.each do |mod| %>
+									<dt><%= mod.reason %></dt>
+									<dd><%= check_unknown(mod.money_amount) {number_to_currency mod.money_amount}  %></dd>
+								<% end %>
+							</dl>
+						</details>
+					<%end %>
+				</dd>
 			<% end %>
 		</dl>
 	</section>
@@ -53,7 +72,6 @@
 		<dl class="aligned">
 			<dt><%= Registration.human_attribute_name :payment_complete %>:</dt>
 			<dd><%= render_yes_no @registration.fully_paid? %></dd>
-
 			<% unless @registration.fully_paid? %>
 				<dt><%= Registration.human_attribute_name :to_be_paid %>:</dt>
 				<dd><%= number_to_currency @registration.to_be_paid %></dd>
@@ -77,10 +95,10 @@
 				<% @registration.registration_payments.each do |payment| %>
 					<dt id="payment-<%= payment.id %>"><%= render_date payment.money_transfer_date %></dt>
 					<dd>
-						<%= check_unknown(payment.money_amount) {number_to_currency payment.money_amount} %>
-						<% unless payment.comment.blank? %>
-							<br><%= payment.comment %>
-						<% end %>
+						<strong><%= RegistrationPayment.human_enum_value(:payment_type, payment.payment_type) %></strong> <%= check_unknown(payment.money_amount) {number_to_currency payment.money_amount} %>
+					<% unless payment.category.blank? and payment.comment.blank? %>
+						</br><%= [payment.category, payment.comment].reject(&:blank?).join(", ") %>
+					<% end %>
 					</dd>
 				<% end %>
 			</dl>

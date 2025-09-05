@@ -1,0 +1,12 @@
+<fieldset class="charge-modifier">
+	<div class="aligned">
+		<%= form.label :reason %>
+		<%= form.text_field :reason, list: :reason_list %>
+
+		<%= form.label :money_amount %>
+		<%= form.number_field :money_amount, :step => 0.01 %>
+
+		<%= form.label :comment %>
+		<%= form.text_field :comment %>
+	</div>
+</fieldset>

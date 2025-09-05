@@ -140,8 +140,8 @@ module BankingStatementImportHelper
 			if registration.payment_complete
 				raise "Person #{person.full_name} schon für die Veranstaltung #{event.title} bezahlt."
 			end
-			unless registration.money_amount == amount
-				raise "Person #{person.full_name} muss #{registration.money_amount}€ für die Veranstaltung #{event.title} zahlen, nicht #{amount}€."
+			unless registration.to_be_paid == amount
+				raise "Person #{person.full_name} muss #{registration.to_be_paid}€ für die Veranstaltung #{event.title} zahlen, nicht #{amount}€."
 			end
 		end
 	end
