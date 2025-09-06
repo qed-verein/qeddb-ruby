@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SepaExportHelper
   def sepa_export_button(event_id = nil, year = nil)
     return nil unless policy(:banking).sepa_export?
@@ -31,7 +33,9 @@ module SepaExportHelper
         {
           person: person,
           reference_line: "Foerdermitgliedschaft #{year}, #{person.reference_line}",
-          amount: person.sepa_mandate.sponsor_membership + (person.paid_until < cutoff_date ? Rails.configuration.membership_fee : 0),
+          amount: person.sepa_mandate.sponsor_membership + (
+            person.paid_until < cutoff_date ? Rails.configuration.membership_fee : 0
+          ),
           instruction: "F#{year} #{person.id}"
         }
       end
@@ -41,7 +45,8 @@ module SepaExportHelper
     event
       .registrations
       .joins(person: :sepa_mandate)
-      # Falls Leute NUR der Abbuchung der Fördermitgliedschaft zugestimmt haben, dürfen wir sie keine Events damit zahlen lassen.
+      # Falls Leute NUR der Abbuchung der Fördermitgliedschaft zugestimmt haben,
+      # dürfen wir sie keine Events damit zahlen lassen.
       .where(sepa_mandates: { allow_all_payments: true })
       .reject { |registration| registration.to_be_paid <= 0 }
       .map do |registration|

@@ -60,7 +60,8 @@ class Event < ApplicationRecord
   end
 
   # Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
-  # Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden. (siehe hierzu model/group.rb)
+  # Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden.
+  # (siehe hierzu model/group.rb)
   def organizer_group_data(title)
     {
       title: format('Organisatoren von „%s“', title),

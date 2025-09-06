@@ -33,22 +33,24 @@
 class RegistrationPolicy
   include PunditImplications
 
-  define_implications({
-                        edit_general: [:view_general],
-                        edit_payments: [:view_payments],
-                        edit_additional: [:view_additional],
-                        view_private: %i[view_general view_additional view_dummy],
+  define_implications(
+    {
+      edit_general: [:view_general],
+      edit_payments: [:view_payments],
+      edit_additional: [:view_additional],
+      view_private: %i[view_general view_additional view_dummy],
 
-                        by_other: [],
-                        by_member: [:view_general],
-                        by_participant: %i[by_other view_general view_additional],
-                        by_self: %i[by_participant view_private edit_additional view_payments],
-                        by_organizer: %i[by_participant view_private edit_additional edit_general export],
-                        by_chairman: %i[by_organizer delete_registration],
-                        by_treasurer: %i[by_chairman view_payments edit_payments],
-                        by_auditor:	%i[by_participant view_payments export], # TODO: Check if that is everything reasonable
-                        by_admin: [:by_chairman]
-                      })
+      by_other: [],
+      by_member: [:view_general],
+      by_participant: %i[by_other view_general view_additional],
+      by_self: %i[by_participant view_private edit_additional view_payments],
+      by_organizer: %i[by_participant view_private edit_additional edit_general export],
+      by_chairman: %i[by_organizer delete_registration],
+      by_treasurer: %i[by_chairman view_payments edit_payments],
+      by_auditor:	%i[by_participant view_payments export], # TODO: Check if that is everything reasonable
+      by_admin: [:by_chairman]
+    }
+  )
 
   # TODO: Rechtesystem für Veranstaltung und Person prüfen
   def initialize(user, reg)

@@ -1,6 +1,7 @@
 # Die Klasse "Mailinglist" verwaltet einen Emailverteiler.
 # Für jeden Emailverteiler kann jeweils eine Gruppe für die Sender, Empfänger und Moderatoren angegeben werden.
-# Darüberhinaus können auch manuelle Emailadressen hinzugefügt werden (z.B. für Leute die nicht in der Datenbank stehen).
+# Darüberhinaus können auch manuelle Emailadressen hinzugefügt werden.
+# (z.B. für Leute die nicht in der Datenbank stehen)
 
 class Mailinglist < ApplicationRecord
   # Versionskontrolle
