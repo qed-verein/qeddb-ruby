@@ -155,9 +155,7 @@ class RegistrationsController < ApplicationController
       authorize @registration, :view_general?
     when :new, :create, :select_person, :with_selected_person
       authorize @event, :register_other?
-    when :edit
-      authorize @registration, :edit_general?
-    when :update
+    when :edit, :update
       authorize @registration, :edit_general?
     when :new_self, :create_self
       authorize @event, :register_self?
