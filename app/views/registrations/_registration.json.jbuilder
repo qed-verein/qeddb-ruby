@@ -21,7 +21,7 @@ json.extract! registration, :arrival, :departure, :nights_stay,
 
 if policy(registration).view_payments? || policy(registration).edit_general?
   json.extract! registration, :payment_complete, :money_amount, :money_transfer_date,
-                :effective_member_discount, :other_discounts, :reference_line, :effective_money_amount
+                :effective_member_discount?, :other_discounts, :reference_line, :effective_money_amount
   json.charge_modifiers do
     json.array! registration.charge_modifiers, partial: 'charge_modifiers/charge_modifier', as: :charge_modifier,
                                                modules: []

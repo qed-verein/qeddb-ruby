@@ -40,10 +40,10 @@ class Person < ApplicationRecord
   end
 
   # Daten zu Adressen, Kontakte und Zahlungen werden ebenfalls mit Person gespeichert
-  accepts_nested_attributes_for :addresses, allow_destroy: true, reject_if: proc { |a| reject_blank_entries a }
-  accepts_nested_attributes_for :contacts, allow_destroy: true, reject_if: proc { |a| reject_blank_entries a }
-  accepts_nested_attributes_for :payments, allow_destroy: true, reject_if: proc { |a| reject_blank_entries a }
-  accepts_nested_attributes_for :sepa_mandate, allow_destroy: true, reject_if: proc { |a| reject_blank_entries a }
+  accepts_nested_attributes_for :addresses, allow_destroy: true, reject_if: proc { |a| reject_blank_entries? a }
+  accepts_nested_attributes_for :contacts, allow_destroy: true, reject_if: proc { |a| reject_blank_entries? a }
+  accepts_nested_attributes_for :payments, allow_destroy: true, reject_if: proc { |a| reject_blank_entries? a }
+  accepts_nested_attributes_for :sepa_mandate, allow_destroy: true, reject_if: proc { |a| reject_blank_entries? a }
 
   enum gender: { male: 1, female: 2, other: 3 }
 
@@ -107,7 +107,6 @@ class Person < ApplicationRecord
   def compute_membership_status
     self.paid_until = paid_until_function
     self.member_until = member_until_function
-    true
   end
 
   # Nummeriert die Adress- und Kontaktangaben zum Eintragen in die Datenbank durch
@@ -157,25 +156,25 @@ class Person < ApplicationRecord
 
   # Ist die Person ein Administrator?
   def admin?
-    @is_admin = Group.find_by(program: :admins).has_member?(self) if @is_admin.nil?
+    @is_admin = Group.find_by(program: :admins).member?(self) if @is_admin.nil?
     @is_admin
   end
 
   # Ist die Person ein Kassenwart?
   def treasurer?
-    @is_treasurer = Group.find_by(program: :treasurer).has_member?(self) if @is_treasurer.nil?
+    @is_treasurer = Group.find_by(program: :treasurer).member?(self) if @is_treasurer.nil?
     @is_treasurer
   end
 
   # Ist die Person im Vorstand (inkl. Kassenwart)?
   def chairman?
-    @is_chairman = Group.find_by(program: :chairman).has_member?(self) || treasurer? if @is_chairman.nil?
+    @is_chairman = Group.find_by(program: :chairman).member?(self) || treasurer? if @is_chairman.nil?
     @is_chairman
   end
 
   # Ist diese Person Kassenprüfer:in
   def auditor?
-    @is_auditor = Group.find_by(program: :auditors).has_member?(self) if @is_auditor.nil?
+    @is_auditor = Group.find_by(program: :auditors).member?(self) if @is_auditor.nil?
     @is_auditor
   end
 

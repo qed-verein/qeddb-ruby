@@ -14,9 +14,9 @@ class Registration < ApplicationRecord
   has_many :charge_modifiers, dependent: :destroy
 
   accepts_nested_attributes_for :registration_payments, allow_destroy: true, reject_if: proc { |a|
-    reject_blank_entries a
+    reject_blank_entries? a
   }
-  accepts_nested_attributes_for :charge_modifiers, allow_destroy: true, reject_if: proc { |a| reject_blank_entries a }
+  accepts_nested_attributes_for :charge_modifiers, allow_destroy: true, reject_if: proc { |a| reject_blank_entries? a }
 
   # Der Anmeldestatus des Teilnehmers
   #  pending:   Die Person hat sich gerade erst angemeldet
@@ -36,7 +36,7 @@ class Registration < ApplicationRecord
   validates :money_amount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :nights_stay, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
-  # member_discount ist deprecated, man sollte stattdessen effective_member_discount nutzen.
+  # member_discount ist deprecated, man sollte stattdessen effective_member_discount? nutzen.
   # Wir wollen member_discount jedoch nicht löschen, falls wir doch einen rollback brauchen.
   with_options if: :payment_complete? do
     validates :member_discount, inclusion: { in: [true, false, nil] }
@@ -81,7 +81,7 @@ class Registration < ApplicationRecord
     self.station_departure = person.railway_station if station_departure.blank?
     self.railway_discount = person.railway_discount if railway_discount.blank?
     self.meal_preference = person.meal_preference if meal_preference.blank?
-    return unless charge_modifiers.blank? && !effective_member_discount
+    return unless charge_modifiers.blank? && !effective_member_discount?
 
     charge_modifiers.new(reason: 'extern',
                          money_amount: Rails.configuration.external_surcharge)
@@ -91,7 +91,7 @@ class Registration < ApplicationRecord
     "#{event.reference_line}, #{person.reference_line}"
   end
 
-  def effective_member_discount
+  def effective_member_discount?
     person.member_at_time?(event.start) or person.member_at_time?(event.end)
   end
 
