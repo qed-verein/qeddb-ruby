@@ -187,7 +187,7 @@ class Person < ApplicationRecord
   # Ist die Person ein Organisator für eine andere Person auf einer
   # derzeit aktiven Veranstaltung
   def organizer_of_person_now?(person)
-    !!organized_events.still_organizable.ids.intersect?(person.events.ids)
+    organized_events.still_organizable.ids.intersect?(person.events.ids)
   end
 
   # Ist die Person ein momentan tätiger Organistator für eine aktive Veranstaltung
