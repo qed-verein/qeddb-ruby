@@ -1,15 +1,17 @@
-class DatabasePolicy < Struct.new(:user, :database)
-	include PunditImplications
+# frozen_string_literal: true
 
-	define_implications(
-		{
-			:by_admin => [:import, :export],
-		}
-	)
+DatabasePolicy = Struct.new(:user, :database) do
+  include PunditImplications
 
-	def initialize(user, object)
-		if user.admin? || user.chairman?
-			grant :by_admin
-		end
-	end
+  define_implications(
+    {
+      by_admin: %i[import export]
+    }
+  )
+
+  def initialize(user, _object)
+    return unless user.admin? || user.chairman?
+
+    grant :by_admin
+  end
 end

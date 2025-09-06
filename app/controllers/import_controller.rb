@@ -1,32 +1,34 @@
+# frozen_string_literal: true
+
 class ImportController < ApplicationController
-	include ImportHelper
-	before_action :basic_authorization
+  include ImportHelper
+  before_action :basic_authorization
 
-	breadcrumb 'import', :import_path
+  breadcrumb 'import', :import_path
 
-	def prepare
-		@import_errors = ""
-	end
+  def prepare
+    @import_errors = ''
+  end
 
-	def import
-		@import_errors = ""
+  def import
+    @import_errors = ''
 
-		stream = params[:import_file]
-		return if stream.nil?
+    stream = params[:import_file]
+    return if stream.nil?
 
-		json = JSON.parse(stream.read, {symbolize_names: true})
-		@import_errors = import_json(json)
+    json = JSON.parse(stream.read, { symbolize_names: true })
+    @import_errors = import_json(json)
 
-		if @import_errors.empty?
-			redirect_to import_path, notice: "Import erfolgreich"
-		else
-			render :prepare
-		end
-	end
+    if @import_errors.empty?
+      redirect_to import_path, notice: 'Import erfolgreich'
+    else
+      render :prepare
+    end
+  end
 
-	private
+  private
 
-	def basic_authorization
-		authorize :database, :import?
-	end
+  def basic_authorization
+    authorize :database, :import?
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddMoneyTransferDateToPayments < ActiveRecord::Migration[6.1]
   def change
     add_column :payments, :transfer_date, :date
@@ -8,9 +10,9 @@ class AddMoneyTransferDateToPayments < ActiveRecord::Migration[6.1]
         next unless /(\d\d).(\d\d).(20\d\d)/.match(payment.comment)
 
         payment.update!(transfer_date: Date.new(
-         ::Regexp.last_match(3).to_i,
-         ::Regexp.last_match(2).to_i,
-         ::Regexp.last_match(1).to_i
+          ::Regexp.last_match(3).to_i,
+          ::Regexp.last_match(2).to_i,
+          ::Regexp.last_match(1).to_i
         ))
       end
     end

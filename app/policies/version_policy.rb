@@ -1,23 +1,26 @@
-class PaperTrail::Version
-  def self.policy_class
-    VersionPolicy
+# frozen_string_literal: true
+
+module PaperTrail
+  class Version
+    def self.policy_class
+      VersionPolicy
+    end
   end
 end
 
 class VersionPolicy
-	include PunditImplications
+  include PunditImplications
 
-	define_implications({
-		:by_chairman => [:index, :show],
-		:by_admin    => [:by_chairman, :revert_all]
-	})
+  define_implications({
+                        by_chairman: %i[index show],
+                        by_admin: %i[by_chairman revert_all]
+                      })
 
-	def initialize(user, object)
-		if user.admin?
-			grant :by_admin
-		elsif user.chairman?
-			grant :by_chairman
-		end
-	end
+  def initialize(user, _object)
+    if user.admin?
+      grant :by_admin
+    elsif user.chairman?
+      grant :by_chairman
+    end
+  end
 end
-

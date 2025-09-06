@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'digest'
 
 # Eigenen Passworthasher für Abwärtskompabilität mit der alten QEDDB.
 class QEDCryptoProvider
-	def self.encrypt(*tokens)
-		Digest::SHA1.hexdigest(*tokens.reverse.join(""))
-	end
+  def self.encrypt(*tokens)
+    Digest::SHA1.hexdigest(*tokens.reverse.join(''))
+  end
 
-	def self.matches?(crypted, *tokens)
-		encrypt(*tokens) == crypted
-	end
+  def self.matches?(crypted, *tokens)
+    encrypt(*tokens) == crypted
+  end
 end
 
 # The first thing you need to configure is which modules you need in your app.
@@ -213,7 +215,7 @@ Rails.application.config.sorcery.configure do |config|
     # specify username attributes, for example: [:username, :email].
     # Default: `[:email]`
     #
-    user.username_attribute_names = [:account_name, :email_address]
+    user.username_attribute_names = %i[account_name email_address]
 
     # change *virtual* password attribute, the one which is used until an encrypted one is generated.
     # Default: `:password`
@@ -372,12 +374,12 @@ Rails.application.config.sorcery.configure do |config|
     # how many seconds before the reset request expires. nil for never expires.
     # Default: `nil`
     #
-    user.reset_password_expiration_period = 24*60*60
+    user.reset_password_expiration_period = 24 * 60 * 60
 
     # hammering protection, how long in seconds to wait before allowing another email to be sent.
     # Default: `5 * 60`
     #
-    user.reset_password_time_between_emails = 5*60
+    user.reset_password_time_between_emails = 5 * 60
 
     # access counter to a reset password page attribute name
     # Default: `:access_count_to_reset_password_page`
@@ -390,30 +392,25 @@ Rails.application.config.sorcery.configure do |config|
     #
     # user.magic_login_token_attribute_name =
 
-
     # expires at attribute name.
     # Default: `:magic_login_token_expires_at`
     #
     # user.magic_login_token_expires_at_attribute_name =
-
 
     # when was email sent, used for hammering protection.
     # Default: `:magic_login_email_sent_at`
     #
     # user.magic_login_email_sent_at_attribute_name =
 
-
     # mailer class. Needed.
     # Default: `nil`
     #
     # user.magic_login_mailer_class =
 
-
     # magic login email method on your mailer class.
     # Default: `:magic_login_email`
     #
     # user.magic_login_email_method_name =
-
 
     # when true sorcery will not automatically
     # email magic login details and allow you to
@@ -422,12 +419,10 @@ Rails.application.config.sorcery.configure do |config|
     #
     # user.magic_login_mailer_disabled =
 
-
     # how many seconds before the request expires. nil for never expires.
     # Default: `nil`
     #
     # user.magic_login_expiration_period =
-
 
     # hammering protection, how long in seconds to wait before allowing another email to be sent.
     # Default: `5 * 60`

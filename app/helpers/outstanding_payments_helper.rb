@@ -1,7 +1,9 @@
-module OutstandingPaymentsHelper
-	def outstanding_payments_link
-		return unless policy(:outstanding_payments).view?
+# frozen_string_literal: true
 
-		link_to t('actions.outstanding_payments.view'), outstanding_payments_path
-	end
+module OutstandingPaymentsHelper
+  def outstanding_payments_link
+    return unless policy(:outstanding_payments).view?
+
+    link_to t('actions.outstanding_payments.view'), outstanding_payments_path
+  end
 end

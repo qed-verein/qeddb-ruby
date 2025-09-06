@@ -1,3 +1,4 @@
-module PaymentsHelper
+# frozen_string_literal: true
 
+module PaymentsHelper
 end

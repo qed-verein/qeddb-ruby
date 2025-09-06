@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.type :EventPayment
 json.extract! event_payment, :id, :money_amount, :money_transfer_date, :comment, :category
 if modules.include? :event_summary
