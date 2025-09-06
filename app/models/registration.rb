@@ -23,7 +23,8 @@ class Registration < ApplicationRecord
   #  confirmed: Die Person hat eine Platzzusage zur Veranstaltung
   #  rejected:  Die Person wurde abgelehnt
   #  cancelled: Die Person hat von sich aus abgesagt
-  #  dummy:     Die Person ist ausschließlich aus technischen Gründen angemeldet (bspw. um eine zugehörige Zahlung einzutragen)
+  #  dummy:     Die Person ist ausschließlich aus technischen Gründen angemeldet
+  #             (bspw. um eine zugehörige Zahlung einzutragen)
   enum status: { pending: 1, confirmed: 2, rejected: 3, cancelled: 4, dummy: 5 }
 
   # Validierungen

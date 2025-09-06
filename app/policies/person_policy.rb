@@ -111,9 +111,12 @@ class PersonPolicy
         %i[id payment_type start end transfer_date amount comment _destroy] })
     end
     if edit_sepa_mandate?
-      editable.push({ sepa_mandate_attributes: %i[
-                      id mandate_reference signature_date iban bic name_account_holder sequence_type sponsor_membership allow_all_payments _destroy
-                    ] })
+      editable.push(
+        { sepa_mandate_attributes: %i[
+          id mandate_reference signature_date iban bic name_account_holder
+          sequence_type sponsor_membership allow_all_payments _destroy
+        ] }
+      )
     end
     editable
   end
