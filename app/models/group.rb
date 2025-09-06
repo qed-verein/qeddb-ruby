@@ -77,7 +77,7 @@ class Group < ApplicationRecord
   end
 
   # Ist eine Person in dieser Gruppe enthalten?
-  def has_member?(person)
+  def member?(person)
     members.exists?(id: person.id)
   end
 
@@ -89,11 +89,11 @@ class Group < ApplicationRecord
            class_name: 'Affiliation', inverse_of: :group
   accepts_nested_attributes_for :member_affiliations, allow_destroy: true,
                                                       reject_if: proc { |attr|
-                                                        reject_blank_entries attr, :groupable_id
+                                                        reject_blank_entries? attr, :groupable_id
                                                       }
   accepts_nested_attributes_for :group_affiliations, allow_destroy: true,
                                                      reject_if: proc { |attr|
-                                                       reject_blank_entries attr, :groupable_id
+                                                       reject_blank_entries? attr, :groupable_id
                                                      }
   after_initialize :set_defaults
 

@@ -18,7 +18,6 @@ class ApplicationController < ActionController::Base
       end
       type.all { render nothing: true, status: :forbidden }
     end
-    true
   end
 
   def user_for_paper_trail

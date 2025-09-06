@@ -34,7 +34,7 @@ class Event < ApplicationRecord
   # ~ has_one :organizer_mailing_list, :through :organizer_group, class_name: 'Mailinglist'
   # ~ has_one :participant_mailing_list, :through :participant_group,  class_name: 'Mailinglist'
 
-  accepts_nested_attributes_for :event_payments, allow_destroy: true, reject_if: proc { |a| reject_blank_entries a }
+  accepts_nested_attributes_for :event_payments, allow_destroy: true, reject_if: proc { |a| reject_blank_entries? a }
 
   # Verweis auf die Unterkunft
   belongs_to :hostel, optional: true

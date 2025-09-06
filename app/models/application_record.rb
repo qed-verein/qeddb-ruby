@@ -3,7 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   # Diese Helferfunktion ignoriert bei der Formulareingabe eines assoziierten Models
   # alle leeren Felder und löscht diese auch gegebenfalls aus der Datenbank
-  def self.reject_blank_entries(attributes, keys = nil)
+  def self.reject_blank_entries?(attributes, keys = nil)
     keys ||= attributes.keys - %w[id _destroy]
     keys = [keys] unless keys.is_a?(Array)
     if attributes.slice(*keys).values.all?(&:blank?)
