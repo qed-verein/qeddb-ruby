@@ -50,8 +50,7 @@ class EventPolicy
                     :comment
     end
     if edit_payments?
-      editable.push({ event_payments_attributes: %i[id money_transfer_date money_amount category comment
-                                                    _destroy] })
+      editable.push({ event_payments_attributes: %i[id money_transfer_date money_amount category comment _destroy] })
     end
 
     editable

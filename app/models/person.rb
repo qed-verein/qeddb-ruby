@@ -19,8 +19,8 @@ class Person < ApplicationRecord
   has_one :sepa_mandate, dependent: :destroy
 
   # Liste alle Anmeldungen dieser Person auf (einschließlich Absagen, Warteliste etc)
-  has_many :registrations, -> { includes('event').order('events.start DESC') }, dependent: :destroy,
-                                                                                inverse_of: :person
+  has_many :registrations, -> { includes('event').order('events.start DESC') },
+           dependent: :destroy, inverse_of: :person
   # Liste die zugehörigen Veranstaltungen aller Anmeldungen auf
   has_many :events, through: :registrations
 
