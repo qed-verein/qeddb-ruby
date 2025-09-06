@@ -24,8 +24,8 @@ gem 'awesome_print', '~> 1.8.0'
 gem 'pagy', '~> 3.8.3'
 # scenic for migrating views
 gem 'scenic', '~> 1.8.0'
-gem 'scenic_sqlite_adapter'
 gem 'scenic-mysql_adapter'
+gem 'scenic_sqlite_adapter'
 # loaf for breadcrumbs
 gem 'loaf', '~> 0.10.0'
 # icons for buttons
@@ -58,22 +58,26 @@ gem 'rails-i18n'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'sprockets-rails', require: 'sprockets/railtie'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 4.1.0'
   gem 'listen', '~> 3.3'
+  gem 'web-console', '>= 4.1.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'irb', require: false
   gem 'rdoc', require: false
+  gem 'rubocop', '~> 1.80', require: false
+  gem 'rubocop-capybara', '~> 2.22', require: false
+  gem 'rubocop-discourse', '~> 3.12', require: false
+  gem 'rubocop-rails', '~> 2.33', require: false
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
@@ -81,28 +85,27 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'webdrivers', "~> 5.3.0"
-  gem "drb", "~> 2.2"
+  gem 'drb', '~> 2.2'
+  gem 'webdrivers', '~> 5.3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem "sepa_king", "~> 0.14.0"
-
+gem 'sepa_king', '~> 0.14.0'
 
 # Workaround: https://stackoverflow.com/questions/79360526/uninitialized-constant-activesupportloggerthreadsafelevellogger-nameerror
-gem 'concurrent-ruby', "1.3.4"
+gem 'concurrent-ruby', '1.3.4'
 # Nokogiri 1.18 requires newer Ruybgems 3.3.22 not in Debian 12
-gem 'nokogiri', "~> 1.17.2"
+gem 'nokogiri', '~> 1.17.2'
 
-gem "mutex_m", "~> 0.3.0"
+gem 'mutex_m', '~> 0.3.0'
 
-gem "csv", "~> 3.3"
+gem 'csv', '~> 3.3'
 
-gem "stringio", "~> 3.1"
+gem 'stringio', '~> 3.1'
 
 # Compatiblity to Ruby 3.1
-gem "zeitwerk", "~> 2.6.0"
-gem "erb", "~> 4.0"
-gem "multi_xml", "= 0.7.1"
+gem 'erb', '~> 4.0'
+gem 'multi_xml', '= 0.7.1'
+gem 'zeitwerk', '~> 2.6.0'
