@@ -15,7 +15,7 @@ class BankingStatementImportController < ApplicationController
     stream = params[:import_file]
 
     if stream.nil?
-      flash[:error] = t('actions.import_banking_statements.reading_failed')
+      flash.now[:error] = t('actions.import_banking_statements.reading_failed')
       return render :prepare
     end
 

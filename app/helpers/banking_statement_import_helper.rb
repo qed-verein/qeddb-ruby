@@ -123,7 +123,7 @@ module BankingStatementImportHelper
       unless Rails.configuration.membership_fee == amount
         raise "Mitgliedsbeitrag ist #{Rails.configuration.membership_fee} nicht #{amount}."
       end
-      if person.paid_until.to_time.end_of_day >= Time.new(payment[:year]).end_of_year
+      if person.paid_until.to_time.end_of_day >= Time.zone.local(payment[:year]).end_of_year
         raise "Person #{person.full_name} hat schon für das Jahr #{payment[:year]} gezahlt."
       end
     elsif payment[:type] == :sponsor_membership
@@ -148,7 +148,7 @@ module BankingStatementImportHelper
 
   def apply_payment(payment)
     if payment[:type] == :membership
-      year_date = Time.new(payment[:year])
+      year_date = Time.zone.local(payment[:year])
       Payment.create(
         person: payment[:person],
         payment_type: :regular_member,

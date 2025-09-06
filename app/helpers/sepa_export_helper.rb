@@ -6,7 +6,7 @@ module SepaExportHelper
   end
 
   def get_transactions_for_members(year)
-    cutoff_date = Time.new(year).beginning_of_year
+    cutoff_date = Time.zone.local(year).beginning_of_year
     Person
       .where(paid_until: ..cutoff_date)
       .where(member_until: cutoff_date..)

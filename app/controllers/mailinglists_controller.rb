@@ -14,6 +14,8 @@ class MailinglistsController < ApplicationController
     @mailinglist = Mailinglist.new
   end
 
+  def edit; end
+
   def create
     @mailinglist = Mailinglist.new(permitted_attributes(Mailinglist))
     if @mailinglist.save
@@ -22,8 +24,6 @@ class MailinglistsController < ApplicationController
       render :new
     end
   end
-
-  def edit; end
 
   def update
     if @mailinglist.update(permitted_attributes(@mailinglist))

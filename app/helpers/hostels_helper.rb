@@ -10,7 +10,7 @@ module HostelsHelper
   end
 
   def hostel_select(form)
-    hostels = Hostel.order('title ASC').all.map { |h| [h.title, h.id] }
+    hostels = Hostel.order(:title).all.map { |h| [h.title, h.id] }
     form.select :hostel_id, hostels, id: :hostel_id, include_blank: 'nicht angegeben'
   end
 end

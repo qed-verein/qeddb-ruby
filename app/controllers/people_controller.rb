@@ -17,6 +17,11 @@ class PeopleController < ApplicationController
   # TODO: Optimierung mit "include"
   def show; end
 
+  def new
+    @person = Person.new
+    @person_policy = policy(@person)
+  end
+
   def edit; end
 
   def edit_addresses; end
@@ -28,11 +33,6 @@ class PeopleController < ApplicationController
   def edit_groups; end
 
   def edit_sepa_mandate; end
-
-  def new
-    @person = Person.new
-    @person_policy = policy(@person)
-  end
 
   def create
     @person = Person.new(permitted_attributes(Person))
@@ -108,8 +108,8 @@ class PeopleController < ApplicationController
     when :edit_sepa_mandate
       authorize @person, :edit_sepa_mandate?
     when :destroy_sepa_mandate
-      puts @person.inspect
-      puts action_name
+      Rails.logger.debug @person.inspect
+      Rails.logger.debug action_name
       authorize @person, :edit_sepa_mandate?
     when :edit_addresses
       authorize @person, :edit_additional?

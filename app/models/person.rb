@@ -50,7 +50,7 @@ class Person < ApplicationRecord
   # Validierungen
   validates :first_name, :last_name, presence: true, length: { maximum: 50 }
   validates :account_name, :email_address, presence: true, if: :active
-  validates_uniqueness_of :account_name, allow_blank: true
+  validates :account_name, uniqueness: { allow_blank: true }
 
   validates :password, length: { minimum: 6 }, if: -> { new_record? || changes[:crypted_password] }, allow_blank: true
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
@@ -128,6 +128,8 @@ class Person < ApplicationRecord
          self.class.encrypt(send(config.password_attribute_name), account_name))
   end
 
+  # Standardwerte setzen
+  after_initialize :set_defaults
   before_save :give_priority_numbers
 
   before_save :compute_membership_status
@@ -185,7 +187,7 @@ class Person < ApplicationRecord
   # Ist die Person ein Organisator für eine andere Person auf einer
   # derzeit aktiven Veranstaltung
   def organizer_of_person_now?(person)
-    !(organized_events.still_organizable.ids & person.events.ids).empty?
+    !!organized_events.still_organizable.ids.intersect?(person.events.ids)
   end
 
   # Ist die Person ein momentan tätiger Organistator für eine aktive Veranstaltung
@@ -226,9 +228,6 @@ class Person < ApplicationRecord
 
     contact.identifier
   end
-
-  # Standardwerte setzen
-  after_initialize :set_defaults
 
   def set_defaults
     self.active = true if active.nil?

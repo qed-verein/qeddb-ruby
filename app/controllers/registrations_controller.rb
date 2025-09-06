@@ -35,6 +35,9 @@ class RegistrationsController < ApplicationController
     @registration_policy = policy(@registration)
   end
 
+  # Formularanzeige, wenn Organistoren eine Anmeldung ändern wollen.
+  def edit; end
+
   # Die Organisatoren haben eine Anmeldung erstellt. Speichere diese in der Datenbank.
   def create
     @registration = Registration.new(event: @event, person: @person)
@@ -50,9 +53,6 @@ class RegistrationsController < ApplicationController
       render :new
     end
   end
-
-  # Formularanzeige, wenn Organistoren eine Anmeldung ändern wollen.
-  def edit; end
 
   # Änderungen an der Anmeldung durch Organisatoren speichern.
   def update

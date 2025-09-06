@@ -4,18 +4,18 @@ class PasswordResetsController < ApplicationController
   # Der Benutzer möchte ein neues Passwort anfordern und muss hierzu seinen Benutzernamen angeben
   def new; end
 
-  # Benutzer hat seinen Accountnamen angegeben und möchte ein neues Passwort anfordern
-  def create
-    person = Person.find_by_account_name(params[:account_name])
-    person&.deliver_reset_password_instructions!
-    redirect_to login_path, notice: t('.success')
-  end
-
   # Der Benutzer bekommt die Möglichkeit ein neues Passwort anzugeben
   def edit
     @token = params[:id]
     @person = Person.load_from_reset_password_token(params[:id])
     invalid_password_token if @person.blank?
+  end
+
+  # Benutzer hat seinen Accountnamen angegeben und möchte ein neues Passwort anfordern
+  def create
+    person = Person.find_by(account_name: params[:account_name])
+    person&.deliver_reset_password_instructions!
+    redirect_to login_path, notice: t('.success')
   end
 
   # Der Benutzer hat neue Passwörter abgeschickt

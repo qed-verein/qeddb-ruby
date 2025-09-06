@@ -7,7 +7,7 @@ class ChargeModifier < ApplicationRecord
   belongs_to :registration
 
   # Validierungen
-  validates :registration, :money_amount, :reason, presence: true
+  validates :money_amount, :reason, presence: true
 
   def object_name
     "#{registration&.event ? registration.event.title : 'Unknown event'} » " \

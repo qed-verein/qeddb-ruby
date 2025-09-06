@@ -3,7 +3,7 @@ require 'digest'
 # Eigenen Passworthasher für Abwärtskompabilität mit der alten QEDDB.
 class QEDCryptoProvider
   def self.encrypt(*tokens)
-    Digest::SHA1.hexdigest(*tokens.reverse.join(''))
+    Digest::SHA1.hexdigest(*tokens.reverse.join)
   end
 
   def self.matches?(crypted, *tokens)

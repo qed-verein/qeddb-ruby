@@ -7,7 +7,7 @@ class EventPayment < ApplicationRecord
   default_scope { order(money_transfer_date: :desc) }
 
   # Validierungen
-  validates :event, :money_transfer_date, :money_amount, :category, presence: true
+  validates :money_transfer_date, :money_amount, :category, presence: true
 
   def object_name
     (event ? event.title : 'Unknown event').to_s

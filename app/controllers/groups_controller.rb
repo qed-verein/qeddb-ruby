@@ -14,6 +14,8 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def edit; end
+
   def create
     @group = Group.new(permitted_attributes(Group))
     if @group.save
@@ -22,8 +24,6 @@ class GroupsController < ApplicationController
       render :new
     end
   end
-
-  def edit; end
 
   def update
     if @group.update(permitted_attributes(@group))

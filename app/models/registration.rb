@@ -27,7 +27,6 @@ class Registration < ApplicationRecord
   enum status: { pending: 1, confirmed: 2, rejected: 3, cancelled: 4, dummy: 5 }
 
   # Validierungen
-  validates :person, :event, presence: true
   validates :person, uniqueness: { scope: :event, message:
     proc { |reg, _| format('%s ist bereits zur Veranstaltung angemeldet', reg.person.full_name) } }
   validates :status, inclusion: { in: Registration.statuses.keys }

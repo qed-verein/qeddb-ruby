@@ -51,9 +51,9 @@ class Event < ApplicationRecord
             format: { with: /\A[a-zA-Z0-9 -]+\z/, message: I18n.t('validations.event.reference_line.charset') }
   validate :max_participants_not_exceeded
 
+  after_initialize :set_defaults
   after_create :create_groups, :create_mailinglists
   after_save :update_groups
-  after_initialize :set_defaults
 
   def set_defaults
     self.reference_line = create_reference_line if reference_line.blank?
@@ -138,7 +138,7 @@ class Event < ApplicationRecord
 
   # Ist die Veranstaltung derzeit noch von Organisatoren bearbeitbar
   def still_organizable?
-    Event.still_organizable.where(id: id).exists?
+    Event.still_organizable.exists?(id: id)
   end
 
   # Ist die Veranstaltung derzeit noch von Organisatoren bearbeitbar

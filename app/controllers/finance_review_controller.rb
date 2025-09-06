@@ -14,8 +14,8 @@ class FinanceReviewController < ApplicationController
   def set_payments
     @filter = {
       reason: params.dig(:finance_review, :reason) || '',
-      start: parse_date(params.dig(:finance_review, :start), Date.today.beginning_of_year),
-      end: parse_date(params.dig(:finance_review, :end), Date.today.end_of_year)
+      start: parse_date(params.dig(:finance_review, :start), Time.zone.today.beginning_of_year),
+      end: parse_date(params.dig(:finance_review, :end), Time.zone.today.end_of_year)
     }
     date_range = @filter[:start]..@filter[:end]
     @payments = membership_payments(date_range) + registration_payments(date_range)

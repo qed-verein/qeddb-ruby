@@ -15,6 +15,8 @@ class HostelsController < ApplicationController
     @hostel.build_address
   end
 
+  def edit; end
+
   def create
     @hostel = Hostel.new(permitted_attributes(Hostel))
     if @hostel.save
@@ -23,8 +25,6 @@ class HostelsController < ApplicationController
       render :new
     end
   end
-
-  def edit; end
 
   def update
     if @hostel.update(permitted_attributes(@hostel))

@@ -6,7 +6,7 @@ class Subscription < ApplicationRecord
 
   # Zu diese Verteiler gehört das Abonnement
   belongs_to :mailinglist
-  validates :mailinglist, :email_address, presence: true
+  validates :email_address, presence: true
 
   # Ordne Adressen standardmäßig alphabetisch
   default_scope { order('LOWER(email_address) ASC') }

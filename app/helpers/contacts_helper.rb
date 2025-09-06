@@ -21,7 +21,7 @@ module ContactsHelper
   end
 
   def contact_html(contact)
-    protocol = contact.protocol.split(' ').first.strip.downcase
+    protocol = contact.protocol.split.first.strip.downcase
     case protocol.strip.downcase
     when 'telefon', 'mobil', 'handy'
       mobile_phone_html(contact.identifier)

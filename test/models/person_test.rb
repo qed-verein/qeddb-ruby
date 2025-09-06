@@ -3,7 +3,7 @@ require 'test_helper'
 class PersonTest < ActiveSupport::TestCase
   def default_person_hash
     { first_name: 'Test', last_name: 'User',
-      account_name: 'TestUser', birthday: Time.new(2000, 1, 1),
+      account_name: 'TestUser', birthday: Time.zone.local(2000, 1, 1),
       email_address: 'testuser@email.de', active: true,
       gender: :male,	password: 'secret', password_confirmation: 'secret' }
   end

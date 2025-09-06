@@ -14,7 +14,7 @@ class ApplicationRecord < ActiveRecord::Base
         true
       end
     else
-      p attributes
+      Rails.logger.debug attributes
       false
 
     end
@@ -28,9 +28,9 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.human_enum_options(enum_symbol)
-    send(enum_symbol).keys.map do |key|
-      [human_attribute_name("#{enum_symbol.to_s.singularize}.#{key}"), key]
-    end.to_h
+    send(enum_symbol).keys.index_by do |key|
+      human_attribute_name("#{enum_symbol.to_s.singularize}.#{key}")
+    end
   end
 
   # Kurze Beschreibung des Objekts (wird für den Versions-Log gebraucht)

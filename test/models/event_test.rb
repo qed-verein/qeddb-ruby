@@ -3,9 +3,9 @@ require 'test_helper'
 class EventTest < ActiveSupport::TestCase
   def default_event_hash
     { title: 'Testveranstaltung',
-      start: Time.new(2002, 2, 20),
-      end: Time.new(2002, 2, 22),
-      deadline: Time.new(2002, 1, 1),
+      start: Time.zone.local(2002, 2, 20),
+      end: Time.zone.local(2002, 2, 22),
+      deadline: Time.zone.local(2002, 1, 1),
       max_participants: 20,
       cost: 100 }
   end
@@ -34,7 +34,7 @@ class EventTest < ActiveSupport::TestCase
 
   test 'time_ordering' do
     assert_raise(ActiveRecord::RecordInvalid) do
-      Event.create!(default_event_hash.merge(start: Time.new(2002, 2, 22), end: Time.new(2002, 2, 20)))
+      Event.create!(default_event_hash.merge(start: Time.zone.local(2002, 2, 22), end: Time.zone.local(2002, 2, 20)))
     end
   end
 end

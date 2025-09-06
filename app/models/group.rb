@@ -106,5 +106,5 @@ class Group < ApplicationRecord
     title
   end
 
-  default_scope { order('title ASC') }
+  default_scope { order(:title) }
 end

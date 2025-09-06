@@ -40,7 +40,7 @@ class Mailinglist < ApplicationRecord
   def set_defaults; end
 
   # Ordne Emailverteiler standardmäßig alphabetisch
-  default_scope { order('title ASC') }
+  default_scope { order(:title) }
 
   def object_name
     title

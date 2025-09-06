@@ -23,8 +23,8 @@ class GroupTest < ActiveSupport::TestCase
     Affiliation.create!({
                           group: groups(:group_so),
                           groupable: groups(:group_q),
-                          start: Time.current - 2.year,
-                          end: Time.current - 1.year,
+                          start: 2.years.ago,
+                          end: 1.year.ago,
                           groupable_type: 'Group'
                         })
     assert_equal groups(:group_sl, :group_so).sort,
@@ -33,8 +33,8 @@ class GroupTest < ActiveSupport::TestCase
     Affiliation.create!({
                           group: groups(:group_so),
                           groupable: groups(:group_z),
-                          start: Time.current - 2.year,
-                          end: Time.current + 3.year,
+                          start: 2.years.ago,
+                          end: 3.years.from_now,
                           groupable_type: 'Group'
                         })
     assert_equal groups(:group_gl, :group_sl, :group_o, :group_so, :group_z).sort,

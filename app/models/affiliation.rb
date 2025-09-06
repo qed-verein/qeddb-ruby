@@ -13,8 +13,6 @@ class Affiliation < ApplicationRecord
   # Die eingetragene Person oder Gruppe (-> polymorphes Attribut "groupable")
   belongs_to :groupable, polymorphic: true
 
-  validates :group, presence: true
-  validates :groupable, presence: true
   validates :groupable_type, inclusion: { in: %w[Person Group] }
   validate :time_ordering
 
