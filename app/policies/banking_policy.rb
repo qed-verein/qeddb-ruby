@@ -1,16 +1,15 @@
 class BankingPolicy
-	include PunditImplications
+  include PunditImplications
 
-	define_implications(
-		{
-			:by_treasurer => [:import_banking_statement, :sepa_export]
-		}
-	)
+  define_implications(
+    {
+      by_treasurer: %i[import_banking_statement sepa_export]
+    }
+  )
 
-	def initialize(user, unused)
-		if user.treasurer?
-			grant :by_treasurer
-		end
-	end
+  def initialize(user, _unused)
+    return unless user.treasurer?
+
+    grant :by_treasurer
+  end
 end
-
