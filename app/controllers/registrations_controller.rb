@@ -5,7 +5,8 @@ class RegistrationsController < ApplicationController
 	before_action :set_event_and_person,
 		only: [:new, :create, :new_self, :create_self, :select_person, :with_selected_person, :edit_self]
 	before_action :basic_authorization
-	before_action :deadline_check, only: [:new_self, :create_self,  :edit_self, :update_self]
+	before_action :deadline_check, only: [:new_self, :create_self]
+	before_action :edit_deadline_check, only: [:edit_self, :update_self]
 	before_action :capacity_check, only: [:new_self, :create_self]
 
 	# Anmeldung eines Benutzers anzeigen
@@ -181,6 +182,15 @@ class RegistrationsController < ApplicationController
 		@event ||= @registration.event
 		if @event.deadline_missed?
 			redirect_to event_path(@event), alert: t('registrations.deadline_missed')
+		end
+	end
+
+	# Prüfe ob die Deadline für die Bearbeitung der Anmeldedaten schon vorbei ist
+	# (aktuell = Ende der Veranstaltung)
+	def edit_deadline_check
+		@event ||= @registration.event
+		if @event.has_ended?
+			redirect_to event_path(@event), alert: t('registrations.event_has_ended')
 		end
 	end
 
