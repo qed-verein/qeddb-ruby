@@ -12,6 +12,8 @@ de:
       failed: Login fehlgeschlagen
     destroy:
       complete: Ausgeloggt
+    access_denied: Zugriff verweigert
+    login_required: Bitte einloggen.
   password_resets:
     new:
       title: Passwort vergessen
@@ -37,6 +39,8 @@ de:
       overpaid: überbezahlt
     edit_payments:
       submit: Zahlungen speichern
+    already_registered: Du bist bereits zu dieser Veranstaltung angemeldet. Leite zur bestehender Anmeldung weiter
+    not_registered: Anmeldung nicht gefunden.
 
   people:
     create:
@@ -165,6 +169,7 @@ de:
     import:
       prepare: Import
       submit: Daten importieren
+      success: Import erfolgreich
     import_banking_statements:
       prepare: Kontoauszug importieren
       submit: Kontoauszug importieren
@@ -184,3 +189,13 @@ de:
       view: Offene Posten
     finance_review:
       view: Finanzübersicht
+
+  account_mailer:
+    reset_password_email:
+      subject: Passwort zurücksetzen
+    account_created_email:
+      subject: Benutzerkonto wurde angelegt
+
+  sepa_mailer:
+    sepa_direct_debit_announce_email:
+      subject: Ankündigung SEPA-Lastschrift
