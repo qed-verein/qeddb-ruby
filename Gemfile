@@ -74,6 +74,7 @@ group :development do
   gem 'rdoc', require: false
   gem 'rubocop', '~> 1.80', require: false
   gem 'rubocop-capybara', '~> 2.22', require: false
+  gem 'rubocop-discourse', '~> 3.12', require: false
   gem 'rubocop-rails', '~> 2.33', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
