@@ -52,7 +52,7 @@ class Registration < ApplicationRecord
   # Teilnehmer muss Teilnahmebedingungen akzepteren
   attr_accessor :terms_of_service
 
-  validates :terms_of_service, acceptance: { message: 'Teilnahmebedingungen müssen akzeptiert werden' }
+  validates :terms_of_service, acceptance: { message: I18n.t('validations.registration.must_accept_terms_of_service') }
 
   validate :max_participants_not_exceeded
 

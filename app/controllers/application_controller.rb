@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   def access_denied_handler
     respond_to do |type|
       type.html do
-        flash[:alert] = 'Access denied.'
+        flash[:alert] = t('sessions.access_denied')
         redirect_to root_path
       end
       type.all { render nothing: true, status: :forbidden }
@@ -25,6 +25,6 @@ class ApplicationController < ActionController::Base
   end
 
   def not_authenticated
-    redirect_to login_path, notice: 'Bitte einloggen.'
+    redirect_to login_path, notice: t('sessions.login_required')
   end
 end

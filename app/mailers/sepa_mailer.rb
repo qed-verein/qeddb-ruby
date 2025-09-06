@@ -10,6 +10,6 @@ class SepaMailer < ApplicationMailer
   end
 
   def sepa_direct_debit_announce_email
-    mail(to: @person.email_address,	subject: 'Ankündigung SEPA-Lastschrift')
+    mail(to: @person.email_address,	subject: t('sepa_mailer.sepa_direct_debit_announce_email.subject'))
   end
 end
