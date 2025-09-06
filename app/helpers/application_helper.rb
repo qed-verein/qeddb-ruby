@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ApplicationHelper
   def root_link
     link_to Rails.configuration.database_title, root_path

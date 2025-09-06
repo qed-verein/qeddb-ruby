@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 if @export_people
   json.people do
     json.array! @people, partial: 'people/person', as: :person, locals: { modules: %i[

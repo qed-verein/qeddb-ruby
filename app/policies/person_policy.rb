@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # *** Berechtigungsstufen für Personen ***
 # view_additional, edit_additional:
 #	 Zusätzliche Daten wie Adressen und Kontakte

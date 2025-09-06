@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class FinanceReviewPolicy
   include PunditImplications
   define_implications(

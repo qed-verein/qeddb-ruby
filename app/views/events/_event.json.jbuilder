@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 json.type :Event
 json.extract! event, :id, :title, :homepage, :start, :end, :deadline,
               :cost, :max_participants, :hostel_id, :comment

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 authorize_json_export(policy(:finance_review), json) do
   json.type :FinanceReview
 

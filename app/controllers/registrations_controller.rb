@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RegistrationsController < ApplicationController
   breadcrumb Event.model_name.human(count: :other), :events_path
 

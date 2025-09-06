@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 json.type :Payment
 json.extract! payment, :id, :payment_type, :start, :end, :amount, :transfer_date
 if modules.include? :person_summary

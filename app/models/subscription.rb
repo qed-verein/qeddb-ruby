@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Subscription" dient zur Verwaltung eines einzelnen Emailabonnements.
 
 class Subscription < ApplicationRecord

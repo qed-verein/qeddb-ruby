@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class BankingStatementImportController < ApplicationController
   include BankingStatementImportHelper
   before_action :basic_authorization

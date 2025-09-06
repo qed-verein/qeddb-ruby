@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ExportController < ApplicationController
   before_action :basic_authorization
 

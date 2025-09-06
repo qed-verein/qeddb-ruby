@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Payment" verwaltet eine Mitgliedschaftszahlung.
 # Hierzu gehören alle normalen Mitgliedszahlungen, aber auch Fördermitgliedschaften etc.
 # Nicht erfasst werden hier veranstaltungsspezifische Zahlungen.

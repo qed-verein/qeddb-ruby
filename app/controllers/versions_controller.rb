@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class VersionsController < ApplicationController
   before_action :set_version, only: %i[show revert]
   before_action :basic_authorization

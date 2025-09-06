@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module PeopleHelper
   def person_link(person)
     if policy(person).view_public?

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 json.type :Person
 json.extract! person, :id, :account_name, :first_name, :last_name,
               :email_address, :birthday, :gender, :joined, :quitted, :active, :paid_until

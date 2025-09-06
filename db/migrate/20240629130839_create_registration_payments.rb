@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CreateRegistrationPayments < ActiveRecord::Migration[6.1]
   def change
     create_table :registration_payments do |t|

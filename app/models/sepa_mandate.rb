@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Klasse um Sepa-Lastschriftmandate zu speichern und Personen zuzuordnen.
 
 class SepaMandate < ApplicationRecord

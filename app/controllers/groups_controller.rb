@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GroupsController < ApplicationController
   breadcrumb Group.model_name.human(count: :other), :groups_path
 

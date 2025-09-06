@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'digest'
 
 # Eigenen Passworthasher für Abwärtskompabilität mit der alten QEDDB.

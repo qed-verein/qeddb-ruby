@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Registration" verwaltet eine einzelne Anmeldung einer Person zu einer Veranstaltung.
 
 class Registration < ApplicationRecord

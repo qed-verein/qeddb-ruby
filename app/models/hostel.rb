@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Hostel" verwaltet eine einzelne Unterkunft.
 
 class Hostel < ApplicationRecord

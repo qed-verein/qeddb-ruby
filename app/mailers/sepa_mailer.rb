@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SepaMailer < ApplicationMailer
   before_action :set_variable
 

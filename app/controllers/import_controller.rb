@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ImportController < ApplicationController
   include ImportHelper
   before_action :basic_authorization

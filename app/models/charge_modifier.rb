@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Klasse um Kosten von Veranstaltungen anzupassen
 class ChargeModifier < ApplicationRecord
   # Versionskontrolle

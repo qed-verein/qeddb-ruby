@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SepaExportController < ApplicationController
   include SepaExportHelper
   before_action :basic_authorization, :extract_parameters

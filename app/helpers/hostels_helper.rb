@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module HostelsHelper
   include LinksHelper
   default_crud_links :hostel

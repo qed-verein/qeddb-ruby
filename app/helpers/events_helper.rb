@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module EventsHelper
   def event_link(event)
     # ~ return event.title unless policy(event).view_basic?

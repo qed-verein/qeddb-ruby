@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Addresse" verwaltet eine Adresse.
 
 class Address < ApplicationRecord

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module MailinglistsHelper
   include LinksHelper
   default_crud_links :mailinglist, except: [:show]

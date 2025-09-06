@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
-
 require 'json'
 load File.expand_path('spring', __dir__)
 APP_PATH = File.expand_path('../config/application', __dir__)

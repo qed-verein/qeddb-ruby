@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 namespace :changelog do
   desc 'Lösche geloggte Änderungen an der Datenbank nach einer bestimmten Frist für Datenschutz'
   task cleanup_old: :environment do

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class OutstandingPaymentsPolicy
   include PunditImplications
   define_implications(

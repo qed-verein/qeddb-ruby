@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Das allgemiene Berechtigungskonzept für verschiedene Adminbereichte
 # Wird zum Konfigurieren von Gruppen, Emailverteiler und Versionsständen hergenommen
 

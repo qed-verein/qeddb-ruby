@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Event" verwaltet eine Veranstaltung, zu der sich Personen anmelden können.
 require 'general_helpers'
 

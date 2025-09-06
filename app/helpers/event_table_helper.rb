@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module EventTableHelper
   def checkbox(id, text, checked)
     content_tag :label do

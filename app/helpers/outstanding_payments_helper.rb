@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module OutstandingPaymentsHelper
   def outstanding_payments_link
     return unless policy(:outstanding_payments).view?

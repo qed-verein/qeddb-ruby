@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class RegistrationMailer < ApplicationMailer
   before_action :set_registration
 

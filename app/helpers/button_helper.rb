@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ButtonHelper
   def icon_button(text, icon, path)
     link_to path, class: 'button' do

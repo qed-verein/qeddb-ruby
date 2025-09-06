@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Klasse um Zahlungen in Bezug auf Veranstaltungen zu speichern
 class RegistrationPayment < ApplicationRecord
   # Versionskontrolle

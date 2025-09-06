@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class HostelsController < ApplicationController
   breadcrumb Hostel.model_name.human(count: :other), :hostels_path
 

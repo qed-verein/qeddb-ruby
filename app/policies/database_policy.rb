@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 DatabasePolicy = Struct.new(:user, :database) do
   include PunditImplications
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class OutstandingPaymentsController < ApplicationController
   before_action :basic_authorization
   before_action :set_registrations

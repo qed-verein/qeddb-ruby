@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class AddAuditorGroup < ActiveRecord::Migration[6.1]
   def change
     Group.create!({ id: 9, title: 'Kassenprüfer:innen', mode: :editable, program: :auditors,

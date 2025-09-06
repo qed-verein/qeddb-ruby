@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # *** Die Berechtigungsstufen für Anmeldungen ***
 # view_general, edit_general:
 #	 Allgemeine Informationen wie Anmeldestatus

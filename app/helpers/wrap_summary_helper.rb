@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module WrapSummaryHelper
   def wrap_summary(condition, summary, &block)
     if condition

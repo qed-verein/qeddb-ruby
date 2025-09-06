@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module GeneralHelpers
   def asciify(string)
     replacements = {

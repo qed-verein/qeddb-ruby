@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Configurable hooks
 Rails.application.config.qeddb_hooks = {
   person_created: proc { |person| printf "Person created: %s\n", person.account_name },

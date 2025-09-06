@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 json.type :Mailinglist
 json.extract! mailinglist, :id, :title, :description
 json.extract! mailinglist, :sender_group_id, :receiver_group_id, :moderator_group_id

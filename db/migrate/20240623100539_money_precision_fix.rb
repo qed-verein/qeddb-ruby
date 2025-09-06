@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MoneyPrecisionFix < ActiveRecord::Migration[6.1]
   def change
     change_column :registrations, :money_amount, :decimal, precision: 10, scale: 2

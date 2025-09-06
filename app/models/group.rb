@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Group" dient zur Verwaltung von Gruppen.
 # Eine Gruppe besteht im Wesentlichen aus einer Liste von Personen.
 #

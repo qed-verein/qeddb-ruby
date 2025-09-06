@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 json.type :Group
 json.extract! group, :id, :title, :description, :mode, :program, :event_id
 json.url group_url(group, format: :json)

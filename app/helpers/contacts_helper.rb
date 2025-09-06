@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ContactsHelper
   def im_protocol_list
     %w[Discord Email Facebook Github GPG ICQ Instagram IRC Jabber Matrix Mobil

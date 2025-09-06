@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ImportHelper
   def import_link
     return unless policy(:database).import?

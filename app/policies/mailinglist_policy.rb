@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MailinglistPolicy < AdminPolicy
   def permitted_attributes
     [:id, :title, :description, :public_email_address, :can_unsubscribe, :sender_group_id, :receiver_group_id, :moderator_group_id,

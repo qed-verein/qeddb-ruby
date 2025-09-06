@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationMailer < ActionMailer::Base
   helper ApplicationHelper
   default from: Rails.configuration.system_email_address,

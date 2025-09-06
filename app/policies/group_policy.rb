@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GroupPolicy < AdminPolicy
   # Wie AdminPolicy, aber einige der vordefinierten Gruppen sollen auch
   # von Admins nicht geändert beziehungsweise gelöscht werden dürfen

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Diese Klasse "Person" verwaltet alle Personen in der Mitgliederdatenbank.
 # Dazu zählen nicht nur Vereinsmitglieder, sondern auch auch Externe.
 # Daneben ist die Klasse "Person" auch für das Loginmanagement zuständig.

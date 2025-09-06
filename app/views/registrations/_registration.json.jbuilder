@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 json.type :Registration
 json.extract! registration, :id
 

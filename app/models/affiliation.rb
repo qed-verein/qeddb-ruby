@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Affiliation" dient zur Verwaltung einer einzelnen Gruppenzugehörigkeit.
 #
 # Eine Gruppenzugehörigkeit besteht einer Eintrag, welcher über einen Zeitraum

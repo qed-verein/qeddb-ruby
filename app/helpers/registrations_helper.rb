@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module RegistrationsHelper
   def registration_information(reg)
     words = []

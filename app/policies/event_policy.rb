@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # *** Die Berechtigungsstufen für Veranstaltungen ***
 # view_event, edit_event
 #	 Allgemeine Daten zur Veranstaltung wie Kosten, Beginn, Ende anzeigen bzw. berbeiten

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Die Klasse "Contact" verwaltet eine Kontaktmöglichkeit, wie zum Beispiel
 # eine Telefonnummer, oder eine XMPP-Adresse.
 
