@@ -1,5 +1,6 @@
 class BankingStatementImportController < ApplicationController
   include BankingStatementImportHelper
+
   before_action :basic_authorization
 
   breadcrumb 'import', :import_path

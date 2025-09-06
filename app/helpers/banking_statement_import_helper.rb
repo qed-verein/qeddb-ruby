@@ -111,7 +111,7 @@ module BankingStatementImportHelper
     # that all of ruby3, this qeddb and the banking statements will still be around in 2069.
     {
       **payment_data,
-      amount: Float(line['Betrag'].gsub(/,/, '.')),
+      amount: Float(line['Betrag'].gsub(',', '.')),
       payment_date: Time.strptime(line['Buchungstag'], '%d.%m.%y')
     }
   end

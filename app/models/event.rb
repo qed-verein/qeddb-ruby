@@ -3,6 +3,7 @@ require 'general_helpers'
 
 class Event < ApplicationRecord
   include GeneralHelpers
+
   # Versionskontrolle
   has_paper_trail
 

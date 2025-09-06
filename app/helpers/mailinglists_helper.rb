@@ -1,5 +1,6 @@
 module MailinglistsHelper
   include LinksHelper
+
   default_crud_links :mailinglist, except: [:show]
 
   def mailinglist_link(mailinglist)

@@ -1,5 +1,6 @@
 class SepaExportController < ApplicationController
   include SepaExportHelper
+
   before_action :basic_authorization, :extract_parameters
 
   def extract_parameters

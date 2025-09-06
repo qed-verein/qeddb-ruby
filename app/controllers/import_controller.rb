@@ -1,5 +1,6 @@
 class ImportController < ApplicationController
   include ImportHelper
+
   before_action :basic_authorization
 
   breadcrumb 'import', :import_path

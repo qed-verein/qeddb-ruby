@@ -5,6 +5,7 @@
 
 class Person < ApplicationRecord
   include GeneralHelpers
+
   # Alle Änderungen an Person werden gespeichert. Hierzu benutzen wir das Paket "PaperTrail".
   has_paper_trail skip: %i[crypted_password salt reset_password_token]
 

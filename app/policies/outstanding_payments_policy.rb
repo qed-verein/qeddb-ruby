@@ -1,5 +1,6 @@
 class OutstandingPaymentsPolicy
   include PunditImplications
+
   define_implications(
     {
       by_auditor: %i[view export],

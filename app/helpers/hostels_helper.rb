@@ -1,5 +1,6 @@
 module HostelsHelper
   include LinksHelper
+
   default_crud_links :hostel
 
   def hostel_homepage_link(hostel)

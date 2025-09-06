@@ -16,6 +16,6 @@ class RegistrationPayment < ApplicationRecord
 
   def object_name
     "#{registration&.event ? registration.event.title : 'Unknown event'} » " \
-    "#{registration&.event ? registration&.person&.full_name : 'Unknown person'}"
+      "#{registration&.event ? registration&.person&.full_name : 'Unknown person'}"
   end
 end
