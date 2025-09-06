@@ -8,6 +8,7 @@ categories = {}
 	categories[letter] = [] if categories[letter].nil?
 	categories[letter].push person
 }
+show_unpublished_people = policy(Person).view_private?
 %>
 
 <article id="people">
@@ -29,7 +30,11 @@ categories = {}
 			<dt><%= key %></dt>
 			<ul>
 			<% categories[key].each do |person| %>
-				<li><%= person_link_unchecked person %></li>
+				<% if person.publish || show_unpublished_people %>
+					<li><%= person_link_unchecked person %></li>
+				<% else %>
+					<li><%= person.full_name %></li>
+				<% end %>
 			<% end %>
 			</ul>
 		<% end %>

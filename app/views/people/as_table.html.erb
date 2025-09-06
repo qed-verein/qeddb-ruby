@@ -60,8 +60,13 @@
 		<% @people.each do |person| %>
 			<tr class="<%= person.member? ? 'member_row' : 'non_member_row' %>">
 				<td></td>
+				<% if @person_policy.view_private? || person.publish %>
 				<td><%= link_to person.first_name, person %></td>
 				<td><%= link_to person.last_name, person %></td>
+				<% else %>
+				<td><%= person.first_name %></td>
+				<td><%= person.last_name %></td>
+				<% end %>
 
 				<td class="person_field"><%= Person.human_enum_value(:gender, person.gender) %></td>
 
