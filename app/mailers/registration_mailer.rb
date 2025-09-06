@@ -29,7 +29,8 @@ class RegistrationMailer < ApplicationMailer
     return unless @event.organizer_email_address
 
     mail(to: @event.organizer_email_address, subject: format(
-      'Neue Anmeldung von %s für die Veranstaltung %s', @person.full_name, @event.title
+      'Neue Anmeldung von %<name>s für die Veranstaltung %<event_title>s',
+      name: @person.full_name, event_title: @event.title
     ))
   end
 
@@ -37,7 +38,8 @@ class RegistrationMailer < ApplicationMailer
     return unless @event.organizer_email_address
 
     mail(to: @event.organizer_email_address, subject: format(
-      'Geänderte Anmeldung von %s für die Veranstaltung %s', @person.full_name, @event.title
+      'Geänderte Anmeldung von %<name>s für die Veranstaltung %<event_title>s',
+      name: @person.full_name, event_title: @event.title
     ))
   end
 end
