@@ -55,8 +55,11 @@ module RegistrationsHelper
     return unless policy(registration).delete_registration?
 
     link_to registration, class: 'button', method: :delete, data: {
-      confirm: format('Anmeldung von „%s“ zur Veranstaltung „%s“ komplett löschen?',
-                      registration.person.full_name, registration.event.title)
+      confirm: format(
+        'Anmeldung von „%<name>s“ zur Veranstaltung „%<event_title>s“ komplett löschen?',
+        name: registration.person.full_name,
+        event_title: registration.event.title
+      )
     } do
       concat mi.delete.md_24
       concat t('actions.registration.delete')
