@@ -74,6 +74,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'irb', require: false
   gem 'rdoc', require: false
+  gem 'rubocop', '~> 1.80', require: false
 end
 
 group :test do
