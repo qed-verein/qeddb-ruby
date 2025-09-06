@@ -33,8 +33,11 @@ class Mailinglist < ApplicationRecord
   validates :description, length: { maximum: 1000 }
 
   # Nötig, da das Formular für Unterkünfte auch eine Liste von Eintragungen mitschickt
-  accepts_nested_attributes_for :subscriptions, allow_destroy: true,
-                                                reject_if: proc { |attr| reject_blank_entries? attr, :email_address }
+  accepts_nested_attributes_for(
+    :subscriptions,
+    allow_destroy: true,
+    reject_if: proc { |attr| reject_blank_entries? attr, :email_address }
+  )
   after_initialize :set_defaults
 
   # Standardwerte für Emailverteiler

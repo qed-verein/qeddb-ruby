@@ -23,15 +23,19 @@ if policy(registration).view_payments? || policy(registration).edit_general?
   json.extract! registration, :payment_complete, :money_amount, :money_transfer_date,
                 :effective_member_discount?, :other_discounts, :reference_line, :effective_money_amount
   json.charge_modifiers do
-    json.array! registration.charge_modifiers, partial: 'charge_modifiers/charge_modifier', as: :charge_modifier,
-                                               modules: []
+    json.array! registration.charge_modifiers,
+                partial: 'charge_modifiers/charge_modifier',
+                as: :charge_modifier,
+                modules: []
   end
 end
 
 if policy(registration).view_payments?
   json.registration_payments do
-    json.array! registration.registration_payments, partial: 'registration_payments/registration_payment',
-                                                    as: :registration_payment, modules: []
+    json.array! registration.registration_payments,
+                partial: 'registration_payments/registration_payment',
+                as: :registration_payment,
+                modules: []
   end
 end
 json.url registration_url(registration, format: :json)
