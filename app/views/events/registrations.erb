@@ -72,24 +72,24 @@
 				<td><%= link_to r.person.last_name, r %></td>
 				<td class="person_field"><%= Person.human_enum_value(:gender, r.person.gender)%></td>
 
-				<% if view_private || r.person.publish_birthday %>
+				<% if view_private || (r.person.publish && r.person.publish_birthday) %>
 					<td class="person_field" data-sort-value="<%= r.person.birthday %>"><%= render_date r.person.birthday %></td>
 				<% else %>
 					<td class="person_field"><%= tag.i("privat") %></td>
 				<% end %>
 
 				<td class="phone_field">
-					<%= (view_private || r.person.publish_address) ?
+					<%= (view_private || (r.person.publish && r.person.publish_address)) ?
 						check_unknown(r.person.mobile_number) {|x| mobile_phone_html(x)} : tag.i("privat") %>
 				</td>
 
 				<td class="address_field">
-					<%= (view_private || r.person.publish_email) ?
+					<%= (view_private || (r.person.publish && r.person.publish_email)) ?
 						mail_to(r.person.email_address, r.person.email_address) : tag.i("privat") %>
 				</td>
 
 				<td class="address_field">
-					<%= (view_private || r.person.publish_address) ?
+					<%= (view_private || (r.person.publish && r.person.publish_address)) ?
 						 check_unknown(r.person.main_address) {|x| render_inline_address(x)} : tag.i("privat") %>
 				</td>
 
