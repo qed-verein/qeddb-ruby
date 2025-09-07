@@ -2,17 +2,18 @@
 # Wird zum Konfigurieren von Gruppen, Emailverteiler und Versionsständen hergenommen
 
 class AdminPolicy
-	include PunditImplications
+  include PunditImplications
 
-	define_implications({
-		:viewable     => [:show, :index],
-		:editable     => [:viewable, :edit, :new, :edit, :destroy]})
-	alias_method :update?, :edit?
-	alias_method :create?, :new?
+  define_implications({
+                        viewable: %i[show index],
+                        editable: %i[viewable edit new edit destroy]
+                      })
+  alias update? edit?
+  alias create? new?
 
-	def initialize(user, object)
-		if user.admin? || user.chairman?
-			grant :editable
-		end
-	end
+  def initialize(user, _object)
+    return unless user.admin? || user.chairman?
+
+    grant :editable
+  end
 end
