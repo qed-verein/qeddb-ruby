@@ -81,18 +81,23 @@ class PersonPolicy
     grant :by_treasurer if user.treasurer?
     grant :by_auditor if user.auditor?
     grant :by_chairman if user.chairman?
-    grant :by_self if person.is_a?(Person) && user.id == person.id
-    grant :by_organizer if person.is_a?(Person) && user.organizer_of_person_now?(person)
 
-    if person.is_a?(Person) && user.member? && person.member? && person.publish
-      grant :by_member
-      grant :view_addresses if person.publish_address
-      grant :view_contacts if person.publish_address
+    if person.is_a?(Person)
+      grant :by_self if user.id == person.id
+      grant :by_organizer if user.organizer_of_person_now?(person)
+
+      if user.member? && person.member? && person.publish
+        grant :by_member
+        grant :view_addresses if person.publish_address
+        grant :view_contacts if person.publish_address
+      end
     end
 
-	# Rechte für die Liste der Personen
-    grant :by_organizer if person == Person && user.organizing_now?
-    grant :by_member if person == Person && user.member?
+    # Rechte für die Liste der Personen
+    if person == Person
+        grant :by_organizer if user.organizing_now?
+        grant :by_member if user.member?
+    end
 
     grant :by_other
   end
