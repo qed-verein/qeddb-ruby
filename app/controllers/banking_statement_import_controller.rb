@@ -1,35 +1,36 @@
 class BankingStatementImportController < ApplicationController
-	include BankingStatementImportHelper
-	before_action :basic_authorization
+  include BankingStatementImportHelper
 
-	breadcrumb 'import', :import_path
+  before_action :basic_authorization
 
-	def prepare
-		@results = []
-	end
+  breadcrumb 'import', :import_path
 
-	def import
-		@results = []
+  def prepare
+    @results = []
+  end
 
-		stream = params[:import_file]
+  def import
+    @results = []
 
-		if stream.nil?
-			flash[:error] = t("actions.import_banking_statements.reading_failed")
-			return render :prepare
-		end
+    stream = params[:import_file]
 
-		begin
-			@results = import_banking_csv(stream.read)
-		rescue Exception =>e
-			flash[:error]	= t("actions.import_banking_statements.reading_failed") + ": #{e.message}"
-		end
+    if stream.nil?
+      flash.now[:error] = t('actions.import_banking_statements.reading_failed')
+      return render :prepare
+    end
 
-		render :prepare
-	end
+    begin
+      @results = import_banking_csv(stream.read)
+    rescue Exception => e
+      flash[:error]	= t('actions.import_banking_statements.reading_failed') + ": #{e.message}"
+    end
 
-	private
+    render :prepare
+  end
 
-	def basic_authorization
-		authorize :banking, :import_banking_statement?
-	end
+  private
+
+  def basic_authorization
+    authorize :banking, :import_banking_statement?
+  end
 end

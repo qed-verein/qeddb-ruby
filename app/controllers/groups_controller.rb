@@ -1,54 +1,52 @@
 class GroupsController < ApplicationController
-	breadcrumb Group.model_name.human(count: :other), :groups_path
+  breadcrumb Group.model_name.human(count: :other), :groups_path
 
-	before_action :set_group, except: [:index, :new, :create]
-	before_action :basic_authorization
+  before_action :set_group, except: %i[index new create]
+  before_action :basic_authorization
 
-	def index
-		@groups = Group.where(event: nil).all
-	end
+  def index
+    @groups = Group.where(event: nil).all
+  end
 
-	def show
-	end
+  def show; end
 
-	def new
-		@group = Group.new
-	end
+  def new
+    @group = Group.new
+  end
 
-	def create
-		@group = Group.new(permitted_attributes(Group))
-		if @group.save
-			redirect_to @group, notice: t(".success")
-		else
-			render :new
-		end
-	end
+  def edit; end
 
-	def edit
-	end
+  def create
+    @group = Group.new(permitted_attributes(Group))
+    if @group.save
+      redirect_to @group, notice: t('.success')
+    else
+      render :new
+    end
+  end
 
-	def update
-		if @group.update(permitted_attributes(@group))
-			redirect_to @group, notice: t(".success")
-		else
-			render :edit
-		end
-	end
+  def update
+    if @group.update(permitted_attributes(@group))
+      redirect_to @group, notice: t('.success')
+    else
+      render :edit
+    end
+  end
 
-	def destroy
-		@group.destroy
-		redirect_to groups_url, notice: t(".success")
-	end
+  def destroy
+    @group.destroy
+    redirect_to groups_url, notice: t('.success')
+  end
 
-	private
+  private
 
-	def set_group
-		@group = Group.find(params[:id])
-		@group_policy = policy(@group)
-		breadcrumb @group.title, @group
-	end
+  def set_group
+    @group = Group.find(params[:id])
+    @group_policy = policy(@group)
+    breadcrumb @group.title, @group
+  end
 
-	def basic_authorization
-		authorize (@group.nil? ? Group : @group)
-	end
+  def basic_authorization
+    authorize(@group.nil? ? Group : @group)
+  end
 end
