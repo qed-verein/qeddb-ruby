@@ -17,10 +17,13 @@
 #	 Neue Person eintragen
 # delete_person:
 #	 Person löschen
-# list_published_people:
-#   Anzeige aller veröffentlichen Mitglieder
+# list_member:
+#   Anzeige aller aktuellen Vereinsmitglieder
+# list_active:
+#   Anzeige aller aktiven Accounts
+#   (insb. auch Nichtmitglieder, die sich in der DB anmelden können)
 # list_all_people:
-#   Anzeige sämtlicher Mitglieder aufgelistet werden
+#   Anzeige aller aktiven und inaktiven Accounts
 # by_other:
 #	 Das können andere externe Personen in der Datenbank tun
 # by_member:
@@ -57,11 +60,12 @@ class PersonPolicy
                         view_private:	%i[view_public view_payments view_addresses view_contacts view_settings
                                          export],
 
-                        list_all_people: [:list_published_people],
+                        list_all_people: [:list_active],
+                        list_active: [:list_members],
                         create_person: %i[edit_personal edit_additional edit_settings],
 
                         by_other: [],
-                        by_member: %i[view_public list_published_people],
+                        by_member: %i[view_public list_members],
                         by_organizer: %i[by_member view_private view_settings],
                         by_self: %i[by_member view_private edit_additional edit_settings view_sepa_mandate],
                         by_chairman: %i[by_self edit_personal create_person delete_person list_all_people],
@@ -131,8 +135,11 @@ class PersonPolicy
     def resolve
       if Pundit.policy!(user, Person).list_all_people?
         scope.all
-      elsif Pundit.policy!(user, Person).list_published_people?
-        scope.where('(active=? AND publish=?) OR id=?', true, true, user.id)
+      elsif Pundit.policy!(user, Person).list_active?
+        scope.where('active=? OR id=?', true, user.id)
+      elsif Pundit.policy!(user, Person).list_members?
+        scope.where('(active=? AND (? BETWEEN joined AND member_until)) OR id=?',
+                    true, Time.current, user.id)
       else
         scope.where(id: user.id)
       end
