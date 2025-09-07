@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
 
   rescue_from Pundit::NotAuthorizedError, with: :access_denied_handler
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_founrd_handler
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_handler
 
   def access_denied_handler
     respond_to do |type|
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     true
   end
 
-  def record_not_founrd_handler
+  def record_not_found_handler
     respond_to do |type|
       type.html do
         flash[:alert] = 'Record not found.'
@@ -32,7 +32,6 @@ class ApplicationController < ActionController::Base
     end
     true
   end
-
 
   def user_for_paper_trail
     logged_in? ? current_user.full_name + " (ID: #{current_user.id})" : 'Anonym'

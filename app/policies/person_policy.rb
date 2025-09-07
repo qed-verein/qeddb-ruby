@@ -1,22 +1,22 @@
 # *** Berechtigungsstufen für Personen ***
 # view_additional, edit_additional:
-#	 Zusätzliche Daten wie Adressen und Kontakte
+#     Zusätzliche Daten wie Adressen und Kontakte
 # view_settings, edit_settings:
-#	 Einstellungen zu Datenschutz und Mailinglisten
+#     Einstellungen zu Datenschutz und Mailinglisten
 # view_payments, edit_payments:
-#	 Überweisungen und Finanzen
+#     Überweisungen und Finanzen
 # view_public:
-#	 Anzeige aller öffentlichen Attribute (z.B. für alle Mitglieder)
+#     Anzeige aller öffentlichen Attribute (z.B. für alle Mitglieder)
 # view_private:
-#	 Anzeige aller privaten Attribute (z.B. nur für spezielle Personen)
+#     Anzeige aller privaten Attribute (z.B. nur für spezielle Personen)
 # edit_personal:
-#	 Persönliche Daten wie Name, Geburtstag etc. bearbeiten
+#     Persönliche Daten wie Name, Geburtstag etc. bearbeiten
 # edit_basic:
 #   Mindestesn ein Attribute der Person lässt sich ändern (intern für Auth benötigt)
 # create_person:
-#	 Neue Person eintragen
+#     Neue Person eintragen
 # delete_person:
-#	 Person löschen
+#     Person löschen
 # list_member:
 #   Anzeige aller aktuellen Vereinsmitglieder
 # list_active:
@@ -25,19 +25,19 @@
 # list_all_people:
 #   Anzeige aller aktiven und inaktiven Accounts
 # by_other:
-#	 Das können andere externe Personen in der Datenbank tun
+#     Das können andere externe Personen in der Datenbank tun
 # by_member:
-#	 Das können andere Vereinsmitglieder tun
+#     Das können andere Vereinsmitglieder tun
 # by_organizer:
-#	 Das können Organisatoren an den Teilnehmern einer Veranstaltung tun
+#     Das können Organisatoren an den Teilnehmern einer Veranstaltung tun
 # by_self:
-#	 Das kann ein Mitglied mit seinem eigenen Account tun
+#     Das kann ein Mitglied mit seinem eigenen Account tun
 # by_chairman:
-#	 Das können alle Vereinsvorstände tun
+#     Das können alle Vereinsvorstände tun
 # by_treasurer:
-#	 Das kann der Kassier tun
+#     Das kann der Kassier tun
 # by_auditor:
-#	 Das können Kassenprüfer:innen tun
+#     Das können Kassenprüfer:innen tun
 # by_admin
 #   Das können Administratoren tun
 class PersonPolicy
@@ -49,14 +49,14 @@ class PersonPolicy
   # Transitive Beziehungen werden erkannt.
 
   define_implications({
-                        edit_personal:	%i[view_private edit_basic],
+                        edit_personal: %i[view_private edit_basic],
                         edit_additional: %i[view_additional view_addresses view_contacts edit_basic],
-                        edit_settings:	%i[view_settings edit_basic],
-                        edit_payments:	[:view_payments],
+                        edit_settings: %i[view_settings edit_basic],
+                        edit_payments: [:view_payments],
                         edit_sepa_mandate: [:view_sepa_mandate],
 
-                        view_public:	[:view_additional],
-                        view_private:	%i[view_public view_payments view_addresses view_contacts view_settings
+                        view_public: [:view_additional],
+                        view_private: %i[view_public view_payments view_addresses view_contacts view_settings
                                          export],
 
                         list_all_people: [:list_active],
@@ -66,11 +66,11 @@ class PersonPolicy
 
                         by_other: [],
                         by_member: %i[view_public list_members],
-                        by_organizer: %i[by_member view_private view_settings list_all_people],
+                        by_organizer: %i[by_member view_private view_settings list_active],
                         by_self: %i[by_member view_private edit_additional edit_settings view_sepa_mandate],
                         by_chairman: %i[by_self edit_personal create_person delete_person list_all_people],
                         by_treasurer: %i[by_chairman edit_payments edit_sepa_mandate],
-                        by_auditor:	%i[by_member view_payments view_sepa_mandate],
+                        by_auditor: %i[by_member view_payments view_sepa_mandate],
                         by_admin: [:by_chairman]
                       })
 
@@ -95,8 +95,8 @@ class PersonPolicy
 
     # Rechte für die Liste der Personen
     if person == Person
-        grant :by_organizer if user.organizing_now?
-        grant :by_member if user.member?
+      grant :by_organizer if user.organizing_now?
+      grant :by_member if user.member?
     end
 
     grant :by_other
