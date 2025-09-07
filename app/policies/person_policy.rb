@@ -61,11 +61,12 @@ class PersonPolicy
 
                         list_all_people: [:list_active],
                         list_active: [:list_members],
+
                         create_person: %i[edit_personal edit_additional edit_settings],
 
                         by_other: [],
                         by_member: %i[view_public list_members],
-                        by_organizer: %i[by_member view_private view_settings],
+                        by_organizer: %i[by_member view_private view_settings list_all_people],
                         by_self: %i[by_member view_private edit_additional edit_settings view_sepa_mandate],
                         by_chairman: %i[by_self edit_personal create_person delete_person list_all_people],
                         by_treasurer: %i[by_chairman edit_payments edit_sepa_mandate],
@@ -89,7 +90,10 @@ class PersonPolicy
       grant :view_contacts if person.publish_address
     end
 
+	# Rechte für die Liste der Personen
+    grant :by_organizer if person == Person && user.organizing_now?
     grant :by_member if person == Person && user.member?
+
     grant :by_other
   end
 
