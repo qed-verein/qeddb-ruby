@@ -40,7 +40,6 @@
 #	 Das können Kassenprüfer:innen tun
 # by_admin
 #   Das können Administratoren tun
-
 class PersonPolicy
   include PunditImplications
 

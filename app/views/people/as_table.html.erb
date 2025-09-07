@@ -70,7 +70,7 @@
 
 				<td class="person_field"><%= Person.human_enum_value(:gender, person.gender) %></td>
 
-				<% if @person_policy.view_private? || person.publish_birthday %>
+				<% if @person_policy.view_private? || (person.publish && person.publish_birthday) %>
 					<td class="person_field" data-sort-value="<%= person.birthday %>">
 						<%= render_date person.birthday %>
 					</td>
@@ -80,7 +80,7 @@
 
 
 				<td class="email_field">
-					<% if @person_policy.view_private? || person.publish_email %>
+					<% if @person_policy.view_private? || (person.publish && person.publish_email) %>
 						<%= mail_to person.email_address %>
 					<% else %>
 						<%= tag.i "privat" %>
@@ -88,7 +88,7 @@
 				</td>
 
 				<td class="address_field">
-					<% if @person_policy.view_private? || person.publish_address %>
+					<% if @person_policy.view_private? || (person.publish && person.publish_address) %>
 						<%= check_unknown(person.main_address) {|a| render_inline_address(a)}	%>
 					<% else %>
 						<%= tag.i "privat" %>
@@ -96,7 +96,7 @@
 				</td>
 
 				<td class="phone_field">
-					<% if @person_policy.view_private? || person.publish_address %>
+					<% if @person_policy.view_private? || (person.publish && person.publish_address) %>
 						<%= check_unknown(person.mobile_number) {|n| mobile_phone_html(n)}	%>
 					<% else %>
 						<%= tag.i "privat" %>
