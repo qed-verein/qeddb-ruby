@@ -1,5 +1,6 @@
-class BankingPolicy
+class BankingPolicy < ApplicationPolicy
   include PunditImplications
+  include PolicyHelper
 
   define_implications(
     {
@@ -7,8 +8,9 @@ class BankingPolicy
     }
   )
 
-  def initialize(user, _unused)
-    return unless user.treasurer?
+  def initialize(user_context, _unused)
+    super
+    return unless active_treasurer?(@user, @mode)
 
     grant :by_treasurer
   end

@@ -1,5 +1,6 @@
-class HostelPolicy
+class HostelPolicy < ApplicationPolicy
   include PunditImplications
+  include PolicyHelper
 
   define_implications({
                         by_member: %i[show index],
@@ -9,10 +10,11 @@ class HostelPolicy
   alias update? edit?
   alias create? new?
 
-  def initialize(user, _hostel)
-    if user.admin? || user.chairman? || user.organizing_now?
+  def initialize(user_context, _hostel)
+    super
+    if active_admin?(@user, @mode) || active_chairman?(@user, @mode) || @user.organizing_now?
       grant :by_admin
-    elsif user.member?
+    elsif @user.member?
       grant :by_member
     end
   end
