@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module SepaExportHelper
   def sepa_export_button(event_id = nil, year = nil)
     return nil unless policy(:banking).sepa_export?
