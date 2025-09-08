@@ -137,6 +137,9 @@ de:
       edit_privacy: Datenschutz einstellen
       groups: Rechte
       edit_groups: Rechte
+    admin:
+      enter_privileged_mode: Privilegierter Modus
+      exit_privileged_mode: Standardmodus
     event:
       new: Neue Veranstaltung eintragen
       edit: Veranstaltung bearbeiten

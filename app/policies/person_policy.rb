@@ -40,8 +40,10 @@
 #     Das können Kassenprüfer:innen tun
 # by_admin
 #   Das können Administratoren tun
-class PersonPolicy
+
+class PersonPolicy < ApplicationPolicy
   include PunditImplications
+  include PolicyHelper
 
   # Baut einen Abhängigkeitsgraph für die verschieden Rechtestufen
   # Die Rechte auf linken Seite implizieren die Rechte auf rechten Seite
@@ -77,16 +79,17 @@ class PersonPolicy
   # Vergibt die Rechtestufen, je nachdem ob der Benutzer ein Mitglieder, Admin etc. ist
   # Dabei werden obige Implikationen automatisch berücksichtigt.
   def initialize(user, person)
-    grant :by_admin if user.admin?
-    grant :by_treasurer if user.treasurer?
-    grant :by_auditor if user.auditor?
-    grant :by_chairman if user.chairman?
+    super
+    grant :by_admin if active_admin?(@user, @mode)
+    grant :by_treasurer if active_treasurer?(@user, @mode)
+    grant :by_auditor if @user.auditor?
+    grant :by_chairman if active_chairman?(@user, @mode)
 
     if person.is_a?(Person)
-      grant :by_self if user.id == person.id
-      grant :by_organizer if user.organizer_of_person_now?(person)
+      grant :by_self if @user.id == person.id
+      grant :by_organizer if @user.organizer_of_person_now?(person)
 
-      if user.member? && person.member? && person.publish
+      if @user.member? && person.member? && person.publish
         grant :by_member
         grant :view_addresses if person.publish_address
         grant :view_contacts if person.publish_address
@@ -95,8 +98,8 @@ class PersonPolicy
 
     # Rechte für die Liste der Personen
     if person == Person
-      grant :by_organizer if user.organizing_now?
-      grant :by_member if user.member?
+      grant :by_organizer if @user.organizing_now?
+      grant :by_member if @user.member?
     end
 
     grant :by_other
@@ -136,23 +139,23 @@ class PersonPolicy
   # Scopes schränken die Menge der anzeigbaren Personen ein,
   #   (was man für nicht öffentliche Mitgliederprofile braucht)
   class Scope
-    attr_reader :user, :scope
+    attr_reader :user_context, :scope
 
-    def initialize(user, scope)
-      @user = user
+    def initialize(user_context, scope)
+      @user_context = user_context
       @scope = scope
     end
 
     def resolve
-      if Pundit.policy!(user, Person).list_all_people?
+      if Pundit.policy!(user_context, Person).list_all_people?
         scope.all
-      elsif Pundit.policy!(user, Person).list_active?
-        scope.where('active=? OR id=?', true, user.id)
-      elsif Pundit.policy!(user, Person).list_members?
+      elsif Pundit.policy!(user_context, Person).list_active?
+        scope.where('active=? OR id=?', true, user_context.user.id)
+      elsif Pundit.policy!(user_context, Person).list_members?
         scope.where('(active=? AND (? BETWEEN joined AND member_until)) OR id=?',
-                    true, Time.current, user.id)
+                    true, Time.current, user_context.user.id)
       else
-        scope.where(id: user.id)
+        scope.where(id: user_context.user.id)
       end
     end
   end

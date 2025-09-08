@@ -14,8 +14,9 @@
 # by_other, by_member, by_participant, by_organizer, by_chairman etc.
 #	 Analog wie bei Registrierungen
 
-class EventPolicy
+class EventPolicy < ApplicationPolicy
   include PunditImplications
+  include PolicyHelper
 
   define_implications({
                         view_event: %i[view_basic list_participants],
@@ -32,13 +33,14 @@ class EventPolicy
                         by_auditor:	%i[by_member view_payments export]
                       })
 
-  def initialize(user, event)
-    grant :by_admin if user.admin? || user.chairman?
-    grant :by_organizer if event.is_a?(Event) && user.organizer?(event) && event.still_organizable?
-    grant :by_participant if event.is_a?(Event) && user.participant?(event)
-    grant :by_member if user.member?
-    grant :by_treasurer if user.treasurer?
-    grant :by_auditor if user.auditor?
+  def initialize(user_context, event)
+    super
+    grant :by_admin if active_admin?(@user, @mode) || active_chairman?(@user, @mode)
+    grant :by_organizer if event.is_a?(Event) && @user.organizer?(event) && event.still_organizable?
+    grant :by_participant if event.is_a?(Event) && @user.participant?(event)
+    grant :by_member if @user.member?
+    grant :by_treasurer if active_treasurer?(@user, @mode)
+    grant :by_auditor if @user.auditor?
     grant :by_other
   end
 

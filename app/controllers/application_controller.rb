@@ -1,3 +1,13 @@
+# UserContext um den privilegierten Modus an die Pundit policies durchzureichen
+class UserContext
+  attr_reader :user, :mode
+
+  def initialize(user, mode)
+    @user = user
+    @mode = mode == 'privileged' ? 'privileged' : 'standard'
+  end
+end
+
 class ApplicationController < ActionController::Base
   include Pundit
 
@@ -19,6 +29,10 @@ class ApplicationController < ActionController::Base
       end
       type.all { render nothing: true, status: :forbidden }
     end
+  end
+
+  def pundit_user
+    UserContext.new(current_user, session[:mode])
   end
 
   def record_not_found_handler
