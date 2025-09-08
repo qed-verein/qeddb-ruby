@@ -60,7 +60,7 @@ class RegistrationPolicy
                            user.organizer?(reg.event) && reg.event.still_organizable?
     grant :by_self if reg.is_a?(Registration) && !reg.person.nil? && user.id == reg.person.id
     grant :by_participant if reg.is_a?(Registration) && user.participant?(reg.event)
-    grant :by_member if user.member?
+    grant :by_member if user.member? && !reg.person.nil? && reg.person.member?
     grant :by_other
   end
 
