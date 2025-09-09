@@ -28,12 +28,12 @@ module RegistrationsHelper
 
     text = registration.person.full_name
     text = content_tag :del, text if %w[rejected cancelled dummy].include?(registration.status)
-    tag.div style: 'display: inline-block' do
-	  if policy(registration).view_general?
-		concat link_to(text, registration_path(registration))
-	  else
-		concat text
-	  end
+    tag.span style: 'display: inline-block' do
+      if policy(registration).view_general?
+        concat link_to(text, registration_path(registration))
+      else
+        concat text
+      end
       concat ' '
       concat registration_information(registration)
     end
@@ -41,11 +41,18 @@ module RegistrationsHelper
 
   def registration_link_with_event_fancy(registration)
     return nil if registration.status == 'dummy' && !policy(registration).view_dummy?
-    return registration.event.title unless policy(registration).view_general?
 
     text = registration.event.title
     text = content_tag :del, text if %w[rejected cancelled dummy].include?(registration.status)
-    [link_to(text, registration_path(registration)), ' ', registration_information(registration)].join.html_safe
+    tag.span style: 'display: inline-block' do
+      if policy(registration).view_general?
+        concat link_to(text, registration_path(registration))
+      else
+        concat text
+      end
+      concat ' '
+      concat registration_information(registration)
+    end
   end
 
   def edit_registration_link(registration)
