@@ -1,43 +1,45 @@
 # *** Berechtigungsstufen für Personen ***
 # view_additional, edit_additional:
-#	 Zusätzliche Daten wie Adressen und Kontakte
+#     Zusätzliche Daten wie Adressen und Kontakte
 # view_settings, edit_settings:
-#	 Einstellungen zu Datenschutz und Mailinglisten
+#     Einstellungen zu Datenschutz und Mailinglisten
 # view_payments, edit_payments:
-#	 Überweisungen und Finanzen
+#     Überweisungen und Finanzen
 # view_public:
-#	 Anzeige aller öffentlichen Attribute (z.B. für alle Mitglieder)
+#     Anzeige aller öffentlichen Attribute (z.B. für alle Mitglieder)
 # view_private:
-#	 Anzeige aller privaten Attribute (z.B. nur für spezielle Personen)
+#     Anzeige aller privaten Attribute (z.B. nur für spezielle Personen)
 # edit_personal:
-#	 Persönliche Daten wie Name, Geburtstag etc. bearbeiten
+#     Persönliche Daten wie Name, Geburtstag etc. bearbeiten
 # edit_basic:
 #   Mindestesn ein Attribute der Person lässt sich ändern (intern für Auth benötigt)
 # create_person:
-#	 Neue Person eintragen
+#     Neue Person eintragen
 # delete_person:
-#	 Person löschen
-# list_published_people:
-#   Anzeige aller veröffentlichen Mitglieder
+#     Person löschen
+# list_member:
+#   Anzeige aller aktuellen Vereinsmitglieder
+# list_active:
+#   Anzeige aller aktiven Accounts
+#   (insb. auch Nichtmitglieder, die sich in der DB anmelden können)
 # list_all_people:
-#   Anzeige sämtlicher Mitglieder aufgelistet werden
+#   Anzeige aller aktiven und inaktiven Accounts
 # by_other:
-#	 Das können andere externe Personen in der Datenbank tun
+#     Das können andere externe Personen in der Datenbank tun
 # by_member:
-#	 Das können andere Vereinsmitglieder tun
+#     Das können andere Vereinsmitglieder tun
 # by_organizer:
-#	 Das können Organisatoren an den Teilnehmern einer Veranstaltung tun
+#     Das können Organisatoren an den Teilnehmern einer Veranstaltung tun
 # by_self:
-#	 Das kann ein Mitglied mit seinem eigenen Account tun
+#     Das kann ein Mitglied mit seinem eigenen Account tun
 # by_chairman:
-#	 Das können alle Vereinsvorstände tun
+#     Das können alle Vereinsvorstände tun
 # by_treasurer:
-#	 Das kann der Kassier tun
+#     Das kann der Kassier tun
 # by_auditor:
-#	 Das können Kassenprüfer:innen tun
+#     Das können Kassenprüfer:innen tun
 # by_admin
 #   Das können Administratoren tun
-
 class PersonPolicy
   include PunditImplications
 
@@ -47,26 +49,28 @@ class PersonPolicy
   # Transitive Beziehungen werden erkannt.
 
   define_implications({
-                        edit_personal:	%i[view_private edit_basic],
+                        edit_personal: %i[view_private edit_basic],
                         edit_additional: %i[view_additional view_addresses view_contacts edit_basic],
-                        edit_settings:	%i[view_settings edit_basic],
-                        edit_payments:	[:view_payments],
+                        edit_settings: %i[view_settings edit_basic],
+                        edit_payments: [:view_payments],
                         edit_sepa_mandate: [:view_sepa_mandate],
 
-                        view_public:	[:view_additional],
-                        view_private:	%i[view_public view_payments view_addresses view_contacts view_settings
+                        view_public: [:view_additional],
+                        view_private: %i[view_public view_payments view_addresses view_contacts view_settings
                                          export],
 
-                        list_all_people: [:list_published_people],
+                        list_all_people: [:list_active],
+                        list_active: [:list_members],
+
                         create_person: %i[edit_personal edit_additional edit_settings],
 
                         by_other: [],
-                        by_member: %i[view_public list_published_people],
-                        by_organizer: %i[by_member view_private view_settings],
+                        by_member: %i[view_public list_members],
+                        by_organizer: %i[by_member view_private view_settings list_active],
                         by_self: %i[by_member view_private edit_additional edit_settings view_sepa_mandate],
                         by_chairman: %i[by_self edit_personal create_person delete_person list_all_people],
                         by_treasurer: %i[by_chairman edit_payments edit_sepa_mandate],
-                        by_auditor:	%i[by_member view_payments view_sepa_mandate],
+                        by_auditor: %i[by_member view_payments view_sepa_mandate],
                         by_admin: [:by_chairman]
                       })
 
@@ -77,16 +81,24 @@ class PersonPolicy
     grant :by_treasurer if user.treasurer?
     grant :by_auditor if user.auditor?
     grant :by_chairman if user.chairman?
-    grant :by_self if person.is_a?(Person) && user.id == person.id
-    grant :by_organizer if person.is_a?(Person) && user.organizer_of_person_now?(person)
 
-    if person.is_a?(Person) && user.member? && person.publish
-      grant :by_member
-      grant :view_addresses if person.publish_address
-      grant :view_contacts if person.publish_address
+    if person.is_a?(Person)
+      grant :by_self if user.id == person.id
+      grant :by_organizer if user.organizer_of_person_now?(person)
+
+      if user.member? && person.member? && person.publish
+        grant :by_member
+        grant :view_addresses if person.publish_address
+        grant :view_contacts if person.publish_address
+      end
     end
 
-    grant :by_member if person == Person && user.member?
+    # Rechte für die Liste der Personen
+    if person == Person
+      grant :by_organizer if user.organizing_now?
+      grant :by_member if user.member?
+    end
+
     grant :by_other
   end
 
@@ -131,8 +143,11 @@ class PersonPolicy
     def resolve
       if Pundit.policy!(user, Person).list_all_people?
         scope.all
-      elsif Pundit.policy!(user, Person).list_published_people?
-        scope.where('(active=? AND publish=?) OR id=?', true, true, user.id)
+      elsif Pundit.policy!(user, Person).list_active?
+        scope.where('active=? OR id=?', true, user.id)
+      elsif Pundit.policy!(user, Person).list_members?
+        scope.where('(active=? AND (? BETWEEN joined AND member_until)) OR id=?',
+                    true, Time.current, user.id)
       else
         scope.where(id: user.id)
       end

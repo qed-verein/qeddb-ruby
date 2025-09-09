@@ -116,7 +116,7 @@ class PeopleController < ApplicationController
     when :new, :create
       authorize Person, :create_person?
     when :index, :index_as_table
-      authorize Person, :list_published_people?
+      authorize Person, :list_members?
     when :destroy
       authorize @person, :delete_person?
     else

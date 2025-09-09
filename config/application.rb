@@ -26,7 +26,7 @@ module QeddbRuby
     config.action_controller.default_url_options = default_url_options
     config.action_mailer.default_url_options = default_url_options
 
-    config.lock_event_after_end = 100.years
+    config.lock_event_after_end = 3.years
     config.max_deferred_payment = 2.years
     config.membership_fee	= 5
     config.external_surcharge	= 15

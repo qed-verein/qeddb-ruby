@@ -19,7 +19,7 @@ module PeopleHelper
   end
 
   def people_link
-    return nil unless policy(Person).list_published_people?
+    return nil unless policy(Person).list_members?
 
     link_to Person.model_name.human(count: :other), people_path
   end

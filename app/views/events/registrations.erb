@@ -65,31 +65,37 @@
 </thead>
 <tbody>
 	<% @event.registrations.each do |r| %>
+		<% view_registration = policy(r).view_general? && r.person.publish %>
 		<% if r.status != 'dummy' || view_dummy %>
 			<tr class='<%= 'inactive' if !r.active? %>'>
 				<td></td>
-				<td><%= link_to r.person.first_name, r %></td>
-				<td><%= link_to r.person.last_name, r %></td>
+				<% if view_registration %>
+					<td><%= link_to r.person.first_name, r %></td>
+					<td><%= link_to r.person.last_name, r %></td>
+				<% else %>
+					<td><%= r.person.first_name %></td>
+					<td><%= r.person.last_name %></td>
+				<% end %>
 				<td class="person_field"><%= Person.human_enum_value(:gender, r.person.gender)%></td>
 
-				<% if view_private || r.person.publish_birthday %>
+				<% if view_private || (view_registration && r.person.publish_birthday) %>
 					<td class="person_field" data-sort-value="<%= r.person.birthday %>"><%= render_date r.person.birthday %></td>
 				<% else %>
 					<td class="person_field"><%= tag.i("privat") %></td>
 				<% end %>
 
 				<td class="phone_field">
-					<%= (view_private || r.person.publish_address) ?
+					<%= (view_private || (view_registration && r.person.publish_address)) ?
 						check_unknown(r.person.mobile_number) {|x| mobile_phone_html(x)} : tag.i("privat") %>
 				</td>
 
 				<td class="address_field">
-					<%= (view_private || r.person.publish_email) ?
+					<%= (view_private || (view_registration && r.person.publish_email)) ?
 						mail_to(r.person.email_address, r.person.email_address) : tag.i("privat") %>
 				</td>
 
 				<td class="address_field">
-					<%= (view_private || r.person.publish_address) ?
+					<%= (view_private || (view_registration && r.person.publish_address)) ?
 						 check_unknown(r.person.main_address) {|x| render_inline_address(x)} : tag.i("privat") %>
 				</td>
 
