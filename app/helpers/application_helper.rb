@@ -81,7 +81,7 @@ module ApplicationHelper
     end
   end
 
-  # kann user in den priviliegierten Modus wechseln?
+  # kann user in den privilegierten Modus wechseln?
   def toggle_privileged_mode?
     current_user.admin? || current_user.chairman? || current_user.treasurer?
   end
