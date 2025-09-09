@@ -75,9 +75,9 @@ module ApplicationHelper
     return unless toggle_privileged_mode?
 
     if session[:mode] == 'privileged'
-      icon_button t('actions.admin.exit_privileged_mode'), 'lock_open', send("admin_standard_mode_path")
+      icon_button t('actions.admin.exit_privileged_mode'), 'lock_open', send('admin_standard_mode_path')
     else
-      icon_button t('actions.admin.enter_privileged_mode'), 'lock', send("admin_privileged_mode_path")
+      icon_button t('actions.admin.enter_privileged_mode'), 'lock', send('admin_privileged_mode_path')
     end
   end
 
