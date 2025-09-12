@@ -72,3 +72,31 @@ group_mathematikerkonferenz_teilnehmer:
     description: Alle Teilnehmer der Mathematikerkonferenz
     mode: automatic
     program: participants
+
+group_physikerkonferenz_orgas:
+    title: Orgas der Physikerkonferenz
+    event: event_physikerkonferenz
+    description: Alle Orgas der Physikerkonferenz
+    mode: automatic
+    program: organizers
+
+group_physikerkonferenz_teilnehmer:
+    title: Teilnehmer der Physikerkonferenz
+    event: event_physikerkonferenz
+    description: Alle Teilnehmer der Physikerkonferenz
+    mode: automatic
+    program: participants
+
+group_historikerkonferenz_orgas:
+    title: Orgas der Historikerkonferenz
+    event: event_historikerkonferenz
+    description: Alle Orgas der Historikerkonferenz
+    mode: automatic
+    program: organizers
+
+group_historikerkonferenz_teilnehmer:
+    title: Teilnehmer der Historikerkonferenz
+    event: event_historikerkonferenz
+    description: Alle Teilnehmer der Historikerkonferenz
+    mode: automatic
+    program: participants
