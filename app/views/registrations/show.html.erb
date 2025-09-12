@@ -56,7 +56,11 @@
 								<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount}  %></dd>
 								<% @registration.charge_modifiers.each do |mod| %>
 									<dt><%= mod.reason %></dt>
-									<dd><%= check_unknown(mod.money_amount) {number_to_currency mod.money_amount}  %></dd>
+									<dd><%= check_unknown(mod.money_amount) {number_to_currency mod.money_amount}  %>
+									<% unless mod.comment.blank? %>
+										</br><%= mod.comment %>
+									<% end %>
+									</dd>
 								<% end %>
 							</dl>
 						</details>
