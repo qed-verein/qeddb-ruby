@@ -1,6 +1,7 @@
 # Die Klasse "Mailinglist" verwaltet einen Emailverteiler.
 # Für jeden Emailverteiler kann jeweils eine Gruppe für die Sender, Empfänger und Moderatoren angegeben werden.
-# Darüberhinaus können auch manuelle Emailadressen hinzugefügt werden (z.B. für Leute die nicht in der Datenbank stehen).
+# Darüberhinaus können auch manuelle Emailadressen hinzugefügt werden.
+# (z.B. für Leute die nicht in der Datenbank stehen)
 
 class Mailinglist < ApplicationRecord
   # Versionskontrolle
@@ -32,8 +33,11 @@ class Mailinglist < ApplicationRecord
   validates :description, length: { maximum: 1000 }
 
   # Nötig, da das Formular für Unterkünfte auch eine Liste von Eintragungen mitschickt
-  accepts_nested_attributes_for :subscriptions, allow_destroy: true,
-                                                reject_if: proc { |attr| reject_blank_entries attr, :email_address }
+  accepts_nested_attributes_for(
+    :subscriptions,
+    allow_destroy: true,
+    reject_if: proc { |attr| reject_blank_entries? attr, :email_address }
+  )
   after_initialize :set_defaults
 
   # Standardwerte für Emailverteiler
