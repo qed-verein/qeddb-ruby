@@ -1,5 +1,6 @@
-class OutstandingPaymentsPolicy
+class OutstandingPaymentsPolicy < ApplicationPolicy
   include PunditImplications
+  include PolicyHelper
 
   define_implications(
     {
@@ -8,8 +9,9 @@ class OutstandingPaymentsPolicy
     }
   )
 
-  def initialize(user, _)
-    grant :by_treasurer if user.treasurer?
-    grant :by_auditor if user.auditor?
+  def initialize(user_context, _)
+    super
+    grant :by_treasurer if active_treasurer?(@user, @mode)
+    grant :by_auditor if @user.auditor?
   end
 end
