@@ -84,7 +84,7 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
   gem 'drb', '~> 2.2'
-  gem 'selenium-webdriver', '~> 4.11'
+  gem 'selenium-webdriver', '~> 4.11', '<= 4.32.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
