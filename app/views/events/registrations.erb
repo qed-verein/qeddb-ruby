@@ -69,7 +69,7 @@
 		<% if r.status != 'dummy' || view_dummy %>
 			<tr class='<%= 'inactive' if !r.active? %>'>
 				<td></td>
-				<% if view_registration %>
+				<% if view_private || view_registration %>
 					<td><%= link_to r.person.first_name, r %></td>
 					<td><%= link_to r.person.last_name, r %></td>
 				<% else %>
