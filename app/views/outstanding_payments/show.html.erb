@@ -33,8 +33,8 @@
 		<td><%= link_to r.person.first_name, r.person %></td>
 		<td><%= link_to r.person.last_name, r.person %></td>
 		<td><%= link_to r.event.title, r %></td>
-		<td data-sort-value="<%= r.money_amount || 0 %>">
-			<%= check_unknown(r.money_amount) {|x| number_to_currency x} %>
+		<td data-sort-value="<%= r.effective_money_amount || 0 %>">
+			<%= check_unknown(r.effective_money_amount) {|x| number_to_currency x} %>
 		</td>
 		<td data-sort-value="<%= r.to_be_paid || 0 %>">
 			<%= check_unknown(r.to_be_paid) {|x| number_to_currency x} %>

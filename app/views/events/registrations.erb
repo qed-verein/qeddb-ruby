@@ -108,7 +108,7 @@
 				<td class="travel_field"><%= render_string r.station_departure %></td>
 				<td class="travel_field"><%= render_string r.railway_discount %></td>
 				<% if view_private %>
-				<td class="payment_field" data-sort-value="<%= r.money_amount || 0 %>"> <%= check_unknown(r.money_amount) {|x| number_to_currency x} %></td>
+				<td class="payment_field" data-sort-value="<%= r.effective_money_amount || 0 %>"> <%= check_unknown(r.effective_money_amount) {|x| number_to_currency x} %></td>
 				<td class="payment_field" data-sort-value="<%= r.to_be_paid || 0 %>"> <%= check_unknown(r.to_be_paid) {|x| number_to_currency x} %></td>
 				<td class="payment_field"><%= render_yes_no r.effective_member_discount %></td>
 				<td class="payment_field"><%= render_string r.other_discounts %></td>
