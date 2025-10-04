@@ -87,7 +87,7 @@
 			<% end %>
 
 			<dt><%= Registration.human_attribute_name :effective_member_discount %>:</dt>
-			<dd><%= render_yes_no @registration.effective_member_discount %></dd>
+			<dd><%= render_yes_no @registration.effective_member_discount? %></dd>
 
 			<dt><%= Registration.human_attribute_name :other_discounts %>:</dt>
 			<dd><%= render_string @registration.other_discounts %></dd>

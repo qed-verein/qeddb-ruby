@@ -36,7 +36,10 @@ class PasswordResetsController < ApplicationController
   end
 
   def invalid_password_token
-    redirect_to new_password_reset_url, notice: 'Der Link zum Neusetzen des Benutzerpasswortes ist ungültig oder abgelaufen. ' \
-                                                'Bitte beginne den Vorgang von vorne.'
+    redirect_to(
+      new_password_reset_url,
+      notice: 'Der Link zum Neusetzen des Benutzerpasswortes ist ungültig oder abgelaufen. ' \
+              'Bitte beginne den Vorgang von vorne.'
+    )
   end
 end

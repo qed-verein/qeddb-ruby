@@ -21,7 +21,7 @@ class BankingStatementImportController < ApplicationController
 
     begin
       @results = import_banking_csv(stream.read)
-    rescue Exception => e
+    rescue StandardError => e
       flash[:error]	= t('actions.import_banking_statements.reading_failed') + ": #{e.message}"
     end
 
