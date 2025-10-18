@@ -59,10 +59,9 @@ class EventsController < ApplicationController
   def edit_own_registration
     registration = Registration.find_by(event: @event, person: current_user)
     if registration
-      redirect_to self_registration_path(registration), notice:
-        'Du bist bereits zu dieser Veranstaltung angemeldet. Leite zur bestehender Anmeldung weiter'
+      redirect_to self_registration_path(registration), notice: t('.already_registered')
     else
-      redirect_to event_path(@event), notice: 'Anmeldung nicht gefunden.'
+      redirect_to event_path(@event), notice: t('.not_registered')
     end
   end
 

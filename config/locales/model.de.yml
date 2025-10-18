@@ -299,6 +299,8 @@ de:
     event:
       reference_line:
         charset: darf nur Buchstaben, Zahlen, Leerzeichen und Bindestrichte enthalten
+    registration:
+      must_accept_terms_of_service: Die Teilnahmebedingungen müssen akzeptiert werden
 
 
   time:

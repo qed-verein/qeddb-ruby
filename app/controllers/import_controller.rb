@@ -19,7 +19,7 @@ class ImportController < ApplicationController
     @import_errors = import_json(json)
 
     if @import_errors.empty?
-      redirect_to import_path, notice: 'Import erfolgreich'
+      redirect_to import_path, notice: t('.success')
     else
       render :prepare
     end
