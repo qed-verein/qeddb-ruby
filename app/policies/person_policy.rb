@@ -56,7 +56,7 @@ class PersonPolicy
                         edit_sepa_mandate: [:view_sepa_mandate],
 
                         view_public: [:view_additional],
-                        view_private: %i[view_public view_payments view_addresses view_contacts view_settings
+                        view_private: %i[view_public view_addresses view_contacts view_settings
                                          export],
 
                         list_all_people: [:list_active],
