@@ -52,12 +52,12 @@ class PersonPolicy
                         edit_personal: %i[view_private edit_basic],
                         edit_additional: %i[view_additional view_addresses view_contacts edit_basic],
                         edit_settings: %i[view_settings edit_basic],
-                        edit_payments: [:view_payments],
+                        edit_private: %i[edit_personal edit_additional edit_settings view_private],
                         edit_sepa_mandate: [:view_sepa_mandate],
+                        edit_payments: %i[view_payments edit_payments],
 
                         view_public: [:view_additional],
-                        view_private: %i[view_public view_addresses view_contacts view_settings
-                                         export],
+                        view_private: %i[view_public view_addresses view_contacts view_settings export],
 
                         list_all_people: [:list_active],
                         list_active: [:list_members],
@@ -67,8 +67,8 @@ class PersonPolicy
                         by_other: [],
                         by_member: %i[view_public list_members],
                         by_organizer: %i[by_member view_private view_settings list_active],
-                        by_self: %i[by_member view_private edit_additional edit_settings view_sepa_mandate],
-                        by_chairman: %i[by_self edit_personal create_person delete_person list_all_people],
+                        by_self: %i[by_member edit_private view_payments],
+                        by_chairman: %i[by_member edit_private create_person delete_person list_all_people],
                         by_treasurer: %i[by_chairman edit_payments edit_sepa_mandate],
                         by_auditor: %i[by_member view_payments view_sepa_mandate],
                         by_admin: [:by_chairman]
