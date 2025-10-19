@@ -246,8 +246,8 @@ ActiveRecord::Schema.define(version: 20_250_421_095_135) do
     		-- Liefert die Liste aller momentan gültigen Gruppenzugehörigkeiten
 		SELECT group_id, groupable_type, groupable_id
 		FROM affiliations
-		WHERE (start IS NULL OR start <= DATETIME('now'))
-			AND (end IS NULL OR end >= DATETIME('now'))
+		WHERE (start IS NULL OR start <= CURRENT_TIMESTAMP)
+			AND (end IS NULL OR end >= CURRENT_TIMESTAMP)
   SQL
   create_view 'recursive_subgroups', sql_definition: <<-SQL
     		/* Erzeugt eine SQL-View, welche für jede Gruppe alle hinzugefügten Untergruppen
@@ -281,8 +281,8 @@ ActiveRecord::Schema.define(version: 20_250_421_095_135) do
   	UNION
   	SELECT groups.id, people.id
   	FROM groups, people
-  	WHERE (groups.program = 4 AND people.active AND (DATETIME('now') BETWEEN people.joined AND people.member_until)) OR
-  		  (groups.program = 5 AND people.active AND (NOT DATETIME('now') BETWEEN people.joined AND people.member_until OR
+  	WHERE (groups.program = 4 AND people.active AND (CURRENT_TIMESTAMP BETWEEN people.joined AND people.member_until)) OR
+  		  (groups.program = 5 AND people.active AND (NOT CURRENT_TIMESTAMP BETWEEN people.joined AND people.member_until OR
   				people.joined IS NULL OR people.member_until IS NULL)) OR
   		  (groups.program = 6 AND people.active AND people.newsletter)),
   -- Liste der manuell eingetragenen Gruppenmitglieder
