@@ -34,7 +34,6 @@ Anschließend müssen die JavaScript-Abhängigkeiten mit yarn installiert werden
 Datenbanksetup
 ==============
 
-Möchte man MYSQL benutzen, so muss vorher "ruby db/mysql_patch.rb" ausgeführt werden.
 Falls noch keine Datenbank erstellt wurde, muss anschließend
 
     bin/rails db:setup
