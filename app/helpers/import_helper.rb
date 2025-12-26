@@ -8,8 +8,10 @@ module ImportHelper
   def import_object(data, klass)
     description = "*** #{data[:type]} #{data[:id]} ***"
     if data[:type] != klass.name
-      return [description, format('Invalid object type: found %s, expected %s',
-                                  data[:type], klass.name)]
+      return [description, format(
+        'Invalid object type: found %<type>s, expected %<class_name>s',
+        type: data[:type], class_name: klass.name
+      )]
     end
 
     object = klass.find_by(id: data[:id]) || klass.new
@@ -77,10 +79,9 @@ module ImportHelper
         errors.push import_object(hostel, Hostel)
 
         # Importiere die Adresse der Unterkunft
-        errors.push import_object(hostel[:address].merge({
-                                                           addressable_id: hostel[:id],
-                                                           addressable_type: 'Hostel'
-                                                         }), Address)
+        errors.push import_object(
+          hostel[:address].merge({ addressable_id: hostel[:id], addressable_type: 'Hostel' }), Address
+        )
       end
 
       # Importiere alle Gruppen
@@ -103,9 +104,9 @@ module ImportHelper
 
         # Importiere alle Abonnements eines Emailverteilers
         mailinglist[:subscriptions]&.each do |subscription|
-          errors.push import_object(subscription.merge({
-                                                         mailinglist_id: mailinglist[:id]
-                                                       }), Subscription)
+          errors.push import_object(
+            subscription.merge({ mailinglist_id: mailinglist[:id] }), Subscription
+          )
         end
       end
 

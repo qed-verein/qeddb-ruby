@@ -13,8 +13,8 @@ class Event < ApplicationRecord
   default_scope { order(start: :desc) }
 
   # Alle Anmeldungen für dieser Veranstaltung
-  has_many :registrations, -> { includes(:person).order('people.last_name') }, dependent: :destroy,
-                                                                               inverse_of: :event
+  has_many :registrations, -> { includes(:person).order('people.last_name') },
+           dependent: :destroy, inverse_of: :event
   # Die zugehörigen Personen dieser Anmeldungen
   has_many :people, through: :registrations
 
@@ -34,7 +34,7 @@ class Event < ApplicationRecord
   # ~ has_one :organizer_mailing_list, :through :organizer_group, class_name: 'Mailinglist'
   # ~ has_one :participant_mailing_list, :through :participant_group,  class_name: 'Mailinglist'
 
-  accepts_nested_attributes_for :event_payments, allow_destroy: true, reject_if: proc { |a| reject_blank_entries a }
+  accepts_nested_attributes_for :event_payments, allow_destroy: true, reject_if: proc { |a| reject_blank_entries? a }
 
   # Verweis auf die Unterkunft
   belongs_to :hostel, optional: true
@@ -60,7 +60,8 @@ class Event < ApplicationRecord
   end
 
   # Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
-  # Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden. (siehe hierzu model/group.rb)
+  # Diese können anschließend in Rechtemanagement oder in den Mailverteilern weiterverwendet werden.
+  # (siehe hierzu model/group.rb)
   def organizer_group_data(title)
     {
       title: format('Organisatoren von „%s“', title),

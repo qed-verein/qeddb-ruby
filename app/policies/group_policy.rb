@@ -2,6 +2,7 @@ class GroupPolicy < AdminPolicy
   # Wie AdminPolicy, aber einige der vordefinierten Gruppen sollen auch
   # von Admins nicht geändert beziehungsweise gelöscht werden dürfen
   def initialize(user, group)
+    super
     return unless user.admin? || user.chairman?
 
     if group.is_a?(Group)

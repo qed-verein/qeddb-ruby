@@ -27,13 +27,18 @@ module VersionsHelper
   def version_link(version)
     return nil unless policy(version).show?
 
-    link_to format('%s %d - rev %d', version.item_type, version.item_id, version.index), version_path(version)
+    link_to format(
+      '%<type>s %<id>d - rev %<index>d',
+      type: version.item_type, id: version.item_id, index: version.index
+    ), version_path(version)
   end
 
   def revert_link(version)
     link_to t('actions.version.revert'), revert_version_path(version), method: :patch, data: {
-      confirm: format('Object %s-%d auf Version %d zurücksetzen?',
-                      version.item_type, version.item_id, version.index)
+      confirm: format(
+        'Object %<type>s-%<id>d auf Version %<index>d zurücksetzen?',
+        type: version.item_type, id: version.item_id, index: version.index
+      )
     }
   end
 end

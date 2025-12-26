@@ -19,12 +19,12 @@ module ApplicationHelper
     '<i>k.A.</i>'.html_safe
   end
 
-  def check_unknown(x)
-    x.nil? ? unknown_html : yield(x)
+  def check_unknown(str)
+    str.nil? ? unknown_html : yield(str)
   end
 
-  def check_blank(x)
-    x.blank? ? blank_html : yield(x)
+  def check_blank(str)
+    str.blank? ? blank_html : yield(str)
   end
 
   def render_yes_no(boolean)

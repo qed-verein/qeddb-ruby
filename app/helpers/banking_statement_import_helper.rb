@@ -46,7 +46,7 @@ module BankingStatementImportHelper
   def find_person(name)
     matches = Person.all.select { |person| person.reference_line.gsub(/ /, '') == name }
     sole_element matches
-  rescue Exception => e
+  rescue StandardError => e
     case e.message
     when 'None'
       raise "Keine Person mit Namen #{name} gefunden."
@@ -62,7 +62,7 @@ module BankingStatementImportHelper
     event_str.gsub!(/20\d\d/) { |match| match.delete_prefix('20') }
     begin
       sole_element(Event.all.select { |event| event.reference_line.gsub(/ /, '') == event_str })
-    rescue Exception => e
+    rescue StandardError => e
       case e.message
       when 'None'
         raise "Keine Veranstaltung mit Namen #{event_str} gefunden."
@@ -140,8 +140,15 @@ module BankingStatementImportHelper
       if registration.payment_complete
         raise "Person #{person.full_name} schon für die Veranstaltung #{event.title} bezahlt."
       end
+
       unless registration.to_be_paid == amount
-        raise "Person #{person.full_name} muss #{registration.to_be_paid}€ für die Veranstaltung #{event.title} zahlen, nicht #{amount}€."
+        raise format(
+          'Person %<name>s muss %<to_be_paid>s€ für die Veranstaltung %<event_title>s zahlen, nicht %<amount>s€.',
+          name: person.full_name,
+          to_be_paid: registration.to_be_paid,
+          event_title: event.title,
+          amount: amount
+        )
       end
     end
   end
@@ -182,7 +189,7 @@ module BankingStatementImportHelper
     payment = parse_line(record)
     validate_payment payment
     apply_payment payment
-  rescue Exception => e
+  rescue StandardError => e
     e.message
   end
 

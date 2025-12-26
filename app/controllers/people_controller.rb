@@ -4,8 +4,11 @@ class PeopleController < ApplicationController
   breadcrumb Person.model_name.human(count: :other), :people_path
 
   before_action :set_all_people, only: %i[index index_as_table]
-  before_action :set_person, only: %i[show addresses registrations privacy payments sepa_mandate groups
-                                      edit edit_addresses edit_privacy edit_payments edit_sepa_mandate edit_groups update destroy destroy_sepa_mandate]
+  before_action :set_person, only: %i[
+    show addresses registrations privacy payments sepa_mandate groups
+    edit edit_addresses edit_privacy edit_payments edit_sepa_mandate edit_groups update
+    destroy destroy_sepa_mandate
+  ]
   before_action :basic_authorization
 
   def index; end
