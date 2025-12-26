@@ -1,0 +1,41 @@
+services:
+  base:
+    build:
+      dockerfile_inline: |
+        FROM ruby:3.3
+        RUN apt-get update -y && apt-get install -y yarnpkg
+        WORKDIR /app
+        COPY Gemfile Gemfile.lock package.json yarn.lock .
+        RUN gem install bundle
+        RUN bundle config set --local path 'vendor/bundle'
+        RUN bundle install
+        RUN yarnpkg install
+    working_dir: /app
+    volumes:
+      - "./app:/app/app"
+      - "./test:/app/test"
+      - "./public:/app/public"
+      - "./bin:/app/bin"
+      - "./config:/app/config"
+      - "./db:/app/db"
+      - "./Rakefile:/app/Rakefile"
+      - "./config.ru:/app/config.ru"
+    ports:
+      - "3000:3000"
+    profiles: [ "dependency_only" ]
+
+  migrate:
+    extends: base
+    command: "bin/rails db:migrate"
+    profiles: [ "migrations" ]
+
+  load_fixtures:
+    extends: base
+    command: "bin/rails db:fixtures:load"
+    profiles: [ "fixtures" ]
+
+  qeddb:
+    extends: "base"
+    profiles: [ "" ]
+    command: bin/rails server -b ${RAILS_HTTP_HOST:-0.0.0.0}
+
