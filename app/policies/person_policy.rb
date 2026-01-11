@@ -4,7 +4,7 @@
 # view_settings, edit_settings:
 #     Einstellungen zu Datenschutz und Mailinglisten
 # view_payments, edit_payments:
-#     Überweisungen und Finanzen
+#     Überweisungen, Finanzen, SEPA-Mandat
 # view_public:
 #     Anzeige aller öffentlichen Attribute (z.B. für alle Mitglieder)
 # view_private:
@@ -53,7 +53,6 @@ class PersonPolicy
                         edit_additional: %i[view_additional view_addresses view_contacts edit_basic],
                         edit_settings: %i[view_settings edit_basic],
                         edit_private: %i[edit_additional edit_settings view_private],
-                        edit_sepa_mandate: [:view_sepa_mandate],
                         edit_payments: %i[view_payments edit_payments],
 
                         view_public: [:view_additional],
@@ -67,11 +66,11 @@ class PersonPolicy
                         by_other: [],
                         by_member: %i[view_public list_members],
                         by_organizer: %i[by_member view_private view_settings list_active],
-                        by_self: %i[by_member edit_private view_payments view_sepa_mandate],
+                        by_self: %i[by_member edit_private view_payments],
                         by_chairman: %i[by_member edit_personal edit_private create_person delete_person
                                         list_all_people],
-                        by_treasurer: %i[by_chairman edit_payments edit_sepa_mandate],
-                        by_auditor: %i[by_member view_payments view_sepa_mandate],
+                        by_treasurer: %i[by_chairman edit_payments],
+                        by_auditor: %i[by_member view_payments],
                         by_admin: [:by_chairman]
                       })
 
@@ -120,16 +119,9 @@ class PersonPolicy
       editable.push :account_name, :first_name, :last_name, :birthday, :gender, :joined, :quitted, :active
     end
     if edit_payments?
-      editable.push({ payments_attributes:
-        %i[id payment_type start end transfer_date amount comment _destroy] })
-    end
-    if edit_sepa_mandate?
-      editable.push(
-        { sepa_mandate_attributes: %i[
-          id mandate_reference signature_date iban bic name_account_holder
-          sequence_type sponsor_membership allow_all_payments _destroy
-        ] }
-      )
+      editable.push({ payments_attributes: %i[id payment_type start end transfer_date amount comment _destroy] })
+      editable.push({ sepa_mandate_attributes: %i[id mandate_reference signature_date iban bic name_account_holder
+                                                  sequence_type sponsor_membership allow_all_payments _destroy] })
     end
     editable
   end

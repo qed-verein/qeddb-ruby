@@ -49,13 +49,13 @@ module PeopleHelper
   end
 
   def edit_sepa_mandate_person_link(person)
-    return nil unless policy(person).edit_sepa_mandate?
+    return nil unless policy(person).edit_payments?
 
     icon_button t('actions.person.edit_sepa_mandate'), 'attach_money', edit_sepa_mandate_person_path(person)
   end
 
   def delete_sepa_mandate_link(person)
-    return nil unless policy(person).edit_sepa_mandate?
+    return nil unless policy(person).edit_payments?
 
     link_to delete_sepa_mandate_person_path(person),
             method: :delete,
