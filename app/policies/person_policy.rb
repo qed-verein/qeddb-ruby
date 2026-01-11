@@ -53,7 +53,7 @@ class PersonPolicy
                         edit_additional: %i[view_additional view_addresses view_contacts edit_basic],
                         edit_settings: %i[view_settings edit_basic],
                         edit_private: %i[edit_additional edit_settings view_private],
-                        edit_payments: %i[view_payments edit_payments],
+                        edit_payments: %i[view_payments],
 
                         view_public: [:view_additional],
                         view_private: %i[view_public view_addresses view_contacts view_settings export],
