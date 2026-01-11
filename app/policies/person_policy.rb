@@ -65,7 +65,7 @@ class PersonPolicy
 
                         by_other: [],
                         by_member: %i[view_public list_members],
-                        by_organizer: %i[by_member view_private view_settings list_active],
+                        by_organizer: %i[by_member view_private list_active],
                         by_self: %i[by_member edit_private view_payments],
                         by_chairman: %i[by_member edit_personal edit_private create_person delete_person
                                         list_all_people],
