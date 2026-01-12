@@ -40,7 +40,7 @@ class EventPolicy < ApplicationPolicy
     grant :by_participant if event.is_a?(Event) && @user.participant?(event)
     grant :by_member if @user.member?
     grant :by_treasurer if active_treasurer?(@user, @mode)
-    grant :by_auditor if @user.auditor?
+    grant :by_auditor if active_auditor?(@user, @mode)
     grant :by_other
   end
 

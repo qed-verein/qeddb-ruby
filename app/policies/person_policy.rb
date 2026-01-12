@@ -82,7 +82,7 @@ class PersonPolicy < ApplicationPolicy
     super
     grant :by_admin if active_admin?(@user, @mode)
     grant :by_treasurer if active_treasurer?(@user, @mode)
-    grant :by_auditor if @user.auditor?
+    grant :by_auditor if active_auditor?(@user, @mode)
     grant :by_chairman if active_chairman?(@user, @mode)
 
     if person.is_a?(Person)

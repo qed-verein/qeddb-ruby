@@ -13,4 +13,9 @@ module PolicyHelper
   def active_treasurer?(user, mode)
     user&.treasurer? && mode == 'privileged'
   end
+
+  # ist user ein Auditor und im privilegierten Modus?
+  def active_auditor?(user)
+    user&.auditor? && mode == 'privileged'
+  end
 end
