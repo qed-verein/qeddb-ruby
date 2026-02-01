@@ -15,7 +15,7 @@ module PolicyHelper
   end
 
   # ist user ein Auditor und im privilegierten Modus?
-  def active_auditor?(user)
+  def active_auditor?(user, mode)
     user&.auditor? && mode == 'privileged'
   end
 end
