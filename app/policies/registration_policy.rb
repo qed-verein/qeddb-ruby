@@ -30,8 +30,9 @@
 # by_admin
 #   Das dürfen Administratoren tun
 
-class RegistrationPolicy
+class RegistrationPolicy < ApplicationPolicy
   include PunditImplications
+  include PolicyHelper
 
   define_implications(
     {
@@ -53,16 +54,17 @@ class RegistrationPolicy
   )
 
   # TODO: Rechtesystem für Veranstaltung und Person prüfen
-  def initialize(user, reg)
-    grant :by_admin if user.admin?
-    grant :by_treasurer if user.treasurer?
-    grant :by_auditor if user.auditor?
-    grant :by_chairman if user.chairman?
+  def initialize(user_context, reg)
+    super
+    grant :by_admin if active_admin?(@user, @mode)
+    grant :by_treasurer if active_treasurer?(@user, @mode)
+    grant :by_auditor if active_auditor?(@user, @mode)
+    grant :by_chairman if active_chairman?(@user, @mode)
     grant :by_organizer if reg.is_a?(Registration) &&
-                           user.organizer?(reg.event) && reg.event.still_organizable?
-    grant :by_self if reg.is_a?(Registration) && !reg.person.nil? && user.id == reg.person.id
-    grant :by_participant if reg.is_a?(Registration) && user.participant?(reg.event)
-    grant :by_member if user.member? && !reg.person.nil? && reg.person.member? && reg.person.publish
+                           @user.organizer?(reg.event) && reg.event.still_organizable?
+    grant :by_self if reg.is_a?(Registration) && !reg.person.nil? && @user.id == reg.person.id
+    grant :by_participant if reg.is_a?(Registration) && @user.participant?(reg.event)
+    grant :by_member if @user.member? && !reg.person.nil? && reg.person.member? && reg.person.publish
     grant :by_other
   end
 

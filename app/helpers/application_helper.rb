@@ -70,4 +70,19 @@ module ApplicationHelper
   def admin_email_link
     mail_to Rails.configuration.admin_email_address
   end
+
+  def privileged_mode_link
+    return unless toggle_privileged_mode?
+
+    if session[:mode] == 'privileged'
+      icon_button t('actions.admin.exit_privileged_mode'), 'lock_open', send('admin_standard_mode_path')
+    else
+      icon_button t('actions.admin.enter_privileged_mode'), 'lock', send('admin_privileged_mode_path')
+    end
+  end
+
+  # kann user in den privilegierten Modus wechseln?
+  def toggle_privileged_mode?
+    current_user.admin? || current_user.chairman? || current_user.treasurer?
+  end
 end

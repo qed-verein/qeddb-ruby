@@ -1,9 +1,12 @@
 class GroupPolicy < AdminPolicy
+  include PunditImplications
+  include PolicyHelper
+
   # Wie AdminPolicy, aber einige der vordefinierten Gruppen sollen auch
   # von Admins nicht geändert beziehungsweise gelöscht werden dürfen
-  def initialize(user, group)
+  def initialize(user_context, group)
     super
-    return unless user.admin? || user.chairman?
+    return unless active_admin?(@user, @mode) || active_chairman?(@user, @mode)
 
     if group.is_a?(Group)
       grant :viewable
