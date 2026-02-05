@@ -123,13 +123,7 @@
           <h3><%= t "sections.person.settings" %></h3>
           <p style="max-width: 30em">
             <span>
-              <%= %i[
-                publish_birthday
-                publish_email
-                publish_address
-                newsletter
-                publish
-              ]
+              <%= %i[publish_birthday publish_email publish_address newsletter publish]
                 .map { |attr| Person.human_attribute_name attr if @person.send(attr) }
                 .compact
                 .join(", ") %></span>
@@ -179,7 +173,7 @@
       <hr>
     <% end %>
 
-    <% if @person_policy.view_sepa_mandate? %>
+    <% if @person_policy.view_payments? %>
       <div class="flexlayout">
         <section id="person_sepa_mandate">
           <h3><%= SepaMandate.model_name.human(count: :other) %></h3>
@@ -244,7 +238,14 @@
           <h3>Anmeldungen</h3>
 
           <% unless @person.registrations.empty? %>
-            Diese Person hat sich zu folgenden Veranstaltungen angemeldet: (<%= pluralize @person.registrations.count {|reg| reg.active? }, "Teilnahme", "Teilnahmen"%>, <%= pluralize @person.registrations.count {|reg| not reg.active? }, "Absage", "Absagen" %>, <%= @person.registrations.count { |reg| reg.organizer }%> organisiert)
+            Diese Person hat sich zu folgenden Veranstaltungen angemeldet: (<%= pluralize @person.registrations.count { |reg| reg.active? },
+            "Teilnahme",
+            "Teilnahmen" %>,
+            <%= pluralize @person.registrations.count { |reg| not reg.active? },
+            "Absage",
+            "Absagen" %>,
+            <%= @person.registrations.count { |reg| reg.organizer } %>
+            organisiert)
             <ul>
               <% @person.registrations.each do |r| %>
                 <li><%= registration_link_with_event_fancy r %></li>

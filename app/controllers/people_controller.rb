@@ -71,7 +71,7 @@ class PeopleController < ApplicationController
   end
 
   def destroy_sepa_mandate
-    authorize @person, :edit_sepa_mandate?
+    authorize @person, :edit_payments?
     @person.sepa_mandate = nil
     redirect_to @person, notice: t('.success')
   end
@@ -96,24 +96,20 @@ class PeopleController < ApplicationController
       authorize @person, :view_public?
     when :privacy, :groups
       authorize @person, :view_settings?
-    when :payments
+    when :payments, :sepa_mandate
       authorize @person, :view_payments?
-    when :sepa_mandate
-      authorize @person, :view_sepa_mandate?
     when :addresses
       authorize @person, :view_additional?
     when :edit, :update
       authorize @person, :edit_basic?
     when :edit_privacy
       authorize @person, :edit_settings?
-    when :edit_payments
+    when :edit_payments, :edit_sepa_mandate
       authorize @person, :edit_payments?
-    when :edit_sepa_mandate
-      authorize @person, :edit_sepa_mandate?
     when :destroy_sepa_mandate
       Rails.logger.debug @person.inspect
       Rails.logger.debug action_name
-      authorize @person, :edit_sepa_mandate?
+      authorize @person, :edit_payments?
     when :edit_addresses
       authorize @person, :edit_additional?
     when :new, :create

@@ -1,4 +1,4 @@
-if policy(person).view_sepa_mandate?
+if policy(person).view_payments?
   json.sepa_mandate do
     if person.sepa_mandate.nil?
       json.nil!
