@@ -1,6 +1,5 @@
 <% provide :title, Group.model_name.human(count: :other) %>
 
-
 <article id="groups">
 	<h1><%= Group.model_name.human(count: :other) %></h1>
 
@@ -8,10 +7,12 @@
 
 	<div class="overview">
 		<dl>
-		<% @groups.each do |group| %>
-			<dt><%= group_link(group) %></dt>
-			<dd><%= group.description %></dd>
-		<% end %>
+			<% @groups.each do |group| %>
+				<div>
+					<dt><%= group_link(group) %></dt>
+					<dd><%= group.description %></dd>
+				</div>
+			<% end %>
 		</dl>
 	</div>
 

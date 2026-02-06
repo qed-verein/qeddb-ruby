@@ -12,20 +12,20 @@ categories = {}
 	<h1><%= Event.model_name.human(count: :other) %></h1>
 
 	<div class="overview">
-	<dl>
-		<% categories.keys.sort.reverse.each do |key| %>
-			<dt><%= key %></dt>
-			<ul>
-				<% categories[key].each do |event| %>
-					<li><%= event_link event %></li>
-				<% end %>
-			</ul>
-		<% end %>
-	</dl>
+		<dl>
+			<% categories.keys.sort.reverse.each do |key| %>
+				<div>
+					<dt><%= key %></dt>
+					<% categories[key].each do |event| %>
+						<dd><%= event_link event %></dd>
+					<% end %>
+				</div>
+			<% end %>
+		</dl>
+	</div>
+
+	<div class="actions">
+		<%= icon_button 'Tabellenansicht', 'grid_on', events_as_table_path %>
+		<%= new_event_link %>
 	</div>
 </article>
-
-<div class="actions">
-	<%= icon_button 'Tabellenansicht', 'grid_on', events_as_table_path %>
-	<%= new_event_link %>
-</div>

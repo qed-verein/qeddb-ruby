@@ -16,18 +16,18 @@ show_unpublished_people = policy(Person).view_private?
 
 	<div class="overview">
 		<dl>
-		<% categories.keys.sort.each do |key| %>
-			<dt><%= key %></dt>
-			<ul>
-			<% categories[key].each do |person| %>
-				<% if person.publish || show_unpublished_people %>
-					<li><%= person_link_unchecked person %></li>
-				<% else %>
-					<li><%= person.full_name %></li>
-				<% end %>
+			<% categories.keys.sort.each do |key| %>
+				<div>
+					<dt><%= key %></dt>
+					<% categories[key].each do |person| %>
+						<% if person.publish || show_unpublished_people %>
+							<dd><%= person_link_unchecked person %></dd>
+						<% else %>
+							<dd><%= person.full_name %></dd>
+						<% end %>
+					<% end %>
+				</div>
 			<% end %>
-			</ul>
-		<% end %>
 		</dl>
 	</div>
 

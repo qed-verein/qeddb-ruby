@@ -341,23 +341,26 @@ hr {
 	line-height: 170%;
 	columns: 3 12em;
 	column-gap: 3em;
-	margin: 2em 0em;
+	margin: 2em 0;
 }
 
-.overview ul {
-	margin: 0em;
-	list-style-type: none;
+.overview dl, .overview ul {
+	margin: 0;
+	padding: 0;
+}
+
+.overview dl > div {
 	break-inside: avoid-column;
+	margin-bottom: 2rem;
 }
 
-.overview dt {
-	break-after: avoid-column;
-}
-
-.overview dd {
+.overview dd, .overview li {
 	font-size: 90%;
 	font-style: italic;
 	color: #300;
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
 }
 
 /* Flexlayout */
@@ -373,7 +376,7 @@ hr {
 }
 
 .flexlayout > section, .flexlayout > fieldset {
-	margin: 0em 2em;
+	margin: 0 2em;
 	border: none;
 }
 
@@ -419,7 +422,6 @@ hr {
 	.breadcrumb {display: none}
 	.flexlayout {display: block}
 	.flexlayout h3 {margin-top: 0px}
-	dt {margin-top: 1em;}
 	.aligned label {display: block}
 	.aligned input[type=text] {display: block}
 	.flexlayout section, .flexlayout fieldset {margin: 0em}
