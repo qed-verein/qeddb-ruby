@@ -19,11 +19,8 @@ header {
 header nav {
 	font-size: 1.2rem;
 	text-align: left;
-	align-items: center;
-}
+	align-items: stretch;
 
-
-header nav {
 	display: flex;
 	flex-flow: row wrap;
 }
@@ -32,6 +29,9 @@ header nav a {
 	padding: 0.7em;
 	font-weight: bold;
 	word-wrap: none;
+
+	display: inline-flex;
+	align-items: center;
 }
 
 summary {
@@ -131,7 +131,10 @@ label > i {
 }
 
 button, input[type="submit"], input[type="button"], .button {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+
 	font-weight: normal;
 	font-size: 0.8rem;
 	text-transform: uppercase;
