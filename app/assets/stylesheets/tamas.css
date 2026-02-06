@@ -12,6 +12,11 @@ body {
 	line-height: 150%;
 }
 
+body > article {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
 header {
 	transition: 1.0s;
 }
@@ -40,6 +45,7 @@ summary {
 	transition: color 0.2s;
 	margin: 1em;
 }
+
 summary:hover {
 	color: #ffe;
 	cursor: pointer;
@@ -201,7 +207,6 @@ ul, ol {
 	padding-left: 2em;
 }
 
-
 dt {
 	font-weight: bold;
 	font-variant: small-caps;
@@ -254,10 +259,6 @@ h1, h2, h3, legend {
 	font-variant: small-caps;
 	text-align: center;
 }
-/* Zitate */
-q {
-	color: #833;
-}
 
 /* Abschnitte */
 aside {
@@ -273,19 +274,15 @@ aside h1, aside h2, aside h3 {
 	margin-top: 0em;
 }
 
-
 header {
-	margin-bottom: 1em;
-	margin-top: 0em;
-	margin-left: 0em;
-	margin-right: 0em;
+	margin: 0 0 1rem;
 }
 
 footer {
 	clear: both;
 	text-align: right;
 	font-size: small;
-	padding: 0.5em;
+	margin: 0.5rem 1rem;
 }
 
 
@@ -371,13 +368,6 @@ hr {
 	justify-content: center;
 }
 
-/*
-fieldset .flexlayout, .panel .flexlayout {
-	justify-content: flex-start;
-}
-*/
-
-
 .flexlayout h2, .flexlayout p {
 	width: 100%;
 }
@@ -427,9 +417,6 @@ fieldset .flexlayout, .panel .flexlayout {
 /* Für die mobile Version */
 @media (max-width: 40em) {
 	.breadcrumb {display: none}
-/*
-	footer {display: none}
-*/
 	.flexlayout {display: block}
 	.flexlayout h3 {margin-top: 0px}
 	dt {margin-top: 1em;}
@@ -441,7 +428,7 @@ fieldset .flexlayout, .panel .flexlayout {
 .breadcrumb {
 	font-weight: bold;
 	font-variant: small-caps;
-	margin: 0.5rem;
+	margin: 0.5rem 1rem;
 }
 
 .breadcrumb ol {
