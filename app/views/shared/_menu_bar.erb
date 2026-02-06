@@ -14,11 +14,17 @@
 		<%= finance_review_link %>
 		<%= privileged_mode_link %>
 	</nav>
-
-	<div class="breadcrumb">
-		<%= breadcrumb_trail.map{|crumb| link_to crumb.name, crumb.url}.join(" » ").html_safe %>
-	</div>
 </header>
+
+<nav class="breadcrumb">
+	<ol>
+		<% breadcrumb_trail.each do |crumb| %>
+			<li>
+				<%= link_to crumb.name, crumb.url, 'aria-current': (if request.fullpath == crumb.url then 'page' else nil end) %>
+			</li>
+		<% end %>
+	</ol>
+</nav>
 
 
 <div class="mobilemenu">

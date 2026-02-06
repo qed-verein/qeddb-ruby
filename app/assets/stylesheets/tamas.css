@@ -441,6 +441,20 @@ fieldset .flexlayout, .panel .flexlayout {
 .breadcrumb {
 	font-weight: bold;
 	font-variant: small-caps;
+	margin: 0.5rem;
+}
+
+.breadcrumb ol {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.breadcrumb ol li {
+	display: inline;
+}
+
+.breadcrumb ol li + li::before {
+	content: ' » ' / '';
 }
 
 .tabs {
