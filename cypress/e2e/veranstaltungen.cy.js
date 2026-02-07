@@ -26,7 +26,6 @@ describe('veranstaltungen', () => {
     cy.contains('a', title).click()
 
     // delete again
-    cy.on('window:confirm', () => true)
     cy.contains('a.button', 'Veranstaltung löschen').click()
     cy.get('.notice').should('contain', 'gelöscht')
   })

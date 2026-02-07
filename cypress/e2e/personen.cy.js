@@ -26,7 +26,6 @@ describe('personen', () => {
     cy.contains('a', `${firstName} ${lastName}`).click()
 
     // delete again
-    cy.on('window:confirm', () => true)
     cy.contains('a.button', 'Person löschen').click()
     cy.get('.notice').should('contain', 'gelöscht')
   })
