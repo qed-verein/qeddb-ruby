@@ -11,7 +11,7 @@ class Payment < ApplicationRecord
   belongs_to :person
 
   # Ordne Zahlungen nach der Zeit
-  default_scope { order(end: :desc) }
+  default_scope { order(transfer_date: :asc) }
 
   # Art der Mitgliedschaftszahlung:
   #  regular_member: Reguläre Mitgliedszahlung
@@ -28,11 +28,13 @@ class Payment < ApplicationRecord
   validates :start, :end, presence: true, if: :membership_payment?
   validates :transfer_date, presence: true, on: :update, unless: -> { transfer_date_was.nil? }
   validates :transfer_date, presence: true, on: :create
+  validates :amount, presence: true
 
   # Aktualisiere den Mitgliedsstatus einer Person, wenn eine Zahlung eintragen wird
   after_save :update_membership_status
 
   def membership_payment?
+    return false if payment_type.nil?
     %i[regular_member sponsor_and_member sponsor_member free_member].include?(payment_type.to_sym)
   end
 
