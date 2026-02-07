@@ -25,7 +25,6 @@ gem 'pagy', '~> 3.8.3'
 # scenic for migrating views
 gem 'scenic', '~> 1.8.0'
 gem 'scenic-mysql_adapter'
-gem 'scenic_sqlite_adapter'
 # loaf for breadcrumbs
 gem 'loaf', '~> 0.10.0'
 # icons for buttons
@@ -35,8 +34,6 @@ gem 'jquery-rails', '~> 4.6.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.6'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
