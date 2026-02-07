@@ -62,7 +62,8 @@ gem 'sprockets-rails', require: 'sprockets/railtie'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri windows]
+  # Downgrade to version 12 for compatiblity to Ruby 3.1
+  gem 'byebug', '~> 12.0', platforms: %i[mri windows]
 end
 
 group :development do
