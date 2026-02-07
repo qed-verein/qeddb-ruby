@@ -49,4 +49,8 @@ class Mailinglist < ApplicationRecord
   def object_name
     title
   end
+
+  def event_related? 
+    !receiver_group.nil? && !receiver_group.event.nil? 
+  end
 end
