@@ -197,7 +197,7 @@ GEM
     psych (5.3.1)
       date
       stringio
-    public_suffix (7.0.2)
+    public_suffix (6.0.2)
     puma (5.6.9)
       nio4r (~> 2.0)
     pundit (2.3.2)
@@ -389,6 +389,7 @@ DEPENDENCIES
   nokogiri (~> 1.17.2)
   pagy (~> 3.8.3)
   paper_trail (~> 14.0.0)
+  public_suffix (~> 6.0)
   puma (~> 5.0)
   pundit (~> 2.3.0)
   pundit_implications (~> 0.1.0)
