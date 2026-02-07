@@ -6,7 +6,7 @@ class GroupPolicy < AdminPolicy
   # von Admins nicht geändert beziehungsweise gelöscht werden dürfen
   def initialize(user_context, group)
     super
-    return unless active_admin?(@user, @mode) || active_chairman?(@user, @mode)
+    return unless active_admin?(@user, @mode) || active_board_member?(@user, @mode)
 
     if group.is_a?(Group)
       grant :viewable

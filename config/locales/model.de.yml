@@ -254,8 +254,8 @@ de:
         newsletter: Alle Personen, die Newsletter abonnieren möchten, werden in diese Gruppe eingetragen.
         organizers: Füge alle Organisatoren dieser Veranstaltung automatisch hinzu.
         participants: Füge alle Teilnehmer dieser Veranstaltung automatisch hinzu.
-        chairman: Alle angegebenen Gruppenmitglieder bekommen automatisch Vorstandsrechte.
-        treasurer: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassiererrechte.
+        board_members: Alle angegebenen Gruppenmitglieder bekommen automatisch Vorstandsrechte.
+        treasurers: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassiererrechte.
         auditors: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassenprüfrechte.
         admins: Alle angegebenen Gruppenmitglieder bekommen automatisch Administratorrechte.
       affiliation:

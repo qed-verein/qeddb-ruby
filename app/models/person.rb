@@ -162,14 +162,14 @@ class Person < ApplicationRecord
 
   # Ist die Person ein Kassenwart?
   def treasurer?
-    @is_treasurer = Group.find_by(kind: :treasurer).member?(self) if @is_treasurer.nil?
+    @is_treasurer = Group.find_by(kind: :treasurers).member?(self) if @is_treasurer.nil?
     @is_treasurer
   end
 
   # Ist die Person im Vorstand (inkl. Kassenwart)?
-  def chairman?
-    @is_chairman = Group.find_by(kind: :chairman).member?(self) || treasurer? if @is_chairman.nil?
-    @is_chairman
+  def board_member?
+    @is_board_member = Group.find_by(kind: :board_members).member?(self) || treasurer? if @is_board_member.nil?
+    @is_board_member
   end
 
   # Ist diese Person Kassenprüfer:in

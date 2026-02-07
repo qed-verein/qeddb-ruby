@@ -45,13 +45,13 @@ group_admin_entry_2:
     groupable_type: Person
     groupable: admin
 
-group_chairman_entry_1:
-    group: group_chairman
+group_board_members_entry_1:
+    group: group_board_members
     groupable_type: Person
     groupable: testvorstand
 
-group_treasurer_entry_1:
-    group: group_treasurer
+group_treasurers_entry_1:
+    group: group_treasurers
     groupable_type: Person
     groupable: testkassier
 

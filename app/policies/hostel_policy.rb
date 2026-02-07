@@ -12,7 +12,7 @@ class HostelPolicy < ApplicationPolicy
 
   def initialize(user_context, _hostel)
     super
-    if active_admin?(@user, @mode) || active_chairman?(@user, @mode) || @user.organizing_now?
+    if active_admin?(@user, @mode) || active_board_member?(@user, @mode) || @user.organizing_now?
       grant :by_admin
     elsif @user.member?
       grant :by_member
