@@ -1,9 +1,11 @@
 <% provide :title, Person.model_name.human(count: :other) %>
 
 <%
+sort_field = @current_sort
 categories = {}
 @people.each {|person|
-	letter = person.last_name[0] || " "
+    category_value = person.send(sort_field)
+	letter = category_value[0] || " "
 	letter.upcase!
 	categories[letter] = [] if categories[letter].nil?
 	categories[letter].push person
@@ -13,6 +15,13 @@ show_unpublished_people = policy(Person).view_private?
 
 <article id="people">
 	<h1><%= Person.model_name.human(count: :other) %></h1>
+
+	<div class="sort-controls actions">
+			<%= link_to 'Nach Nachname', people_path(sort: 'last_name'),
+			    class: ['button', (@current_sort == 'last_name' ? 'active' : nil)] %>
+			<%= link_to 'Nach Vorname', people_path(sort: 'first_name'),
+			    class: ['button', (@current_sort == 'first_name' ? 'active' : nil)] %>
+		</div>
 
 	<div class="overview">
 		<dl>
