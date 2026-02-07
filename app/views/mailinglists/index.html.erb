@@ -4,32 +4,19 @@
 	<h1><%= Mailinglist.model_name.human(count: :other) %></h1>
 
 	Hier können alle Emailverteiler konfiguriert werden. Schickt man eine Email an die angezeigte Adresse, so wird diese an alle Einträge in diesem Verteiler verschickt. Zur einfacheren Konfiguration von großen Emailverteilern werden Gruppen benutzt.
+
+	<div class="overview">
+		<dl>
+			<% @mailinglists.each do |mailinglist| %>
+				<div>
+					<dt><%= mailinglist_link(mailinglist) %></dt>
+					<dd><%= mailinglist.description %></dd>
+				</div>
+			<% end %>
+		</dl>
+	</div>
+
 	<div class="actions">
 		<%= new_mailinglist_link %>
 	</div>
-	<div class="overview">
-		<dl>
-		<% @mailinglists.each do |mailinglist| %>
-			<% unless mailinglist.event_related? %>
-				<dt><%= mailinglist_link(mailinglist) %></dt>
-				<dd><%= mailinglist.description %></dd>
-			<% end %>
-		<% end %>
-		</dl>
-	</div>
-
-
-
-	<h2>Veranstaltungsverteiler</h2>
-	<div class="overview">
-		<dl>
-		<% @mailinglists.each do |mailinglist| %>
-			<% if mailinglist.event_related? %>
-				<dt><%= mailinglist_link(mailinglist) %></dt>
-				<dd><%= mailinglist.description %></dd>
-			<% end %>
-		<% end %>
-		</dl>
-	</div>
-
 </article>

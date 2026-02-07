@@ -28,8 +28,8 @@ class Event < ApplicationRecord
   has_many :event_payments, dependent: :destroy
 
   # Rechtegruppen für Organisatoren und Teilnehmer
-  has_one :organizer_group, -> { where(kind: :organizers) }, class_name: 'Group', dependent: :destroy
-  has_one :participant_group, -> { where(kind: :participants) }, class_name: 'Group', dependent: :destroy
+  has_one :organizer_group, -> { where(program: :organizers) }, class_name: 'Group', dependent: :destroy
+  has_one :participant_group, -> { where(program: :participants) }, class_name: 'Group', dependent: :destroy
 
   # ~ has_one :organizer_mailing_list, :through :organizer_group, class_name: 'Mailinglist'
   # ~ has_one :participant_mailing_list, :through :participant_group,  class_name: 'Mailinglist'
@@ -66,7 +66,7 @@ class Event < ApplicationRecord
     {
       title: format('Organisatoren von „%s“', title),
       description: format('Alle Organisatoren der Veranstaltung „%s“', title),
-      event: self, kind: :organizers
+      event: self, mode: :automatic, program: :organizers
     }
   end
 
@@ -74,7 +74,7 @@ class Event < ApplicationRecord
     {
       title: format('Teilnehmer von „%s“', title),
       description: format('Alle Teilnehmer der Veranstaltung „%s“', title),
-      event: self, kind: :participants
+      event: self, mode: :automatic, program: :participants
     }
   end
 

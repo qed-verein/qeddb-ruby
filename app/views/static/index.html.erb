@@ -26,8 +26,8 @@ Hier kanst du deine eigenen Daten ändern und dich zu Veranstaltungen anmelden.
 <% if current_user.organizing_now? %>
 <li>Als Organisator kannst du deine Veranstaltung bearbeiten und die Daten der Teilnehmer einsehen.</li>
 <% end %>
-<% if current_user.board_member? %>
-<li>Als Vorstand hast du die Möglichkeit<% if not active_board_member?(current_user, session[:mode] == 'privileged' ? 'privileged' : 'standard') %> im privilegierten Modus<% end %>  sämtliche Daten zu Personen und Veranstaltungen
+<% if current_user.chairman? %>
+<li>Als Vorstand hast du die Möglichkeit<% if not active_chairman?(current_user, session[:mode] == 'privileged' ? 'privileged' : 'standard') %> im privilegierten Modus<% end %>  sämtliche Daten zu Personen und Veranstaltungen
 (außer Zahlungen) zu bearbeiten.</li>
 <% end %>
 <% if current_user.treasurer? %>

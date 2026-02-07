@@ -11,7 +11,7 @@
 #	 Liste der Teilnehmer anzeigen
 # list_dummy:
 #	 Liste der dummy-Teilis anzeigen
-# by_other, by_member, by_participant, by_organizer, by_board_member etc.
+# by_other, by_member, by_participant, by_organizer, by_chairman etc.
 #	 Analog wie bei Registrierungen
 
 class EventPolicy < ApplicationPolicy
@@ -35,7 +35,7 @@ class EventPolicy < ApplicationPolicy
 
   def initialize(user_context, event)
     super
-    grant :by_admin if active_admin?(@user, @mode) || active_board_member?(@user, @mode)
+    grant :by_admin if active_admin?(@user, @mode) || active_chairman?(@user, @mode)
     grant :by_organizer if event.is_a?(Event) && @user.organizer?(event) && event.still_organizable?
     grant :by_participant if event.is_a?(Event) && @user.participant?(event)
     grant :by_member if @user.member?
