@@ -14,7 +14,7 @@ class AdminPolicy < ApplicationPolicy
 
   def initialize(user_context, _object)
     super
-    return unless active_admin?(@user, @mode) || active_chairman?(@user, @mode)
+    return unless active_admin?(@user, @mode) || active_board_member?(@user, @mode)
 
     grant :editable
   end

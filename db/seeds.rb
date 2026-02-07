@@ -27,11 +27,11 @@ Group.transaction do
   puts 'Create default groups...'
 
   # Erstelle die Standardgruppen
-  group = Group.new({ id: 1, title: 'Vorstand', kind: :chairman,
+  group = Group.new({ id: 1, title: 'Vorstand', kind: :board_members,
                       description: 'Diese Gruppe enthält alle Vorstände des Vereins' })
   group.save!
 
-  group = Group.new({ id: 2, title: 'Kassier', kind: :treasurer,
+  group = Group.new({ id: 2, title: 'Kassier', kind: :treasurers,
                       description: 'Diese Gruppe enthält den Kassier des Vereins' })
   group.save!
 
