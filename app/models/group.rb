@@ -16,8 +16,8 @@ class Group < ApplicationRecord
   # Welcher Typ von Gruppe liegt vor?
   # Momentan gibt es einige verschiedene Gruppentypen:
   #   0) manual = Manuell verwaltete Liste 
-  #   1) chairman = Liste der Vorstände
-  #   2) treasurer = Liste der Kassenwärte
+  #   1) board_members = Liste der Vorstände
+  #   2) treasurers = Liste der Kassenwärte
   #   3) admins = Liste der Webmaster
   #   4) members = Alle Mitglieder (nicht editierbar)
   #   5) externals = Alle Externen (nicht editierbar)
@@ -26,7 +26,7 @@ class Group < ApplicationRecord
   #   8) participants = Teilnehmer einer Veranstaltung (nicht editierbar)
   #   9) auditors = Kassenprüfer:innen
 
-  enum kind: { manual: 0, chairman: 1, treasurer: 2, admins: 3,
+  enum kind: { manual: 0, board_members: 1, treasurers: 2, admins: 3,
                   members: 4, externals: 5, newsletter: 6,
                   organizers: 7, participants: 8, auditors: 9 }
 

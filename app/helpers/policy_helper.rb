@@ -4,9 +4,9 @@ module PolicyHelper
     user&.admin? && mode == 'privileged'
   end
 
-  # ist user ein Chairman und im privilegierten Modus?
-  def active_chairman?(user, mode)
-    user&.chairman? && mode == 'privileged'
+  # ist user ein board_member und im privilegierten Modus?
+  def active_board_member?(user, mode)
+    user&.board_member? && mode == 'privileged'
   end
 
   # ist user ein Treasurer und im privilegierten Modus?
