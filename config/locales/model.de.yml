@@ -246,7 +246,7 @@ de:
         description: Beschreibung
         preset: Voreinstellung
         event: Veranstaltung
-      group/program:
+      group/type:
         manual: Es werden keine Benutzer automatisch hinzugefügt.
         members: Alle Mitglieder werden automatisch zu dieser Gruppe hinzugefügt.
         members_and_externals: Alle Mitglieder und Externe werden automatisch zu dieser Gruppe hinzugefügt.
@@ -258,10 +258,6 @@ de:
         treasurer: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassiererrechte.
         auditors: Alle angegebenen Gruppenmitglieder bekommen automatisch Kassenprüfrechte.
         admins: Alle angegebenen Gruppenmitglieder bekommen automatisch Administratorrechte.
-      group/mode:
-        automatic: Diese Gruppe wurde vollautomatisch verwaltet. Es sind keine Änderungen möglich.
-        editable: Diese Gruppe wurde automatisch erstellt, kann jedoch vom Benutzer verändert werden.
-        userdefined: Diese Gruppe wurde vom Benutzer anlegt.
       affiliation:
         person: Person
         group: Gruppe

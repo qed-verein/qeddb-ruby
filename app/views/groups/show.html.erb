@@ -15,10 +15,8 @@
 
 		<dt>Einstellung:</dt>
 		<dd>
-			<%= Group.human_enum_value :mode, @group.mode %>
-				<% unless @group.mode == 'userdefined' %>
-				<%= Group.human_enum_value(:program, @group.program) %>
-			<% end %>
+			<%= Group.human_enum_value :kind, @group.kind %>
+		
 		</dd>
 
 		<dt>Hinzugefügte Unterruppen:</dt>
