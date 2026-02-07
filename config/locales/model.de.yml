@@ -251,7 +251,7 @@ de:
         members: Alle Mitglieder werden automatisch zu dieser Gruppe hinzugefügt.
         members_and_externals: Alle Mitglieder und Externe werden automatisch zu dieser Gruppe hinzugefügt.
         externals: Alle Externen werden automatisch zu dieser Gruppe hinzugefügt.
-        newsletter: Alle Personen, die newsletter_subscribers abonnieren möchten, werden in diese Gruppe eingetragen.
+        newsletter_subscribers: Alle Personen, die den Newsletter abonnieren möchten, werden in diese Gruppe eingetragen.
         organizers: Füge alle Organisatoren dieser Veranstaltung automatisch hinzu.
         participants: Füge alle Teilnehmer dieser Veranstaltung automatisch hinzu.
         board_members: Alle angegebenen Gruppenmitglieder bekommen automatisch Vorstandsrechte.
