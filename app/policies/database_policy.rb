@@ -10,7 +10,7 @@ DatabasePolicy = Struct.new(:user, :database) do
 
   def initialize(user_context, _object)
     super
-    return unless active_admin?(@user, @mode) || active_board_member?(@user, @mode)
+    return unless active_admin?(@user, @mode) || active_chairman?(@user, @mode)
 
     grant :by_admin
   end

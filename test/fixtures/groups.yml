@@ -1,95 +1,102 @@
 group_admin:
     title: "Admin"
     description: "Diese Gruppe enthält alle Administratoren"
-    kind: admins
+    mode: editable
+    program: admins
 
-group_board_members:
+group_chairman:
     title: "Vorstand"
     description: "Diese Gruppe enthält alle Vorstände"
-    kind: board_members
+    mode: editable
+    program: chairman
 
-group_treasurers:
+group_treasurer:
     title: "Kassier"
     description: "Diese Gruppe enthält alle Kassenwärte"
-    kind: treasurers
+    mode: editable
+    program: treasurer
 
 group_member:
     title: "Mitglieder"
     description: "Diese Gruppe enthält alle Mitglieder"
-    kind: members
+    mode: automatic
+    program: members
 
 group_auditor:
     title: "Kassenprüfer:in"
     description: "Diese Gruppe enthält alle Kassenprüfer:innen"
-    kind: auditors
-    
-group_newsletter_subscribers:
-    title: "Newsletter"
-    description: "Diese Gruppe enthält alle Abonnent:innen des Newsletters"
-    kind: newsletter_subscribers
+    mode: editable
+    program: auditors
 
 group_gl:
     title: Allgemeine lineare Gruppe
     description: "Diese Gruppe enthält alle invertierbaren Matrizen"
-    kind: admins
+    mode: manual
+    program: admins
 
 group_sl:
     title: Spezielle lineare Gruppe
     description: "Diese Gruppe enthält alle invertierbaren Matrizen mit Determinate 1"
-    kind: manual
+    mode: userdefined
 
 group_o:
     title: Orthogonale Gruppe
     description: "Diese Gruppe enthält alle orthogonalen Matrizen"
-    kind: manual
+    mode: userdefined
 
 group_so:
     title: Spezielle orthogonale Gruppe
     description: "Diese Gruppe enthält alle orthogonalen Matrizen mit Determinate 1"
-    kind: manual
+    mode: userdefined
 
 group_q:
     title: Rationale Zahlen
     description: Additive Gruppe der rationalen Zahlen
-    kind: manual
+    mode: userdefined
 
 group_z:
     title: Ganze Zahlen
     description: Additive Gruppe der ganzen Zahlen
-    kind: manual
+    mode: userdefined
 
 group_mathematikerkonferenz_orgas:
     title: Orgas der Mathematikerkonferenz
     event: event_mathematikerkonferenz
     description: Alle Orgas der Mathematikerkonferenz
-    kind: organizers
+    mode: automatic
+    program: organizers
 
 group_mathematikerkonferenz_teilnehmer:
     title: Teilnehmer der Mathematikerkonferenz
     event: event_mathematikerkonferenz
     description: Alle Teilnehmer der Mathematikerkonferenz
-    kind: participants
+    mode: automatic
+    program: participants
 
 group_physikerkonferenz_orgas:
     title: Orgas der Physikerkonferenz
     event: event_physikerkonferenz
     description: Alle Orgas der Physikerkonferenz
-    kind: organizers
+    mode: automatic
+    program: organizers
 
 group_physikerkonferenz_teilnehmer:
     title: Teilnehmer der Physikerkonferenz
     event: event_physikerkonferenz
     description: Alle Teilnehmer der Physikerkonferenz
-    kind: participants
+    mode: automatic
+    program: participants
 
 group_historikerkonferenz_orgas:
     title: Orgas der Historikerkonferenz
     event: event_historikerkonferenz
     description: Alle Orgas der Historikerkonferenz
-    kind: organizers
+    mode: automatic
+    program: organizers
 
 group_historikerkonferenz_teilnehmer:
     title: Teilnehmer der Historikerkonferenz
     event: event_historikerkonferenz
     description: Alle Teilnehmer der Historikerkonferenz
-    kind: participants
+    mode: automatic
+    program: participants

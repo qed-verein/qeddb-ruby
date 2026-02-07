@@ -1,8 +1,14 @@
 # Die Klasse "Group" dient zur Verwaltung von Gruppen.
 # Eine Gruppe besteht im Wesentlichen aus einer Liste von Personen.
 #
+# Grundsätzlich gibt es drei Arten von Gruppen (mode):
+#   automatic: Diese Gruppen werden von Mitgliederdatenbank selber verwaltet
+#      und können weder verändert noch gelöscht werden (z.B. Mitglieder)
+#   editable: Dieser Gruppen werden ebenfalls von der Mitgliederdatenbank benötigt,
+#      jedoch können diese von Administrationen abgeändert werden (z.B. Vorstand)
+#   userdefined: Diese Gruppen werden von Admins selber verwaltet (für Projekte z.B.)
 #
-# Für editierbare Gruppen muss eine Liste von Zugehörigkeiten (Affiliations)
+# Für nichtautomatische Gruppen muss eine Liste von Zugehörigkeiten (Affiliations)
 # erstellt werden. Als Einträge dieser Liste können Personen sowie weitere Untergruppen
 # angegeben werden. Jeder Eintrag enthält zudem einen Zeitraum, in welcher dieser gültig ist.
 #
@@ -13,27 +19,30 @@ class Group < ApplicationRecord
   # Versionskontrolle
   has_paper_trail
 
-  # Welcher Typ von Gruppe liegt vor?
-  # Momentan gibt es einige verschiedene Gruppentypen:
-  #   0) manual = Manuell verwaltete Liste 
-  #   1) board_members = Liste der Vorstände
-  #   2) treasurers = Liste der Kassenwärte
+  # Ist die Gruppe automatisch, bearbeitbar oder benutzerdefiniert? (siehe oben)
+  enum mode: { automatic: 1, editable: 2, userdefined: 3 }
+
+  # Welcher Typ von automatischer Gruppe liegt vor?
+  # Momentan gibt es acht verschiedene Programme:
+  #   1) chairman = Liste der Vorstände
+  #   2) treasurer = Liste der Kassenwärte
   #   3) admins = Liste der Webmaster
-  #   4) members = Alle Mitglieder (nicht editierbar)
-  #   5) externals = Alle Externen (nicht editierbar)
-  #   6) newsletter_subscribers = Alle die den Newsletter haben wollen (nicht editierbar)
-  #   7) organizers = Organisatoren eines Veranstaltung (nicht editierbar)
-  #   8) participants = Teilnehmer einer Veranstaltung (nicht editierbar)
+  #   4) members = Alle Mitglieder
+  #   5) externals = Alle Externen
+  #   6) newsletter = Alle die Newsletter haben wollen
+  #   7) organizers = Organisatoren eines Veranstaltung
+  #   8) participants = Teilnehmer einer Veranstaltung
   #   9) auditors = Kassenprüfer:innen
 
-  enum kind: { manual: 0, board_members: 1, treasurers: 2, admins: 3,
-                  members: 4, externals: 5, newsletter_subscribers: 6,
+  enum program: { chairman: 1, treasurer: 2, admins: 3,
+                  members: 4, externals: 5, newsletter: 6,
                   organizers: 7, participants: 8, auditors: 9 }
 
   # Validierungen
   validates :title, length: { maximum: 50 }, presence: true, uniqueness: true
   validates :description, length: { maximum: 1000 }
-  validates :kind, inclusion: { in: kinds.keys }, allow_nil: true
+  validates :mode, inclusion: { in: modes.keys }
+  validates :program, inclusion: { in: programs.keys }, allow_nil: true
 
   # Verweis zur Veranstaltung (falls die Gruppe veranstaltungsspezifisch ist)
   belongs_to :event, optional: true
@@ -59,12 +68,12 @@ class Group < ApplicationRecord
 
   # Kann diese Gruppe von Admins bearbeitet werden?
   def editable?
-    not %w[members externals newsletter_subscribers participants organizers].include?(kind)
+    %w[userdefined editable].include?(mode)
   end
 
   # Kann diese Gruppe von Admins gelöscht werden?
   def destroyable?
-    kind == "manual"
+    mode == 'userdefined'
   end
 
   # Ist eine Person in dieser Gruppe enthalten?
@@ -88,7 +97,7 @@ class Group < ApplicationRecord
 
   # Standardwerte für Gruppen
   def set_defaults
-    self.kind ||= "manual"
+    self.mode ||= :userdefined
   end
 
   def object_name

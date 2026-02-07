@@ -7,14 +7,14 @@ class AdminPolicy < ApplicationPolicy
 
   define_implications({
                         viewable: %i[show index],
-                        editable: %i[viewable edit new destroy]
+                        editable: %i[viewable edit new edit destroy]
                       })
   alias update? edit?
   alias create? new?
 
   def initialize(user_context, _object)
     super
-    return unless active_admin?(@user, @mode) || active_board_member?(@user, @mode)
+    return unless active_admin?(@user, @mode) || active_chairman?(@user, @mode)
 
     grant :editable
   end

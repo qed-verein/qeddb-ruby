@@ -21,7 +21,7 @@
 #	 Das kann eine Person mit seiner eigenen Anmeldung tun
 # by_organizer:
 #	 Das können Organisatoren mit den Anmeldungen der Teilnehmer tun
-# by_board_member:
+# by_chairman:
 #	 Das können alle Vereinsvorstände tun
 # by_treasurer:
 #	 Das kann der Kassier tun
@@ -46,10 +46,10 @@ class RegistrationPolicy < ApplicationPolicy
       by_participant: %i[by_other view_general view_additional],
       by_self: %i[by_participant view_private edit_additional view_payments],
       by_organizer: %i[by_participant view_private edit_additional edit_general export],
-      by_board_member: %i[by_organizer delete_registration],
-      by_treasurer: %i[by_board_member view_payments edit_payments],
+      by_chairman: %i[by_organizer delete_registration],
+      by_treasurer: %i[by_chairman view_payments edit_payments],
       by_auditor:	%i[by_participant view_payments export], # TODO: Check if that is everything reasonable
-      by_admin: [:by_board_member]
+      by_admin: [:by_chairman]
     }
   )
 
@@ -59,7 +59,7 @@ class RegistrationPolicy < ApplicationPolicy
     grant :by_admin if active_admin?(@user, @mode)
     grant :by_treasurer if active_treasurer?(@user, @mode)
     grant :by_auditor if active_auditor?(@user, @mode)
-    grant :by_board_member if active_board_member?(@user, @mode)
+    grant :by_chairman if active_chairman?(@user, @mode)
     grant :by_organizer if reg.is_a?(Registration) &&
                            @user.organizer?(reg.event) && reg.event.still_organizable?
     grant :by_self if reg.is_a?(Registration) && !reg.person.nil? && @user.id == reg.person.id
