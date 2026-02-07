@@ -9,6 +9,8 @@ class Mailinglist < ApplicationRecord
 
   # Liste der manuellen Eintragungen
   has_many :subscriptions, dependent: :destroy
+  has_many :mailinglist_members, dependent: :destroy
+
 
   # Diese Gruppe darf Emails senden
   belongs_to :sender_group, optional: true, class_name: 'Group'
@@ -37,6 +39,11 @@ class Mailinglist < ApplicationRecord
     :subscriptions,
     allow_destroy: true,
     reject_if: proc { |attr| reject_blank_entries? attr, :email_address }
+  )
+  accepts_nested_attributes_for(
+    :mailinglist_members,
+    allow_destroy: true,
+    reject_if: proc { |attr| reject_blank_entries? attr, :person_id }
   )
   after_initialize :set_defaults
 

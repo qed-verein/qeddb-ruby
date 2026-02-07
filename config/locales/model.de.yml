@@ -289,6 +289,12 @@ de:
         receiver_group: Empfängergruppe
         moderator_group: Moderatorengruppe
 
+      mailinglist_member:
+        person: Person
+        as_sender: Senden
+        as_receiver: Empfangen
+        as_moderator: Moderator
+
       subscription:
         email_address: Emailadresse
         first_name: Vorname
