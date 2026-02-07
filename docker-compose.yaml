@@ -11,6 +11,7 @@ services:
         RUN bundle install
         RUN yarnpkg install
     working_dir: /app
+    entrypoint: /app/bin/docker-entrypoint
     volumes:
       - "./app:/app/app"
       - "./test:/app/test"
@@ -24,18 +25,13 @@ services:
       - "3000:3000"
     profiles: [ "dependency_only" ]
 
-  migrate:
-    extends: base
-    command: "bin/rails db:migrate"
-    profiles: [ "migrations" ]
-
   load_fixtures:
     extends: base
-    command: "bin/rails db:fixtures:load"
+    command: "./bin/rails db:fixtures:load"
     profiles: [ "fixtures" ]
 
   qeddb:
     extends: "base"
     profiles: [ "" ]
-    command: bin/rails server -b ${RAILS_HTTP_HOST:-0.0.0.0}
+    command: ./bin/rails server -b ${RAILS_HTTP_HOST:-0.0.0.0}
 
