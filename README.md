@@ -2,7 +2,7 @@
 
 Die QEDDB-RUBY ist die neue Mitgliederverwaltung für den Quod Erat Demonstrandum e.V. (https://www.qed-verein.de)
 
-Die Implementierung erfolgte mit Ruby on Rails Version 6 (https://rubyonrails.org/)
+Die Implementierung erfolgte mit Ruby on Rails Version 6 (<https://rubyonrails.org/>)
 
 # Voraussetzungen
 

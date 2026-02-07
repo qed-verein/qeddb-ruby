@@ -1,5 +1,6 @@
 {
   "name": "qeddb-ruby",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
@@ -9,8 +10,12 @@
     "table2csv": "^1.1.4",
     "turbolinks": "^5.2.0"
   },
-  "version": "0.1.0",
   "devDependencies": {
-    "@types/jquery": "^3.5.30"
+    "@types/jquery": "^3.5.30",
+    "cypress": "^15.10.0"
+  },
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   }
 }
