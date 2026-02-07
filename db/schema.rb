@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2026_02_07_021120) do
   end
 
   create_table "charge_modifiers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "registration_id"
+    t.integer "registration_id"
     t.decimal "money_amount", precision: 10, scale: 2
     t.string "reason"
     t.text "comment"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2026_02_07_021120) do
   end
 
   create_table "event_payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "event_id"
+    t.integer "event_id"
     t.date "money_transfer_date"
     t.decimal "money_amount", precision: 10, scale: 2
     t.string "category"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 2026_02_07_021120) do
   end
 
   create_table "registration_payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "registration_id"
+    t.integer "registration_id"
     t.date "money_transfer_date"
     t.decimal "money_amount", precision: 10, scale: 2
     t.text "comment"
