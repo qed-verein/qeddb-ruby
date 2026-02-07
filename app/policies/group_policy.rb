@@ -4,7 +4,7 @@ class GroupPolicy < ApplicationPolicy
 
   define_implications({
                         viewable: %i[show index],
-                        editable: %i[viewable edit edit],
+                        editable: %i[viewable edit],
                         creatable: %i[new],
                         destroyable: %i[destroy],
                       })
