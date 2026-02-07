@@ -7,10 +7,12 @@
 
 	<div class="overview">
 		<dl>
-		<% @mailinglists.each do |mailinglist| %>
-			<dt><%= mailinglist_link(mailinglist) %></dt>
-			<dd><%= mailinglist.description %></dd>
-		<% end %>
+			<% @mailinglists.each do |mailinglist| %>
+				<div>
+					<dt><%= mailinglist_link(mailinglist) %></dt>
+					<dd><%= mailinglist.description %></dd>
+				</div>
+			<% end %>
 		</dl>
 	</div>
 
