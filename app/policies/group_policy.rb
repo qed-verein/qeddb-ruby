@@ -1,6 +1,15 @@
-class GroupPolicy < AdminPolicy
+class GroupPolicy < ApplicationPolicy
   include PunditImplications
   include PolicyHelper
+
+  define_implications({
+                        viewable: %i[show index],
+                        editable: %i[viewable edit edit],
+                        creatable: %i[new],
+                        destroyable: %i[destroy],
+                      })
+  alias update? edit?
+  alias create? new?
 
   # Wie AdminPolicy, aber einige der vordefinierten Gruppen sollen auch
   # von Admins nicht geändert beziehungsweise gelöscht werden dürfen
@@ -10,10 +19,11 @@ class GroupPolicy < AdminPolicy
 
     if group.is_a?(Group)
       grant :viewable
-      grant :edit if group.editable?
-      grant :destroy if group.destroyable?
+      grant :editable if group.editable?
+      grant :destroyable if group.destroyable?
     elsif group == Group
-      grant :editable
+      grant :viewable
+      grant :creatable
     end
   end
 
