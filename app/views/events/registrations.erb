@@ -1,4 +1,5 @@
 <% view_private = @event_policy.list_private_fields? %>
+<% view_payments = @event_policy.view_payments? %>
 <% view_dummy = @event_policy.list_dummy? %>
 
 <h1><%= @event.title %></h1>
@@ -21,8 +22,10 @@
         <%= checkbox("show_travel_field", "Anreiseinformationen anzeigen", true) %>
         <%= checkbox("show_address_field", "Addressdaten anzeigen", false) %>
         <%= checkbox("show_status_field", "Anmeldestatus anzeigen", false) %>
+        <% if view_payments %>
+        	<%= checkbox("show_payment_field", "Zahlungsinformationen anzeigen", false) %>
+        <% end %>
         <% if view_private %>
-            <%= checkbox("show_payment_field", "Zahlungsinformationen anzeigen", false) %>
             <%= checkbox("show_other_field", "Sonstige Daten anzeigen", false) %>
         <% end %>
     </fieldset>
@@ -52,11 +55,13 @@
 		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :station_arrival %></th>
 		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :station_departure %></th>
 		<th data-sort="string" class="travel_field"><%= Registration.human_attribute_name :railway_discount %></th>
-		<% if view_private %>
+		<% if view_payments %>
 		<th data-sort="int"    class="payment_field"><%= Registration.human_attribute_name :money_amount_short %></th>
 		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :to_be_paid_short %></th>
 		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :effective_member_discount %></th>
 		<th data-sort="string" class="payment_field"><%= Registration.human_attribute_name :other_discounts %></th>
+		<% end %>
+		<% if view_private %>
 		<th data-sort="string" class="other_field"><%= Registration.human_attribute_name :meal_preference %></th>
 		<th data-sort="string" class="other_field"><%= Registration.human_attribute_name :talks %></th>
 		<th data-sort="string" class="other_field"><%= Registration.human_attribute_name :comment %></th>
@@ -107,11 +112,13 @@
 				<td class="travel_field"><%= render_string r.station_arrival %></td>
 				<td class="travel_field"><%= render_string r.station_departure %></td>
 				<td class="travel_field"><%= render_string r.railway_discount %></td>
-				<% if view_private %>
+				<% if view_payments %>
 				<td class="payment_field" data-sort-value="<%= r.effective_money_amount || 0 %>"> <%= check_unknown(r.effective_money_amount) {|x| number_to_currency x} %></td>
 				<td class="payment_field" data-sort-value="<%= r.to_be_paid || 0 %>"> <%= check_unknown(r.to_be_paid) {|x| number_to_currency x} %></td>
 				<td class="payment_field"><%= render_yes_no r.effective_member_discount? %></td>
 				<td class="payment_field"><%= render_string r.other_discounts %></td>
+				<% end %>
+				<% if view_private %>
 				<td class="other_field"><%= render_string r.meal_preference  %></td>
 				<td class="other_field"><%= render_string r.talks %></td>
 				<td class="other_field"><%= render_string r.comment  %></td>
