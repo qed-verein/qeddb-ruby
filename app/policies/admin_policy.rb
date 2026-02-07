@@ -7,7 +7,7 @@ class AdminPolicy < ApplicationPolicy
 
   define_implications({
                         viewable: %i[show index],
-                        editable: %i[viewable edit new edit destroy]
+                        editable: %i[viewable edit new destroy]
                       })
   alias update? edit?
   alias create? new?
