@@ -10,7 +10,7 @@ categories = {}
 	categories[letter] = [] if categories[letter].nil?
 	categories[letter].push person
 }
-show_unpublished_people = policy(Person).view_private?
+show_unpublished_people = policy(Person).view_unpublished?
 %>
 
 <article id="people">

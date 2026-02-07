@@ -5,6 +5,8 @@
 #     Einstellungen zu Datenschutz und Mailinglisten
 # view_payments, edit_payments:
 #     Überweisungen, Finanzen, SEPA-Mandat
+# view_unpublished:
+#     Anzeige von nicht öffentlichen Nutzerprofilen (nicht unbedingt mit allen Attributen!)
 # view_public:
 #     Anzeige aller öffentlichen Attribute (z.B. für alle Mitglieder)
 # view_private:
@@ -12,18 +14,18 @@
 # edit_personal:
 #     Persönliche Daten wie Name, Geburtstag etc. bearbeiten
 # edit_basic:
-#   Mindestesn ein Attribute der Person lässt sich ändern (intern für Auth benötigt)
+#     Mindestens ein Attribute der Person lässt sich ändern (intern für Auth benötigt)
 # create_person:
 #     Neue Person eintragen
 # delete_person:
 #     Person löschen
 # list_member:
-#   Anzeige aller aktuellen Vereinsmitglieder
+#     Anzeige aller aktuellen Vereinsmitglieder
 # list_active:
-#   Anzeige aller aktiven Accounts
+#     Anzeige aller aktiven Accounts
 #   (insb. auch Nichtmitglieder, die sich in der DB anmelden können)
 # list_all_people:
-#   Anzeige aller aktiven und inaktiven Accounts
+#     Anzeige aller aktiven und inaktiven Accounts
 # by_other:
 #     Das können andere externe Personen in der Datenbank tun
 # by_member:
@@ -39,7 +41,7 @@
 # by_auditor:
 #     Das können Kassenprüfer:innen tun
 # by_admin
-#   Das können Administratoren tun
+#     Das können Administratoren tun
 
 class PersonPolicy < ApplicationPolicy
   include PunditImplications
@@ -58,7 +60,7 @@ class PersonPolicy < ApplicationPolicy
                         edit_payments: %i[view_payments],
 
                         view_public: [:view_additional],
-                        view_private: %i[view_public view_addresses view_contacts view_settings export],
+                        view_private: %i[view_unpublished view_public view_addresses view_contacts view_settings export],
 
                         list_all_people: [:list_active],
                         list_active: [:list_members],
@@ -72,7 +74,7 @@ class PersonPolicy < ApplicationPolicy
                         by_chairman: %i[by_member edit_personal edit_private create_person delete_person
                                         list_all_people],
                         by_treasurer: %i[by_chairman edit_payments],
-                        by_auditor: %i[by_member view_payments],
+                        by_auditor: %i[by_member view_payments view_unpublished],
                         by_admin: [:by_chairman]
                       })
 
