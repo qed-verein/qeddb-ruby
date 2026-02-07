@@ -51,6 +51,9 @@ de:
       event_payment:
         one: Veranstaltungszahlung
         other: Veranstaltungszahlungen
+      generic_payment:
+        one: Allgemeine Zahlung
+        other: Allgemeine Zahlungen
       registration_payment:
         one: Teilnehmerzahlung
         other: Teilnehmerzahlungen
@@ -204,6 +207,26 @@ de:
         identifier: Eintrag
         priority: Priorität
         _destroy: Löschen
+      generic_payment:
+        counterparty: Gegenpartei
+        money_amount: Betrag
+        money_transfer_date: Geldeingang
+        comment: Kommentar
+        category: Kategorie
+        categories:
+          banking: Bankgebühren
+          insurance: Versicherung
+          website: Website
+          sponsoring: Sponsoring
+          donation: Spende
+      generic_payment/category:
+        hostel: Unterkunft
+        shopping: Einkauf
+        talk_gift: Vortragsgeschenk
+        deposit: Pfand
+        organizer_gift: Orgageschenk
+        transportation: Transport
+        talk_materials: Vortragsmaterial
       hostel:
         title: Titel
         homepage: Homepage

@@ -1,40 +1,39 @@
 <% provide :title, Event.model_name.human(count: :other) %>
 <h1><%= Event.model_name.human(count: :other) %></h1>
 
-
 <div class="actions">
-	<%= download_table_button('#events_table') %>
+  <%= download_table_button("#events_table") %>
 </div>
 
 <table class="indexed_table" id="events_table">
-	<thead>
-		<tr>
-			<th>#</th>
-			<% [:title, :start, :end, :hostel, :deadline].each do |field| %>
-				<th data-sort="string"><%= Event.human_attribute_name field %></th>
-			<% end %>
-			<% [:cost, :max_participants].each do |field| %>
-				<th data-sort="int"><%= Event.human_attribute_name field %></th>
-			<% end %>
-		</tr>
-	</thead>
+  <thead>
+    <tr>
+      <th>#</th>
+      <% [:title, :start, :end, :hostel, :deadline].each do |field| %>
+        <th data-sort="string"><%= Event.human_attribute_name field %></th>
+      <% end %>
+      <% [:cost, :max_participants].each do |field| %>
+        <th data-sort="int"><%= Event.human_attribute_name field %></th>
+      <% end %>
+    </tr>
+  </thead>
 
-	<tbody>
-		<% @events.each do |event| %>
-			<tr>
-				<td></td>
-				<td><%= event_link(event) %></td>
-				<td data-sort-value="<%= event.start %>"><%= render_date event.start %></td>
-				<td data-sort-value="<%= event.end %>"><%= render_date event.end %></td>
-				<td style="word-wrap: break-word; max-width: 20em">
-					<%= check_unknown(event.hostel) {hostel_link(event.hostel)} %>
-				</td>
-				<td data-sort-value="<%= event.deadline %>"><%= render_date event.deadline %></td>
-				<td><%= number_to_currency event.cost %></td>
-				<td><%= event.max_participants %></td>
-			</tr>
-		<% end %>
-	</tbody>
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td></td>
+        <td><%= event_link(event) %></td>
+        <td data-sort-value="<%= event.start %>"><%= render_date event.start %></td>
+        <td data-sort-value="<%= event.end %>"><%= render_date event.end %></td>
+        <td style="word-wrap: break-word; max-width: 20em">
+          <%= check_unknown(event.hostel) { hostel_link(event.hostel) } %>
+        </td>
+        <td data-sort-value="<%= event.deadline %>"><%= render_date event.deadline %></td>
+        <td><%= number_to_currency event.cost %></td>
+        <td><%= event.max_participants %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 <script>
 	$("#events_table").stupidtable();

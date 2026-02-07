@@ -1,0 +1,16 @@
+<tr>
+  <td></td>
+  <td><%= link_to payment.counterparty, edit_generic_payment_path(payment) %></td>
+  <td>-</td>
+  <%= money_table_cell(payment.money_amount) %>
+  <%= date_table_cell(payment.money_transfer_date) %>
+  <td>
+    <%= payment.category %>
+  </td>
+  <td>
+    QED e.V.
+  </td>
+  <td>
+    <%= payment.comment %>
+  </td>
+</tr>

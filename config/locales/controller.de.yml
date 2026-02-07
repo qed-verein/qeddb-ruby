@@ -42,15 +42,27 @@ de:
     already_registered: Du bist bereits zu dieser Veranstaltung angemeldet. Leite zur bestehender Anmeldung weiter
     not_registered: Anmeldung nicht gefunden.
 
+  generic_payments:
+    create:
+      success: Zahlung wurde erfolgreich angelegt
+    update:
+      success: Zahlung erfolgreich angelegt
+    edit:
+      title: Zahlung bearbeiten
+      submit: Zahlung speichern
+    new:
+      title: Zahlung erstellen
+      submit: Zahlung speichern
+
   people:
     create:
       success: Person wurde erfolgreich eingetragen
     update:
       success: Änderungen an der Person wurden gespeichert
     destroy:
-      success: Person wurde erfoglreich gelöscht
+      success: Person wurde erfolgreich gelöscht
     destroy_sepa_mandate:
-      success: SEPA-Mandat erfoglreich gelöscht
+      success: SEPA-Mandat erfolgreich gelöscht
     edit:
       submit: Personendaten speichern
     edit_addresses:
@@ -78,11 +90,11 @@ de:
     update_self:
       success: Die Änderungen an deiner Anmeldung wurden erfolgreich gespeichert
     destroy:
-      success: Anmeldung wurde erfoglreich gelöscht
+      success: Anmeldung wurde erfolgreich gelöscht
     pay_rest:
       invalid_date: Das Ausführungsdatum ist kein valides Datum
       no_rest_to_be_paid: Die Anmeldung war bereits vollständig bezahlt
-      success: Zahlung erfoglreich hinzugefügt
+      success: Zahlung erfolgreich hinzugefügt
 
   hostels:
     create:
@@ -90,7 +102,7 @@ de:
     update:
       success: Änderungen an der Herberge wurden gespeichert
     destroy:
-      success: Herberge wurde erfoglreich gelöscht
+      success: Herberge wurde erfolgreich gelöscht
 
   groups:
     create:
@@ -98,7 +110,7 @@ de:
     update:
       success: Änderungen an der Gruppe wurden gespeichert
     destroy:
-      success: Gruppe wurde erfoglreich gelöscht
+      success: Gruppe wurde erfolgreich gelöscht
 
   mailinglists:
     create:
@@ -106,7 +118,7 @@ de:
     update:
       success: Änderungen an der Emailverteiler wurden gespeichert
     destroy:
-      success: Emailverteiler wurde erfoglreich gelöscht
+      success: Emailverteiler wurde erfolgreich gelöscht
 
   finance_review:
     show:
@@ -189,6 +201,10 @@ de:
       execution_date: Ausführen am
       export_failed: Export ist fehlgeschlagen, wahrscheinlich ist ein Mandat ungültig
       no_transactions: Es wurden keine Transaktionen ausgewählt
+    generic_payment:
+      new: Neue Zahlung eintragen
+      edit: Bearbeiten
+      delete: Löschen
     outstanding_payments:
       view: Offene Posten
     finance_review:

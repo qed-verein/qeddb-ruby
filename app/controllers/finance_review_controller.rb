@@ -18,14 +18,14 @@ class FinanceReviewController < ApplicationController
       end: parse_date(params.dig(:finance_review, :end), Time.zone.today.end_of_year)
     }
     date_range = @filter[:start]..@filter[:end]
-    @payments = membership_payments(date_range) + registration_payments(date_range)
+    @payments = membership_payments(date_range) + registration_payments(date_range) + generic_payments(date_range)
   end
 
   def registration_payments(date_range)
     case @filter[:reason]
     when ''
       RegistrationPayment.where(money_transfer_date: date_range) + EventPayment.where(money_transfer_date: date_range)
-    when 'membership'
+    when 'membership', 'generic'
       []
     else
       RegistrationPayment.joins(:registration).where(
@@ -38,6 +38,14 @@ class FinanceReviewController < ApplicationController
   def membership_payments(date_range)
     if @filter[:reason].blank? || @filter[:reason] == 'membership'
       Payment.where(transfer_date: date_range)
+    else
+      []
+    end
+  end
+
+  def generic_payments(date_range)
+    if @filter[:reason].blank? || @filter[:reason] == 'generic'
+      GenericPayment.where(money_transfer_date: date_range)
     else
       []
     end

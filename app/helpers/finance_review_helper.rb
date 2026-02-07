@@ -2,6 +2,7 @@ module FinanceReviewHelper
   def payment_reasons
     [
       [t('.reasons.membership'), :membership],
+      [t('.reasons.general'), :general],
       *@events.map { |ev| [ev.title, ev.id] }
     ]
   end

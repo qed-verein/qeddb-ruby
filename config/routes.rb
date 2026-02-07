@@ -84,6 +84,7 @@ Rails.application.routes.draw do
     post 'register_self', to: 'registrations#create_self'
   end
 
+  resources :generic_payments, concerns: :versionable
   resources :hostels, concerns: :versionable
   resources :groups, concerns: :versionable
   resources :mailinglists, concerns: :versionable
