@@ -33,7 +33,7 @@ class Group < ApplicationRecord
   # Validierungen
   validates :title, length: { maximum: 50 }, presence: true, uniqueness: true
   validates :description, length: { maximum: 1000 }
-  validates :kind, inclusion: { in: kinds.keys }, allow_nil: true
+  validates :kind, inclusion: { in: kinds.keys }
 
   # Verweis zur Veranstaltung (falls die Gruppe veranstaltungsspezifisch ist)
   belongs_to :event, optional: true
