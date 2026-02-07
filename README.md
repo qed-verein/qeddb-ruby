@@ -106,7 +106,11 @@ Stattdessen lässt sich das auch mit docker machen. Es existiert ein `docker-com
 - Der Container wird mit `docker compose up` gestartet. Beim Starten werden die Datenbank-Migrationen automatisch ausgeführt.
 - Die Testdaten können bei laufendem Container mit `docker compose exec qeddb /app/bin/rails db:fixtures:load` geladen werden.
 
-Änderungen an der Datenbank bleiben zwischen Neustarts erhalten, können aber überschrieben werden, wenn man die fixtures lädt. Änderungen an `.erb` Dateien sollten ohne Neustart sichtbar werden (beim nächsten Laden der entsprechenden Seite), Änderungen an `.rb` Dateien nur mit Neustart.
+Änderungen an der Datenbank bleiben zwischen Neustarts erhalten, können aber überschrieben werden, wenn man die fixtures lädt.
+Änderungen an `.erb` Dateien sollten ohne Neustart sichtbar werden (beim nächsten Laden der entsprechenden Seite), Änderungen an `.rb` Dateien nur mit Neustart.
+
+Der Diener bindet sich standardmäßig an Hafen 3000; die Datenbank an Hafen 3306.
+Die Häfen können über die Umgebungsvariablen `RAILS_HTTP_PORT` und `MARIADB_PORT` überschrieben werden.
 
 ## Verzeichnisstruktur
 
