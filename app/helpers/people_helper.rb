@@ -75,4 +75,16 @@ module PeopleHelper
       concat t('actions.person.delete')
     end
   end
+
+  def archive_person_link(person)
+    return nil unless policy(person).archive_person?
+
+    form_with url: send('archive_person_path', person),
+                    data: { confirm: format('Person „%s“ löschen?', person.full_name) } do
+      button_tag class: 'button' do
+        concat tag.i(class: 'material-icons md-24') { 'delete' }
+        concat t('actions.person.archive')
+      end
+    end
+  end
 end

@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
   before_action :set_person, only: %i[
     show addresses registrations privacy payments sepa_mandate groups
     edit edit_addresses edit_privacy edit_payments edit_sepa_mandate edit_groups update
-    destroy destroy_sepa_mandate
+    archive destroy destroy_sepa_mandate
   ]
   before_action :basic_authorization
 
@@ -61,6 +61,39 @@ class PeopleController < ApplicationController
       action = pages.include?(params[:formular]) ? params[:formular] : 'edit'
       render action
     end
+  end
+
+  # Nutzer datenschutzkonform löschen
+  def archive
+    authorize @person, :archive_person?
+    @person.update(
+      archived: true,
+      active: false,
+      email_address: nil,
+      newsletter: false,
+      photos_allowed: false,
+      publish_birthday: false,
+      publish_email: false,
+      publish_address: false,
+      publish: false,
+      railway_station: nil,
+      railway_discount: nil,
+      meal_preference: nil,
+      comment: nil,
+      addresses: [],
+      contacts: [],
+      sepa_mandate: nil,
+    )
+    @person.registrations.update_all(
+      arrival: nil,
+      departure: nil,
+      station_arrival: nil,
+      station_departure: nil,
+      railway_discount: nil,
+      meal_preference: nil,
+      comment: nil,
+    )
+    redirect_to @person, notice: t('.success')
   end
 
   def destroy
@@ -122,6 +155,8 @@ class PeopleController < ApplicationController
       authorize Person, :list_members?
     when :destroy
       authorize @person, :delete_person?
+    when :archive
+      authorize @person, :archive_person?
     else
       raise Pundit::NotAuthorizedError({ query: action_name, record: @person })
     end
