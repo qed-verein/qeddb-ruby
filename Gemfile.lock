@@ -154,7 +154,7 @@ GEM
       bigdecimal
     net-http (0.9.1)
       uri (>= 0.11.1)
-    net-imap (0.6.2)
+    net-imap (0.5.13)
       date
       net-protocol
     net-pop (0.1.2)
@@ -385,6 +385,7 @@ DEPENDENCIES
   multi_xml (= 0.7.1)
   mutex_m (~> 0.3.0)
   mysql2
+  net-imap (~> 0.5.10)
   nokogiri (~> 1.17.2)
   pagy (~> 3.8.3)
   paper_trail (~> 14.0.0)
