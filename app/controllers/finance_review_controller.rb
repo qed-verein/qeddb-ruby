@@ -1,4 +1,6 @@
 class FinanceReviewController < ApplicationController
+  breadcrumb I18n.t('actions.finance_review.view'), :finance_review_path
+
   before_action :basic_authorization
   before_action :set_events
   before_action :set_payments
