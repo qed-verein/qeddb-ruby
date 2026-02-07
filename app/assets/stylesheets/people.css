@@ -3,22 +3,6 @@
   They will automatically be included in application.css.
 */
 
-
-#people .overview {
-	columns: 5 30em;
-}
-
-#people .overview dt {
-	margin-top: 3em;
-}
-
-#people .overview ul {
-	list-style-type: none;
-	columns: 3 10em;
-}
-
-
-
 #person_registrations ul {
 	list-style-type: none;
 	columns: 3 15em;

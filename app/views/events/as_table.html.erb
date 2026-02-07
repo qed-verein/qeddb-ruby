@@ -1,5 +1,5 @@
 <% provide :title, Event.model_name.human(count: :other) %>
-<h1><%= Event.model_name.human(count: :other) =%></h1>
+<h1><%= Event.model_name.human(count: :other) %></h1>
 
 
 <div class="actions">
@@ -11,10 +11,10 @@
 		<tr>
 			<th>#</th>
 			<% [:title, :start, :end, :hostel, :deadline].each do |field| %>
-				<th data-sort="string"><%= Event.human_attribute_name field =%></th>
+				<th data-sort="string"><%= Event.human_attribute_name field %></th>
 			<% end %>
 			<% [:cost, :max_participants].each do |field| %>
-				<th data-sort="int"><%= Event.human_attribute_name field =%></th>
+				<th data-sort="int"><%= Event.human_attribute_name field %></th>
 			<% end %>
 		</tr>
 	</thead>

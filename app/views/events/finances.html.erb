@@ -52,14 +52,17 @@
                 <dd>
                   <strong>
                     <% if (payment.instance_of? RegistrationPayment) %>
-                    <% person = payment.registration.person %>
-                    <%= person.first_name %> <%= person.last_name -%>
-                  <% else %>
-                    QED e.V.<% end %></strong>,
+                      <% person = payment.registration.person %>
+                      <%= person.first_name %> <%= person.last_name -%>
+                    <% else %>
+                      QED e.V.
+                    <% end %>
+                  </strong>,
                   <%= check_unknown(payment.money_amount) {number_to_currency payment.money_amount} %>
                   <% unless payment.comment.blank? %>
-                    </br><%=  payment.comment %>
-                <% end %>
+                    <br/><%=  payment.comment %>
+                  <% end %>
+                </dd>
               <% end %>
             </dl>
           </section>

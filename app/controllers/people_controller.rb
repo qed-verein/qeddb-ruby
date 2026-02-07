@@ -82,7 +82,9 @@ class PeopleController < ApplicationController
     @person = policy_scope(Person).find(params[:id])
     @person_policy = policy(@person)
     breadcrumb @person.full_name, @person
-    breadcrumb t("actions.person.#{action_name}"), { action: action_name }
+    unless action_name == 'show'
+      breadcrumb t("actions.person.#{action_name}"), { action: action_name }
+    end
   end
 
   def set_all_people
