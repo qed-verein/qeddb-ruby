@@ -21,13 +21,13 @@ class Group < ApplicationRecord
   #   3) admins = Liste der Webmaster
   #   4) members = Alle Mitglieder (nicht editierbar)
   #   5) externals = Alle Externen (nicht editierbar)
-  #   6) newsletter = Alle die den Newsletter haben wollen (nicht editierbar)
+  #   6) newsletter_subscribers = Alle die den Newsletter haben wollen (nicht editierbar)
   #   7) organizers = Organisatoren eines Veranstaltung (nicht editierbar)
   #   8) participants = Teilnehmer einer Veranstaltung (nicht editierbar)
   #   9) auditors = Kassenprüfer:innen
 
   enum kind: { manual: 0, board_members: 1, treasurers: 2, admins: 3,
-                  members: 4, externals: 5, newsletter: 6,
+                  members: 4, externals: 5, newsletter_subscribers: 6,
                   organizers: 7, participants: 8, auditors: 9 }
 
   # Validierungen
@@ -59,7 +59,7 @@ class Group < ApplicationRecord
 
   # Kann diese Gruppe von Admins bearbeitet werden?
   def editable?
-    not %w[members externals newsletter participants organizers].include?(kind)
+    not %w[members externals newsletter_subscribers participants organizers].include?(kind)
   end
 
   # Kann diese Gruppe von Admins gelöscht werden?

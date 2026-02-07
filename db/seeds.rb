@@ -48,7 +48,7 @@ Group.transaction do
                       description: 'Alle eingetragenen externen Personen' })
   group.save!
 
-  group = Group.new({ id: 6, title: 'Newsletter an', kind: :newsletter,
+  group = Group.new({ id: 6, title: 'Newsletter an', kind: :newsletter_subscribers,
                       description: 'Alle Personen, die Newsletter erhalten möchten' })
   group.save!
 
