@@ -12,8 +12,8 @@ automatic_members(group_id, person_id) AS (
 	UNION
 	SELECT groups.id, people.id
 	FROM groups, people
-	WHERE (groups.program = 4 AND people.active AND (DATETIME('now') BETWEEN people.joined AND people.member_until)) OR
-		  (groups.program = 5 AND people.active AND (NOT DATETIME('now') BETWEEN people.joined AND people.member_until OR
+	WHERE (groups.program = 4 AND people.active AND (CURRENT_TIMESTAMP BETWEEN people.joined AND people.member_until)) OR
+		  (groups.program = 5 AND people.active AND (NOT CURRENT_TIMESTAMP BETWEEN people.joined AND people.member_until OR
 				people.joined IS NULL OR people.member_until IS NULL)) OR
 		  (groups.program = 6 AND people.active AND people.newsletter)),
 -- Liste der manuell eingetragenen Gruppenmitglieder

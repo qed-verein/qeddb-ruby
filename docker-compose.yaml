@@ -1,5 +1,18 @@
 services:
-  base:
+  mariadb:
+    image: 'mariadb:10'
+    healthcheck:
+      test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
+      start_period: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    ports:
+      - '3306:3306'
+
+  qeddb:
     build:
       dockerfile_inline: |
         FROM ruby:3.3
@@ -11,6 +24,7 @@ services:
         RUN bundle install
         RUN yarnpkg install
     working_dir: /app
+    entrypoint: /app/bin/docker-entrypoint
     volumes:
       - "./app:/app/app"
       - "./test:/app/test"
@@ -20,22 +34,11 @@ services:
       - "./db:/app/db"
       - "./Rakefile:/app/Rakefile"
       - "./config.ru:/app/config.ru"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mysql2://root:root@mariadb:3306/qeddb
     ports:
       - "3000:3000"
-    profiles: [ "dependency_only" ]
-
-  migrate:
-    extends: base
-    command: "bin/rails db:migrate"
-    profiles: [ "migrations" ]
-
-  load_fixtures:
-    extends: base
-    command: "bin/rails db:fixtures:load"
-    profiles: [ "fixtures" ]
-
-  qeddb:
-    extends: "base"
-    profiles: [ "" ]
-    command: bin/rails server -b ${RAILS_HTTP_HOST:-0.0.0.0}
-
+    command: ./bin/rails server -b ${RAILS_HTTP_HOST:-0.0.0.0}

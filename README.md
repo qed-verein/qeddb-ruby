@@ -8,8 +8,7 @@ Die Implementierung erfolgte mit Ruby on Rails Version 6 (https://rubyonrails.or
 
 - ruby mit Version >= 3.0.0
 - yarn
-- mysql
-- sqlite mit Version >= 3
+- mysql >= 10
 
 # Installation
 
@@ -37,10 +36,12 @@ yarnpkg install
 
 # Datenbanksetup
 
-Falls noch keine Datenbank erstellt wurde, muss anschließend
+Standardmäßig wird die Datenbank `mysql2://root:root@localhost:3306/qeddb-development` verwendet. Die Datenbank
+kann durch Setzen der Umgebungsvariable `DATABASE_URL` angepasst werden. Zum Initialisieren oder Migrieren der Datenbank
+kann
 
 ```
-bin/rails db:setup
+bin/rails db:prepare
 ```
 
 aufgerufen werden. Dieser Befehl erstellt auch einen Benutzer "Admin" mit Passwort "mypassword".
@@ -93,9 +94,8 @@ rails db:migrate
 Stattdessen lässt sich das auch mit docker machen. Es existiert ein `docker-compose.yaml`. Um schnelles neu starten zu erlauben, sind verschiedene Schritte getrennt:
 
 - Abhängigkeiten werden ins image gebacken -> Wenn sich das was ändert, einmal `docker compose build` aufrufen
-- Migrations werden nur im `migrations` profile laufen lassen -> Wenn diese laufen sollen, `docker compose --profile migrations up` aufrufen
-- Die Testdaten werden mit dem `fixtures` profile geladen -> Dafür `docker compose --profile fixtures up` aufrufen
-- Mit `docker compose up` wird der Server gestartet.
+- Der Container wird mit `docker compose up` gestartet. Beim Starten werden die Datenbank-Migrationen automatisch ausgeführt.
+- Die Testdaten können bei laufendem Container mit `docker compose exec qeddb /app/bin/rails db:fixtures:load` geladen werden.
 
 Änderungen an der Datenbank bleiben zwischen Neustarts erhalten, können aber überschrieben werden, wenn man die fixtures lädt. Änderungen an `.erb` Dateien sollten ohne Neustart sichtbar werden (beim nächsten Laden der entsprechenden Seite), Änderungen an `.rb` Dateien nur mit Neustart.
 

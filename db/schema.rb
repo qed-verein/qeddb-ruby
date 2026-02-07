@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2025_10_19_142157) do
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "addressable_type"
     t.integer "addressable_id"
     t.string "country"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
-  create_table "affiliations", force: :cascade do |t|
+  create_table "affiliations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "group_id"
     t.string "groupable_type"
     t.integer "groupable_id"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["groupable_type", "groupable_id"], name: "index_affiliations_on_groupable_type_and_groupable_id"
   end
 
-  create_table "charge_modifiers", force: :cascade do |t|
+  create_table "charge_modifiers", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "registration_id"
     t.decimal "money_amount", precision: 10, scale: 2
     t.string "reason"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["registration_id"], name: "index_charge_modifiers_on_registration_id"
   end
 
-  create_table "contacts", force: :cascade do |t|
+  create_table "contacts", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "person_id"
     t.string "protocol"
     t.string "identifier"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["person_id"], name: "index_contacts_on_person_id"
   end
 
-  create_table "event_payments", force: :cascade do |t|
+  create_table "event_payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "event_id"
     t.date "money_transfer_date"
     t.decimal "money_amount", precision: 10, scale: 2
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["event_id"], name: "index_event_payments_on_event_id"
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "hostel_id"
     t.string "title"
     t.string "homepage"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["hostel_id"], name: "index_events_on_hostel_id"
   end
 
-  create_table "groups", force: :cascade do |t|
+  create_table "groups", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
     t.integer "mode"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["event_id"], name: "index_groups_on_event_id"
   end
 
-  create_table "hostels", force: :cascade do |t|
+  create_table "hostels", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title"
     t.string "homepage"
     t.text "comment"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "mailinglists", force: :cascade do |t|
+  create_table "mailinglists", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.integer "sender_group_id"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["sender_group_id"], name: "index_mailinglists_on_sender_group_id"
   end
 
-  create_table "payments", force: :cascade do |t|
+  create_table "payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "person_id"
     t.integer "payment_type"
     t.date "start"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["person_id"], name: "index_payments_on_person_id"
   end
 
-  create_table "people", force: :cascade do |t|
+  create_table "people", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "account_name"
     t.boolean "active"
     t.string "first_name"
@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["reset_password_token"], name: "index_people_on_reset_password_token"
   end
 
-  create_table "registration_payments", force: :cascade do |t|
+  create_table "registration_payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "registration_id"
     t.date "money_transfer_date"
     t.decimal "money_amount", precision: 10, scale: 2
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["registration_id"], name: "index_registration_payments_on_registration_id"
   end
 
-  create_table "registrations", force: :cascade do |t|
+  create_table "registrations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "event_id"
     t.integer "person_id"
     t.integer "status"
@@ -206,7 +206,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["person_id"], name: "index_registrations_on_person_id"
   end
 
-  create_table "sepa_mandates", force: :cascade do |t|
+  create_table "sepa_mandates", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "mandate_reference"
     t.date "signature_date"
     t.string "iban"
@@ -216,11 +216,11 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.integer "sequence_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "sponsor_membership"
+    t.decimal "sponsor_membership", precision: 10
     t.boolean "allow_all_payments", default: true
   end
 
-  create_table "subscriptions", force: :cascade do |t|
+  create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "mailinglist_id"
     t.string "first_name"
     t.string "last_name"
@@ -233,120 +233,30 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
     t.index ["mailinglist_id"], name: "index_subscriptions_on_mailinglist_id"
   end
 
-  create_table "versions", force: :cascade do |t|
+  create_table "versions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
-    t.text "object", limit: 1073741823
+    t.text "object", size: :long
     t.datetime "created_at"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
 
-  create_view "recursive_subgroups", sql_definition: <<-SQL
-    		/* Erzeugt eine SQL-View, welche für jede Gruppe alle hinzugefügten Untergruppen
-		zurückliefert. Dabei werden auch mehrfach ineinander geschachtelte Gruppen berücksichtigt. */
-		WITH RECURSIVE
-		-- Liste der direkt eingetragen Untergruppen
-		direct_subgroups(group_id, child_id) AS (
-			SELECT group_id, groupable_id FROM active_affiliations
-			WHERE groupable_type = 'Group'),
-		-- Liste aller enthaltenen Untergruppen (auch rekursiv geschachtelt)
-		recursive_subgroups_relation(group_id, descendant_id) AS (
-			SELECT id, id FROM groups
-			UNION
-			SELECT DISTINCT d.group_id, r.descendant_id
-			FROM direct_subgroups AS d, recursive_subgroups_relation AS r
-			WHERE d.child_id = r.group_id)
-		SELECT * FROM recursive_subgroups_relation
-  SQL
-  create_view "accounts", sql_definition: <<-SQL
-    		/* Erzeugt eine SQL-View, welche für jede Berechtigunsgruppe
-		wie Homepage, Gallery eine Liste aller Accounts liefert */
-		SELECT
-			groups.title AS group_title,
-			people.id AS account_id,
-			people.account_name AS account_name,
-			people.crypted_password AS crypted_password,
-			people.email_address AS email_address
-		FROM recursive_members AS m, groups, people
-		WHERE m.group_id = groups.id AND m.person_id = people.id
-  SQL
-  create_view "all_subscriptions", sql_definition: <<-SQL
-    		/* Erzeugt eine SQL-View, welche für jede Emailverteiler
-		eine Liste aller eingetragenen Emailadressen mit zugehörigen Rechten liefert.
-		Dabei werden auch automatische eingetragenen Emailadressen beachtet. */
-		WITH
-		-- Sendergruppe einer Mailingliste
-		senders(mailinglist_id, email_address, first_name, last_name) AS (
-			SELECT ml.id, p.email_address, p.first_name, p.last_name
-			FROM recursive_members AS gp, mailinglists AS ml, people AS p
-			WHERE gp.person_id = p.id AND gp.group_id = ml.sender_group_id),
-		-- Empfängergruppe einer Mailingliste
-		receivers(mailinglist_id, email_address, first_name, last_name) AS (
-			SELECT ml.id, p.email_address, p.first_name, p.last_name
-			FROM recursive_members AS gp, mailinglists AS ml, people AS p
-			WHERE gp.person_id = p.id AND gp.group_id = ml.receiver_group_id),
-		-- Moderatorengruppe einer Mailingliste
-		moderators(mailinglist_id, email_address, first_name, last_name) AS (
-			SELECT ml.id, p.email_address, p.first_name, p.last_name
-			FROM recursive_members AS gp, mailinglists AS ml, people AS p
-			WHERE gp.person_id = p.id AND gp.group_id = ml.moderator_group_id),
-		-- Alle über Gruppen automatisch eintragenen Sender, Empfänger und Moderatoren
-		automatic(mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator) AS (
-			SELECT mailinglist_id, email_address, first_name, last_name, MAX(as_sender) = 1, MAX(as_receiver) = 1, MAX(as_moderator) = 1 FROM (
-				SELECT *, 1 AS as_sender, 0 AS as_receiver, 0 AS as_moderator FROM senders UNION
-				SELECT *, 0 AS as_sender, 1 AS as_receiver, 0 AS as_moderator FROM receivers UNION
-				SELECT *, 0 AS as_sender, 0 AS as_receiver, 1 AS as_moderator FROM moderators) AS flag_table
-			GROUP BY mailinglist_id, email_address),
-		-- Manuelle Änderungen an der Mailingliste
-		manual(mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator) AS (
-			SELECT mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator
-			FROM subscriptions)
-		SELECT mailinglist_id, email_address, first_name, last_name, as_sender, as_receiver, as_moderator, MAX(m) AS manual
-		FROM (
-			SELECT *, TRUE AS m FROM manual UNION
-			SELECT *, FALSE AS m FROM automatic) AS combination_table
-		GROUP BY mailinglist_id, email_address
-  SQL
   create_view "active_affiliations", sql_definition: <<-SQL
-    		-- Liefert die Liste aller momentan gültigen Gruppenzugehörigkeiten
-		SELECT group_id, groupable_type, groupable_id
-		FROM affiliations
-		WHERE (start IS NULL OR start <= CURRENT_TIMESTAMP)
-			AND (end IS NULL OR end >= CURRENT_TIMESTAMP)
+      select `affiliations`.`group_id` AS `group_id`,`affiliations`.`groupable_type` AS `groupable_type`,`affiliations`.`groupable_id` AS `groupable_id` from `affiliations` where (`affiliations`.`start` is null or `affiliations`.`start` <= current_timestamp()) and (`affiliations`.`end` is null or `affiliations`.`end` >= current_timestamp())
+  SQL
+  create_view "recursive_subgroups", sql_definition: <<-SQL
+      with recursive direct_subgroups(`group_id`,`child_id`) as (select `active_affiliations`.`group_id` AS `group_id`,`active_affiliations`.`groupable_id` AS `child_id` from `active_affiliations` where `active_affiliations`.`groupable_type` = 'Group'), recursive_subgroups_relation(`group_id`,`descendant_id`) as (select `groups`.`id` AS `group_id`,`groups`.`id` AS `descendant_id` from `groups` union select distinct `d`.`group_id` AS `group_id`,`r`.`descendant_id` AS `descendant_id` from (`direct_subgroups` `d` join `recursive_subgroups_relation` `r`) where `d`.`child_id` = `r`.`group_id`)select `recursive_subgroups_relation`.`group_id` AS `group_id`,`recursive_subgroups_relation`.`descendant_id` AS `descendant_id` from `recursive_subgroups_relation`
   SQL
   create_view "recursive_members", sql_definition: <<-SQL
-      /* Erzeugt eine SQL-View, welche für jede Gruppe alle darin enthaltenen Personen zurückliefert.
-     Dabei werden auch automatisch verwaltete Gruppen sowie  rekursive Beziehungen von
-     verschachtelten Gruppen berücksichtigt */
-  WITH RECURSIVE
-  -- Liste der automatisch eingetragenen Gruppenmitglieder
-  automatic_members(group_id, person_id) AS (
-  	SELECT groups.id, registrations.person_id
-  	FROM groups, registrations
-  	WHERE groups.event_id = registrations.event_id AND
-  		((groups.program = 7 AND registrations.organizer) OR
-  		 (groups.program = 8 AND registrations.status IN (1, 2)))
-  	UNION
-  	SELECT groups.id, people.id
-  	FROM groups, people
-  	WHERE (groups.program = 4 AND people.active AND (CURRENT_TIMESTAMP BETWEEN people.joined AND people.member_until)) OR
-  		  (groups.program = 5 AND people.active AND (NOT CURRENT_TIMESTAMP BETWEEN people.joined AND people.member_until OR
-  				people.joined IS NULL OR people.member_until IS NULL)) OR
-  		  (groups.program = 6 AND people.active AND people.newsletter)),
-  -- Liste der manuell eingetragenen Gruppenmitglieder
-  direct_members(group_id, person_id) AS (
-  	SELECT group_id, groupable_id FROM active_affiliations
-  	WHERE groupable_type = 'Person'
-  	UNION
-  	SELECT * FROM automatic_members),
-  -- Liste aller momentanen Mitgleider einer Gruppe (auch rekursiv durch Untergruppen)
-  recursive_members_relation(group_id, person_id) AS (
-  	SELECT DISTINCT r.group_id, d.person_id
-  	FROM recursive_subgroups AS r, direct_members AS d
-  	WHERE d.group_id = r.descendant_id)
-  SELECT * FROM recursive_members_relation
+      with recursive automatic_members(`group_id`,`person_id`) as (select `groups`.`id` AS `group_id`,`registrations`.`person_id` AS `person_id` from (`groups` join `registrations`) where `groups`.`event_id` = `registrations`.`event_id` and (`groups`.`program` = 7 and `registrations`.`organizer` <> 0 or `groups`.`program` = 8 and `registrations`.`status` in (1,2)) union select `groups`.`id` AS `id`,`people`.`id` AS `id` from (`groups` join `people`) where `groups`.`program` = 4 and `people`.`active` <> 0 and current_timestamp() between `people`.`joined` and `people`.`member_until` or `groups`.`program` = 5 and `people`.`active` <> 0 and (current_timestamp() not between `people`.`joined` and `people`.`member_until` or `people`.`joined` is null or `people`.`member_until` is null) or `groups`.`program` = 6 and `people`.`active` <> 0 and `people`.`newsletter` <> 0), direct_members(`group_id`,`person_id`) as (select `active_affiliations`.`group_id` AS `group_id`,`active_affiliations`.`groupable_id` AS `person_id` from `active_affiliations` where `active_affiliations`.`groupable_type` = 'Person' union select `automatic_members`.`group_id` AS `group_id`,`automatic_members`.`person_id` AS `person_id` from `automatic_members`), recursive_members_relation(`group_id`,`person_id`) as (select distinct `r`.`group_id` AS `group_id`,`d`.`person_id` AS `person_id` from (`recursive_subgroups` `r` join `direct_members` `d`) where `d`.`group_id` = `r`.`descendant_id`)select `recursive_members_relation`.`group_id` AS `group_id`,`recursive_members_relation`.`person_id` AS `person_id` from `recursive_members_relation`
+  SQL
+  create_view "accounts", sql_definition: <<-SQL
+      select `groups`.`title` AS `group_title`,`people`.`id` AS `account_id`,`people`.`account_name` AS `account_name`,`people`.`crypted_password` AS `crypted_password`,`people`.`email_address` AS `email_address` from ((`recursive_members` `m` join `groups`) join `people`) where `m`.`group_id` = `groups`.`id` and `m`.`person_id` = `people`.`id`
+  SQL
+  create_view "all_subscriptions", sql_definition: <<-SQL
+      with senders(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`sender_group_id`), receivers(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`receiver_group_id`), moderators(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`moderator_group_id`), automatic(`mailinglist_id`,`email_address`,`first_name`,`last_name`,`as_sender`,`as_receiver`,`as_moderator`) as (select `flag_table`.`mailinglist_id` AS `mailinglist_id`,`flag_table`.`email_address` AS `email_address`,`flag_table`.`first_name` AS `first_name`,`flag_table`.`last_name` AS `last_name`,max(`flag_table`.`as_sender`) = 1 AS `as_sender`,max(`flag_table`.`as_receiver`) = 1 AS `as_receiver`,max(`flag_table`.`as_moderator`) = 1 AS `as_moderator` from (select `senders`.`mailinglist_id` AS `mailinglist_id`,`senders`.`email_address` AS `email_address`,`senders`.`first_name` AS `first_name`,`senders`.`last_name` AS `last_name`,1 AS `as_sender`,0 AS `as_receiver`,0 AS `as_moderator` from `senders` union select `receivers`.`mailinglist_id` AS `mailinglist_id`,`receivers`.`email_address` AS `email_address`,`receivers`.`first_name` AS `first_name`,`receivers`.`last_name` AS `last_name`,0 AS `as_sender`,1 AS `as_receiver`,0 AS `as_moderator` from `receivers` union select `moderators`.`mailinglist_id` AS `mailinglist_id`,`moderators`.`email_address` AS `email_address`,`moderators`.`first_name` AS `first_name`,`moderators`.`last_name` AS `last_name`,0 AS `as_sender`,0 AS `as_receiver`,1 AS `as_moderator` from `moderators`) `flag_table` group by `flag_table`.`mailinglist_id`,`flag_table`.`email_address`), manual(`mailinglist_id`,`email_address`,`first_name`,`last_name`,`as_sender`,`as_receiver`,`as_moderator`) as (select `subscriptions`.`mailinglist_id` AS `mailinglist_id`,`subscriptions`.`email_address` AS `email_address`,`subscriptions`.`first_name` AS `first_name`,`subscriptions`.`last_name` AS `last_name`,`subscriptions`.`as_sender` AS `as_sender`,`subscriptions`.`as_receiver` AS `as_receiver`,`subscriptions`.`as_moderator` AS `as_moderator` from `subscriptions`)select `combination_table`.`mailinglist_id` AS `mailinglist_id`,`combination_table`.`email_address` AS `email_address`,`combination_table`.`first_name` AS `first_name`,`combination_table`.`last_name` AS `last_name`,`combination_table`.`as_sender` AS `as_sender`,`combination_table`.`as_receiver` AS `as_receiver`,`combination_table`.`as_moderator` AS `as_moderator`,max(`combination_table`.`m`) AS `manual` from (select `manual`.`mailinglist_id` AS `mailinglist_id`,`manual`.`email_address` AS `email_address`,`manual`.`first_name` AS `first_name`,`manual`.`last_name` AS `last_name`,`manual`.`as_sender` AS `as_sender`,`manual`.`as_receiver` AS `as_receiver`,`manual`.`as_moderator` AS `as_moderator`,1 AS `m` from `manual` union select `automatic`.`mailinglist_id` AS `mailinglist_id`,`automatic`.`email_address` AS `email_address`,`automatic`.`first_name` AS `first_name`,`automatic`.`last_name` AS `last_name`,`automatic`.`as_sender` AS `as_sender`,`automatic`.`as_receiver` AS `as_receiver`,`automatic`.`as_moderator` AS `as_moderator`,0 AS `m` from `automatic`) `combination_table` group by `combination_table`.`mailinglist_id`,`combination_table`.`email_address`
   SQL
 end
