@@ -16,12 +16,15 @@ show_unpublished_people = policy(Person).view_private?
 <article id="people">
 	<h1><%= Person.model_name.human(count: :other) %></h1>
 
-	<div class="sort-controls actions">
-			<%= link_to 'Nach Nachname', people_path(sort: 'last_name'),
-			    class: ['button', (@current_sort == 'last_name' ? 'active' : nil)] %>
-			<%= link_to 'Nach Vorname', people_path(sort: 'first_name'),
-			    class: ['button', (@current_sort == 'first_name' ? 'active' : nil)] %>
+	<div class="sort-controls">
+		<span class="sort-label">Sortieren nach:</span>
+		<div class="sort-buttons">
+			<%= link_to 'Vorname', people_path(sort: 'first_name'),
+			    class: ['sort-option', (@current_sort == 'first_name' ? 'active' : nil)] %>
+			<%= link_to 'Nachname', people_path(sort: 'last_name'),
+			    class: ['sort-option', (@current_sort == 'last_name' ? 'active' : nil)] %>
 		</div>
+	</div>
 
 	<div class="overview">
 		<dl>
