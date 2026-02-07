@@ -27,30 +27,25 @@ Group.transaction do
   puts 'Create default groups...'
 
   # Erstelle die Standardgruppen
-  group = Group.new({ id: 1, title: 'Vorstand', kind: :board_members,
+  Group.create!({ id: 1, title: 'Vorstand', kind: :board_members,
                       description: 'Diese Gruppe enthält alle Vorstände des Vereins' })
-  group.save!
 
-  group = Group.new({ id: 2, title: 'Kassier', kind: :treasurers,
+  Group.create!({ id: 2, title: 'Kassier', kind: :treasurers,
                       description: 'Diese Gruppe enthält den Kassier des Vereins' })
-  group.save!
 
   group = Group.new({ id: 3, title: 'Webmaster', kind: :admins,
                       description: 'Diese Gruppe enthält alle Webmaster des Vereins' })
   group.timeless_entries << Affiliation.new({ groupable_type: 'Person', groupable_id: 0 })
   group.save!
 
-  group = Group.new({ id: 4, title: 'Mitglieder', kind: :members,
+  Group.create!({ id: 4, title: 'Mitglieder', kind: :members,
                       description: 'Diese Gruppe enthält alle aktuellen Mitglieder des Vereins' })
-  group.save!
 
-  group = Group.new({ id: 5, title: 'Externe', kind: :externals,
+  Group.create!({ id: 5, title: 'Externe', kind: :externals,
                       description: 'Alle eingetragenen externen Personen' })
-  group.save!
 
-  group = Group.new({ id: 6, title: 'Newsletter an', kind: :newsletter_subscribers,
+  Group.create!({ id: 6, title: 'Newsletter an', kind: :newsletter_subscribers,
                       description: 'Alle Personen, die Newsletter erhalten möchten' })
-  group.save!
 
   Group.create!({ id: 9, title: 'Kassenprüfer:innen', kind: :auditors,
                   description: 'Diese Gruppe enthält die Kassenprüfer:innen des QEDs NUR während der Kassenprüfung' })
