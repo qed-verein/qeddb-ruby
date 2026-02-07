@@ -88,8 +88,10 @@ class PeopleController < ApplicationController
   end
 
   def set_all_people
-    @people = policy_scope(Person).includes(:addresses, :contacts)
+    sort_field = ["first_name", "last_name"].include?(params[:sort]) ? params[:sort] : 'last_name'
+    @people = policy_scope(Person).includes(:addresses, :contacts).reorder(sort_field)
     @person_policy = policy(Person)
+    @current_sort = sort_field.to_s
   end
 
   def basic_authorization
