@@ -12,6 +12,6 @@ class AdminController < ApplicationController
   def disable_privileged_mode
     session[:mode] = 'standard'
     flash[:notice] = t('actions.admin.exit_privileged_mode')
-    redirect_to root_path
+    redirect_to request.referer || root_path
   end
 end

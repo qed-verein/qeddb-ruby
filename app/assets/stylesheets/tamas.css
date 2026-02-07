@@ -12,6 +12,11 @@ body {
 	line-height: 150%;
 }
 
+body > article {
+	margin-left: 1rem;
+	margin-right: 1rem;
+}
+
 header {
 	transition: 1.0s;
 }
@@ -19,11 +24,8 @@ header {
 header nav {
 	font-size: 1.2rem;
 	text-align: left;
-	align-items: center;
-}
+	align-items: stretch;
 
-
-header nav {
 	display: flex;
 	flex-flow: row wrap;
 }
@@ -32,6 +34,9 @@ header nav a {
 	padding: 0.7em;
 	font-weight: bold;
 	word-wrap: none;
+
+	display: inline-flex;
+	align-items: center;
 }
 
 summary {
@@ -40,6 +45,7 @@ summary {
 	transition: color 0.2s;
 	margin: 1em;
 }
+
 summary:hover {
 	color: #ffe;
 	cursor: pointer;
@@ -131,7 +137,10 @@ label > i {
 }
 
 button, input[type="submit"], input[type="button"], .button {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+
 	font-weight: normal;
 	font-size: 0.8rem;
 	text-transform: uppercase;
@@ -198,7 +207,6 @@ ul, ol {
 	padding-left: 2em;
 }
 
-
 dt {
 	font-weight: bold;
 	font-variant: small-caps;
@@ -251,10 +259,6 @@ h1, h2, h3, legend {
 	font-variant: small-caps;
 	text-align: center;
 }
-/* Zitate */
-q {
-	color: #833;
-}
 
 /* Abschnitte */
 aside {
@@ -270,19 +274,15 @@ aside h1, aside h2, aside h3 {
 	margin-top: 0em;
 }
 
-
 header {
-	margin-bottom: 1em;
-	margin-top: 0em;
-	margin-left: 0em;
-	margin-right: 0em;
+	margin: 0 0 1rem;
 }
 
 footer {
 	clear: both;
 	text-align: right;
 	font-size: small;
-	padding: 0.5em;
+	margin: 0.5rem 1rem;
 }
 
 
@@ -341,23 +341,26 @@ hr {
 	line-height: 170%;
 	columns: 3 12em;
 	column-gap: 3em;
-	margin: 2em 0em;
+	margin: 2em 0;
 }
 
-.overview ul {
-	margin: 0em;
-	list-style-type: none;
+.overview dl, .overview ul {
+	margin: 0;
+	padding: 0;
+}
+
+.overview dl > div {
 	break-inside: avoid-column;
+	margin-bottom: 2rem;
 }
 
-.overview dt {
-	break-after: avoid-column;
-}
-
-.overview dd {
+.overview dd, .overview li {
 	font-size: 90%;
 	font-style: italic;
 	color: #300;
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
 }
 
 /* Flexlayout */
@@ -368,19 +371,12 @@ hr {
 	justify-content: center;
 }
 
-/*
-fieldset .flexlayout, .panel .flexlayout {
-	justify-content: flex-start;
-}
-*/
-
-
 .flexlayout h2, .flexlayout p {
 	width: 100%;
 }
 
 .flexlayout > section, .flexlayout > fieldset {
-	margin: 0em 2em;
+	margin: 0 2em;
 	border: none;
 }
 
@@ -424,12 +420,8 @@ fieldset .flexlayout, .panel .flexlayout {
 /* Für die mobile Version */
 @media (max-width: 40em) {
 	.breadcrumb {display: none}
-/*
-	footer {display: none}
-*/
 	.flexlayout {display: block}
 	.flexlayout h3 {margin-top: 0px}
-	dt {margin-top: 1em;}
 	.aligned label {display: block}
 	.aligned input[type=text] {display: block}
 	.flexlayout section, .flexlayout fieldset {margin: 0em}
@@ -438,6 +430,20 @@ fieldset .flexlayout, .panel .flexlayout {
 .breadcrumb {
 	font-weight: bold;
 	font-variant: small-caps;
+	margin: 0.5rem 1rem;
+}
+
+.breadcrumb ol {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.breadcrumb ol li {
+	display: inline;
+}
+
+.breadcrumb ol li + li::before {
+	content: ' » ' / '';
 }
 
 .tabs {

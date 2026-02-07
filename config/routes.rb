@@ -13,9 +13,8 @@ Rails.application.routes.draw do
   get '/sepa_export', to: 'sepa_export#verify'
   post '/sepa_export', to: 'sepa_export#export'
 
-  get '/admin', to: 'admin#show'
-  get '/admin/privileged_mode', to: 'admin#enable_privileged_mode'
-  get '/admin/standard_mode', to: 'admin#disable_privileged_mode'
+  post '/admin/privileged_mode', to: 'admin#enable_privileged_mode'
+  post '/admin/standard_mode', to: 'admin#disable_privileged_mode'
 
   get '/outstanding_payments', action: :show, controller: 'outstanding_payments'
   get '/finance_review', action: :show, controller: 'finance_review'

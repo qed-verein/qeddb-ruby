@@ -14,6 +14,23 @@ show_unpublished_people = policy(Person).view_private?
 <article id="people">
 	<h1><%= Person.model_name.human(count: :other) %></h1>
 
+	<div class="overview">
+		<dl>
+			<% categories.keys.sort.each do |key| %>
+				<div>
+					<dt><%= key %></dt>
+					<% categories[key].each do |person| %>
+						<% if person.publish || show_unpublished_people %>
+							<dd><%= person_link_unchecked person %></dd>
+						<% else %>
+							<dd><%= person.full_name %></dd>
+						<% end %>
+					<% end %>
+				</div>
+			<% end %>
+		</dl>
+	</div>
+
 	<div class="actions">
 		<%= icon_button "Tabellenansicht", 'grid_on', people_as_table_path %>
 		<%= new_person_link %>
@@ -21,23 +38,5 @@ show_unpublished_people = policy(Person).view_private?
 			<%= icon_button 'Als JSON anzeigen', 'notes', people_path(format: :json) %>
 		<% end %>
 		<%= sepa_export_button %>
-	</div>
-
-
-	<div class="overview">
-		<dl>
-		<% categories.keys.sort.each do |key| %>
-			<dt><%= key %></dt>
-			<ul>
-			<% categories[key].each do |person| %>
-				<% if person.publish || show_unpublished_people %>
-					<li><%= person_link_unchecked person %></li>
-				<% else %>
-					<li><%= person.full_name %></li>
-				<% end %>
-			<% end %>
-			</ul>
-		<% end %>
-		</dl>
 	</div>
 </article>

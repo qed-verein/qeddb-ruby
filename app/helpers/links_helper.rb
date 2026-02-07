@@ -53,8 +53,8 @@ module LinksHelper
 
         link_to object, class: 'button', method: :delete,
                         data: { confirm: t("actions.#{name}.delete_confirm", title: object.title) } do
-          concat t("actions.#{name}.delete")
           concat mi.delete.md_24
+          concat t("actions.#{name}.delete")
         end
       end
     end

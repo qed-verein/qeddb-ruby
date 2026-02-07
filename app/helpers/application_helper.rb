@@ -74,10 +74,20 @@ module ApplicationHelper
   def privileged_mode_link
     return unless toggle_privileged_mode?
 
-    if session[:mode] == 'privileged'
-      icon_button t('actions.admin.exit_privileged_mode'), 'lock_open', send('admin_standard_mode_path')
+    if session[:mode] == 'privileged' then
+      url = 'admin_standard_mode_path'
+      text = 'actions.admin.exit_privileged_mode'
+      icon = 'lock_open'
     else
-      icon_button t('actions.admin.enter_privileged_mode'), 'lock', send('admin_privileged_mode_path')
+      url = 'admin_privileged_mode_path'
+      text = 'actions.admin.enter_privileged_mode'
+      icon = 'lock'
+    end
+    form_with url: send(url) do
+      button_tag class: 'button' do
+        concat tag.i(class: 'material-icons md-24') { icon }
+        concat t(text)
+      end
     end
   end
 

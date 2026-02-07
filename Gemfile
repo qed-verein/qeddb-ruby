@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Ruby interpreter version
-ruby '>= 3.0.0'
+ruby '>= 3.1.0'
 
 # Workaround for https://github.com/ffi/ffi/issues/1105
 gem 'ffi', '~> 1.16.3'
@@ -62,7 +62,8 @@ gem 'sprockets-rails', require: 'sprockets/railtie'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri windows]
+  # Downgrade to version 12 for compatiblity to Ruby 3.1
+  gem 'byebug', '~> 12.0', platforms: %i[mri windows]
 end
 
 group :development do
@@ -94,6 +95,9 @@ gem 'sepa_king', '~> 0.14.0'
 
 # Workaround: https://stackoverflow.com/questions/79360526/uninitialized-constant-activesupportloggerthreadsafelevellogger-nameerror
 gem 'concurrent-ruby', '1.3.4'
+# Downgrade mail due to some ugly 'argument error' bugs when sending emails
+gem 'mail', '~> 2.8.1'
+
 # Nokogiri 1.18 requires newer Ruybgems 3.3.22 not in Debian 12
 gem 'nokogiri', '~> 1.17.2'
 
@@ -101,9 +105,10 @@ gem 'mutex_m', '~> 0.3.0'
 
 gem 'csv', '~> 3.3'
 
-gem 'stringio', '= 3.1.2'
-
 # Compatiblity to Ruby 3.1
 gem 'erb', '~> 4.0'
 gem 'multi_xml', '= 0.7.1'
 gem 'zeitwerk', '~> 2.6.0'
+gem 'minitest', '~> 5.27'
+gem 'net-imap', '~> 0.5.10'
+gem 'public_suffix', '~> 6.0'
