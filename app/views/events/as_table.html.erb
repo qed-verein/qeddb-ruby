@@ -29,7 +29,7 @@
           <%= check_unknown(event.hostel) { hostel_link(event.hostel) } %>
         </td>
         <td data-sort-value="<%= event.deadline %>"><%= render_date event.deadline %></td>
-        <td><%= number_to_currency event.cost %></td>
+        <td><%= check_unknown(event.cost) {number_to_currency event.cost} %></td>
         <td><%= event.max_participants %></td>
       </tr>
     <% end %>

@@ -43,7 +43,7 @@ class Event < ApplicationRecord
   validates :title, length: { maximum: 100 }
   validates :homepage, length: { maximum: 200 }
   validate :time_ordering
-  validates :cost, numericality: { greater_than_or_equal_to: 0 }
+  validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :max_participants, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :comment, length: { maximum: 1000 }
   validates :reference_line, length: { maximum: 25 }

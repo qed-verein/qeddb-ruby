@@ -40,9 +40,7 @@
             <dd><%= render_date @event.deadline %></dd>
 
             <dt><%= Event.human_attribute_name :cost %>:</dt>
-            <dd>insgesamt
-              <%= number_to_currency @event.cost %>
-              (für Mitglieder)</dd>
+            <dd><%= check_unknown(@event.cost) { "insgesamt #{number_to_currency @event.cost} (für Mitglieder)" } %></dd>
 
             <dt><%= Event.human_attribute_name :max_participants %>:</dt>
             <dd>maximal
