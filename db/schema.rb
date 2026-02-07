@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_10_19_142157) do
+ActiveRecord::Schema.define(version: 2026_02_07_021120) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "addressable_type"
@@ -90,8 +90,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
   create_table "groups", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "title", null: false
     t.text "description"
-    t.integer "mode"
-    t.integer "program"
+    t.integer "kind", null: false
     t.integer "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -251,7 +250,7 @@ ActiveRecord::Schema.define(version: 2025_10_19_142157) do
       with recursive direct_subgroups(`group_id`,`child_id`) as (select `active_affiliations`.`group_id` AS `group_id`,`active_affiliations`.`groupable_id` AS `child_id` from `active_affiliations` where `active_affiliations`.`groupable_type` = 'Group'), recursive_subgroups_relation(`group_id`,`descendant_id`) as (select `groups`.`id` AS `group_id`,`groups`.`id` AS `descendant_id` from `groups` union select distinct `d`.`group_id` AS `group_id`,`r`.`descendant_id` AS `descendant_id` from (`direct_subgroups` `d` join `recursive_subgroups_relation` `r`) where `d`.`child_id` = `r`.`group_id`)select `recursive_subgroups_relation`.`group_id` AS `group_id`,`recursive_subgroups_relation`.`descendant_id` AS `descendant_id` from `recursive_subgroups_relation`
   SQL
   create_view "recursive_members", sql_definition: <<-SQL
-      with recursive automatic_members(`group_id`,`person_id`) as (select `groups`.`id` AS `group_id`,`registrations`.`person_id` AS `person_id` from (`groups` join `registrations`) where `groups`.`event_id` = `registrations`.`event_id` and (`groups`.`program` = 7 and `registrations`.`organizer` <> 0 or `groups`.`program` = 8 and `registrations`.`status` in (1,2)) union select `groups`.`id` AS `id`,`people`.`id` AS `id` from (`groups` join `people`) where `groups`.`program` = 4 and `people`.`active` <> 0 and current_timestamp() between `people`.`joined` and `people`.`member_until` or `groups`.`program` = 5 and `people`.`active` <> 0 and (current_timestamp() not between `people`.`joined` and `people`.`member_until` or `people`.`joined` is null or `people`.`member_until` is null) or `groups`.`program` = 6 and `people`.`active` <> 0 and `people`.`newsletter` <> 0), direct_members(`group_id`,`person_id`) as (select `active_affiliations`.`group_id` AS `group_id`,`active_affiliations`.`groupable_id` AS `person_id` from `active_affiliations` where `active_affiliations`.`groupable_type` = 'Person' union select `automatic_members`.`group_id` AS `group_id`,`automatic_members`.`person_id` AS `person_id` from `automatic_members`), recursive_members_relation(`group_id`,`person_id`) as (select distinct `r`.`group_id` AS `group_id`,`d`.`person_id` AS `person_id` from (`recursive_subgroups` `r` join `direct_members` `d`) where `d`.`group_id` = `r`.`descendant_id`)select `recursive_members_relation`.`group_id` AS `group_id`,`recursive_members_relation`.`person_id` AS `person_id` from `recursive_members_relation`
+      with recursive automatic_members(`group_id`,`person_id`) as (select `groups`.`id` AS `group_id`,`registrations`.`person_id` AS `person_id` from (`groups` join `registrations`) where `groups`.`event_id` = `registrations`.`event_id` and (`groups`.`kind` = 7 and `registrations`.`organizer` <> 0 or `groups`.`kind` = 8 and `registrations`.`status` in (1,2)) union select `groups`.`id` AS `id`,`people`.`id` AS `id` from (`groups` join `people`) where `groups`.`kind` = 4 and `people`.`active` <> 0 and current_timestamp() between `people`.`joined` and `people`.`member_until` or `groups`.`kind` = 5 and `people`.`active` <> 0 and (current_timestamp() not between `people`.`joined` and `people`.`member_until` or `people`.`joined` is null or `people`.`member_until` is null) or `groups`.`kind` = 6 and `people`.`active` <> 0 and `people`.`newsletter` <> 0), direct_members(`group_id`,`person_id`) as (select `active_affiliations`.`group_id` AS `group_id`,`active_affiliations`.`groupable_id` AS `person_id` from `active_affiliations` where `active_affiliations`.`groupable_type` = 'Person' union select `automatic_members`.`group_id` AS `group_id`,`automatic_members`.`person_id` AS `person_id` from `automatic_members`), recursive_members_relation(`group_id`,`person_id`) as (select distinct `r`.`group_id` AS `group_id`,`d`.`person_id` AS `person_id` from (`recursive_subgroups` `r` join `direct_members` `d`) where `d`.`group_id` = `r`.`descendant_id`)select `recursive_members_relation`.`group_id` AS `group_id`,`recursive_members_relation`.`person_id` AS `person_id` from `recursive_members_relation`
   SQL
   create_view "accounts", sql_definition: <<-SQL
       select `groups`.`title` AS `group_title`,`people`.`id` AS `account_id`,`people`.`account_name` AS `account_name`,`people`.`crypted_password` AS `crypted_password`,`people`.`email_address` AS `email_address` from ((`recursive_members` `m` join `groups`) join `people`) where `m`.`group_id` = `groups`.`id` and `m`.`person_id` = `people`.`id`
