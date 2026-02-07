@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require slim-select/dist/slimselect.js
 //= require stupid-table-plugin/stupidtable.min
 //= require table2csv/src/table2csv
 //= require table_download_helper

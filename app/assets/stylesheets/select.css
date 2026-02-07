@@ -1,0 +1,8 @@
+/*
+* Style Slim-Select
+*/
+
+:root {
+  --ss-main-height: 1rem;
+  --ss-font-color: var(--text-color-1);
+}

@@ -6,6 +6,7 @@
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
+    "slim-select": "^3.4.0",
     "stupid-table-plugin": "^1.1.3",
     "table2csv": "^1.1.4",
     "turbolinks": "^5.2.0"
