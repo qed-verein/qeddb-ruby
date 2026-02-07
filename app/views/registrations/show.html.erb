@@ -41,7 +41,7 @@
 			<% end %>
 
 			<% if @registration_policy.view_private? || @registration_policy.view_payments? %>
-				<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
+				<dt><%= Registration.human_attribute_name :effective_money_amount %>:</dt>
 				<% money_to_show = check_unknown(@registration.effective_money_amount) {number_to_currency @registration.effective_money_amount}  %>
 				<dd>
 					<% if @registration.charge_modifiers.blank? %>
@@ -52,8 +52,8 @@
 								<%= money_to_show %>
 							</summary>
 							<dl>
-								<dt><%= Registration.human_attribute_name :money_amount %></dt>
-								<dd><%= check_unknown(@registration.money_amount) {number_to_currency @registration.money_amount}  %></dd>
+								<dt><%= Event.human_attribute_name :cost %></dt>
+								<dd><%= check_unknown(@registration.event.cost) { |cost| number_to_currency cost } %></dd>
 								<% @registration.charge_modifiers.each do |mod| %>
 									<dt><%= mod.reason %></dt>
 									<dd><%= check_unknown(mod.money_amount) {number_to_currency mod.money_amount}  %>

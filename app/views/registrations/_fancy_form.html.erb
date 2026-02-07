@@ -56,9 +56,6 @@
 		<dt><%= Registration.human_attribute_name :organizer %>:</dt>
 		<dd><%= render_yes_no @registration.organizer %></dd>
 
-		<dt><%= Registration.human_attribute_name :money_amount %>:</dt>
-		<dd><%= check_unknown(@registration.money_amount) {|x| number_to_currency x} %></dd>
-
 		<dt><%= Registration.human_attribute_name :payment_complete %>:</dt>
 		<dd><%= render_yes_no @registration.payment_complete %></dd>
 

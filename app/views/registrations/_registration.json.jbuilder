@@ -20,7 +20,7 @@ json.extract! registration, :arrival, :departure, :nights_stay,
               :station_arrival, :station_departure, :railway_discount, :meal_preference, :talks, :comment
 
 if policy(registration).view_payments? || policy(registration).edit_general?
-  json.extract! registration, :payment_complete, :money_amount, :money_transfer_date,
+  json.extract! registration, :payment_complete, :money_transfer_date,
                 :effective_member_discount?, :other_discounts, :reference_line, :effective_money_amount
   json.charge_modifiers do
     json.array! registration.charge_modifiers,
