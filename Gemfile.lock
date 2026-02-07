@@ -145,8 +145,7 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.9)
-    minitest (6.0.1)
-      prism (~> 1.5)
+    minitest (5.27.0)
     msgpack (1.8.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
@@ -382,6 +381,7 @@ DEPENDENCIES
   listen (~> 3.3)
   loaf (~> 0.10.0)
   material_icons (~> 2.2.1)
+  minitest (~> 5.27)
   multi_xml (= 0.7.1)
   mutex_m (~> 0.3.0)
   mysql2
