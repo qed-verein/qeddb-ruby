@@ -64,7 +64,7 @@ class Group < ApplicationRecord
 
   # Kann diese Gruppe von Admins gelöscht werden?
   def destroyable?
-    kind == :manual
+    kind == "manual"
   end
 
   # Ist eine Person in dieser Gruppe enthalten?
@@ -88,7 +88,7 @@ class Group < ApplicationRecord
 
   # Standardwerte für Gruppen
   def set_defaults
-    self.kind ||= :manual
+    self.kind ||= "manual"
   end
 
   def object_name
