@@ -23,10 +23,10 @@ group_auditor:
     description: "Diese Gruppe enthält alle Kassenprüfer:innen"
     kind: auditors
     
-group_newsletter:
+group_newsletter_subscribers:
     title: "Newsletter"
     description: "Diese Gruppe enthält alle Abonnent:innen des Newsletters"
-    kind: newsletter
+    kind: newsletter_subscribers
 
 group_gl:
     title: Allgemeine lineare Gruppe
