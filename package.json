@@ -13,9 +13,5 @@
   "devDependencies": {
     "@types/jquery": "^3.5.30",
     "cypress": "^15.10.0"
-  },
-  "scripts": {
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
   }
 }
