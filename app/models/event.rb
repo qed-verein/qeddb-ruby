@@ -111,12 +111,6 @@ class Event < ApplicationRecord
     Mailinglist.create!(participant_mailinglist_data(email))
   end
 
-  # Können Anmeldungen von Teilnehmern geändert werden?
-  def can_edit_registration?
-    # Teilnehmer dürfen ihre eigenen Daten bis Veranstaltungsende ändern
-    !ended?
-  end
-
   def update_groups
     organizer_group.update(organizer_group_data(title))
     participant_group.update(participant_group_data(title))
@@ -129,7 +123,8 @@ class Event < ApplicationRecord
 
   # Können Anmeldungen von Teilnehmern geändert werden?
   def can_edit_registration?
-    !deadline_missed? # TODO: Separate Deadline zum Bearbeiten der Anmeldedaten?
+    # Teilnehmer dürfen ihre eigenen Daten bis Veranstaltungsende ändern
+    !ended?
   end
 
   def ended?
