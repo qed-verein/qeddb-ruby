@@ -101,8 +101,6 @@ gem 'mutex_m', '~> 0.3.0'
 
 gem 'csv', '~> 3.3'
 
-gem 'stringio', '= 3.1.2'
-
 # Compatiblity to Ruby 3.1
 gem 'erb', '~> 4.0'
 gem 'multi_xml', '= 0.7.1'
