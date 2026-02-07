@@ -213,20 +213,12 @@ de:
         money_transfer_date: Geldeingang
         comment: Kommentar
         category: Kategorie
-        categories:
-          banking: Bankgebühren
-          insurance: Versicherung
-          website: Website
-          sponsoring: Sponsoring
-          donation: Spende
       generic_payment/category:
-        hostel: Unterkunft
-        shopping: Einkauf
-        talk_gift: Vortragsgeschenk
-        deposit: Pfand
-        organizer_gift: Orgageschenk
-        transportation: Transport
-        talk_materials: Vortragsmaterial
+        banking: Bankgebühren
+        insurance: Versicherung
+        website: Website
+        sponsoring: Sponsoring
+        donation: Spende
       hostel:
         title: Titel
         homepage: Homepage
