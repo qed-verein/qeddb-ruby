@@ -1,16 +1,16 @@
 payment1:
   registration: registration1
   reason: Vortrag gehalten
-  money_amount: 25
+  money_amount: -25
   comment: '2 Vorträge'
 
 payment2:
   registration: registration1
   reason: Haupthauszuschlag
-  money_amount: -10
+  money_amount: 10
 
 payment3:
   registration: registration2
   reason: Ich mag ihn nicht
-  money_amount: -314
+  money_amount: 314
   comment: ''
