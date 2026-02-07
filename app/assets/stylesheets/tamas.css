@@ -339,7 +339,7 @@ hr {
 .overview {
 	font-size: 120%;
 	line-height: 170%;
-	columns: 3 12em;
+	columns: auto 15em;
 	column-gap: 3em;
 	margin: 2em 0;
 }
