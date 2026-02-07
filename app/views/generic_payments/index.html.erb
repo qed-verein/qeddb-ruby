@@ -1,0 +1,42 @@
+<% provide :title, GenericPayment.model_name.human(count: :other) %>
+<h1><%= GenericPayment.model_name.human(count: :other) %></h1>
+
+<div class="actions">
+  <%= new_generic_payment_link %>
+  <% if policy(@generic_payments).export? %>
+    <%= icon_button "Als JSON anzeigen", "notes", generic_payments_path(format: :json) %>
+  <% end %>
+</div>
+
+<table class="indexed_table" id="generic_payments_table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th data-sort="string"><%= GenericPayment.human_attribute_name(:money_transfer_date) %></th>
+      <th data-sort="string"><%= GenericPayment.human_attribute_name(:counterparty) %></th>
+      <th data-sort="float"><%= GenericPayment.human_attribute_name(:money_amount) %></th>
+      <th data-sort="string"><%= GenericPayment.human_attribute_name(:category) %></th>
+      <th data-sort="string"><%= GenericPayment.human_attribute_name(:comment) %></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @generic_payments.each do |generic_payment| %>
+      <tr>
+        <td></td>
+        <td data-sort-value="<%= generic_payment.money_transfer_date %>"><%= render_date generic_payment.money_transfer_date %></td>
+        <td><%= generic_payment.counterparty %></td>
+        <td data-sort-value="<%= generic_payment.money_amount %>"><%= number_to_currency generic_payment.money_amount %></td>
+        <td><%= generic_payment.category %></td>
+        <td><%= generic_payment.comment %></td>
+        <td><%= edit_generic_payment_link generic_payment %></td>
+        <td><%= delete_generic_payment_link generic_payment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+	$("#generic_payments_table").stupidtable();
+</script>

@@ -12,6 +12,8 @@ authorize_json_export(policy(:finance_review), json) do
                     registration_payment: payment, modules: [:registration_summary]
     when EventPayment
       json.partial! 'event_payments/event_payment', event_payment: payment, modules: [:event_summary]
+    when GenericPayment
+      json.partial! 'generic_payments/generic_payment', generic_payment: payment, modules: [:generic_summary]
     when Payment
       json.partial! 'payments/payment', payment: payment, modules: [:person_summary]
     end
