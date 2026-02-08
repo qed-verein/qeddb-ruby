@@ -11,19 +11,19 @@ gem 'ffi', '~> 1.16.3'
 gem 'mysql2'
 
 ## PaperTrail for Version managment
-gem 'paper_trail', '~> 14.0.0'
+gem 'paper_trail', '~> 15.2.0'
 # Pundit for Authorization
-gem 'pundit', '~> 2.3.0'
+gem 'pundit', '~> 2.5.0'
 # Pundit Implications to handle permission implications
 gem 'pundit_implications', '~> 0.1.0'
 # Sorcery for Authentification
 gem 'sorcery', '~> 0.17.0'
 # awesome_print for Object Rendering
-gem 'awesome_print', '~> 1.8.0'
+gem 'awesome_print', '~> 1.9.0'
 # pagy for Paging
 gem 'pagy', '~> 3.8.3'
 # scenic for migrating views
-gem 'scenic', '~> 1.8.0'
+gem 'scenic', '~> 1.9.0'
 gem 'scenic-mysql_adapter'
 # loaf for breadcrumbs
 gem 'loaf', '~> 0.10.0'
