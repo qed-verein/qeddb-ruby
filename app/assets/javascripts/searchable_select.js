@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () =>
   document.querySelectorAll("select.slim-select").forEach((it) => {
-    console.log(it);
     new SlimSelect({
       select: it,
       settings: {
