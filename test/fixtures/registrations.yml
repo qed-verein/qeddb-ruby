@@ -99,3 +99,23 @@ registration_uqbar3:
   station_arrival: Uqbar
   station_departure: Uqbar
   talks: Eine Anwendung von Nash-Isometrien zur Einbettung der Hegelschen Kategorien in beliebig kleine Spekulationsblasen
+
+registration_uqbar4:
+  event: uqbar
+  person: heino
+  status: 1
+  organizer: false
+
+<% 2012.upto(2027) do |i| %>
+registration_akademie<%= i %>_heino:
+  event: akademie_<%= i %>
+  person: heino
+  status: 1
+  organizer: false
+
+registration_akademie<%= i %>_tim:
+  event: akademie_<%= i %>
+  person: testmitglied
+  status: 2
+  organizer: false
+<% end %>

@@ -15,24 +15,19 @@ payment1:
 
 payment2:
   person: person2
-  start: 2000-1-1,
+  start: 2000-1-1
   end: 2001-1-1
   amount: 5
   payment_type: 1
   comment: Kommentar
   transfer_date: 2000-1-1
 
-payments_testmitglied_1:
+<% 2005.upto(2028) do |i| %>
+payments_testmitglied_<%= i %>:
   person: testmitglied
-  start: 2000-1-1,
-  end: 2100-1-1
+  start: <%= i %>-1-1
+  end: <%= i %>-12-31
+  transfer_date: <%= i-2 %>-1-1
   amount: 5
   payment_type: 1
-
-payments_testmitglied_2:
-  person: testmitglied
-  transfer_date: 2024-05-01
-  start: 2100-1-1,
-  end: 2200-1-1
-  amount: 5
-  payment_type: 1
+<% end %>

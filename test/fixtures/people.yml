@@ -65,17 +65,19 @@ testmitglied:
   account_name: Testmitglied
   first_name: Tim
   last_name: Geidl
+  paid_until: 2028-12-31
+  member_until: 2030-12-31
   email_address: testmitglied@example.com
   comment: Mitgliederaccount zum Testen
 
-testohneglied:
+heino:
   <<: *DEFAULTS
-  account_name: testohneglied
+  account_name: heino
   first_name: Heino
   last_name: Geld
   paid_until: 2023-12-31
   member_until: 2025-12-31
-  email_address: testohneglied@example.com
+  email_address: heino.geld@example.com
   comment: Chronisch pleite und deshalb aktuell kein Mitglied mehr. Hat auch noch eine ausstehende Zahlung für die Historikerkonferenz.
   gender: 3
 
