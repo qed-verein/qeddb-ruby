@@ -93,7 +93,7 @@ input, select, .slim-select, textarea {
 	background-color: var(--bg-color-5);
 }
 
-input:focus, select:focus, .slim-select:focus, textarea:focus {
+input:focus, select:focus, .slim-select:focus, .ss-option, textarea:focus {
 	background-color: var(--bg-color-6);
 }
 

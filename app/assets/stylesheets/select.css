@@ -12,3 +12,9 @@
 .ss-option:hover {
   border-left: initial !important; /* Keine Einrückung bei hover */
 }
+
+.ss-selected {
+  /* Nicht die aktuell ausgewählte Option hervorheben */
+  color: initial !important;
+  background-color: var(--bg-color-6) !important;
+}
