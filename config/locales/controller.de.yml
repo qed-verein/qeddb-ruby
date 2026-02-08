@@ -165,6 +165,7 @@ de:
     registration:
       edit: Anmeldung bearbeiten
       delete: Anmeldung löschen
+      view_invitation: Einladung anzeigen
     hostel:
       new: Neue Herberge eintragen
       edit: Herberge bearbeiten

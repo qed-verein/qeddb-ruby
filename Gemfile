@@ -57,6 +57,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'sprockets-rails', require: 'sprockets/railtie'
 
+# Typst for pdf generation
+gem 'typst', '~> 0.13'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # Downgrade to version 12 for compatiblity to Ruby 3.1

@@ -75,4 +75,10 @@ module RegistrationsHelper
       concat t('actions.registration.delete')
     end
   end
+
+  def view_invitation_link(registration)
+    return unless policy(registration).view_private?
+
+    icon_button t('actions.registration.view_invitation'), :assignment_returned, view_invitation_registration_path(registration)
+  end
 end

@@ -1,7 +1,9 @@
 class RegistrationsController < ApplicationController
+  include TypstHelper
+
   breadcrumb Event.model_name.human(count: :other), :events_path
 
-  before_action :set_registration, only: %i[show edit update destroy edit_self update_self pay_rest]
+  before_action :set_registration, only: %i[show edit update destroy edit_self update_self pay_rest view_invitation]
   before_action :set_event_and_person,
                 only: %i[new create new_self create_self select_person with_selected_person edit_self]
   before_action :basic_authorization
@@ -132,6 +134,22 @@ class RegistrationsController < ApplicationController
     end
   end
 
+  def view_invitation
+    orgas = @registration.event.organizers
+    orga = if orgas.empty? then '' else orgas.sample.full_name end
+
+    einladung = render_typst_template 'einladung.typ', {
+      'name': @registration.person.full_name,
+      'orga': orga,
+      'event.start': I18n.l(@registration.event.start, format: :long),
+      'event.end': I18n.l(@registration.event.end, format: :long),
+      'absender': "#{Rails.configuration.qed_name}\np.Adr. #{Rails.configuration.qed_address}",
+      'homepage': "#{Rails.configuration.qed_homepage}",
+    }
+
+    send_data einladung, format: 'application/pdf', filename: 'example.pdf', disposition: 'inline'
+  end
+
   private
 
   # Lade Anmeldung aus der Datenbank
@@ -166,6 +184,8 @@ class RegistrationsController < ApplicationController
       authorize @registration, :delete_registration?
     when :pay_rest
       authorize @registration, :edit_payments?
+    when :view_invitation
+      authorize @registration, :view_private?
     else
       raise Pundit::NotAuthorizedError({ query: action_name, record: @registration })
     end

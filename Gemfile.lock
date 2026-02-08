@@ -246,9 +246,12 @@ GEM
       thor (~> 1.0)
     rainbow (3.1.1)
     rake (13.3.1)
+    rake-compiler-dock (1.11.0)
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
+    rb_sys (0.9.124)
+      rake-compiler-dock (= 1.11.0)
     rdoc (7.1.0)
       erb
       psych (>= 4.0.0)
@@ -343,6 +346,21 @@ GEM
     thor (1.5.0)
     timeout (0.6.0)
     tsort (0.2.0)
+    typst (0.13.5)
+      rb_sys (>= 0.9.116)
+      rubyzip (~> 2.4)
+    typst (0.13.5-aarch64-linux)
+      rb_sys (>= 0.9.116)
+      rubyzip (~> 2.4)
+    typst (0.13.5-arm64-darwin)
+      rb_sys (>= 0.9.116)
+      rubyzip (~> 2.4)
+    typst (0.13.5-x86_64-darwin)
+      rb_sys (>= 0.9.116)
+      rubyzip (~> 2.4)
+    typst (0.13.5-x86_64-linux)
+      rb_sys (>= 0.9.116)
+      rubyzip (~> 2.4)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.2.0)
@@ -409,6 +427,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sprockets-rails
+  typst (~> 0.13)
   tzinfo-data
   web-console (>= 4.1.0)
 
