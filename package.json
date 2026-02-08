@@ -12,7 +12,5 @@
   },
   "devDependencies": {
     "@types/jquery": "^3.5.30",
-//     Auskommentiert weil die node-Version auf Debian zu alt ist
-//    "cypress": "^15.10.0"
   }
 }
