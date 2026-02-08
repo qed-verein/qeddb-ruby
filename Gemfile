@@ -101,11 +101,3 @@ gem 'nokogiri', '~> 1.17.2'
 gem 'mutex_m', '~> 0.3.0'
 
 gem 'csv', '~> 3.3'
-
-# Compatiblity to Ruby 3.1
-gem 'erb', '~> 4.0'
-gem 'multi_xml', '= 0.7.1'
-gem 'zeitwerk', '~> 2.6.0'
-gem 'minitest', '~> 5.27'
-gem 'net-imap', '~> 0.5.10'
-gem 'public_suffix', '~> 6.0'
