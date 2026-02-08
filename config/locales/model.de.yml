@@ -42,6 +42,9 @@ de:
       subscription:
         one: Emailabonnement
         other: Emailabonnements
+      mailinglist_member:
+        one: Person auf Emailverteiler
+        other: Personen auf Emailverteiler
       version:
         one: Version
         other: Versionen
