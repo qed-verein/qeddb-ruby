@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_02_07_105754) do
+ActiveRecord::Schema.define(version: 2026_02_07_155558) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "addressable_type"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2026_02_07_105754) do
     t.date "start"
     t.date "end"
     t.date "deadline"
-    t.string "cost"
+    t.decimal "cost", precision: 10, scale: 2
     t.integer "max_participants"
     t.text "comment"
     t.datetime "created_at", null: false
@@ -198,7 +198,6 @@ ActiveRecord::Schema.define(version: 2026_02_07_105754) do
     t.boolean "member_discount"
     t.string "other_discounts"
     t.date "money_transfer_date"
-    t.decimal "money_amount", precision: 10, scale: 2
     t.boolean "payment_complete"
     t.datetime "arrival"
     t.datetime "departure"

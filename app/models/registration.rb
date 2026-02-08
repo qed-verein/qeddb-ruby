@@ -33,7 +33,6 @@ class Registration < ApplicationRecord
   validates :status, inclusion: { in: Registration.statuses.keys }
   validates :organizer, inclusion: { in: [true, false] }
 
-  validates :money_amount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :nights_stay, numericality: { greater_than_or_equal_to: 0, only_integer: true }
 
   # member_discount ist deprecated, man sollte stattdessen effective_member_discount? nutzen.
@@ -41,7 +40,6 @@ class Registration < ApplicationRecord
   with_options if: :payment_complete? do
     validates :member_discount, inclusion: { in: [true, false, nil] }
     validates :money_transfer_date, presence: true
-    validates :money_amount, presence: true
     validates :nights_stay, presence: true
   end
 
@@ -64,12 +62,9 @@ class Registration < ApplicationRecord
     self.payment_complete = false if payment_complete.nil?
 
     # Übernehme Standardeinstellungen zu Anreise ect. aus dem Veranstaltungsprofil
-    if event.nil?
-      self.money_amount = 0 if money_amount.nil?
-    else
+    unless event.nil?
       self.arrival = event.start if arrival.blank?
       self.departure = event.end if departure.blank?
-      self.money_amount = event.cost if money_amount.nil?
       max_days = ((departure.middle_of_day - arrival.middle_of_day) / 1.day).round
       self.nights_stay = max_days if nights_stay.blank?
     end
@@ -96,15 +91,11 @@ class Registration < ApplicationRecord
   end
 
   def effective_money_amount
-    if money_amount.nil?
-      nil
-    else
-      money_amount + charge_modifiers.sum(:money_amount)
-    end
+    event.cost + charge_modifiers.sum(:money_amount)
   end
 
   def to_be_paid
-    if payment_complete || money_amount.nil?
+    if payment_complete
       0
     else
       effective_money_amount - registration_payments.sum(:money_amount)
@@ -112,15 +103,7 @@ class Registration < ApplicationRecord
   end
 
   def fully_paid?
-    if registration_payments.empty?
-      # This is for legacy reasons:
-      # - Back in the really old days, the open registrations were considered unpaid and the confirmed ones paid
-      # - Later we had a payment_complete checkbox
-      # Both should still give the "correct" result here.
-      status == 'confirmed' or payment_complete or money_amount.nil? or money_amount.zero?
-    else
-      to_be_paid.zero?
-    end
+    to_be_paid.zero?
   end
 
   def self.status_active?(status)

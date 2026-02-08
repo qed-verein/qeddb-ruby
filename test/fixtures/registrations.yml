@@ -6,7 +6,6 @@ registration1:
   status: 1
   organizer: true
   payment_complete: false
-  money_amount: 10
   arrival: 2002-02-20 20:20:20
   departure: 2112-12-21 21:12:00
   station_arrival: von hier komme ich
@@ -23,6 +22,7 @@ registration2:
   person: person2
   status: 2
   organizer: false
+  money_amount: 3.1416
   arrival: 2002-02-20 20:20:20
   departure: 2112-12-21 21:12:00
   station_arrival: von hier komme ich
@@ -39,6 +39,7 @@ registration3:
   person: person3
   status: 4
   organizer: false
+  money_amount: 3.1416
   arrival: 2002-02-20 20:20:20
   departure: 2112-12-21 21:12:00
   station_arrival: von hier komme ich
@@ -55,6 +56,7 @@ registration4:
   person: person1
   status: 3
   organizer: false
+  money_amount: 60.22
   arrival: 2002-02-20 20:20:20
   departure: 2112-12-21 21:12:00
   station_arrival: von hier komme ich

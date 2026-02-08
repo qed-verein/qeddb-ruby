@@ -129,8 +129,9 @@ de:
         member_discount: Mitgliedsermäßigung
         effective_member_discount: Mitgliedsermäßigung
         other_discounts: Sonstige Ermäßigungen
-        money_amount: Teilnahmebeitrag
-        money_amount_short: Betrag
+        effective_money_amount: Teilnahmebeitrag
+        effective_money_amount_short: Betrag
+        to_be_paid: Noch zu zahlen
         to_be_paid_short: Offen
         money_transfer_date: Geldeingang
         payment_complete: Vollständig Bezahlt

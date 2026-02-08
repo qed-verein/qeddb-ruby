@@ -72,8 +72,8 @@ class RegistrationPolicy < ApplicationPolicy
   def permitted_attributes
     editable = []
     if edit_general?
-      editable.push :event_id, :person_id, :status, :organizer, :money_amount
-      editable.push({ charge_modifiers_attributes: %i[id reason money_amount comment _destroy] })
+      editable.push :event_id, :person_id, :status, :organizer
+      editable.push({ charge_modifiers_attributes: %i[id reason comment _destroy] })
     end
     if edit_additional?
       editable.push :arrival, :departure, :nights_stay,
@@ -83,7 +83,7 @@ class RegistrationPolicy < ApplicationPolicy
     if edit_payments?
       editable.push :payment_complete, :money_transfer_date, :other_discounts
       editable.push({ registration_payments_attributes:
-        %i[id payment_type category money_transfer_date money_amount comment _destroy] })
+        %i[id payment_type category money_transfer_date comment _destroy] })
     end
     editable
   end
