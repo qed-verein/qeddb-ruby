@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require material_icons
+ *= require slim-select/dist/slimselect
  *= require tamas
  *= require_tree .
  *= require_self

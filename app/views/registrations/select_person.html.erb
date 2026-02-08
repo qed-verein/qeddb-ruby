@@ -9,7 +9,9 @@
 	<p>Wähle die Person aus, welche zur Veranstaltung <em><%= @event.title %></em> hinzugefügt werden soll.</p>
 	<div class="aligned">
 		<%= label_tag :person_id, Person.model_name.human %>
-		<%= select_tag :person_id, options_from_collection_for_select(Person.all.sort_by(&:full_name), :id, :full_name) %>
+                <%= searchable_select :person_id, 
+                        options_from_collection_for_select(Person.all.sort_by(&:full_name), :id, :full_name),
+                        placeholder: "#{Person.model_name.human} suchen", non_found: "Keine #{Person.model_name.human} gefunden" %>
 	</div>
 	<div class="actions">
 		<%= submit_tag "Weiter zu Anmeldung"  %>

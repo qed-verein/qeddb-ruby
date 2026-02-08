@@ -1,0 +1,24 @@
+/*
+* Style Slim-Select
+*/
+
+:root {
+  --ss-main-height: 1rem;
+  --ss-font-color: var(--text-color-1);
+  --ss-animation-timing: 0; /* Keine Animationen */
+  --ss-primary-color: var(--meta-color-3);
+}
+
+.ss-content {
+  padding: 0;
+}
+
+.ss-option:hover {
+  border-left: initial !important; /* Keine Einrückung bei hover */
+}
+
+.ss-selected:not(:hover):not(:focus):not(.ss-highlighted) {
+  /* Nicht die aktuell ausgewählte Option hervorheben */
+  color: initial !important;
+  background-color: var(--bg-color-7) !important;
+}

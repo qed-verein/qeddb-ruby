@@ -160,7 +160,7 @@ button, input[type="submit"], input[type="button"], .button {
 	float: left;
 }
 
-button, input, select, textarea {
+button, input, select, .slim-select, textarea {
 	border: 1px solid #d96;
 	padding: 0.2em;
 	margin: 0.5em;
@@ -174,7 +174,7 @@ button, input, select, textarea {
 
 .aligned input[type="number"] {width: 4em;}
 
-.aligned input, .aligned select {
+.aligned input, .aligned select, .aligned .slim-select {
 	justify-self: start;
 	align-self: center;
 }
@@ -241,7 +241,7 @@ dd {
 	content: ":"
 }
 
-.aligned > dd, .aligned > input, .aligned > select {
+.aligned > dd, .aligned > input, .aligned > select, .aligned > .slim-select {
 	text-align: left;
 	margin: 0em;
 	grid-column: 2;

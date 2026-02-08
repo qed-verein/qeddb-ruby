@@ -9,8 +9,7 @@ module HostelsHelper
     link_to hostel.title, hostel.homepage
   end
 
-  def hostel_select(form)
-    hostels = Hostel.order(:title).all.map { |h| [h.title, h.id] }
-    form.select :hostel_id, hostels, id: :hostel_id, include_blank: 'nicht angegeben'
+  def hostels_for_select
+    Hostel.order(:title).all.map { |h| [h.title, h.id] }
   end
 end

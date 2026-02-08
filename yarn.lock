@@ -1045,6 +1045,11 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+slim-select@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/slim-select/-/slim-select-3.4.0.tgz#732eb36d17ea60f76233779e03f228445e6ca658"
+  integrity sha512-NXPcAkXvVtZBOVkafHQhvZMPRXccFmELJKsUZfWkpDK2q/CwgVg0UXkW6uIBy+7cHPCsmceX33opqzjW6H/TAg==
+
 spark-md5@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/spark-md5/-/spark-md5-3.0.1.tgz"
