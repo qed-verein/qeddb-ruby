@@ -317,5 +317,5 @@ de:
 
   time:
     formats:
-      short: "%d.%b %Y, %H:%M"
-      very_short: "%d. %b, %H:%M"
+      short: "%d.%m.%Y, %H:%M"
+      very_short: "%d.%m, %H:%M"
