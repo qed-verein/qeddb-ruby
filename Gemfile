@@ -28,7 +28,7 @@ gem 'scenic-mysql_adapter'
 # loaf for breadcrumbs
 gem 'loaf', '~> 0.10.0'
 # icons for buttons
-gem 'material_icons', '~> 2.2.1'
+gem 'material_icons', '~> 4.0.0'
 # JQuery
 gem 'jquery-rails', '~> 4.6.0'
 

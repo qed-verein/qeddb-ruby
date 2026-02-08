@@ -1,20 +1,20 @@
 module ButtonHelper
   def icon_button(text, icon, path)
     link_to path, class: 'button' do
-      concat tag.i(class: 'material-icons md-24') { icon }
+      concat mi.shape(icon).md_24
       concat text
     end
   end
 
   def download_table_button(table)
     tag.button class: 'button', onclick: "downloadTable('#{table}')" do
-      concat tag.i(class: 'material-icons md-24') { 'file_download' }
+      concat mi.shape(:file_download).md_24
       concat 'Herunterladen'
     end
   end
 
   def download_json_button(path)
-    icon_button 'Als JSON anzeigen', 'save', path
+    icon_button 'Als JSON anzeigen', :data_object, path
   end
 
   # ~ def edit_button(path)

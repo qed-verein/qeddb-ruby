@@ -58,7 +58,7 @@ module RegistrationsHelper
   def edit_registration_link(registration)
     return unless policy(registration).edit_general?
 
-    icon_button t('actions.registration.edit'), 'edit', edit_registration_path(registration)
+    icon_button t('actions.registration.edit'), :edit, edit_registration_path(registration)
   end
 
   def delete_registration_link(registration)
@@ -71,7 +71,7 @@ module RegistrationsHelper
         event_title: registration.event.title
       )
     } do
-      concat mi.delete.md_24
+      concat mi.shape(:delete).md_24
       concat t('actions.registration.delete')
     end
   end

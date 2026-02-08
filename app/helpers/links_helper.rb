@@ -26,7 +26,7 @@ module LinksHelper
         define_method("new_#{name}_link") do
           return unless policy(name.classify.constantize).new?
 
-          icon_button t("actions.#{name}.new"), 'add', send("new_#{name}_path")
+          icon_button t("actions.#{name}.new"), :add, send("new_#{name}_path")
         end
       end
 
@@ -42,7 +42,7 @@ module LinksHelper
         define_method("edit_#{name}_link") do |object|
           return unless policy(object).edit?
 
-          icon_button t("actions.#{name}.edit"), 'edit', send("edit_#{name}_path", object)
+          icon_button t("actions.#{name}.edit"), :edit, send("edit_#{name}_path", object)
         end
       end
 
@@ -53,7 +53,7 @@ module LinksHelper
 
         link_to object, class: 'button', method: :delete,
                         data: { confirm: t("actions.#{name}.delete_confirm", title: object.title) } do
-          concat mi.delete.md_24
+          concat mi.shape(:delete).md_24
           concat t("actions.#{name}.delete")
         end
       end

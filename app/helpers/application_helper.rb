@@ -77,15 +77,15 @@ module ApplicationHelper
     if session[:mode] == 'privileged' then
       url = 'admin_standard_mode_path'
       text = 'actions.admin.exit_privileged_mode'
-      icon = 'lock_open'
+      icon = :lock_open
     else
       url = 'admin_privileged_mode_path'
       text = 'actions.admin.enter_privileged_mode'
-      icon = 'lock'
+      icon = :lock
     end
     form_with url: send(url) do
       button_tag class: 'button' do
-        concat tag.i(class: 'material-icons md-24') { icon }
+        concat mi.shape(icon).md_24
         concat t(text)
       end
     end

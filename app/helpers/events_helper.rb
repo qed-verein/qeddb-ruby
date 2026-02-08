@@ -13,7 +13,7 @@ module EventsHelper
   def new_event_link
     return unless policy(Event).create_event?
 
-    icon_button t('actions.event.new'), 'add', new_event_path
+    icon_button t('actions.event.new'), :add, new_event_path
   end
 
   def event_select(form)
@@ -25,29 +25,29 @@ module EventsHelper
 
     reg = current_user.registered?(event)
     if reg && event.can_edit_registration?
-      icon_button t('actions.event.edit_own_registration'), 'assignment_turned_in',
+      icon_button t('actions.event.edit_own_registration'), :assignment_turned_in,
                   edit_own_registration_event_path(event)
     elsif !reg && event.can_create_registration?
-      icon_button t('actions.event.register_self'), 'assignment_turned_in', event_register_self_path(event)
+      icon_button t('actions.event.register_self'), :assignment_turned_in, event_register_self_path(event)
     end
   end
 
   def edit_payments_event_link(event)
     return nil unless policy(event).edit_payments?
 
-    icon_button t('actions.event.edit_payments'), 'attach_money', edit_payments_event_path(event)
+    icon_button t('actions.event.edit_payments'), :euro, edit_payments_event_path(event)
   end
 
   def edit_event_link(event)
     return nil unless policy(event).edit_event?
 
-    icon_button t('actions.event.edit'), 'edit', edit_event_path(event)
+    icon_button t('actions.event.edit'), :edit, edit_event_path(event)
   end
 
   def finances_link(event)
     return nil unless policy(event).view_payments?
 
-    icon_button t('actions.event.finances'), 'attach_money', finances_event_path(event)
+    icon_button t('actions.event.finances'), :euro, finances_event_path(event)
   end
 
   def delete_event_link(event)
@@ -55,7 +55,7 @@ module EventsHelper
 
     link_to event, method: :delete, class: 'button',
                    data: { confirm: format('Veranstaltung „%s“ löschen?', event.title) } do
-      concat mi.delete.md_24
+      concat mi.shape(:delete).md_24
       concat t('actions.event.delete')
     end
   end
@@ -63,6 +63,6 @@ module EventsHelper
   def event_register_other_link(event)
     return nil unless policy(event).register_other?
 
-    icon_button t('actions.event.register_other'), 'person_add', event_register_other_path(event)
+    icon_button t('actions.event.register_other'), :person_add, event_register_other_path(event)
   end
 end
