@@ -4,7 +4,7 @@
 <div class="actions">
   <%= new_generic_payment_link %>
   <% if policy(@generic_payments).export? %>
-    <%= icon_button "Als JSON anzeigen", "notes", generic_payments_path(format: :json) %>
+    <%= download_json_button generic_payments_path(format: :json) %>
   <% end %>
 </div>
 

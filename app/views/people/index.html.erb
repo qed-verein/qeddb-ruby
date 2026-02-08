@@ -47,7 +47,7 @@ show_unpublished_people = policy(Person).view_unpublished?
 		<%= icon_button "Tabellenansicht", 'grid_on', people_as_table_path %>
 		<%= new_person_link %>
 		<% if policy(@people).export? %>
-			<%= icon_button 'Als JSON anzeigen', 'notes', people_path(format: :json) %>
+			<%= download_json_button people_path(format: :json) %>
 		<% end %>
 		<%= sepa_export_button %>
 	</div>

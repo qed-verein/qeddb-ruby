@@ -174,7 +174,7 @@
           registrations_as_table_event_path(@event) %>
         <% end %>
         <% if @event_policy.export? %>
-          <%= icon_button "Als JSON anzeigen", "notes", event_path(@event, format: :json) %>
+          <%= download_json_button event_path(@event, format: :json) %>
         <% end %>
         <br>
         <%= event_register_other_link(@event) %>
