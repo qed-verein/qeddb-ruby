@@ -6,9 +6,19 @@ Die Implementierung erfolgte mit Ruby on Rails Version 6 (<https://rubyonrails.o
 
 ## Voraussetzungen
 
-- ruby mit Version >= 3.0.0
+- ruby mit Version >= 3.3.0
 - yarn
 - mysql >= 10
+
+## Ruby Environment einrichten (optional)
+
+Es wird empfohlen eine separates Ruby Environment für die QEDDB einzurichten (Pakete `rbenv` und `ruby-build`).
+So gibt es keine Versionskonflikte mit dem im System vorinstallieren Ruby-Versionen.
+Das Ruby Environment wird mit folgenden Befehl eingerichtet:
+```
+rbenv install $(cat .ruby-version)
+eval "$(rbenv init -)"
+```
 
 ## Installation
 
