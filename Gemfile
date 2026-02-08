@@ -95,9 +95,5 @@ gem 'concurrent-ruby', '1.3.4'
 # Downgrade mail due to some ugly 'argument error' bugs when sending emails
 gem 'mail', '~> 2.8.1'
 
-# Nokogiri 1.18 requires newer Ruybgems 3.3.22 not in Debian 12
-gem 'nokogiri', '~> 1.17.2'
-
-gem 'mutex_m', '~> 0.3.0'
-
-gem 'csv', '~> 3.3'
+# Required because mutex_m is not longer a standard Gem in Ruby 3.4
+gem 'mutex_m'
