@@ -13,7 +13,7 @@
   border-left: initial !important; /* Keine Einrückung bei hover */
 }
 
-.ss-selected:not(:hover):not(:focus) {
+.ss-selected:not(:hover):not(:focus):not(.ss-highlighted) {
   /* Nicht die aktuell ausgewählte Option hervorheben */
   color: initial !important;
   background-color: var(--bg-color-6) !important;
