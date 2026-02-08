@@ -30,10 +30,16 @@
 
 	<%= form.label :reference_line %>
 	<%= form.text_field :reference_line, id: :event_reference_line %>
-	<i class="hint">Sollte die Jahreszahl zweistellig enthalten.</i>
+	<i class="hint">Wird wenn leer gelassen aus dem Titel generiert. Sollte die Jahreszahl zweistellig enthalten.</i>
 
-	<%= form.label :comment %>
-	<%= form.text_area :comment, id: :event_comment, style: 'display: block' %>
+	<% if event.new_record? %>
+    	<%= form.label :mailinglist_slug %>
+    	<%= form.text_field :mailinglist_slug, id: :event_mailinglist_slug %>
+    	<i class="hint">Wird wenn leer gelassen aus dem Titel generiert. Sollte die Jahreszahl zweistellig enthalten.</i>
+
+    	<%= form.label :comment %>
+    	<%= form.text_area :comment, id: :event_comment, style: 'display: block' %>
+	<% end %>
 </div>
 
 <div class="actions">

@@ -41,6 +41,10 @@ class Event < ApplicationRecord
 
   validates :title, :start, :end, :max_participants, presence: true
   validates :title, length: { maximum: 100 }
+  # first check the characters are a reasonable subset, to have a more useful error message
+  validates :title, format: { with: /\A[\p{Latin}\p{Emoji} ]+\z/, message: I18n.t('validations.event.title.charset') }
+  # then separately check it follows a reasonable format
+  validates :title, format: { with: /\A[\p{Latin}\p{Emoji} ]+ [\d]{4}\z/, message: I18n.t('validations.event.title.format') }
   validates :homepage, length: { maximum: 200 }
   validate :time_ordering
   validates :cost, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
@@ -49,14 +53,23 @@ class Event < ApplicationRecord
   validates :reference_line, length: { maximum: 25 }
   validates :reference_line,
             format: { with: /\A[a-zA-Z0-9 -]+\z/, message: I18n.t('validations.event.reference_line.charset') }
+  validates :reference_line,
+            format: { with: /\A[a-zA-Z0-9 -]+ [\d]{2}\z/, message: I18n.t('validations.event.reference_line.format') }
+  attr_accessor :mailinglist_slug
+  validates :mailinglist_slug, length: { maximum: 12 }, if: -> { new_record? }
+  validates :mailinglist_slug,
+            format: { with: /\A[a-z0-9]+\z/, message: I18n.t('validations.event.mailinglist_slug.charset') }, if: -> { new_record? }
+  validates :mailinglist_slug,
+            format: { with: /\A[a-z0-9]+[\d]{2}\z/, message: I18n.t('validations.event.mailinglist_slug.format') }, if: -> { new_record? }
   validate :max_participants_not_exceeded
 
-  after_initialize :set_defaults
+  before_validation :set_defaults, if: -> { new_record? }
   after_create :create_groups, :create_mailinglists
   after_save :update_groups
 
   def set_defaults
     self.reference_line = create_reference_line if reference_line.blank?
+    self.mailinglist_slug = create_mailinglist_slug if mailinglist_slug.blank?
   end
 
   # Zu jeder Veranstaltungen existiert für die Organistatoren sowie die Teilnehmer je eine Gruppe
@@ -104,11 +117,10 @@ class Event < ApplicationRecord
   end
 
   def create_mailinglists
-    return if reference_line.blank?
+    return if mailinglist_slug.blank?
 
-    email = reference_line.gsub(/ /, '').downcase
-    Mailinglist.create!(organizer_mailinglist_data(email))
-    Mailinglist.create!(participant_mailinglist_data(email))
+    Mailinglist.create!(organizer_mailinglist_data(mailinglist_slug))
+    Mailinglist.create!(participant_mailinglist_data(mailinglist_slug))
   end
 
   def update_groups
@@ -176,10 +188,29 @@ class Event < ApplicationRecord
     return nil if title.nil?
 
     ascii_title = asciify title
-    ascii_title.gsub(/20\d{2}/) { |match| match.delete_prefix('20') }
+    ascii_title.gsub!(/\d{2}(\d{2})/, '\1')
+    ascii_title
+  end
+
+  def create_mailinglist_slug
+    return nil if title.nil?
+
+    ascii_slug = asciify title
+    ascii_slug.downcase!
+    ascii_slug.gsub!(/[^a-z0-9 ]/, '')
+    ascii_slug.gsub!(/ \d{2}(\d{2})/, '\1')
+    ascii_slug
   end
 
   private
+
+  def check_mailinglist_slug_for_spaces
+    return if mailinglist_slug.nil?
+    errors.add(:mailinglist_slug, 'darf keine Leerzeichen enthalten') if mailinglist_slug.include?(' ')
+  end
+
+  def check_reference_line
+  end
 
   # Überprüft ob die angegeben Zeiten für Anfang und Ende in der korrekten Reihenfolge sind.
   def time_ordering
