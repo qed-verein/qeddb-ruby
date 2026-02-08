@@ -5,4 +5,10 @@
 :root {
   --ss-main-height: 1rem;
   --ss-font-color: var(--text-color-1);
+  --ss-animation-timing: 0; /* Keine Animationen */
+  --ss-primary-color: var(--meta-color-3);
+}
+
+.ss-option:hover {
+  border-left: initial !important; /* Keine Einrückung bei hover */
 }

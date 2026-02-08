@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () =>
       settings: {
         searchText: it.dataset.selectSearchNonFound ?? "Nichts gefunden",
         searchPlaceholder: it.dataset.selectSearchPlaceholder ?? "Suchen",
+        timeoutDelay: 0,
       },
     });
   }),
