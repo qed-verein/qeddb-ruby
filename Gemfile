@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Ruby interpreter version
-ruby '>= 3.1.0'
+ruby '>= 3.3.0'
 
 # Workaround for https://github.com/ffi/ffi/issues/1105
 gem 'ffi', '~> 1.16.3'
@@ -11,19 +11,19 @@ gem 'ffi', '~> 1.16.3'
 gem 'mysql2'
 
 ## PaperTrail for Version managment
-gem 'paper_trail', '~> 14.0.0'
+gem 'paper_trail', '~> 15.2.0'
 # Pundit for Authorization
-gem 'pundit', '~> 2.3.0'
+gem 'pundit', '~> 2.5.0'
 # Pundit Implications to handle permission implications
 gem 'pundit_implications', '~> 0.1.0'
 # Sorcery for Authentification
 gem 'sorcery', '~> 0.17.0'
 # awesome_print for Object Rendering
-gem 'awesome_print', '~> 1.8.0'
+gem 'awesome_print', '~> 1.9.0'
 # pagy for Paging
 gem 'pagy', '~> 3.8.3'
 # scenic for migrating views
-gem 'scenic', '~> 1.8.0'
+gem 'scenic', '~> 1.9.0'
 gem 'scenic-mysql_adapter'
 # loaf for breadcrumbs
 gem 'loaf', '~> 0.10.0'
@@ -95,17 +95,5 @@ gem 'concurrent-ruby', '1.3.4'
 # Downgrade mail due to some ugly 'argument error' bugs when sending emails
 gem 'mail', '~> 2.8.1'
 
-# Nokogiri 1.18 requires newer Ruybgems 3.3.22 not in Debian 12
-gem 'nokogiri', '~> 1.17.2'
-
-gem 'mutex_m', '~> 0.3.0'
-
-gem 'csv', '~> 3.3'
-
-# Compatiblity to Ruby 3.1
-gem 'erb', '~> 4.0'
-gem 'multi_xml', '= 0.7.1'
-gem 'zeitwerk', '~> 2.6.0'
-gem 'minitest', '~> 5.27'
-gem 'net-imap', '~> 0.5.10'
-gem 'public_suffix', '~> 6.0'
+# Required because mutex_m is not longer a standard Gem in Ruby 3.4
+gem 'mutex_m'
