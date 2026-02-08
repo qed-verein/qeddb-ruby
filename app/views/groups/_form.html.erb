@@ -29,9 +29,8 @@
 	<tbody>
 	<%= form.fields_for :member_affiliations do |entry| %>
 		<tr>
-			<td><%= entry.collection_select(:groupable_id, Person.all.sort_by(&:full_name), :id, :full_name,
-                                   {:include_blank => "Kein Benutzer gewählt"}, {:class => "slim-select", :style => "max-width: 15em"}) %>
-				<%= entry.hidden_field :groupable_type, :value => "Person" %></td>
+                        <td><%= searchable_collection_select(entry, :groupable_id, Person.all.sort_by(&:full_name), :id, :full_name, blank: "Bitte #{Person.model_name.human} auswählen", placeholder: "#{Person.model_name.human} suchen", non_found: "Keine #{Person.model_name.human} gefunden", html_options: {:style => "max-width: 15em"}) %>
+                            <%= entry.hidden_field :groupable_type, :value => "Person" %></td>
 			<td><%= entry.date_field :start %></td>
 			<td><%= entry.date_field :end %></td>
 		</tr>
@@ -56,8 +55,7 @@
 	<tbody>
 	<%= form.fields_for :group_affiliations do |entry| %>
 		<tr>
-			<td><%= entry.collection_select(:groupable_id, Group.all, :id, :title,
-                                            {:include_blank => "Keine Gruppe gewählt"}, {:style => "max-width: 15em", :class => "slim-select"}) %>
+                        <td><%= searchable_collection_select(entry, :groupable_id, Group.all, :id, :title, blank: "Bitte #{Group.model_name.human} auswählen", placeholder: "#{Group.model_name.human} suchen", non_found: "Keine #{Group.model_name.human} gefunden", html_options: {:style => "max-width: 15em"}) %>
 				<%= entry.hidden_field :groupable_type, :value => "Group" %></td>
 			<td><%= entry.date_field :start %></td>
 			<td><%= entry.date_field :end %></td>
@@ -71,25 +69,3 @@
 	</div>
 </fieldset>
 <% end %>
-
-<script>
-    document.querySelectorAll("#person_fieldset select").forEach(it => 
-        new SlimSelect({
-          select: it,
-          settings: {
-            searchPlaceholder: "Person suchen",
-            searchText: "Keine Person gefunden"
-          }
-        })
-    )
-    document.querySelectorAll("#group_fieldset select").forEach(it => 
-        new SlimSelect({
-          select: it,
-          settings: {
-            searchPlaceholder: "Gruppe suchen",
-            searchText: "Keine Gruppe gefunden"
-          }
-        })
-    )
-
-</script>

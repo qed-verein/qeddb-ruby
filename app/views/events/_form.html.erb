@@ -20,7 +20,7 @@
 	<%= form.date_field :deadline, id: :event_deadline %>
 
 	<%= form.label :hostel_id %>
-	<%= form.select(:hostel_id, hostels_for_select, {include_blank: 'nicht angegeben'}, {class: 'slim-select'}) %>
+        <%= searchable_form_select(form, :hostel_id, hostels_for_select, {include_blank: "nicht angegeben"}, placeholder: "#{Hostel.model_name.human} suchen", non_found: "Keine #{Hostel.model_name.human} gefunden") %>
 
 	<%= form.label :cost %>
 	<%= form.number_field :cost, id: :event_cost, size: 3, step: 0.01 %>
@@ -41,13 +41,3 @@
 </div>
 </fieldset>
 <% end %>
-<script>
-
-new SlimSelect({
-  select: '#event_hostel_id',
-  settings: {
-    searchPlaceholder: "Unterkunft suchen",
-    searchText: "Keine Unterkunft gefunden"
-  }
-})
-</script>
