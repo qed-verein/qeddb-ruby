@@ -8,8 +8,8 @@ class Mailinglist < ApplicationRecord
   has_paper_trail
 
   # Liste der manuellen Eintragungen
-  has_many :subscriptions, dependent: :destroy
-  has_many :mailinglist_members, dependent: :destroy
+  has_many :email_subscriptions, dependent: :destroy
+  has_many :member_subscriptions, dependent: :destroy
 
 
   # Diese Gruppe darf Emails senden
@@ -19,7 +19,7 @@ class Mailinglist < ApplicationRecord
   # Diese Gruppe ist für die Moderation zuständig
   belongs_to :moderator_group, optional: true, class_name: 'Group'
 
-  class VirtualSubscription < Subscription
+  class VirtualSubscription < EmailSubscription
     attribute :mailinglist_id, ActiveRecord::Type::Integer.new
     attribute :email_address, ActiveRecord::Type::String.new
     attribute :as_sender, ActiveRecord::Type::Boolean.new
@@ -36,12 +36,12 @@ class Mailinglist < ApplicationRecord
 
   # Nötig, da das Formular für Unterkünfte auch eine Liste von Eintragungen mitschickt
   accepts_nested_attributes_for(
-    :subscriptions,
+    :email_subscriptions,
     allow_destroy: true,
     reject_if: proc { |attr| reject_blank_entries? attr, :email_address }
   )
   accepts_nested_attributes_for(
-    :mailinglist_members,
+    :member_subscriptions,
     allow_destroy: true,
     reject_if: proc { |attr| reject_blank_entries? attr, :person_id }
   )

@@ -1,6 +1,6 @@
-# Die Klasse "MailinglistMember" dient zur Verwaltung eines einzelnen Mailing-Abonenten (mit DB-Profil).
+# Die Klasse "MemberSubscription" dient zur Verwaltung eines einzelnen Mailing-Abonenten (mit DB-Profil).
 
-class MailinglistMember < ApplicationRecord
+class MemberSubscription < ApplicationRecord
   # Versionskontrolle
   has_paper_trail
 

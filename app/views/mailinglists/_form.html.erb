@@ -1,7 +1,7 @@
 <%= form_with(model: @mailinglist, local: true) do |form| %>
 <%= render partial: "shared/errors", locals: {object: @mailinglist} %>
-<% 5.times {@mailinglist.mailinglist_members.build} %>
-<% 5.times {@mailinglist.subscriptions.build} %>
+<% 5.times {@mailinglist.member_subscriptions.build} %>
+<% 5.times {@mailinglist.email_subscriptions.build} %>
 
 
 <fieldset>
@@ -52,11 +52,11 @@
 <thead>
 	<tr>
 	<% [:person, :as_sender, :as_receiver, :as_moderator].each do |attr| %>
-		<th><%= MailinglistMember.human_attribute_name attr %></th>
+		<th><%= MemberSubscription.human_attribute_name attr %></th>
 	<% end %>
 	</tr>
 </thead>
-<%= form.fields_for :mailinglist_members do |member| %>
+<%= form.fields_for :member_subscriptions do |member| %>
 	<tr>
 		<td><%= member.collection_select(:person_id, Person.all.sort_by(&:full_name),
 				:id, :full_name,
@@ -76,11 +76,11 @@
 <thead>
 	<tr>
 	<% [:email_address, :first_name, :last_name, :as_sender, :as_receiver, :as_moderator].each do |attr| %>
-		<th><%= Subscription.human_attribute_name attr %></th>
+		<th><%= EmailSubscription.human_attribute_name attr %></th>
 	<% end %>
 	</tr>
 </thead>
-<%= form.fields_for :subscriptions do |sub| %>
+<%= form.fields_for :email_subscriptions do |sub| %>
 	<tr>
 		<td><%= sub.email_field :email_address %></td>
 		<td><%= sub.text_field :first_name %></td>

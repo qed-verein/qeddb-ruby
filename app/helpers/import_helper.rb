@@ -103,9 +103,15 @@ module ImportHelper
         errors.push import_object(mailinglist, Mailinglist)
 
         # Importiere alle Abonnements eines Emailverteilers
-        mailinglist[:subscriptions]&.each do |subscription|
+        mailinglist[:email_subscriptions]&.each do |subscription|
           errors.push import_object(
-            subscription.merge({ mailinglist_id: mailinglist[:id] }), Subscription
+            subscription.merge({ mailinglist_id: mailinglist[:id] }), EmailSubscription
+          )
+        end
+
+        mailinglist[:member_subscriptions]&.each do |subscription|
+          errors.push import_object(
+            subscription.merge({ mailinglist_id: mailinglist[:id] }), MemberSubscription
           )
         end
       end

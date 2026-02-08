@@ -1,6 +1,6 @@
-# Die Klasse "Subscription" dient zur Verwaltung eines einzelnen Emailabonnements.
+# Die Klasse "Subscription" dient zur Verwaltung eines einzelnen Emailabonnements (ohne QEDDB-Account).
 
-class Subscription < ApplicationRecord
+class EmailSubscription < ApplicationRecord
   # Versionskontrolle
   has_paper_trail
 
