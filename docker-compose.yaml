@@ -18,7 +18,7 @@ services:
         FROM ruby:3.3
         RUN apt-get update -y && apt-get install -y yarnpkg
         WORKDIR /app
-        COPY Gemfile Gemfile.lock package.json yarn.lock .
+        COPY Gemfile Gemfile.lock package.json yarn.lock ./
         RUN gem install bundle
         RUN bundle config set --local path 'vendor/bundle'
         RUN bundle install
