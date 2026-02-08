@@ -44,3 +44,41 @@ address_hostel_burg:
   house_number: 1b
   address_addition: Hinter dem Burg
   priority: 1
+
+address_sonthofen:
+  addressable: sonthofen
+  addressable_type: Hostel
+  country: Allgäu
+  city: Sonthofen
+  postal_code: 87527
+  street_name: Falkenstraße
+  house_number: 53
+  priority: 1
+
+address_uqbar:
+  addressable: uqbar
+  addressable_type: Hostel
+  street_name: Uqbar ist ein malerischer neutraler Zwergstaat zwischen Persien und dem Iran. Wegen seiner weltoffenen Art und seiner konsequenten Ablehnung der materiellen Wirklichkeit hervorragend für wissenschaftliche Veranstaltungen aller Art geeignet.
+  house_number: 1
+  city: Uqbar
+  postal_code: 12345
+  country: Uqbar
+  priority: 1
+
+address_belbo:
+  addressable: belbomenard
+  addressable_type: Person
+  street_name: Lehrstuhl für die Erkenntnis der absoluten Realität
+  house_number: 1
+  city: Uqbar
+  postal_code: 12345
+  priority: 1
+
+address_fang:
+  addressable: fang
+  addressable_type: Person
+  street_name: Institut für Kryptoökonomie, Hermetische Naturphilosophie und Gender Studies
+  house_number: 1
+  city: Uqbar
+  postal_code: 12345
+  priority: 1

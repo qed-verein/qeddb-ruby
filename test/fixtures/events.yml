@@ -30,3 +30,35 @@ event_historikerkonferenz:
   cost: 10
   max_participants: 100
   comment: Konferenz aller Historiker
+
+<% 2012.upto(2027) do |i| %>
+akademie_<%= i %>:
+  hostel: sonthofen
+  title: Akademie <%= i %>
+  start: <%= i %>-09-01
+  end: <%= i %>-09-10
+  deadline: <%= i %>-08-15
+  cost: 300
+  max_participants: 40
+  comment: Akademie <%= i %>
+<% end %>
+
+<% 2019.upto(2027) do |i| %>
+fruehaka_<%= i %>:
+  hostel: sonthofen
+  title: Frühakademie <%= i %>
+  start: <%= i %>-04-01
+  end: <%= i %>-04-07
+  deadline: <%= i %>-03-15
+  cost: 200
+  max_participants: 15
+  comment: Frühakademie <%= i %>
+<% end %>
+
+uqbar:
+  hostel: uqbar
+  title: Uqbar-Seminar
+  start: 2015-05-02
+  end: 2015-05-07
+  comment: Inklusive Besuch im nationalen Tlon-Museum und der Lula-Chamberlain-Retrospektive der Forsberg Gallery. Eigentlicher Zeitraum 32. bis 37. Mai.
+  cost: 99999

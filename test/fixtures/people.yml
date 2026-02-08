@@ -126,3 +126,27 @@ person3:
   railway_discount: Interrail
   meal_preference: keine Nüsse
   comment: Ich habe einen wunderbaren Beweis für die Unlösbarkeit von a^n + b^n = c^n, aber dieses Kommentarfeld ist zu kurz...
+
+peterukasiov:
+  <<: *DEFAULTS
+  account_name: peterukasiov
+  first_name: Peter
+  last_name: Ukasiov
+  birthday: 1970-1-1
+  joined: 1970-1-1
+  paid_until: 1970-1-1
+  member_until: 1970-1-1
+  active: false
+  comment: Seinen Geburtstag würde er nicht mal Olaf verraten...
+
+belbomenard:
+  <<: *DEFAULTS
+  account_name: belbomenard
+  first_name: Prof. Pierre
+  last_name: Belbo-Menard
+
+fang:
+  <<: *DEFAULTS
+  account_name: fang
+  first_name: Prof. María
+  last_name: Hlör U. Fang
