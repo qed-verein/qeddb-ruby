@@ -93,11 +93,11 @@ input, select, .slim-select, textarea {
 	background-color: var(--bg-color-5);
 }
 
-input:focus, select:focus, .slim-select:focus, .ss-option, textarea:focus {
+input:focus, select:focus, .slim-select:focus, textarea:focus {
 	background-color: var(--bg-color-6);
 }
 
-input:hover, select:hover, .slim-select:hover, textarea:hover {
+input:hover, select:hover, .slim-select:hover, .ss-option, .ss-content, textarea:hover {
 	background-color: var(--bg-color-7);
 }
 
