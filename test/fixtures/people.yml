@@ -9,8 +9,11 @@ DEFAULTS: &DEFAULTS
 
 admin:
   account_name: Admin
-  first_name: Adminis
+  first_name: Admini
   last_name: Strator
+  joined: 2000-1-1
+  paid_until: 2200-1-1
+  member_until: 2202-1-1
   email_address: administrator@example.com
   comment: Adminaccount
   <<: *DEFAULTS
@@ -50,8 +53,8 @@ testkassenprüfer:
 
 testvorstand:
   account_name: Testvorstand
-  first_name: Von
-  last_name: Radst
+  first_name: Stan
+  last_name: Vord
   joined: 2000-1-1
   paid_until: 2200-1-1
   member_until: 2202-1-1
