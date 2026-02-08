@@ -1,13 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+<% ['admin', 'person1', 'person2', 'person3', 'testadmin', 'testadministratorin', 'testkassenprüfer', 'testkassier', 'testmitglied', 'testohneglied', 'testvorstand'].each do |p| %>
+contact_<%= p %>_1:
+  person: <%= p %>
+  protocol: Telegram
+  identifier: <%= p %>
+  priority: 1
+
+contact_<%= p %>_2:
+  person: <%= p %>
+  protocol: Matrix
+  identifier: SL_2(K)
+  priority: 2
+<% end %>
+
 contact1:
   person: person1
   protocol: ICQ
   identifier: 314159265
-  priority: 1
+  priority: 3
 
 contact2:
   person: person1
   protocol: ICQ
   identifier: 271828182
-  priority: 2
+  priority: 4

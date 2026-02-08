@@ -1,7 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-address1:
-  addressable: person1
+<% ['admin', 'person1', 'person2', 'person3', 'testadmin', 'testadministratorin', 'testkassenprüfer', 'testkassier', 'testmitglied', 'testohneglied', 'testvorstand'].each do |p| %>
+address_<%= p %>_1:
+  addressable: <%= p %>
   addressable_type: Person
   country: Schweiz
   city: Hintertupfingen
@@ -11,8 +12,8 @@ address1:
   address_addition: E
   priority: 1
 
-address2:
-  addressable: person1
+address_<%= p %>_2:
+  addressable: <%= p %>
   addressable_type: Person
   country: Deutschland
   city: Pinneberg
@@ -21,6 +22,7 @@ address2:
   house_number: π
   address_addition: PI
   priority: 2
+<% end %>
 
 address_hostel_mandelbrot:
   addressable: hostel_mandelbrot
@@ -30,7 +32,6 @@ address_hostel_mandelbrot:
   postal_code: 46689
   street_name: Feigenbaumgasse
   house_number: 2503
-  address_addition: 
   priority: 1
 
 address_hostel_burg:
@@ -43,4 +44,3 @@ address_hostel_burg:
   house_number: 1b
   address_addition: Hinter dem Burg
   priority: 1
-
