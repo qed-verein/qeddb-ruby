@@ -13,7 +13,7 @@ module PeopleHelper
   end
 
   def new_person_link
-    return nil unless policy(Person).create_person?
+    return nil unless policy(Person).edit_other?
 
     icon_button 'Neue Person eintragen', 'person_add', new_person_path
   end

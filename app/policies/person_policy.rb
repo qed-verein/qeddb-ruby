@@ -15,8 +15,8 @@
 #     Persönliche Daten wie Name, Geburtstag etc. bearbeiten
 # edit_basic:
 #     Mindestens ein Attribute der Person lässt sich ändern (intern für Auth benötigt)
-# create_person:
-#     Neue Person eintragen
+# edit_other:
+#     Bearbeiten anderer Nutzer durch Vorstandsmitglieder (inklusive persönlicher Daten, aber nicht Zahlungen)
 # delete_person:
 #     Person löschen
 # list_member:
@@ -53,25 +53,24 @@ class PersonPolicy < ApplicationPolicy
   # Transitive Beziehungen werden erkannt.
 
   define_implications({
+                        view_public: [:view_additional],
+                        view_private: %i[view_unpublished view_public view_addresses view_contacts view_settings export],
+
+                        list_active: [:list_members],
+                        list_all_people: [:list_active],
+
                         edit_personal: %i[view_private edit_basic],
                         edit_additional: %i[view_additional view_addresses view_contacts edit_basic],
                         edit_settings: %i[view_settings edit_basic],
                         edit_private: %i[edit_additional edit_settings view_private],
                         edit_payments: %i[view_payments],
-
-                        view_public: [:view_additional],
-                        view_private: %i[view_unpublished view_public view_addresses view_contacts view_settings export],
-
-                        list_all_people: [:list_active],
-                        list_active: [:list_members],
-
-                        create_person: %i[edit_personal edit_additional edit_settings],
+                        edit_other: %i[edit_personal edit_additional edit_settings],
 
                         by_other: [],
                         by_member: %i[view_public list_members],
                         by_organizer: %i[by_member view_private list_active],
-                        by_self: %i[by_member edit_private view_payments],
-                        by_board_member: %i[by_member edit_personal edit_private create_person delete_person
+                        by_self: %i[by_member view_payments edit_private edit_password],
+                        by_board_member: %i[by_member edit_private edit_other delete_person
                                         list_all_people],
                         by_treasurer: %i[by_board_member edit_payments],
                         by_auditor: %i[by_member view_payments],

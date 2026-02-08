@@ -13,7 +13,7 @@
 		<%= form.email_field :email_address, id: :person_email_address, disabled: ro_settings %>
 	<% end %>
 
-	<% if @person_policy.edit_settings? && mode == :edit %>
+	<% if @person_policy.edit_password? && mode == :edit %>
 		<%= form.label :password %>
 		<%= form.password_field :password, id: :person_password %>
 
