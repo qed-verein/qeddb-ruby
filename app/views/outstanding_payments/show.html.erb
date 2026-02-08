@@ -8,7 +8,7 @@
 <div class="actions">
 	<%= download_table_button('#outstanding_payments_table') %>
 	<% if policy(:outstanding_payments).export? %>
-		<%= icon_button 'Als JSON anzeigen', 'notes', outstanding_payments_path(format: :json) %>
+		<%= download_json_button outstanding_payments_path(format: :json) %>
 	<% end %>
 </div>
 </fieldset>

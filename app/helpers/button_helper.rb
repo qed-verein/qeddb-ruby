@@ -8,9 +8,13 @@ module ButtonHelper
 
   def download_table_button(table)
     tag.button class: 'button', onclick: "downloadTable('#{table}')" do
-      concat tag.i(class: 'material-icons md-24') { 'save_alt' }
+      concat tag.i(class: 'material-icons md-24') { 'file_download' }
       concat 'Herunterladen'
     end
+  end
+
+  def download_json_button(path)
+    icon_button 'Als JSON anzeigen', 'save', path
   end
 
   # ~ def edit_button(path)
