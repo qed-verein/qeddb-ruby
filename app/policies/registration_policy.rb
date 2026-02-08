@@ -83,7 +83,7 @@ class RegistrationPolicy < ApplicationPolicy
     if edit_payments?
       editable.push :payment_complete, :money_transfer_date, :other_discounts
       editable.push({ registration_payments_attributes:
-        %i[id payment_type category money_transfer_date comment _destroy] })
+        %i[id payment_type money_amount category money_transfer_date comment _destroy] })
     end
     editable
   end
