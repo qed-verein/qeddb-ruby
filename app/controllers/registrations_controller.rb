@@ -138,7 +138,7 @@ class RegistrationsController < ApplicationController
     orgas = @registration.event.organizers
     orga = if orgas.empty? then '' else orgas.sample.full_name end
 
-    einladung = render_typst_template 'einladung.typ', {
+    heathcliff = render_typst_template 'invitation.typ', {
       'name': @registration.person.full_name,
       'orga': orga,
       'event.start': I18n.l(@registration.event.start, format: :long),
@@ -147,7 +147,7 @@ class RegistrationsController < ApplicationController
       'homepage': "#{Rails.configuration.qed_homepage}",
     }
 
-    send_data einladung, format: 'application/pdf', filename: 'example.pdf', disposition: 'inline'
+    send_data heathcliff, format: 'application/pdf', filename: 'example.pdf', disposition: 'inline'
   end
 
   private
