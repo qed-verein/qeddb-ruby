@@ -92,12 +92,14 @@ class Registration < ApplicationRecord
 
   def effective_money_amount
     return nil if event.cost.nil?
+
     event.cost + charge_modifiers.sum(:money_amount)
   end
 
   def to_be_paid
     return 0.0 if payment_complete
     return nil if effective_money_amount.nil?
+
     effective_money_amount - registration_payments.sum(:money_amount)
   end
 

@@ -124,7 +124,7 @@ class EventsController < ApplicationController
       }
     end
 
-    open = @event.registrations.map(&:to_be_paid).reject(&:blank?)
+    open = @event.registrations.map(&:to_be_paid).compact_blank
     @open = {
       positive: open.select(&:positive?),
       negative: open.select(&:negative?)
