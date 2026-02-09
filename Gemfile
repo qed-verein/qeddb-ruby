@@ -71,8 +71,6 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'web-console', '>= 4.1.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'irb', require: false
-  gem 'rdoc', require: false
   gem 'rubocop', '~> 1.80', require: false
   gem 'rubocop-capybara', '~> 2.22', require: false
   gem 'rubocop-discourse', '~> 3.12', require: false

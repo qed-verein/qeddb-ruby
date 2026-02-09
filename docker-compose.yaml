@@ -33,6 +33,7 @@ services:
       - "./config:/app/config"
       - "./db:/app/db"
       - "./Rakefile:/app/Rakefile"
+      - "./.rubocop.yml:/app/.rubocop.yml"
       - "./config.ru:/app/config.ru"
     depends_on:
       mariadb:

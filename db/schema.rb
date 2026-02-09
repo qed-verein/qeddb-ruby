@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_02_07_155558) do
+ActiveRecord::Schema.define(version: 2026_02_09_233936) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "addressable_type"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2026_02_07_155558) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_groups_on_event_id"
+    t.index ["title"], name: "index_groups_on_title", unique: true
   end
 
   create_table "hostels", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -173,7 +174,7 @@ ActiveRecord::Schema.define(version: 2026_02_07_155558) do
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
     t.integer "access_count_to_reset_password_page", default: 0
-    t.index ["account_name"], name: "index_people_on_account_name"
+    t.index ["account_name"], name: "index_people_on_account_name", unique: true
     t.index ["email_address"], name: "index_people_on_email_address"
     t.index ["reset_password_token"], name: "index_people_on_reset_password_token"
   end
@@ -211,6 +212,7 @@ ActiveRecord::Schema.define(version: 2026_02_07_155558) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_registrations_on_event_id"
+    t.index ["person_id", "event_id"], name: "index_registrations_on_person_id_and_event_id", unique: true
     t.index ["person_id"], name: "index_registrations_on_person_id"
   end
 

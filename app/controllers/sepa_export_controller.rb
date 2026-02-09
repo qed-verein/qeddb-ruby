@@ -51,7 +51,7 @@ class SepaExportController < ApplicationController
     use_mandates to_use if params[:set_used] == '1'
 
     send_data sepa_direct_debit.to_xml,
-              filename: filename,
+              filename: filename(@event, @year),
               type: 'application/xml'
   end
 
