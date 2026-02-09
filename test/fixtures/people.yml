@@ -88,6 +88,9 @@ testextern:
   last_name: Tern
   email_address: testextern@example.com
   comment: Externer Account zum Testen
+  joined:
+  paid_until:
+  member_until:
 
 person1:
   <<: *DEFAULTS
