@@ -1,84 +1,99 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 DEFAULTS: &DEFAULTS
-  birthday: 1-1-2000
+  birthday: 2000-1-1
+  joined: 2000-1-1
+  paid_until: 2200-12-31
+  member_until: 2202-12-31
   gender: 1
   active: true
   salt: <%= salt = "Natriumchlorid" %>
   crypted_password: <%= QEDCryptoProvider.encrypt("mypassword", salt) %>
 
 admin:
+  <<: *DEFAULTS
   account_name: Admin
-  first_name: Adminis
-  last_name: Strator
+  first_name: Raimond
+  last_name: Strait
   email_address: administrator@example.com
   comment: Adminaccount
+
+testadministratorin:
   <<: *DEFAULTS
+  account_name: Administratorin
+  first_name: Rasmina
+  last_name: Drottini
+  joined: 2005-1-1
+  email_address: administratorin@example.com
+  comment: Adminaccount
+  gender: 2
 
 testadmin:
+  <<: *DEFAULTS
   account_name: Testadmin
   first_name: Ma
   last_name: Din
-  joined: 2000-1-1
-  paid_until: 2200-1-1
-  member_until: 2202-1-1
   email_address: testadmin@example.com
   comment: Adminaccount zum Testen
-  <<: *DEFAULTS
 
 testkassier:
+  <<: *DEFAULTS
   account_name: Testkassier
   first_name: Reis
   last_name: Sak
-  joined: 2000-1-1
-  paid_until: 2200-1-1
-  member_until: 2202-1-1
   email_address: testkassier@example.com
   comment: Kassieraccount zum Testen
-  <<: *DEFAULTS
 
 testkassenprüfer:
+  <<: *DEFAULTS
   account_name: Testkassenprüferin
   first_name: Nessie
   last_name: Urkarpfen
-  joined: 2000-1-1
-  paid_until: 2200-1-1
-  member_until: 2202-1-1
   email_address: testkassenpruefer@example.com
   comment: 'Kassenprüfer:inaccount zum Testen'
-  <<: *DEFAULTS
 
 testvorstand:
+  <<: *DEFAULTS
   account_name: Testvorstand
-  first_name: Von
-  last_name: Radst
-  joined: 2000-1-1
-  paid_until: 2200-1-1
-  member_until: 2202-1-1
+  first_name: Stan
+  last_name: Vord
   email_address: testvorstand@example.com
   comment: Vorstandsaccount zum Testen
-  <<: *DEFAULTS
 
 testmitglied:
+  <<: *DEFAULTS
   account_name: Testmitglied
   first_name: Tim
   last_name: Geidl
-  joined: 2000-1-1
-  paid_until: 2200-1-1
-  member_until: 2202-1-1
+  paid_until: 2028-12-31
+  member_until: 2030-12-31
   email_address: testmitglied@example.com
   comment: Mitgliederaccount zum Testen
+
+heino:
   <<: *DEFAULTS
+  account_name: heino
+  first_name: Heino
+  last_name: Geld
+  paid_until: 2023-12-31
+  member_until: 2025-12-31
+  email_address: heino.geld@example.com
+  comment: Chronisch pleite und deshalb aktuell kein Mitglied mehr. Hat auch noch eine ausstehende Zahlung für die Historikerkonferenz.
+  gender: 3
 
 testextern:
+  <<: *DEFAULTS
   account_name: Testextern
   first_name: Ex
   last_name: Tern
   email_address: testextern@example.com
   comment: Externer Account zum Testen
-  <<: *DEFAULTS
+  joined:
+  paid_until:
+  member_until:
 
 person1:
+  <<: *DEFAULTS
   account_name: leonhardeuler
   first_name: Leonhard
   last_name: Euler
@@ -90,9 +105,9 @@ person1:
   meal_preference: keine Essenswünsche
   active: true
   comment: Ich bin Leonard Euler
-  <<: *DEFAULTS
 
 person2:
+  <<: *DEFAULTS
   account_name: carlfriedrichgauss
   first_name: Carl Friedrich
   last_name: Gauß
@@ -103,9 +118,9 @@ person2:
   railway_discount: Bahncard 50
   meal_preference: vegetarier
   comment: Ich bin Carl Friedrich Gauß
-  <<: *DEFAULTS
 
 person3:
+  <<: *DEFAULTS
   account_name: pierredefermat
   first_name: Pierre
   last_name:  de Fermat
@@ -116,4 +131,27 @@ person3:
   railway_discount: Interrail
   meal_preference: keine Nüsse
   comment: Ich habe einen wunderbaren Beweis für die Unlösbarkeit von a^n + b^n = c^n, aber dieses Kommentarfeld ist zu kurz...
+
+peterukasiov:
   <<: *DEFAULTS
+  account_name: peterukasiov
+  first_name: Peter
+  last_name: Ukasiov
+  birthday: 1970-1-1
+  joined: 1970-1-1
+  paid_until: 1970-1-1
+  member_until: 1970-1-1
+  active: false
+  comment: Seinen Geburtstag würde er nicht mal Olaf verraten...
+
+belbomenard:
+  <<: *DEFAULTS
+  account_name: belbomenard
+  first_name: Prof. Pierre
+  last_name: Belbo-Menard
+
+fang:
+  <<: *DEFAULTS
+  account_name: fang
+  first_name: Prof. María
+  last_name: Hlör U. Fang

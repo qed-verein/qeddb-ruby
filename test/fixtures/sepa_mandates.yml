@@ -17,3 +17,12 @@ mandate2:
   name_account_holder: Niemand
   sequence_type: first_use
   person: person1
+
+mandate_tim:
+  mandate_reference: Mandat Tim
+  signature_date: 2005-09-05
+  iban: DE12345678901234567890
+  bic: BICBICBICXXX
+  name_account_holder: Tim Geidl
+  sequence_type: recurring_use
+  person: testmitglied

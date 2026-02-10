@@ -61,6 +61,61 @@ registration4:
   railway_discount: Monatskarte
   money_transfer_date: 2002-20-02
   member_discount: false
-  meal_preference: Fruitarier
-  talks: Graviation
+  meal_preference: Fruktarier
+  talks: Gravitation
   comment: schwerer Vortrag
+
+registration_uqbar1:
+  event: uqbar
+  person: peterukasiov
+  status: 2
+  organizer: true
+  arrival: 2015-05-02 05:32:32
+  departure: 2015-05-07 05:37:37
+  station_arrival: Anreise per Flugzeug
+  station_departure: Abreise per Flugzeug
+  railway_discount: ein Euro fünfzig Beteilung durch den Verein
+  money_transfer_date: 2015-05-31
+  member_discount: true
+
+registration_uqbar2:
+  event: uqbar
+  person: belbomenard
+  status: 2
+  organizer: false
+  arrival: 2015-05-02 05:32:32
+  departure: 2015-05-07 05:37:37
+  station_arrival: Uqbar
+  station_departure: Uqbar
+  talks: Transzendentale Algebren - von der Körpererweiterung zur Bewusstseinserweiterung
+
+registration_uqbar3:
+  event: uqbar
+  person: fang
+  status: 2
+  organizer: false
+  arrival: 2015-05-02 05:32:32
+  departure: 2015-05-07 05:37:37
+  station_arrival: Uqbar
+  station_departure: Uqbar
+  talks: Eine Anwendung von Nash-Isometrien zur Einbettung der Hegelschen Kategorien in beliebig kleine Spekulationsblasen
+
+registration_uqbar4:
+  event: uqbar
+  person: heino
+  status: 1
+  organizer: false
+
+<% 2012.upto(2027) do |i| %>
+registration_akademie<%= i %>_heino:
+  event: akademie_<%= i %>
+  person: heino
+  status: 1
+  organizer: false
+
+registration_akademie<%= i %>_tim:
+  event: akademie_<%= i %>
+  person: testmitglied
+  status: 2
+  organizer: false
+<% end %>
