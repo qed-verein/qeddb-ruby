@@ -6,7 +6,6 @@ de:
   "no": Nein
   error: Fehler
 
-
   activerecord:
     models:
       person:
@@ -110,6 +109,7 @@ de:
         max_participants: Teilnehmerlimit
         comment: Anmerkungen
         reference_line: Verwendungszweck
+        mailinglist_slug: Mailinglisten-Titel
       registration:
         event: Veranstaltung
         person: Person
@@ -136,7 +136,6 @@ de:
         money_transfer_date: Geldeingang
         payment_complete: Vollständig Bezahlt
         payment_complete_short: Bezahlt
-
 
         meal_preference: Essenswünsche
         talks: Vorträge
@@ -309,11 +308,17 @@ de:
 
   validations:
     event:
+      title:
+        charset: darf nur Buchstaben, Zahlen, Leerzeichen und Bindestriche enthalten
+        format: sollte den Ort und das vollständige Jahr enthalten
       reference_line:
-        charset: darf nur Buchstaben, Zahlen, Leerzeichen und Bindestrichte enthalten
+        charset: darf nur Buchstaben, Zahlen, Leerzeichen und Bindestriche enthalten
+        format: sollte zum Titel passen und das Jahr zweistellig enthalten
+      mailinglist_slug:
+        charset: darf nur Kleinbuchstaben, Zahlen und Bindestriche enthalten
+        format: sollte zum Titel passen und das Jahr zweistellig enthalten
     registration:
       must_accept_terms_of_service: Die Teilnahmebedingungen müssen akzeptiert werden
-
 
   time:
     formats:
