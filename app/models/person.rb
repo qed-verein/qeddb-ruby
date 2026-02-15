@@ -21,6 +21,7 @@ class Person < ApplicationRecord
   # Liste alle Anmeldungen dieser Person auf (einschließlich Absagen, Warteliste etc)
   has_many :registrations, -> { includes('event').order('events.start DESC') },
            dependent: :destroy, inverse_of: :person
+           
   # Liste die zugehörigen Veranstaltungen aller Anmeldungen auf
   has_many :events, through: :registrations
 
@@ -33,6 +34,8 @@ class Person < ApplicationRecord
 
   # In diese Gruppen wird die Person explizit eingetragen (siehe Group)
   has_many :affiliations, as: :groupable, inverse_of: :groupable, dependent: :destroy
+  has_many :mailinglist_member, dependent: :destroy
+
 
   # Alle Gruppen, in welche diese Person eingetragen ist (auch indirekt)
   def groups

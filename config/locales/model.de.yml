@@ -39,9 +39,12 @@ de:
       mailinglist:
         one: Emailverteiler
         other: Emailverteiler
-      subscription:
+      email_subscription:
         one: Emailabonnement
         other: Emailabonnements
+      member_subscription:
+        one: Person auf Emailverteiler
+        other: Personen auf Emailverteiler
       version:
         one: Version
         other: Versionen
@@ -289,7 +292,13 @@ de:
         receiver_group: Empfängergruppe
         moderator_group: Moderatorengruppe
 
-      subscription:
+      member_subscription:
+        person: Person
+        as_sender: Senden
+        as_receiver: Empfangen
+        as_moderator: Moderator
+
+      email_subscription:
         email_address: Emailadresse
         first_name: Vorname
         last_name: Nachname

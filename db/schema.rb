@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2026_02_07_155558) do
+ActiveRecord::Schema.define(version: 2026_02_07_172930) do
 
   create_table "addresses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "addressable_type"
@@ -58,6 +58,19 @@ ActiveRecord::Schema.define(version: 2026_02_07_155558) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_contacts_on_person_id"
+  end
+
+  create_table "email_subscriptions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "mailinglist_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email_address"
+    t.boolean "as_sender"
+    t.boolean "as_receiver"
+    t.boolean "as_moderator"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mailinglist_id"], name: "index_email_subscriptions_on_mailinglist_id"
   end
 
   create_table "event_payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -128,6 +141,18 @@ ActiveRecord::Schema.define(version: 2026_02_07_155558) do
     t.index ["moderator_group_id"], name: "index_mailinglists_on_moderator_group_id"
     t.index ["receiver_group_id"], name: "index_mailinglists_on_receiver_group_id"
     t.index ["sender_group_id"], name: "index_mailinglists_on_sender_group_id"
+  end
+
+  create_table "member_subscriptions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "mailinglist_id", null: false
+    t.bigint "person_id", null: false
+    t.boolean "as_sender", null: false
+    t.boolean "as_receiver", null: false
+    t.boolean "as_moderator", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mailinglist_id"], name: "index_member_subscriptions_on_mailinglist_id"
+    t.index ["person_id"], name: "index_member_subscriptions_on_person_id"
   end
 
   create_table "payments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -228,19 +253,6 @@ ActiveRecord::Schema.define(version: 2026_02_07_155558) do
     t.boolean "allow_all_payments", default: true
   end
 
-  create_table "subscriptions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "mailinglist_id"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email_address"
-    t.boolean "as_sender"
-    t.boolean "as_receiver"
-    t.boolean "as_moderator"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["mailinglist_id"], name: "index_subscriptions_on_mailinglist_id"
-  end
-
   create_table "versions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
@@ -265,6 +277,6 @@ ActiveRecord::Schema.define(version: 2026_02_07_155558) do
       select `groups`.`title` AS `group_title`,`people`.`id` AS `account_id`,`people`.`account_name` AS `account_name`,`people`.`crypted_password` AS `crypted_password`,`people`.`email_address` AS `email_address` from ((`recursive_members` `m` join `groups`) join `people`) where `m`.`group_id` = `groups`.`id` and `m`.`person_id` = `people`.`id`
   SQL
   create_view "all_subscriptions", sql_definition: <<-SQL
-      with senders(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`sender_group_id`), receivers(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`receiver_group_id`), moderators(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`moderator_group_id`), automatic(`mailinglist_id`,`email_address`,`first_name`,`last_name`,`as_sender`,`as_receiver`,`as_moderator`) as (select `flag_table`.`mailinglist_id` AS `mailinglist_id`,`flag_table`.`email_address` AS `email_address`,`flag_table`.`first_name` AS `first_name`,`flag_table`.`last_name` AS `last_name`,max(`flag_table`.`as_sender`) = 1 AS `as_sender`,max(`flag_table`.`as_receiver`) = 1 AS `as_receiver`,max(`flag_table`.`as_moderator`) = 1 AS `as_moderator` from (select `senders`.`mailinglist_id` AS `mailinglist_id`,`senders`.`email_address` AS `email_address`,`senders`.`first_name` AS `first_name`,`senders`.`last_name` AS `last_name`,1 AS `as_sender`,0 AS `as_receiver`,0 AS `as_moderator` from `senders` union select `receivers`.`mailinglist_id` AS `mailinglist_id`,`receivers`.`email_address` AS `email_address`,`receivers`.`first_name` AS `first_name`,`receivers`.`last_name` AS `last_name`,0 AS `as_sender`,1 AS `as_receiver`,0 AS `as_moderator` from `receivers` union select `moderators`.`mailinglist_id` AS `mailinglist_id`,`moderators`.`email_address` AS `email_address`,`moderators`.`first_name` AS `first_name`,`moderators`.`last_name` AS `last_name`,0 AS `as_sender`,0 AS `as_receiver`,1 AS `as_moderator` from `moderators`) `flag_table` group by `flag_table`.`mailinglist_id`,`flag_table`.`email_address`), manual(`mailinglist_id`,`email_address`,`first_name`,`last_name`,`as_sender`,`as_receiver`,`as_moderator`) as (select `subscriptions`.`mailinglist_id` AS `mailinglist_id`,`subscriptions`.`email_address` AS `email_address`,`subscriptions`.`first_name` AS `first_name`,`subscriptions`.`last_name` AS `last_name`,`subscriptions`.`as_sender` AS `as_sender`,`subscriptions`.`as_receiver` AS `as_receiver`,`subscriptions`.`as_moderator` AS `as_moderator` from `subscriptions`)select `combination_table`.`mailinglist_id` AS `mailinglist_id`,`combination_table`.`email_address` AS `email_address`,`combination_table`.`first_name` AS `first_name`,`combination_table`.`last_name` AS `last_name`,`combination_table`.`as_sender` AS `as_sender`,`combination_table`.`as_receiver` AS `as_receiver`,`combination_table`.`as_moderator` AS `as_moderator`,max(`combination_table`.`m`) AS `manual` from (select `manual`.`mailinglist_id` AS `mailinglist_id`,`manual`.`email_address` AS `email_address`,`manual`.`first_name` AS `first_name`,`manual`.`last_name` AS `last_name`,`manual`.`as_sender` AS `as_sender`,`manual`.`as_receiver` AS `as_receiver`,`manual`.`as_moderator` AS `as_moderator`,1 AS `m` from `manual` union select `automatic`.`mailinglist_id` AS `mailinglist_id`,`automatic`.`email_address` AS `email_address`,`automatic`.`first_name` AS `first_name`,`automatic`.`last_name` AS `last_name`,`automatic`.`as_sender` AS `as_sender`,`automatic`.`as_receiver` AS `as_receiver`,`automatic`.`as_moderator` AS `as_moderator`,0 AS `m` from `automatic`) `combination_table` group by `combination_table`.`mailinglist_id`,`combination_table`.`email_address`
+      with senders(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`sender_group_id`), receivers(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`receiver_group_id`), moderators(`mailinglist_id`,`email_address`,`first_name`,`last_name`) as (select `ml`.`id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name` from ((`recursive_members` `gp` join `mailinglists` `ml`) join `people` `p`) where `gp`.`person_id` = `p`.`id` and `gp`.`group_id` = `ml`.`moderator_group_id`), automatic(`mailinglist_id`,`email_address`,`first_name`,`last_name`,`as_sender`,`as_receiver`,`as_moderator`) as (select `flag_table`.`mailinglist_id` AS `mailinglist_id`,`flag_table`.`email_address` AS `email_address`,`flag_table`.`first_name` AS `first_name`,`flag_table`.`last_name` AS `last_name`,max(`flag_table`.`as_sender`) = 1 AS `as_sender`,max(`flag_table`.`as_receiver`) = 1 AS `as_receiver`,max(`flag_table`.`as_moderator`) = 1 AS `as_moderator` from (select `senders`.`mailinglist_id` AS `mailinglist_id`,`senders`.`email_address` AS `email_address`,`senders`.`first_name` AS `first_name`,`senders`.`last_name` AS `last_name`,1 AS `as_sender`,0 AS `as_receiver`,0 AS `as_moderator` from `senders` union select `receivers`.`mailinglist_id` AS `mailinglist_id`,`receivers`.`email_address` AS `email_address`,`receivers`.`first_name` AS `first_name`,`receivers`.`last_name` AS `last_name`,0 AS `as_sender`,1 AS `as_receiver`,0 AS `as_moderator` from `receivers` union select `moderators`.`mailinglist_id` AS `mailinglist_id`,`moderators`.`email_address` AS `email_address`,`moderators`.`first_name` AS `first_name`,`moderators`.`last_name` AS `last_name`,0 AS `as_sender`,0 AS `as_receiver`,1 AS `as_moderator` from `moderators`) `flag_table` group by `flag_table`.`mailinglist_id`,`flag_table`.`email_address`), members(`mailinglist_id`,`email_address`,`first_name`,`last_name`,`as_sender`,`as_receiver`,`as_moderator`) as (select `mm`.`mailinglist_id` AS `mailinglist_id`,`p`.`email_address` AS `email_address`,`p`.`first_name` AS `first_name`,`p`.`last_name` AS `last_name`,`mm`.`as_sender` AS `as_sender`,`mm`.`as_receiver` AS `as_receiver`,`mm`.`as_moderator` AS `as_moderator` from (`member_subscriptions` `mm` join `people` `p`) where `mm`.`person_id` = `p`.`id`), manual(`mailinglist_id`,`email_address`,`first_name`,`last_name`,`as_sender`,`as_receiver`,`as_moderator`) as (select `email_subscriptions`.`mailinglist_id` AS `mailinglist_id`,`email_subscriptions`.`email_address` AS `email_address`,`email_subscriptions`.`first_name` AS `first_name`,`email_subscriptions`.`last_name` AS `last_name`,`email_subscriptions`.`as_sender` AS `as_sender`,`email_subscriptions`.`as_receiver` AS `as_receiver`,`email_subscriptions`.`as_moderator` AS `as_moderator` from `email_subscriptions`)select `combination_table`.`mailinglist_id` AS `mailinglist_id`,`combination_table`.`email_address` AS `email_address`,`combination_table`.`first_name` AS `first_name`,`combination_table`.`last_name` AS `last_name`,`combination_table`.`as_sender` AS `as_sender`,`combination_table`.`as_receiver` AS `as_receiver`,`combination_table`.`as_moderator` AS `as_moderator`,max(`combination_table`.`m`) AS `manual` from (select `manual`.`mailinglist_id` AS `mailinglist_id`,`manual`.`email_address` AS `email_address`,`manual`.`first_name` AS `first_name`,`manual`.`last_name` AS `last_name`,`manual`.`as_sender` AS `as_sender`,`manual`.`as_receiver` AS `as_receiver`,`manual`.`as_moderator` AS `as_moderator`,2 AS `m` from `manual` union select `members`.`mailinglist_id` AS `mailinglist_id`,`members`.`email_address` AS `email_address`,`members`.`first_name` AS `first_name`,`members`.`last_name` AS `last_name`,`members`.`as_sender` AS `as_sender`,`members`.`as_receiver` AS `as_receiver`,`members`.`as_moderator` AS `as_moderator`,1 AS `m` from `members` union select `automatic`.`mailinglist_id` AS `mailinglist_id`,`automatic`.`email_address` AS `email_address`,`automatic`.`first_name` AS `first_name`,`automatic`.`last_name` AS `last_name`,`automatic`.`as_sender` AS `as_sender`,`automatic`.`as_receiver` AS `as_receiver`,`automatic`.`as_moderator` AS `as_moderator`,0 AS `m` from `automatic`) `combination_table` group by `combination_table`.`mailinglist_id`,`combination_table`.`email_address`
   SQL
 end
