@@ -22,7 +22,7 @@ group_auditor:
     title: "Kassenprüfer:in"
     description: "Diese Gruppe enthält alle Kassenprüfer:innen"
     kind: auditors
-    
+
 group_newsletter_subscribers:
     title: "Newsletter"
     description: "Diese Gruppe enthält alle Abonnent:innen des Newsletters"
@@ -93,3 +93,43 @@ group_historikerkonferenz_teilnehmer:
     event: event_historikerkonferenz
     description: Alle Teilnehmer der Historikerkonferenz
     kind: participants
+
+<% 2012.upto(2027) do |i| %>
+group_akademie_<%= i %>_orgas:
+  title: Orgas der Akademie <%= i %>
+  event: akademie_<%= i %>
+  description: Alle Orgas der Akademie <%= i %>
+  kind: organizers
+
+group_akademie_<%= i %>_teilnehmer:
+  title: Teilnehmer der Akademie <%= i %>
+  event: akademie_<%= i %>
+  description: Alle Teilnehmer der Akademie <%= i %>
+  kind: participants
+<% end %>
+
+<% 2019.upto(2027) do |i| %>
+group_fruehaka_<%= i %>_orgas:
+  title: Orgas der Frühakademie <%= i %>
+  event: fruehaka_<%= i %>
+  description: Alle Orgas der Frühakademie <%= i %>
+  kind: organizers
+
+group_fruehaka_<%= i %>_teilnehmer:
+  title: Teilnehmer der Frühakademie <%= i %>
+  event: fruehaka_<%= i %>
+  description: Alle Teilnehmer der Frühakademie <%= i %>
+  kind: participants
+<% end %>
+
+group_uqbar_orgas:
+  title: Orgas der Uqbar-Seminar
+  event: uqbar
+  description: Alle Orgas der Uqbar-Seminar
+  kind: organizers
+
+group_uqbar_teilnehmer:
+  title: Teilnehmer der Uqbar-Seminar
+  event: uqbar
+  description: Alle Teilnehmer der Uqbar-Seminar
+  kind: participants
