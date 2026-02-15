@@ -19,7 +19,7 @@
 
             <% if @person_policy.view_private? || @person.publish_email %>
               <dt><%= Person.human_attribute_name :email_address %>:</dt>
-              <dd><%= mail_to @person.email_address %></dd>
+              <dd><%= check_unknown(@person.email_address) {|a|mail_to a} %></dd>
             <% end %>
 
             <% if @person_policy.view_private? || @person.publish_birthday %>
@@ -49,6 +49,9 @@
 
             <dt><%= Person.human_attribute_name :active %>:</dt>
             <dd><%= render_yes_no @person.active %></dd>
+
+            <dt><%= Person.human_attribute_name :archived %>:</dt>
+            <dd><%= render_yes_no @person.archived %></dd>
           </dl>
         </section>
       <% end %>
@@ -261,6 +264,7 @@
 
     <div class="actions">
       <%= delete_person_link(@person) %>
+      <%= archive_person_link(@person) %>
     </div>
   </article>
 </div>

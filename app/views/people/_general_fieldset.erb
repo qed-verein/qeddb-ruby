@@ -49,4 +49,9 @@
 		<%= Person.human_attribute_name :active %>
 		<i>Aktivierte Benutzer können sich selbständig in die Datenbank einloggen.</i>
 	</label>
+	<label>
+		<%= form.check_box :archived, id: :person_archived, disabled: ro_personal %>
+		<%= Person.human_attribute_name :archived %>
+		<i>Archivierte Benutzer sind nicht mehr in der Datenbank zu finden.</i>
+	</label>
 </fieldset>
