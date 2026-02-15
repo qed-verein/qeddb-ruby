@@ -2,7 +2,7 @@ module SepaExportHelper
   def sepa_export_button(event_id = nil, year = nil)
     return nil unless policy(:banking).sepa_export?
 
-    icon_button t('actions.export_sepa.prepare'), 'attach_money', sepa_export_path(event_id: event_id, year: year)
+    icon_button t('actions.export_sepa.prepare'), :euro, sepa_export_path(event_id: event_id, year: year)
   end
 
   def get_transactions_for_members(year)

@@ -169,9 +169,7 @@
       <div class="actions">
         <%= event_register_self_link(@event) %>
         <% if @event_policy.list_participants? %>
-          <%= icon_button "Als Tabelle anzeigen",
-          "grid_on",
-          registrations_as_table_event_path(@event) %>
+          <%= icon_button "Als Tabelle anzeigen", :grid_on, registrations_as_table_event_path(@event) %>
         <% end %>
         <% if @event_policy.export? %>
           <%= download_json_button event_path(@event, format: :json) %>

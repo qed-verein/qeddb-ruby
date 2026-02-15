@@ -6,7 +6,7 @@ module GenericPaymentsHelper
   def new_generic_payment_link
     return nil unless policy(GenericPayment).create?
 
-    icon_button t('actions.generic_payment.new'), 'add', new_generic_payment_path
+    icon_button t('actions.generic_payment.new'), :add, new_generic_payment_path
   end
 
   def generic_payments_link

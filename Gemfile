@@ -28,7 +28,7 @@ gem 'scenic-mysql_adapter'
 # loaf for breadcrumbs
 gem 'loaf', '~> 0.10.0'
 # icons for buttons
-gem 'material_icons', '~> 2.2.1'
+gem 'material_icons', '~> 4.0.0'
 # JQuery
 gem 'jquery-rails', '~> 4.6.0'
 
@@ -56,6 +56,9 @@ gem 'rails-i18n'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'sprockets-rails', require: 'sprockets/railtie'
+
+# Typst for pdf generation
+gem 'typst', '~> 0.13'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

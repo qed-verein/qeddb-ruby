@@ -152,6 +152,7 @@
 		<% end %>
 		<%= edit_registration_link(@registration) %>
 		<%= delete_registration_link(@registration) %>
+		<%= view_invitation_link(@registration) %>
 		<%= event_register_other_link(@registration.event) %>
 		<% if @registration_policy.edit_payments? %>
 		<%= form_with url: pay_rest_registration_path(@registration), method: :post do |form| %>

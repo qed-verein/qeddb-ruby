@@ -44,7 +44,7 @@ show_unpublished_people = policy(Person).view_unpublished?
 	</div>
 
 	<div class="actions">
-		<%= icon_button "Tabellenansicht", 'grid_on', people_as_table_path %>
+		<%= icon_button "Tabellenansicht", :grid_on, people_as_table_path %>
 		<%= new_person_link %>
 		<% if policy(@people).export? %>
 			<%= download_json_button people_path(format: :json) %>
