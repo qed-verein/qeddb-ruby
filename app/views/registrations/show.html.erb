@@ -78,7 +78,7 @@
 			<dd><%= render_yes_no @registration.fully_paid? %></dd>
 			<% unless @registration.fully_paid? %>
 				<dt><%= Registration.human_attribute_name :to_be_paid %>:</dt>
-				<dd><%= number_to_currency @registration.to_be_paid %></dd>
+				<dd><%= check_unknown(@registration.to_be_paid) { |amount| number_to_currency amount } %></dd>
 			<% end %>
 
 			<% if @registration.registration_payments.empty? %>
@@ -154,7 +154,7 @@
 		<%= delete_registration_link(@registration) %>
 		<%= view_invitation_link(@registration) %>
 		<%= event_register_other_link(@registration.event) %>
-		<% if @registration_policy.edit_payments? %>
+		<% if @registration_policy.edit_payments? && !@registration.to_be_paid.nil? %>
 		<%= form_with url: pay_rest_registration_path(@registration), method: :post do |form| %>
 			<%= form.date_field :pay_rest_date, id: :pay_rest_date, :required => true %>
 			<%= form.submit "Rest bezahlt" %>

@@ -7,9 +7,9 @@ module RegistrationsHelper
     end
     if policy(reg).view_payments? && !reg.fully_paid?
       amount_open = reg.to_be_paid
-      if amount_open.positive?
+      if !amount_open.nil? && amount_open.positive?
         words.push t('.unpaid')
-      elsif amount_open.negative?
+      elsif !amount_open.nil? && amount_open.negative?
         words.push t('.overpaid')
       end
     end

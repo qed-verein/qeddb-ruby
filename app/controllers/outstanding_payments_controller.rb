@@ -9,7 +9,9 @@ class OutstandingPaymentsController < ApplicationController
   private
 
   def set_registrations
-    @registrations = Registration.all.reject(&:fully_paid?)
+    @registrations = Registration.all
+                                 .reject(&:fully_paid?)
+                                 .reject {|registration| registration.to_be_paid.nil?}
   end
 
   def basic_authorization

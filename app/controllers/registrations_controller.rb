@@ -81,7 +81,7 @@ class RegistrationsController < ApplicationController
 
     amount = @registration.to_be_paid
 
-    return redirect_to @registration, alert: t('.no_rest_to_be_paid') if amount.zero?
+    return redirect_to @registration, alert: t('.no_rest_to_be_paid') if amount.nil? || amount.zero?
 
     @registration.add_transfer(date, @registration.to_be_paid)
     redirect_to @registration, notice: t('.success')

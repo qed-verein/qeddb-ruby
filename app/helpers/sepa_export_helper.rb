@@ -46,7 +46,7 @@ module SepaExportHelper
       # Falls Leute NUR der Abbuchung der Fördermitgliedschaft zugestimmt haben,
       # dürfen wir sie keine Events damit zahlen lassen.
       .where(sepa_mandates: { allow_all_payments: true })
-      .reject { |registration| registration.to_be_paid <= 0 }
+      .reject { |registration| registration.to_be_paid.nil? or registration.to_be_paid <= 0 }
       .map do |registration|
       {
         person: registration.person,
