@@ -1,8 +1,8 @@
 services:
   mariadb:
-    image: 'mariadb:10'
+    image: "mariadb:10"
     healthcheck:
-      test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       start_period: 5s
       interval: 5s
       timeout: 5s
@@ -10,7 +10,7 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: root
     ports:
-      - '${MARIADB_PORT:-3306}:3306'
+      - "${MARIADB_PORT:-3306}:3306"
 
   qeddb:
     build:

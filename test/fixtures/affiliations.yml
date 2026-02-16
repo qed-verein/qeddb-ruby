@@ -1,61 +1,61 @@
 group_gl_entry_1:
-    group: group_gl
-    groupable: group_sl
-    groupable_type: Group
+  group: group_gl
+  groupable: group_sl
+  groupable_type: Group
 group_gl_entry_2:
-    group: group_gl
-    groupable: group_o
-    groupable_type: Group
+  group: group_gl
+  groupable: group_o
+  groupable_type: Group
 group_sl_entry:
-    group: group_sl
-    groupable: group_so
-    groupable_type: Group
+  group: group_sl
+  groupable: group_so
+  groupable_type: Group
 group_o_entry_1:
-    group: group_o
-    groupable: group_so
-    groupable_type: Group
+  group: group_o
+  groupable: group_so
+  groupable_type: Group
 group_o_entry_2:
-    group: group_o
-    groupable: person1
-    groupable_type: Person
+  group: group_o
+  groupable: person1
+  groupable_type: Person
 group_so_entry_1:
-    group: group_o
-    groupable: testmitglied
-    groupable_type: Person
+  group: group_o
+  groupable: testmitglied
+  groupable_type: Person
 
 group_q_entry_1:
-    group: group_q
-    groupable: group_z
-    groupable_type: Group
+  group: group_q
+  groupable: group_z
+  groupable_type: Group
 group_q_entry_2:
-    group: group_q
-    groupable: person2
-    groupable_type: Person
+  group: group_q
+  groupable: person2
+  groupable_type: Person
 group_q_entry_3:
-    group: group_q
-    groupable: person3
-    groupable_type: Person
+  group: group_q
+  groupable: person3
+  groupable_type: Person
 
 group_admin_entry_1:
-    group: group_admin
-    groupable_type: Person
-    groupable: testadmin
+  group: group_admin
+  groupable_type: Person
+  groupable: testadmin
 group_admin_entry_2:
-    group: group_admin
-    groupable_type: Person
-    groupable: admin
+  group: group_admin
+  groupable_type: Person
+  groupable: admin
 
 group_board_members_entry_1:
-    group: group_board_members
-    groupable_type: Person
-    groupable: testvorstand
+  group: group_board_members
+  groupable_type: Person
+  groupable: testvorstand
 
 group_treasurers_entry_1:
-    group: group_treasurers
-    groupable_type: Person
-    groupable: testkassier
+  group: group_treasurers
+  groupable_type: Person
+  groupable: testkassier
 
 group_auditor_entry_1:
-    group: group_auditor
-    groupable_type: Person
-    groupable: testkassenprüfer
+  group: group_auditor
+  groupable_type: Person
+  groupable: testkassenprüfer

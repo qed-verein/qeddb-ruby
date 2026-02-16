@@ -2,7 +2,7 @@ payment1:
   registration: registration1
   reason: Vortrag gehalten
   money_amount: -25
-  comment: '2 Vorträge'
+  comment: "2 Vorträge"
 
 payment2:
   registration: registration1
@@ -13,4 +13,4 @@ payment3:
   registration: registration2
   reason: Ich mag ihn nicht
   money_amount: 314
-  comment: ''
+  comment: ""

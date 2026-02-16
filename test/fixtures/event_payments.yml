@@ -9,14 +9,14 @@ event_payment1:
   money_amount: -100
   category: Unterkunft
   money_transfer_date: 2024-03-14
-  comment: 'Ziemlich günstig'
+  comment: "Ziemlich günstig"
 
 event_payment2:
   event: event_mathematikerkonferenz
   money_amount: 30
   category: Sponsoring
   money_transfer_date: 2023-03-14
-  comment: 'Von TOS'
+  comment: "Von TOS"
 
 event_payment3:
   event: event_physikerkonferenz

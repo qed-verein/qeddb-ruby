@@ -4,7 +4,7 @@ payment1:
   category: Einkauf
   money_amount: 10
   money_transfer_date: 2024-03-14
-  comment: ''
+  comment: ""
 
 payment2:
   registration: registration1
@@ -19,12 +19,12 @@ payment3:
   category: Kostüm
   money_amount: -3.14
   money_transfer_date: 2024-03-14
-  comment: ''
+  comment: ""
 
-<% 2012.upto(2026) do |i| %>
+# <% 2012.upto(2026) do |i| %>
 payment_akademie<%= i %>_tim:
   registration: registration_akademie<%= i %>_tim
   payment_type: 1
   money_amount: 300
   money_transfer_date: <%= i %>-9-15
-<% end %>
+# <% end %>

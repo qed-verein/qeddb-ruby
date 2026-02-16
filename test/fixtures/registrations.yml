@@ -106,7 +106,7 @@ registration_uqbar4:
   status: 1
   organizer: false
 
-<% 2012.upto(2027) do |i| %>
+# <% 2012.upto(2027) do |i| %>
 registration_akademie<%= i %>_heino:
   event: akademie_<%= i %>
   person: heino
@@ -118,4 +118,4 @@ registration_akademie<%= i %>_tim:
   person: testmitglied
   status: 2
   organizer: false
-<% end %>
+# <% end %>

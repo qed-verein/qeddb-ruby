@@ -6,7 +6,6 @@ de:
   "no": Nein
   error: Fehler
 
-
   activerecord:
     models:
       person:
@@ -136,7 +135,6 @@ de:
         money_transfer_date: Geldeingang
         payment_complete: Vollständig Bezahlt
         payment_complete_short: Bezahlt
-
 
         meal_preference: Essenswünsche
         talks: Vorträge
@@ -313,7 +311,6 @@ de:
         charset: darf nur Buchstaben, Zahlen, Leerzeichen und Bindestrichte enthalten
     registration:
       must_accept_terms_of_service: Die Teilnahmebedingungen müssen akzeptiert werden
-
 
   time:
     formats:

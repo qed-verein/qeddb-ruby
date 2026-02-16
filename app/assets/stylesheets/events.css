@@ -4,36 +4,35 @@
 */
 
 #event_general_information {
-	max-width: 25em;
+  max-width: 25em;
 }
 
 #event_registrations {
-	max-width: 50em;
+  max-width: 50em;
 }
 
-
 #event_registrations ul {
-	list-style-type: none;
-	padding-left: 0em;
-	columns: 3 12em;
+  list-style-type: none;
+  padding-left: 0em;
+  columns: 3 12em;
 }
 
 #events .overview dl {
-	min-height: 10em;
+  min-height: 10em;
 }
 
 #events_table td {
-	max-width: 20em;
-	word-wrap: break-word;
+  max-width: 20em;
+  word-wrap: break-word;
 }
 
 #registrations_table td {
-	max-width: 15em;
-	word-wrap: break-word;
+  max-width: 15em;
+  word-wrap: break-word;
 }
 
 .aligned > .hint {
-	margin-top: -0.5em;
-	grid-column: span 2;
-	text-align: right;
+  margin-top: -0.5em;
+  grid-column: span 2;
+  text-align: right;
 }

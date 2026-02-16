@@ -15,6 +15,7 @@ Die Implementierung erfolgte mit Ruby on Rails Version 6 (<https://rubyonrails.o
 Es wird empfohlen eine separates Ruby Environment für die QEDDB einzurichten (Pakete `rbenv` und `ruby-build`).
 So gibt es keine Versionskonflikte mit dem im System vorinstallieren Ruby-Versionen.
 Das Ruby Environment wird mit folgenden Befehl eingerichtet:
+
 ```
 rbenv install $(cat .ruby-version)
 eval "$(rbenv init -)"
@@ -22,7 +23,7 @@ eval "$(rbenv init -)"
 
 ## Installation
 
-Im GIT-Repository sind lediglich die Quelltextdateien für die QEDDB. Die zugehörigen Abhängigkeiten sind *nicht* im GIT-Repository enthalten. Diese können nach dem Klonen mit
+Im GIT-Repository sind lediglich die Quelltextdateien für die QEDDB. Die zugehörigen Abhängigkeiten sind _nicht_ im GIT-Repository enthalten. Diese können nach dem Klonen mit
 
 ```
 gem install bundle
