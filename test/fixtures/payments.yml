@@ -22,7 +22,7 @@ payment2:
   comment: Kommentar
   transfer_date: 2000-1-1
 
-<% 2005.upto(2028) do |i| %>
+# <% 2005.upto(2028) do |i| %>
 payments_testmitglied_<%= i %>:
   person: testmitglied
   start: <%= i %>-1-1
@@ -30,4 +30,4 @@ payments_testmitglied_<%= i %>:
   transfer_date: <%= i-2 %>-1-1
   amount: 5
   payment_type: 1
-<% end %>
+# <% end %>

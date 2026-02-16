@@ -1,14 +1,16 @@
 #groups .overview {
-	columns: 2 30em;
-	column-gap: 5em;
+  columns: 2 30em;
+  column-gap: 5em;
 }
 
-#group input, #group select, #group .slim-select {
-	margin: 0em;
+#group input,
+#group select,
+#group .slim-select {
+  margin: 0em;
 }
 
 #group_memberlist ul {
-	columns: 4 12em;
-	column-gap: 1em;
-	list-style-type: none;
+  columns: 4 12em;
+  column-gap: 1em;
+  list-style-type: none;
 }

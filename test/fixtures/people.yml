@@ -50,7 +50,8 @@ testkassenprüfer:
   first_name: Nessie
   last_name: Urkarpfen
   email_address: testkassenpruefer@example.com
-  comment: 'Kassenprüfer:inaccount zum Testen'
+  comment: "Kassenprüfer:inaccount zum Testen"
+  <<: *DEFAULTS
 
 testvorstand:
   <<: *DEFAULTS
@@ -123,7 +124,7 @@ person3:
   <<: *DEFAULTS
   account_name: pierredefermat
   first_name: Pierre
-  last_name:  de Fermat
+  last_name: de Fermat
   email_address: pierre@example.com
   birthday: 1607-12-31
   gender: 1
