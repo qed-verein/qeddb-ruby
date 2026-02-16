@@ -123,6 +123,12 @@ Stattdessen lässt sich das auch mit docker machen. Es existiert ein `docker-com
 Der Diener bindet sich standardmäßig an Hafen 3000; die Datenbank an Hafen 3306.
 Die Häfen können über die Umgebungsvariablen `RAILS_HTTP_PORT` und `MARIADB_PORT` überschrieben werden.
 
+## Linting/Formatting
+
+Wir linten und formatten den rubycode mit rubocop. Das lässt sich mit `docker compose exec qeddb bundler exec rubocop` überprüfen (sofern der docker container läufter). Mit der flag `-a` lassen sich auch Probleme automatisch korrigieren.
+
+Wir formattieren javascript, html, yaml und json mit prettier. Das lässt sich mit `yarn run prettier -c .` überprüfen. Mit `yarn run prettier -w .` werden die Formattierungen automatisch korrigiert.
+
 ## Verzeichnisstruktur
 
 - `app` - Hier befindet sich der eigentliche Programmcode.
