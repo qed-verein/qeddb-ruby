@@ -1,7 +1,7 @@
 AllCops:
   Exclude:
-    - 'db/**/*'
-    - 'vendor/**/*'
+    - "db/**/*"
+    - "vendor/**/*"
   NewCops: enable
 Metrics/AbcSize:
   Enabled: false
