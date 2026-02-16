@@ -8,6 +8,7 @@ capybara-*.html
 *.orig
 rerun.txt
 pickle-email-*.html
+.ruby-lsp
 
 # Ignore all logfiles and tempfiles.
 /log/*
