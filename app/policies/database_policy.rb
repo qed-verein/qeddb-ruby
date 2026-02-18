@@ -1,4 +1,4 @@
-DatabasePolicy = Struct.new(:user, :database) do
+class DatabasePolicy < ApplicationPolicy
   include PunditImplications
   include PolicyHelper
 
