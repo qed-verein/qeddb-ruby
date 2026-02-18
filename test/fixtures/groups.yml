@@ -1,95 +1,95 @@
 group_admin:
-    title: "Admin"
-    description: "Diese Gruppe enthält alle Administratoren"
-    kind: admins
+  title: "Admin"
+  description: "Diese Gruppe enthält alle Administratoren"
+  kind: admins
 
 group_board_members:
-    title: "Vorstand"
-    description: "Diese Gruppe enthält alle Vorstände"
-    kind: board_members
+  title: "Vorstand"
+  description: "Diese Gruppe enthält alle Vorstände"
+  kind: board_members
 
 group_treasurers:
-    title: "Kassier"
-    description: "Diese Gruppe enthält alle Kassenwärte"
-    kind: treasurers
+  title: "Kassier"
+  description: "Diese Gruppe enthält alle Kassenwärte"
+  kind: treasurers
 
 group_member:
-    title: "Mitglieder"
-    description: "Diese Gruppe enthält alle Mitglieder"
-    kind: members
+  title: "Mitglieder"
+  description: "Diese Gruppe enthält alle Mitglieder"
+  kind: members
 
 group_auditor:
-    title: "Kassenprüfer:in"
-    description: "Diese Gruppe enthält alle Kassenprüfer:innen"
-    kind: auditors
-    
+  title: "Kassenprüfer:in"
+  description: "Diese Gruppe enthält alle Kassenprüfer:innen"
+  kind: auditors
+
 group_newsletter_subscribers:
-    title: "Newsletter"
-    description: "Diese Gruppe enthält alle Abonnent:innen des Newsletters"
-    kind: newsletter_subscribers
+  title: "Newsletter"
+  description: "Diese Gruppe enthält alle Abonnent:innen des Newsletters"
+  kind: newsletter_subscribers
 
 group_gl:
-    title: Allgemeine lineare Gruppe
-    description: "Diese Gruppe enthält alle invertierbaren Matrizen"
-    kind: admins
+  title: Allgemeine lineare Gruppe
+  description: "Diese Gruppe enthält alle invertierbaren Matrizen"
+  kind: admins
 
 group_sl:
-    title: Spezielle lineare Gruppe
-    description: "Diese Gruppe enthält alle invertierbaren Matrizen mit Determinate 1"
-    kind: manual
+  title: Spezielle lineare Gruppe
+  description: "Diese Gruppe enthält alle invertierbaren Matrizen mit Determinate 1"
+  kind: manual
 
 group_o:
-    title: Orthogonale Gruppe
-    description: "Diese Gruppe enthält alle orthogonalen Matrizen"
-    kind: manual
+  title: Orthogonale Gruppe
+  description: "Diese Gruppe enthält alle orthogonalen Matrizen"
+  kind: manual
 
 group_so:
-    title: Spezielle orthogonale Gruppe
-    description: "Diese Gruppe enthält alle orthogonalen Matrizen mit Determinate 1"
-    kind: manual
+  title: Spezielle orthogonale Gruppe
+  description: "Diese Gruppe enthält alle orthogonalen Matrizen mit Determinate 1"
+  kind: manual
 
 group_q:
-    title: Rationale Zahlen
-    description: Additive Gruppe der rationalen Zahlen
-    kind: manual
+  title: Rationale Zahlen
+  description: Additive Gruppe der rationalen Zahlen
+  kind: manual
 
 group_z:
-    title: Ganze Zahlen
-    description: Additive Gruppe der ganzen Zahlen
-    kind: manual
+  title: Ganze Zahlen
+  description: Additive Gruppe der ganzen Zahlen
+  kind: manual
 
 group_mathematikerkonferenz_orgas:
-    title: Orgas der Mathematikerkonferenz
-    event: event_mathematikerkonferenz
-    description: Alle Orgas der Mathematikerkonferenz
-    kind: organizers
+  title: Orgas der Mathematikerkonferenz
+  event: event_mathematikerkonferenz
+  description: Alle Orgas der Mathematikerkonferenz
+  kind: organizers
 
 group_mathematikerkonferenz_teilnehmer:
-    title: Teilnehmer der Mathematikerkonferenz
-    event: event_mathematikerkonferenz
-    description: Alle Teilnehmer der Mathematikerkonferenz
-    kind: participants
+  title: Teilnehmer der Mathematikerkonferenz
+  event: event_mathematikerkonferenz
+  description: Alle Teilnehmer der Mathematikerkonferenz
+  kind: participants
 
 group_physikerkonferenz_orgas:
-    title: Orgas der Physikerkonferenz
-    event: event_physikerkonferenz
-    description: Alle Orgas der Physikerkonferenz
-    kind: organizers
+  title: Orgas der Physikerkonferenz
+  event: event_physikerkonferenz
+  description: Alle Orgas der Physikerkonferenz
+  kind: organizers
 
 group_physikerkonferenz_teilnehmer:
-    title: Teilnehmer der Physikerkonferenz
-    event: event_physikerkonferenz
-    description: Alle Teilnehmer der Physikerkonferenz
-    kind: participants
+  title: Teilnehmer der Physikerkonferenz
+  event: event_physikerkonferenz
+  description: Alle Teilnehmer der Physikerkonferenz
+  kind: participants
 
 group_historikerkonferenz_orgas:
-    title: Orgas der Historikerkonferenz
-    event: event_historikerkonferenz
-    description: Alle Orgas der Historikerkonferenz
-    kind: organizers
+  title: Orgas der Historikerkonferenz
+  event: event_historikerkonferenz
+  description: Alle Orgas der Historikerkonferenz
+  kind: organizers
 
 group_historikerkonferenz_teilnehmer:
-    title: Teilnehmer der Historikerkonferenz
-    event: event_historikerkonferenz
-    description: Alle Teilnehmer der Historikerkonferenz
-    kind: participants
+  title: Teilnehmer der Historikerkonferenz
+  event: event_historikerkonferenz
+  description: Alle Teilnehmer der Historikerkonferenz
+  kind: participants

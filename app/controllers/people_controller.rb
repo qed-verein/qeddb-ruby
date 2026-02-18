@@ -25,17 +25,29 @@ class PeopleController < ApplicationController
     @person_policy = policy(@person)
   end
 
+  def addresses; end
+
   def edit; end
 
   def edit_addresses; end
 
-  def edit_privacy; end
+  def edit_groups; end
 
   def edit_payments; end
 
-  def edit_groups; end
+  def edit_privacy; end
 
   def edit_sepa_mandate; end
+
+  def groups; end
+
+  def payments; end
+
+  def privacy; end
+
+  def registrations; end
+
+  def sepa_mandate; end
 
   def create
     @person = Person.new(permitted_attributes(Person))
@@ -82,13 +94,13 @@ class PeopleController < ApplicationController
     @person = policy_scope(Person).find(params[:id])
     @person_policy = policy(@person)
     breadcrumb @person.full_name, @person
-    unless action_name == 'show'
-      breadcrumb t("actions.person.#{action_name}"), { action: action_name }
-    end
+    return if action_name == 'show'
+
+    breadcrumb t("actions.person.#{action_name}"), { action: action_name }
   end
 
   def set_all_people
-    sort_field = ["first_name", "last_name"].include?(params[:sort]) ? params[:sort] : 'last_name'
+    sort_field = %w[first_name last_name].include?(params[:sort]) ? params[:sort] : 'last_name'
     @people = policy_scope(Person).includes(:addresses, :contacts).reorder(sort_field)
     @person_policy = policy(Person)
     @current_sort = sort_field.to_s

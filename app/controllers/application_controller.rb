@@ -38,12 +38,11 @@ class ApplicationController < ActionController::Base
   def record_not_found_handler
     respond_to do |type|
       type.html do
-        flash[:alert] = 'Record not found.'
+        flash[:alert] = t('application.record_not_found')
         redirect_to root_path
       end
       type.all { render nothing: true, status: :forbidden }
     end
-    true
   end
 
   def user_for_paper_trail

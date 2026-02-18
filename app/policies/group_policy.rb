@@ -6,7 +6,7 @@ class GroupPolicy < ApplicationPolicy
                         viewable: %i[show index],
                         editable: %i[viewable edit],
                         creatable: %i[new],
-                        destroyable: %i[destroy],
+                        destroyable: %i[destroy]
                       })
   alias update? edit?
   alias create? new?

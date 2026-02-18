@@ -54,7 +54,8 @@ class PersonPolicy < ApplicationPolicy
 
   define_implications({
                         view_public: [:view_additional],
-                        view_private: %i[view_unpublished view_public view_addresses view_contacts view_settings export],
+                        view_private: %i[view_unpublished view_public view_addresses view_contacts view_settings
+                                         export],
 
                         list_active: [:list_members],
                         list_all_people: [:list_active],
@@ -71,7 +72,7 @@ class PersonPolicy < ApplicationPolicy
                         by_organizer: %i[by_member view_private list_active],
                         by_self: %i[by_member view_payments edit_private edit_password],
                         by_board_member: %i[by_member edit_private edit_other delete_person
-                                        list_all_people],
+                                            list_all_people],
                         by_treasurer: %i[by_board_member edit_payments],
                         by_auditor: %i[by_member view_payments],
                         by_admin: [:by_board_member]

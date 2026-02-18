@@ -15,6 +15,7 @@ Die Implementierung erfolgte mit Ruby on Rails Version 6 (<https://rubyonrails.o
 Es wird empfohlen eine separates Ruby Environment für die QEDDB einzurichten (Pakete `rbenv` und `ruby-build`).
 So gibt es keine Versionskonflikte mit dem im System vorinstallieren Ruby-Versionen.
 Das Ruby Environment wird mit folgenden Befehl eingerichtet:
+
 ```
 rbenv install $(cat .ruby-version)
 eval "$(rbenv init -)"
@@ -22,7 +23,7 @@ eval "$(rbenv init -)"
 
 ## Installation
 
-Im GIT-Repository sind lediglich die Quelltextdateien für die QEDDB. Die zugehörigen Abhängigkeiten sind *nicht* im GIT-Repository enthalten. Diese können nach dem Klonen mit
+Im GIT-Repository sind lediglich die Quelltextdateien für die QEDDB. Die zugehörigen Abhängigkeiten sind _nicht_ im GIT-Repository enthalten. Diese können nach dem Klonen mit
 
 ```
 gem install bundle
@@ -121,6 +122,12 @@ Stattdessen lässt sich das auch mit docker machen. Es existiert ein `docker-com
 
 Der Diener bindet sich standardmäßig an Hafen 3000; die Datenbank an Hafen 3306.
 Die Häfen können über die Umgebungsvariablen `RAILS_HTTP_PORT` und `MARIADB_PORT` überschrieben werden.
+
+## Linting/Formatting
+
+Wir linten und formatten den rubycode mit rubocop. Das lässt sich mit `docker compose exec qeddb bundler exec rubocop` überprüfen (sofern der docker container läufter). Mit der flag `-a` lassen sich auch Probleme automatisch korrigieren.
+
+Wir formattieren javascript, html, yaml und json mit prettier. Das lässt sich mit `yarn run prettier -c .` überprüfen. Mit `yarn run prettier -w .` werden die Formattierungen automatisch korrigiert.
 
 ## Verzeichnisstruktur
 

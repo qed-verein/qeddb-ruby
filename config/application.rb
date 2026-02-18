@@ -30,10 +30,10 @@ module QeddbRuby
     config.max_deferred_payment = 2.years
     config.membership_fee	= 5
     config.external_surcharge	= 15
-    config.qed_name             = ENV['QED_NAME'] || "Quod Erat Demonstrandum e.V."
-    config.qed_address          = ENV['QED_ADDRESS']
+    config.qed_name             = ENV['QED_NAME'] || 'Quod Erat Demonstrandum e.V.'
+    config.qed_address          = ENV.fetch('QED_ADDRESS', nil)
     config.qed_homepage         = ENV['QED_HOMEPAGE'] || 'qed-verein.de'
-    config.qed_vorstand         = ENV['QED_VORSTAND']
+    config.qed_vorstand         = ENV.fetch('QED_VORSTAND', nil)
     config.admin_email_address  = ENV['QEDDB_ADMIN_EMAIL']       || 'admin@example.com'
     config.system_email_address = ENV['QEDDB_SYSTEM_EMAIL']      || 'qeddb@example.com'
     config.database_title       = ENV['QEDDB_TITLE']             || 'QED-Datenbank'

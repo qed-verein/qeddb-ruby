@@ -3,498 +3,552 @@
  */
 
 html {
-	font-size: 11pt;
+  font-size: 11pt;
 }
 
 body {
-	font-family: Cantarell, sans-serif;
-	margin: 0.0em;
-	line-height: 150%;
+  font-family: Cantarell, sans-serif;
+  margin: 0em;
+  line-height: 150%;
 }
 
 body > article {
-	margin-left: 1rem;
-	margin-right: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 header {
-	transition: 1.0s;
+  transition: 1s;
 }
 
 header nav {
-	font-size: 1.2rem;
-	text-align: left;
-	align-items: stretch;
+  font-size: 1.2rem;
+  text-align: left;
+  align-items: stretch;
 
-	display: flex;
-	flex-flow: row wrap;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 header nav a {
-	padding: 0.7em;
-	font-weight: bold;
-	word-wrap: none;
+  padding: 0.7em;
+  font-weight: bold;
+  word-wrap: none;
 
-	display: inline-flex;
-	align-items: center;
+  display: inline-flex;
+  align-items: center;
 }
 
 summary {
-	font-size: 1.2rem;
-	outline: none;
-	transition: color 0.2s;
-	margin: 1em;
+  font-size: 1.2rem;
+  outline: none;
+  transition: color 0.2s;
+  margin: 1em;
 }
 
 summary:hover {
-	color: #ffe;
-	cursor: pointer;
+  color: #ffe;
+  cursor: pointer;
 }
 
 /* Hyperlinks */
 a {
-	text-decoration: none;
-	transition: color 0.5s, background-color 0.5s;
+  text-decoration: none;
+  transition:
+    color 0.5s,
+    background-color 0.5s;
 }
 
 /* Tabellen */
 table {
-	border-collapse: collapse;
-	margin: 1em auto;
-	line-height: 120%;
+  border-collapse: collapse;
+  margin: 1em auto;
+  line-height: 120%;
 }
 
-th, td {
-	padding: 0.3em;
-	text-align: left;
-	overflow-wrap: break-word;
+th,
+td {
+  padding: 0.3em;
+  text-align: left;
+  overflow-wrap: break-word;
 }
 
 /* Formularelemente */
 
 fieldset {
-/*
+  /*
     border: 1px solid #ba7;
 */
-    border: none;
-    margin: 1em 0em;
-    padding: 1em;
+  border: none;
+  margin: 1em 0em;
+  padding: 1em;
 }
 
-fieldset, header nav, .panel {
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+fieldset,
+header nav,
+.panel {
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12),
+    0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 fieldset fieldset {
-	border: none;
-	margin: 0.5em 0em;
-	padding: 0em;
-	box-shadow: none;
+  border: none;
+  margin: 0.5em 0em;
+  padding: 0em;
+  box-shadow: none;
 }
 
 fieldset fieldset fieldset {
-	padding: 0.5em 0.0em;
+  padding: 0.5em 0em;
 }
 
 fieldset fieldset fieldset:not(:last-of-type) {
-	border-bottom: 1px dashed #c66;
+  border-bottom: 1px dashed #c66;
 }
 
-
 legend {
-	text-align: center;
-	font-weight: bold;
-	font-variant: small-caps;
-	font-size: larger;
+  text-align: center;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: larger;
 }
 
 fieldset fieldset legend {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 label {
-	display: inline-block;
-	font-weight: bold;
-	cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-fieldset > label
-{
-	padding-top: 0.2em;
-	padding-bottom: 0.2em;
-	display: block;
-	transition: background-color 0.3s;
+fieldset > label {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  display: block;
+  transition: background-color 0.3s;
 }
 
 label > i {
-	margin-left: 0.5em;
-	margin-bottom: 0.5em;
-	line-height: 90%;
-	display: block;
-	font-weight: normal;
-	font-size: smaller;
-	font-style: italic;
+  margin-left: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 90%;
+  display: block;
+  font-weight: normal;
+  font-size: smaller;
+  font-style: italic;
 }
 
-button, input[type="submit"], input[type="button"], .button {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.5rem;
+button,
+input[type="submit"],
+input[type="button"],
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 
-	font-weight: normal;
-	font-size: 0.8rem;
-	text-transform: uppercase;
-	padding: 0.6em 1em;
-	cursor: pointer;
-	border-radius: 2px;
-	letter-spacing: .5px;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
-	border: none;
-	margin: 1em;
-	line-height: 22px;
-	user-select: none;
-	font-family: Cantarell, sans-serif;
+  font-weight: normal;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  padding: 0.6em 1em;
+  cursor: pointer;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+  box-shadow:
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12),
+    0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  border: none;
+  margin: 1em;
+  line-height: 22px;
+  user-select: none;
+  font-family: Cantarell, sans-serif;
 }
 
 .button i {
-	float: left;
+  float: left;
 }
 
-button, input, select, .slim-select, textarea {
-	border: 1px solid #d96;
-	padding: 0.2em;
-	margin: 0.5em;
-	vertical-align: top;
+button,
+input,
+select,
+.slim-select,
+textarea {
+  border: 1px solid #d96;
+  padding: 0.2em;
+  margin: 0.5em;
+  vertical-align: top;
 
-/*
+  /*
 	appearance: none;
 */
-	transition: background-color 0.3s, border-color 0.3s;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 }
 
-.aligned input[type="number"] {width: 4em;}
-
-.aligned input, .aligned select, .aligned .slim-select {
-	justify-self: start;
-	align-self: center;
+.aligned input[type="number"] {
+  width: 4em;
 }
 
-
-button, input[type="submit"], input[type="button"], .button {
-	transition: background-color 0.3s, border-color 0.3s;
+.aligned input,
+.aligned select,
+.aligned .slim-select {
+  justify-self: start;
+  align-self: center;
 }
 
-button:hover, input[type="submit"]:hover, input[type="button"]:hover, .button:hover {
-	border: none;
+button,
+input[type="submit"],
+input[type="button"],
+.button {
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 }
 
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.button:hover {
+  border: none;
+}
 
-
-textarea {display: block; width: 90%}
-
+textarea {
+  display: block;
+  width: 90%;
+}
 
 .actions {
-	margin: 0px;
-	padding: 0px;
-	display: block;
-	text-align: center;
+  margin: 0px;
+  padding: 0px;
+  display: block;
+  text-align: center;
 }
 
-
-
 /* Listen */
-ul, ol {
-	padding-left: 2em;
+ul,
+ol {
+  padding-left: 2em;
 }
 
 dt {
-	font-weight: bold;
-	font-variant: small-caps;
-	font-size: 110%;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-size: 110%;
 }
 
 dd {
-	margin-left: 2em;
+  margin-left: 2em;
 }
-
 
 /* Ausrichtung für Definitionlisten und Formularelemente */
 @media (min-width: 40em) {
+  .aligned {
+    display: grid;
+    margin: 0em;
+    padding: 0em 1em;
+    grid-template-columns: minmax(auto, 10em) minmax(10em, 1fr);
+    gap: 0.5em 1.5em;
+  }
 
-.aligned {
-	display: grid;
-	margin: 0em;
-	padding: 0em 1em;
-	grid-template-columns: minmax(auto, 10em) minmax(10em, 1fr);
-	gap: 0.5em 1.5em;
+  .aligned > dt,
+  .aligned > label {
+    text-align: right;
+    grid-column: 1;
+    justify-self: end;
+    word-wrap: break-word;
+  }
+
+  .aligned > label::after {
+    content: ":";
+  }
+
+  .aligned > dd,
+  .aligned > input,
+  .aligned > select,
+  .aligned > .slim-select {
+    text-align: left;
+    margin: 0em;
+    grid-column: 2;
+  }
+
+  .aligned > textarea {
+    grid-column: span 2;
+  }
 }
-
-.aligned > dt, .aligned > label {
-	text-align: right;
-	grid-column: 1;
-	justify-self: end;
-	word-wrap: break-word;
-}
-
-
-.aligned > label::after {
-	content: ":"
-}
-
-.aligned > dd, .aligned > input, .aligned > select, .aligned > .slim-select {
-	text-align: left;
-	margin: 0em;
-	grid-column: 2;
-}
-
-.aligned > textarea {
-	grid-column: span 2;
-}
-}
-
-
 
 /* Überschriften */
-h1, h2, h3, legend {
-	font-variant: small-caps;
-	text-align: center;
+h1,
+h2,
+h3,
+legend {
+  font-variant: small-caps;
+  text-align: center;
 }
 
 /* Abschnitte */
 aside {
-	background-color: #ec9;
-	margin: 1em;
-	padding: 1em;
-	min-width: 30em;
-	width: 30%;
-	float: right;
+  background-color: #ec9;
+  margin: 1em;
+  padding: 1em;
+  min-width: 30em;
+  width: 30%;
+  float: right;
 }
 
-aside h1, aside h2, aside h3 {
-	margin-top: 0em;
+aside h1,
+aside h2,
+aside h3 {
+  margin-top: 0em;
 }
 
 header {
-	margin: 0 0 1rem;
+  margin: 0 0 1rem;
 }
 
 footer {
-	clear: both;
-	text-align: right;
-	font-size: small;
-	margin: 0.5rem 1rem;
+  clear: both;
+  text-align: right;
+  font-size: small;
+  margin: 0.5rem 1rem;
 }
-
 
 /* Fehlermeldungen */
 
-.alert, .error {
-	color: #EC8;
-	background-color: #C33;
-	padding: 1em;
-	margin: 0em 1em;}
+.alert,
+.error {
+  color: #ec8;
+  background-color: #c33;
+  padding: 1em;
+  margin: 0em 1em;
+}
 
 .validation_error ul {
-	margin: 0px;
-	font-style: italic;
-	font-size: smaller;
+  margin: 0px;
+  font-style: italic;
+  font-size: smaller;
 }
 
 .notice {
-	color: white;
-	background-color: #484;
-	border: 2px solid #080;
-	padding: 1em;
-	margin: 0em 1em;}
+  color: white;
+  background-color: #484;
+  border: 2px solid #080;
+  padding: 1em;
+  margin: 0em 1em;
+}
 
 .message {
-	padding: 1em;
-	font-weight: bold;
-	text-align: center;
-	padding: 1em;
-	margin: 1em auto;
-	max-width: 30em;
+  padding: 1em;
+  font-weight: bold;
+  text-align: center;
+  padding: 1em;
+  margin: 1em auto;
+  max-width: 30em;
 }
 
 .field_with_errors {
-	background-color: #C33;
+  background-color: #c33;
 }
 
 /* Sonstiges */
 hr {
-	border-top-width: 0px;
-	border-bottom: 1px dashed #c66;
+  border-top-width: 0px;
+  border-bottom: 1px dashed #c66;
 }
 
 .outstanding {
-	background-color: var(--bg-color-2);
-	font-weight: bold;
-	border: 2px solid;
-	padding: 1em;
-	margin: 1em auto;
-	max-width: 30em;
+  background-color: var(--bg-color-2);
+  font-weight: bold;
+  border: 2px solid;
+  padding: 1em;
+  margin: 1em auto;
+  max-width: 30em;
 }
 
 /* Überblick */
 .overview {
-	font-size: 120%;
-	line-height: 170%;
-	columns: auto 15em;
-	column-gap: 3em;
-	margin: 2em 0;
+  font-size: 120%;
+  line-height: 170%;
+  columns: auto 15em;
+  column-gap: 3em;
+  margin: 2em 0;
 }
 
-.overview dl, .overview ul {
-	margin: 0;
-	padding: 0;
+.overview dl,
+.overview ul {
+  margin: 0;
+  padding: 0;
 }
 
 .overview dl > div {
-	break-inside: avoid-column;
-	margin-bottom: 2rem;
+  break-inside: avoid-column;
+  margin-bottom: 2rem;
 }
 
-.overview dd, .overview li {
-	font-size: 90%;
-	font-style: italic;
-	color: #300;
-	list-style-type: none;
-	margin-left: 0;
-	padding-left: 0;
+.overview dd,
+.overview li {
+  font-size: 90%;
+  font-style: italic;
+  color: #300;
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 /* Flexlayout */
 .flexlayout {
-	display: flex;
-	flex-flow: row wrap;
-	align-items: flex-start;
-	justify-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: center;
 }
 
-.flexlayout h2, .flexlayout p {
-	width: 100%;
+.flexlayout h2,
+.flexlayout p {
+  width: 100%;
 }
 
-.flexlayout > section, .flexlayout > fieldset {
-	margin: 0 2em;
-	border: none;
+.flexlayout > section,
+.flexlayout > fieldset {
+  margin: 0 2em;
+  border: none;
 }
 
 .mobilemenu {
-	display: none;
+  display: none;
 }
 
 @media (max-width: 40em) {
-	.mobilemenu {
-		position: fixed;
-		width: auto;
-		height: auto;
-		top: 0px;
-		left: 0px;
-		margin: 0px;
-		display: inline-block;
-	}
+  .mobilemenu {
+    position: fixed;
+    width: auto;
+    height: auto;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    display: inline-block;
+  }
 
-	header {
-		position: fixed;
-		top: 0em;
-		left: 5em;
-		right: 0px;
-		visibility: hidden;
-		opacity: 0%;
-		margin: 0em;
-		z-index: 1;
-	}
+  header {
+    position: fixed;
+    top: 0em;
+    left: 5em;
+    right: 0px;
+    visibility: hidden;
+    opacity: 0%;
+    margin: 0em;
+    z-index: 1;
+  }
 
-	header nav {
-		background-color: #ffe;
-		display: block;
-	}
+  header nav {
+    background-color: #ffe;
+    display: block;
+  }
 
-	header nav a {
-		display: block;
-	}
+  header nav a {
+    display: block;
+  }
 }
-
 
 /* Für die mobile Version */
 @media (max-width: 40em) {
-	.breadcrumb {display: none}
-	.flexlayout {display: block}
-	.flexlayout h3 {margin-top: 0px}
-	.aligned label {display: block}
-	.aligned input[type=text] {display: block}
-	.flexlayout section, .flexlayout fieldset {margin: 0em}
+  .breadcrumb {
+    display: none;
+  }
+  .flexlayout {
+    display: block;
+  }
+  .flexlayout h3 {
+    margin-top: 0px;
+  }
+  .aligned label {
+    display: block;
+  }
+  .aligned input[type="text"] {
+    display: block;
+  }
+  .flexlayout section,
+  .flexlayout fieldset {
+    margin: 0em;
+  }
 }
 
 .breadcrumb {
-	font-weight: bold;
-	font-variant: small-caps;
-	margin: 0.5rem 1rem;
+  font-weight: bold;
+  font-variant: small-caps;
+  margin: 0.5rem 1rem;
 }
 
 .breadcrumb ol {
-	list-style-type: none;
-	padding-left: 0;
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .breadcrumb ol li {
-	display: inline;
+  display: inline;
 }
 
 .breadcrumb ol li + li::before {
-	content: ' » ' / '';
+  content: " » " / "";
 }
 
 .tabs {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;}
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
 
 .tabs a {
-	word-wrap: none;
-	margin: 0px;
-	padding: 0.5em;
-	display: block;
-	background-color: #ea8;
+  word-wrap: none;
+  margin: 0px;
+  padding: 0.5em;
+  display: block;
+  background-color: #ea8;
 }
 
 .panel {
-	padding: 1.0em;
+  padding: 1em;
 }
 
 .inline-details {
-	display: inline-block;
+  display: inline-block;
 }
 
 .inline-details > summary {
-	margin: inherit;
-	font: inherit;
+  margin: inherit;
+  font: inherit;
 }
 
 /* Für Tabellen sortieren und nummerieren */
 
 table.indexed_table {
-	counter-reset: row-num;
+  counter-reset: row-num;
 }
 table.indexed_table tbody tr {
-	counter-increment: row-num;
+  counter-increment: row-num;
 }
 table.indexed_table tr td:first-child::before {
-	content: counter(row-num) ". ";
+  content: counter(row-num) ". ";
 }
 
 th[data-sort]:hover {
-	cursor: pointer;
-	background-color: var(--bg-color-3);
-	color: var(--text-color-3);
+  cursor: pointer;
+  background-color: var(--bg-color-3);
+  color: var(--text-color-3);
 }
 
-th[data-sort].sorting-asc, th[data-sort].sorting-desc {
-	background-color: var(--bg-color-1);
+th[data-sort].sorting-asc,
+th[data-sort].sorting-desc {
+  background-color: var(--bg-color-1);
 }
 
 th[data-sort].sorting-asc::after {
-	content: " ↓"}
+  content: " ↓";
+}
 th[data-sort].sorting-desc::after {
-	content: " ↑"}
+  content: " ↑";
+}

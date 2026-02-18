@@ -13,7 +13,7 @@
 
           <%= form.label :reason %>
           <%= form.select :reason,
-                      payment_reasons,
+                      payment_reasons(@events),
                       selected: @filter[:reason],
                       include_blank: t(".reasons.blank") %>
 
