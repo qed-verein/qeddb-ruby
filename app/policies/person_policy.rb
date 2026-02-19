@@ -19,6 +19,8 @@
 #     Bearbeiten anderer Nutzer durch Vorstandsmitglieder (inklusive persönlicher Daten, aber nicht Zahlungen)
 # delete_person:
 #     Person löschen
+# archive_person:
+#     Person datenschutzkonform löschen
 # list_member:
 #     Anzeige aller aktuellen Vereinsmitglieder
 # list_active:
@@ -71,7 +73,7 @@ class PersonPolicy < ApplicationPolicy
                         by_organizer: %i[by_member view_private list_active],
                         by_self: %i[by_member view_payments edit_private edit_password],
                         by_board_member: %i[by_member edit_private edit_other delete_person
-                                        list_all_people],
+                                            archive_person list_all_people],
                         by_treasurer: %i[by_board_member edit_payments],
                         by_auditor: %i[by_member view_payments],
                         by_admin: [:by_board_member]
@@ -120,7 +122,7 @@ class PersonPolicy < ApplicationPolicy
                     :newsletter, :publish_birthday, :publish_email, :publish_address, :publish
     end
     if edit_personal?
-      editable.push :account_name, :first_name, :last_name, :birthday, :gender, :joined, :quitted, :active
+      editable.push :account_name, :first_name, :last_name, :birthday, :gender, :joined, :quitted, :active, :archived
     end
     if edit_payments?
       editable.push({ payments_attributes: %i[id payment_type start end transfer_date amount comment _destroy] })

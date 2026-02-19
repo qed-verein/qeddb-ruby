@@ -63,6 +63,8 @@ de:
       success: Person wurde erfolgreich gelöscht
     destroy_sepa_mandate:
       success: SEPA-Mandat erfolgreich gelöscht
+    archive:
+      success: Person wurde erfolgreich datenschutzkonform gelöscht
     edit:
       submit: Personendaten speichern
     edit_addresses:
@@ -135,6 +137,7 @@ de:
     person:
       new: Neue Person eintragen
       delete: Person löschen
+      archive: Person datenschutzkonform löschen
       show: Allgemeines
       edit: Person bearbeiten
       edit_general: Mitgliedsdaten bearbeiten
