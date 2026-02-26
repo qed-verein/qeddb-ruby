@@ -1,6 +1,8 @@
 <%= form_with(model: @mailinglist, local: true) do |form| %>
 <%= render partial: "shared/errors", locals: {object: @mailinglist} %>
-<% 5.times {@mailinglist.subscriptions.build} %>
+<% 5.times {@mailinglist.member_subscriptions.build} %>
+<% 5.times {@mailinglist.email_subscriptions.build} %>
+
 
 <fieldset>
 <fieldset>
@@ -44,17 +46,41 @@
 </fieldset>
 <hr>
 <fieldset>
-<legend>Manuelle Änderungen</legend>
-<p>Füge weitere Emailadressen hinzu zu diesem Emailverteiler hinzu.</p>
+<legend>Zusätzliche Benutzer:innen</legend>
+<p>Weitere Benutzer:innen zu diesem Verteiler hinzufügen.</p>
+<table>
+<thead>
+	<tr>
+	<% [:person, :as_sender, :as_receiver, :as_moderator].each do |attr| %>
+		<th><%= MemberSubscription.human_attribute_name attr %></th>
+	<% end %>
+	</tr>
+</thead>
+<%= form.fields_for :member_subscriptions do |member| %>
+	<tr>
+		<td><%= member.collection_select(:person_id, Person.all.sort_by(&:full_name),
+				:id, :full_name,
+				{include_blank: "---"}, {:style => "max-width: 15em"}) %></td>
+		<td><%= member.check_box :as_sender %></td>
+		<td><%= member.check_box :as_receiver %></td>
+		<td><%= member.check_box :as_moderator %></td>
+	</tr>
+<% end %>
+</table>
+</fieldset>
+<hr>
+<fieldset>
+<legend>Zusätzliche E-Mail-Adressen</legend>
+<p>Weitere E-Mail-Adressen (ohne QEDDB-Account) zu diesem Verteiler hinzufügen.</p>
 <table>
 <thead>
 	<tr>
 	<% [:email_address, :first_name, :last_name, :as_sender, :as_receiver, :as_moderator].each do |attr| %>
-		<th><%= Subscription.human_attribute_name attr %></th>
+		<th><%= EmailSubscription.human_attribute_name attr %></th>
 	<% end %>
 	</tr>
 </thead>
-<%= form.fields_for :subscriptions do |sub| %>
+<%= form.fields_for :email_subscriptions do |sub| %>
 	<tr>
 		<td><%= sub.email_field :email_address %></td>
 		<td><%= sub.text_field :first_name %></td>
