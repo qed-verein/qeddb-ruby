@@ -6,4 +6,31 @@ mailinglist_mathematikerkonferenz_teilnehmer:
   title: mathematikerkonferenz-teilnehmer
   sender_group: group_mathematikerkonferenz_orgas
   receiver_group: group_mathematikerkonferenz_teilnehmer
-  
+
+<% 2012.upto(2027) do |i| %>
+mailinglist_akademie_<%= i %>_orgas:
+  title: aka-<%= i %>
+  receiver_group: group_akademie_<%= i %>_orgas
+  can_unsubscribe: false
+
+mailinglist_akademie_<%= i %>_teilnehmer:
+  title: aka-<%= i %>-teilnehmer
+  moderator_group: group_akademie_<%= i %>_orgas
+  receiver_group: group_akademie_<%= i %>_teilnehmer
+  sender_group: group_akademie_<%= i %>_teilnehmer
+  can_unsubscribe: false
+<% end %>
+
+<% 2019.upto(2027) do |i| %>
+mailinglist_fruehaka_<%= i %>_orgas:
+  title: fruehaka-<%= i %>-orgas
+  receiver_group: group_fruehaka_<%= i %>_orgas
+  can_unsubscribe: false
+
+mailinglist_fruehaka_<%= i %>_teilnehmer:
+  title: fruehaka-<%= i %>-teilnehmer
+  moderator_group: group_fruehaka_<%= i %>_orgas
+  receiver_group: group_fruehaka_<%= i %>_teilnehmer
+  sender_group: group_fruehaka_<%= i %>_teilnehmer
+  can_unsubscribe: false
+<% end %>
