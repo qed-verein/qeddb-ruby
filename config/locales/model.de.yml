@@ -107,6 +107,7 @@ de:
         organizer_email_address: Email an Orgas
         participant_email_address: Email an Teilnehmer
         cost: Kosten
+        participants_count: Teilnehmerzahl
         max_participants: Teilnehmerlimit
         comment: Anmerkungen
         reference_line: Verwendungszweck
