@@ -50,7 +50,7 @@
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :member %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :joined %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :quitted %></th>
-			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :participated_events_count %></th>
+			<th data-sort="int" class="status_field"><%= Person.human_attribute_name :participated_events_count %></th>
 			<% if @person_policy.view_payments? %>
 			<th data-sort="string" class="payment_field"><%= Person.human_attribute_name :paid_until %></th>
 			<% end %>
