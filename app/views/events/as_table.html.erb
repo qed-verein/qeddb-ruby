@@ -12,9 +12,8 @@
       <% [:title, :start, :end, :hostel, :deadline].each do |field| %>
         <th data-sort="string"><%= Event.human_attribute_name field %></th>
       <% end %>
-      <% [:cost, :max_participants].each do |field| %>
-        <th data-sort="int"><%= Event.human_attribute_name field %></th>
-      <% end %>
+      <th data-sort="int"><%= Event.human_attribute_name :cost %></th>
+      <th data-sort="int"><%= Event.human_attribute_name :participants_count %></th>
     </tr>
   </thead>
 
@@ -30,7 +29,7 @@
         </td>
         <td data-sort-value="<%= event.deadline %>"><%= render_date event.deadline %></td>
         <td><%= check_unknown(event.cost) {number_to_currency event.cost} %></td>
-        <td><%= event.max_participants %></td>
+        <td><%= @event_participants_counts[event.id] || 0 %></td>
       </tr>
     <% end %>
   </tbody>

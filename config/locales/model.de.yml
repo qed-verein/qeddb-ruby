@@ -78,6 +78,8 @@ de:
         member: Aktuell Mitglied
         active: Aktiviertes Profil
 
+        participated_events_count: Anzahl Veranstaltungen
+
         newsletter: Newsletter abonnieren
         publish_birthday: Geburtstag einsehbar
         publish_email: Emailadresse einsehbar
@@ -107,6 +109,7 @@ de:
         organizer_email_address: Email an Orgas
         participant_email_address: Email an Teilnehmer
         cost: Kosten
+        participants_count: Teilnehmerzahl
         max_participants: Teilnehmerlimit
         comment: Anmerkungen
         reference_line: Verwendungszweck

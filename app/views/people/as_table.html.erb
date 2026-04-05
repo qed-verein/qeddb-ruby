@@ -22,6 +22,7 @@
 		<%= checkbox("show_address_field", "Addressdaten", true) %>
 		<%= checkbox("show_account_field", "Benutzerkonto", false) %>
 		<%= checkbox("show_status_field", "Mitgliedsstatus", false) %>
+		<%= checkbox("show_events_count_field", "Anzahl Veranstaltungen", false) %>
 		<% if @person_policy.view_payments? %>
 		  <%= checkbox("show_payment_field", "Zahlungsstatus", false) %>
 		<% end %>
@@ -50,6 +51,7 @@
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :member %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :joined %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :quitted %></th>
+			<th data-sort="int" class="events_count_field"><%= Person.human_attribute_name :participated_events_count %></th>
 			<% if @person_policy.view_payments? %>
 			<th data-sort="string" class="payment_field"><%= Person.human_attribute_name :paid_until %></th>
 			<% end %>
@@ -125,6 +127,10 @@
 
 				<td class="status_field" data-sort-value="<%= person.quitted %>">
 					<%= render_date person.quitted %>
+				</td>
+
+				<td class="events_count_field">
+					<%= @person_participated_events_count[person.id] || 0 %>
 				</td>
 
 				<% if @person_policy.view_payments? %>
