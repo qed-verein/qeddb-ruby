@@ -78,6 +78,8 @@ de:
         member: Aktuell Mitglied
         active: Aktiviertes Profil
 
+        participated_events_count: Anzahl Veranstaltungen
+
         newsletter: Newsletter abonnieren
         publish_birthday: Geburtstag einsehbar
         publish_email: Emailadresse einsehbar

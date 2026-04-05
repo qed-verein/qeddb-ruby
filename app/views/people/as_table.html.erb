@@ -50,6 +50,7 @@
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :member %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :joined %></th>
 			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :quitted %></th>
+			<th data-sort="string" class="status_field"><%= Person.human_attribute_name :participated_events_count %></th>
 			<% if @person_policy.view_payments? %>
 			<th data-sort="string" class="payment_field"><%= Person.human_attribute_name :paid_until %></th>
 			<% end %>
@@ -125,6 +126,10 @@
 
 				<td class="status_field" data-sort-value="<%= person.quitted %>">
 					<%= render_date person.quitted %>
+				</td>
+
+				<td class="status_field">
+					<%= @person_participated_events_count[person.id] || 0 %>
 				</td>
 
 				<% if @person_policy.view_payments? %>
