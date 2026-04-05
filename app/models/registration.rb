@@ -27,7 +27,8 @@ class Registration < ApplicationRecord
   #             (bspw. um eine zugehörige Zahlung einzutragen)
   enum status: { pending: 1, confirmed: 2, rejected: 3, cancelled: 4, dummy: 5 }
 
-  scope :participant_scope, -> { where(status: [:pending, :confirmed]) } # Muss auch in event.rb angepasst werden
+  PARTICIPANT_STATUS = [:pending, :confirmed]
+  scope :participant_scope, -> { where(status: PARTICIPANT_STATUS) }
 
   # Validierungen
   validates :person, uniqueness: { scope: :event, message:
