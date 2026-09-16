@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   def index; end
 
   def index_as_table
+    @event_participants_counts = Registration.participant_scope.group(:event_id).count
     render 'as_table'
   end
 

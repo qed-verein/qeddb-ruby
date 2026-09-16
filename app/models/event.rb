@@ -18,8 +18,8 @@ class Event < ApplicationRecord
   # Die zugehörigen Personen dieser Anmeldungen
   has_many :people, through: :registrations
 
-  # Alle Teilnehmer dieser Veranstaltung (außer Absagen)
-  has_many :participants, -> { where(registrations: { status: %i[pending confirmed] }) },
+  # Alle Teilnehmer dieser Veranstaltung (ohne Absagen/Dummy-Anmeldungen usw.)
+  has_many :participants, -> { where(registrations: { status: Registration::PARTICIPANT_STATUS }) },
            source: :person, through: :registrations
   # Alle Organisatoren dieser Veranstaltung
   has_many :organizers, -> { where(registrations: { organizer: true }) },
