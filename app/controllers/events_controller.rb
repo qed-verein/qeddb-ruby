@@ -32,6 +32,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(permitted_attributes(Event))
     if @event.save
+      Rails.configuration.qeddb_hooks[:event_created].call(@event)
       redirect_to @event, notice: t('.success')
     else
       render :new
@@ -50,6 +51,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
+    Rails.configuration.qeddb_hooks[:event_deleted].call(@event)
     redirect_to events_url, notice: t('.success')
   end
 
