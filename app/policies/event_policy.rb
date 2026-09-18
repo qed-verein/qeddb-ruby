@@ -49,7 +49,7 @@ class EventPolicy < ApplicationPolicy
 
     if edit_event?
       editable.push :title, :homepage, :start, :end, :deadline, :reference_line, :cost, :max_participants, :hostel_id,
-                    :comment
+                    :comment, :mailinglist_slug
     end
     if edit_payments?
       editable.push({ event_payments_attributes: %i[id money_transfer_date money_amount category comment _destroy] })
