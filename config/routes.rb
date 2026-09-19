@@ -55,6 +55,7 @@ Rails.application.routes.draw do
       get 'edit_groups'
 
       get 'activate'
+      post 'archive', to: 'people#archive'
     end
   end
 

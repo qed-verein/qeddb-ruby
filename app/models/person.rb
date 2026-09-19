@@ -146,12 +146,13 @@ class Person < ApplicationRecord
 
   def member_at_time?(time)
     !joined.nil? && joined.to_time <= time &&
-      !member_until.nil? && member_until > time
+      !member_until.nil? && member_until > time &&
+      !archived
   end
 
   # Leute mit Attrbiut active=true können sich einloggen (-> siehe Sorcery)
   def active_for_authentication?
-    active
+    active && !archived
   end
 
   # Ist die Person ein Administrator?
