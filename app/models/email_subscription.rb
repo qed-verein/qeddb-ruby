@@ -1,12 +1,16 @@
-# Die Klasse "Subscription" dient zur Verwaltung eines einzelnen Emailabonnements.
+# Die Klasse "Subscription" dient zur Verwaltung eines einzelnen Emailabonnements (ohne QEDDB-Account).
 
-class Subscription < ApplicationRecord
+class EmailSubscription < ApplicationRecord
   # Versionskontrolle
   has_paper_trail
 
+
   # Zu diese Verteiler gehört das Abonnement
   belongs_to :mailinglist
-  validates :email_address, presence: true
+  validates :email_address, presence: true,
+              uniqueness: {scope: :mailinglist_id,
+              message: "sollte nur einmal auf Mailingliste eingetragen sein"}
+
 
   # Ordne Adressen standardmäßig alphabetisch
   default_scope { order('LOWER(email_address) ASC') }
