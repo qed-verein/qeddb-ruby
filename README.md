@@ -125,7 +125,7 @@ Die Häfen können über die Umgebungsvariablen `RAILS_HTTP_PORT` und `MARIADB_P
 
 ## Linting/Formatting
 
-Wir linten und formatten den rubycode mit rubocop. Das lässt sich mit `docker compose exec qeddb bundler exec rubocop` überprüfen (sofern der docker container läufter). Mit der flag `-a` lassen sich auch Probleme automatisch korrigieren.
+Wir linten und formatten den rubycode mit rubocop. Das lässt sich mit `docker compose exec qeddb bundler exec rubocop` überprüfen (sofern der docker container läufter). Mit der flag `-A` lassen sich auch Probleme automatisch korrigieren.
 
 Wir formattieren javascript, html, yaml und json mit prettier. Das lässt sich mit `yarn run prettier -c .` überprüfen. Mit `yarn run prettier -w .` werden die Formattierungen automatisch korrigiert.
 
