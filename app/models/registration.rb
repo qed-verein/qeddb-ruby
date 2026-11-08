@@ -27,7 +27,7 @@ class Registration < ApplicationRecord
   #             (bspw. um eine zugehörige Zahlung einzutragen)
   enum status: { pending: 1, confirmed: 2, rejected: 3, cancelled: 4, dummy: 5 }
 
-  PARTICIPANT_STATUS = [:pending, :confirmed]
+  PARTICIPANT_STATUS = %i[pending confirmed].freeze
   scope :participant_scope, -> { where(status: PARTICIPANT_STATUS) }
 
   # Validierungen
