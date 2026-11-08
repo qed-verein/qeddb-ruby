@@ -1,2 +1,1 @@
-import './commands/login'
-
+import "./commands/login";

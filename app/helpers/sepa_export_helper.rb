@@ -15,12 +15,12 @@ module SepaExportHelper
       .where(sepa_mandate: { sponsor_membership: nil })
       .to_a
       .map do |person|
-      {
-        person: person,
-        reference_line: "Mitgliedschaft #{year}, #{person.reference_line}",
-        amount: Rails.configuration.membership_fee,
-        instruction: "M#{year} #{person.id}"
-      }
+        {
+          person: person,
+          reference_line: "Mitgliedschaft #{year}, #{person.reference_line}",
+          amount: Rails.configuration.membership_fee,
+          instruction: "M#{year} #{person.id}"
+        }
     end +
       Person
       .where.not(sepa_mandate: nil)
@@ -48,12 +48,12 @@ module SepaExportHelper
       .where(sepa_mandates: { allow_all_payments: true })
       .reject { |registration| registration.to_be_paid.nil? or registration.to_be_paid <= 0 }
       .map do |registration|
-      {
-        person: registration.person,
-        reference_line: registration.reference_line,
-        amount: registration.to_be_paid,
-        instruction: "E#{event.id} #{registration.person.id}"
-      }
+        {
+          person: registration.person,
+          reference_line: registration.reference_line,
+          amount: registration.to_be_paid,
+          instruction: "E#{event.id} #{registration.person.id}"
+        }
     end
   end
 
@@ -108,11 +108,11 @@ module SepaExportHelper
     end
   end
 
-  def filename
-    if @event
-      "SEPA_#{@event.title}.xml"
+  def filename(event, year)
+    if event
+      "SEPA_#{event.title}.xml"
     else
-      "SEPA_Mitgliedschaft_#{@year}.xml"
+      "SEPA_Mitgliedschaft_#{year}.xml"
     end
   end
 end

@@ -5,7 +5,7 @@ class Hostel < ApplicationRecord
   has_paper_trail
 
   # Dies Adresse der Unterkunft
-  has_one :address, as: :addressable, inverse_of: :addressable
+  has_one :address, as: :addressable, dependent: :destroy, inverse_of: :addressable
   # Zu diesen Veranstaltungen gehört die Unterkunft
   has_many :events, dependent: :nullify
 

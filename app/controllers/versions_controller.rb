@@ -13,6 +13,8 @@ class VersionsController < ApplicationController
 
   def show; end
 
+  def revert; end
+
   # ~ def revert
   # ~ object = @version.reify(unversioned_attributes: :preserve)
   # ~ if object.nil?

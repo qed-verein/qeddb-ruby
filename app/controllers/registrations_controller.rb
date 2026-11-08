@@ -136,15 +136,15 @@ class RegistrationsController < ApplicationController
 
   def view_invitation
     orgas = @registration.event.organizers
-    orga = if orgas.empty? then '' else orgas.sample.full_name end
+    orga = orgas.empty? ? '' : orgas.sample.full_name
 
     heathcliff = render_typst_template 'invitation.typ', {
-      'name': @registration.person.full_name,
-      'orga': orga,
+      name: @registration.person.full_name,
+      orga: orga,
       'event.start': I18n.l(@registration.event.start, format: :long),
       'event.end': I18n.l(@registration.event.end, format: :long),
-      'absender': "#{Rails.configuration.qed_name}\np.Adr. #{Rails.configuration.qed_address}",
-      'homepage': "#{Rails.configuration.qed_homepage}",
+      absender: "#{Rails.configuration.qed_name}\np.Adr. #{Rails.configuration.qed_address}",
+      homepage: Rails.configuration.qed_homepage.to_s
     }
 
     send_data heathcliff, format: 'application/pdf', filename: 'example.pdf', disposition: 'inline'

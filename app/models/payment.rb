@@ -35,6 +35,7 @@ class Payment < ApplicationRecord
 
   def membership_payment?
     return false if payment_type.nil?
+
     %i[regular_member sponsor_and_member sponsor_member free_member].include?(payment_type.to_sym)
   end
 

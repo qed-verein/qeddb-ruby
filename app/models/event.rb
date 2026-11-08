@@ -28,8 +28,12 @@ class Event < ApplicationRecord
   has_many :event_payments, dependent: :destroy
 
   # Rechtegruppen für Organisatoren und Teilnehmer
-  has_one :organizer_group, -> { where(kind: :organizers) }, class_name: 'Group', dependent: :destroy
-  has_one :participant_group, -> { where(kind: :participants) }, class_name: 'Group', dependent: :destroy
+  has_one :organizer_group, lambda {
+    where(kind: :organizers)
+  }, class_name: 'Group', dependent: :destroy, inverse_of: :event
+  has_one :participant_group, lambda {
+    where(kind: :participants)
+  }, class_name: 'Group', dependent: :destroy, inverse_of: :event
 
   # ~ has_one :organizer_mailing_list, :through :organizer_group, class_name: 'Mailinglist'
   # ~ has_one :participant_mailing_list, :through :participant_group,  class_name: 'Mailinglist'
