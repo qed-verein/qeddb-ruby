@@ -8,7 +8,8 @@ on:
 
 jobs:
   rubocop:
-    runs-on: ubuntu-latest
+    # Unsere ruby version ist potentiell zu alt für ubuntu-latest...
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
