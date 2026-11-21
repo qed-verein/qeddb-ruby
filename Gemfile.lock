@@ -85,7 +85,6 @@ GEM
     crass (1.0.6)
     date (3.5.1)
     drb (2.2.3)
-    erb (6.0.1)
     erubi (1.13.1)
     faraday (2.14.1)
       faraday-net_http (>= 2.0, < 3.5)
@@ -101,11 +100,6 @@ GEM
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     iban-tools (1.2.1)
-    io-console (0.8.2)
-    irb (1.16.0)
-      pp (>= 0.6.0)
-      rdoc (>= 4.0.0)
-      reline (>= 0.4.2)
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -196,13 +190,7 @@ GEM
     parser (3.3.10.1)
       ast (~> 2.4.1)
       racc
-    pp (0.6.3)
-      prettyprint
-    prettyprint (0.2.0)
     prism (1.9.0)
-    psych (5.3.1)
-      date
-      stringio
     public_suffix (7.0.2)
     puma (5.6.9)
       nio4r (~> 2.0)
@@ -252,13 +240,7 @@ GEM
       ffi (~> 1.0)
     rb_sys (0.9.124)
       rake-compiler-dock (= 1.11.0)
-    rdoc (7.1.0)
-      erb
-      psych (>= 4.0.0)
-      tsort
     regexp_parser (2.11.3)
-    reline (0.6.3)
-      io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
     rexml (3.4.4)
@@ -342,10 +324,8 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    stringio (3.2.0)
     thor (1.5.0)
     timeout (0.6.0)
-    tsort (0.2.0)
     typst (0.13.5)
       rb_sys (>= 0.9.116)
       rubyzip (~> 2.4)
@@ -398,7 +378,6 @@ DEPENDENCIES
   concurrent-ruby (= 1.3.4)
   drb (~> 2.2)
   ffi (~> 1.16.3)
-  irb
   jbuilder (~> 2.7)
   jquery-rails (~> 4.6.0)
   listen (~> 3.3)
@@ -414,7 +393,6 @@ DEPENDENCIES
   pundit_implications (~> 0.1.0)
   rails (~> 6.1.4)
   rails-i18n
-  rdoc
   rubocop (~> 1.80)
   rubocop-capybara (~> 2.22)
   rubocop-discourse (~> 3.12)

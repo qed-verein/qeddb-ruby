@@ -11,10 +11,10 @@ de:
         start: Von
         end: Bis
   sections:
-     person:
-       generalinfo: Personendaten
-       settings: Einstellungen
-       additional_information: Weitere Informationen
+    person:
+      generalinfo: Personendaten
+      settings: Einstellungen
+      additional_information: Weitere Informationen
   outstanding_payments:
     show:
       title: Offene Posten

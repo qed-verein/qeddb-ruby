@@ -1,5 +1,7 @@
 ---
 de:
+  application:
+    record_not_found: Datensatz nicht gefunden
   sessions:
     new:
       account_name: Benutzername

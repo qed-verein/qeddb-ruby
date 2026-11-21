@@ -15,7 +15,7 @@ class Group < ApplicationRecord
 
   # Welcher Typ von Gruppe liegt vor?
   # Momentan gibt es einige verschiedene Gruppentypen:
-  #   0) manual = Manuell verwaltete Liste 
+  #   0) manual = Manuell verwaltete Liste
   #   1) board_members = Liste der Vorstände
   #   2) treasurers = Liste der Kassenwärte
   #   3) admins = Liste der Webmaster
@@ -27,8 +27,8 @@ class Group < ApplicationRecord
   #   9) auditors = Kassenprüfer:innen
 
   enum kind: { manual: 0, board_members: 1, treasurers: 2, admins: 3,
-                  members: 4, externals: 5, newsletter_subscribers: 6,
-                  organizers: 7, participants: 8, auditors: 9 }
+               members: 4, externals: 5, newsletter_subscribers: 6,
+               organizers: 7, participants: 8, auditors: 9 }
 
   # Validierungen
   validates :title, length: { maximum: 50 }, presence: true, uniqueness: true
@@ -59,12 +59,12 @@ class Group < ApplicationRecord
 
   # Kann diese Gruppe von Admins bearbeitet werden?
   def editable?
-    not %w[members externals newsletter_subscribers participants organizers].include?(kind)
+    %w[members externals newsletter_subscribers participants organizers].exclude?(kind)
   end
 
   # Kann diese Gruppe von Admins gelöscht werden?
   def destroyable?
-    kind == "manual"
+    kind == 'manual'
   end
 
   # Ist eine Person in dieser Gruppe enthalten?
@@ -75,9 +75,9 @@ class Group < ApplicationRecord
   # Das Formular zum Bearbeiten einer Gruppe schickt auch eine Liste
   # von einzutragenden Personen und weiteren Gruppen mit
   has_many :member_affiliations, -> { where groupable_type: 'Person' },
-           class_name: 'Affiliation', inverse_of: :group
+           class_name: 'Affiliation', dependent: :destroy, inverse_of: :group
   has_many :group_affiliations, -> { where groupable_type: 'Group' },
-           class_name: 'Affiliation', inverse_of: :group
+           class_name: 'Affiliation', dependent: :destroy, inverse_of: :group
   accepts_nested_attributes_for :member_affiliations,
                                 allow_destroy: true,
                                 reject_if: proc { |attr| reject_blank_entries? attr, :groupable_id }
@@ -88,7 +88,7 @@ class Group < ApplicationRecord
 
   # Standardwerte für Gruppen
   def set_defaults
-    self.kind ||= "manual"
+    self.kind ||= 'manual'
   end
 
   def object_name

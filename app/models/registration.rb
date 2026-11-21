@@ -27,7 +27,7 @@ class Registration < ApplicationRecord
   #             (bspw. um eine zugehörige Zahlung einzutragen)
   enum status: { pending: 1, confirmed: 2, rejected: 3, cancelled: 4, dummy: 5 }
 
-  PARTICIPANT_STATUS = [:pending, :confirmed]
+  PARTICIPANT_STATUS = %i[pending confirmed].freeze
   scope :participant_scope, -> { where(status: PARTICIPANT_STATUS) }
 
   # Validierungen
@@ -95,12 +95,14 @@ class Registration < ApplicationRecord
 
   def effective_money_amount
     return nil if event.cost.nil?
+
     event.cost + charge_modifiers.sum(:money_amount)
   end
 
   def to_be_paid
     return 0.0 if payment_complete
     return nil if effective_money_amount.nil?
+
     effective_money_amount - registration_payments.sum(:money_amount)
   end
 

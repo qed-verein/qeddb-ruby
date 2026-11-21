@@ -1,6 +1,6 @@
 module TypstHelper
-  def render_typst_template template, inputs
-    root = Rails.root.join('app', 'templates')
+  def render_typst_template(template, inputs)
+    root = Rails.root.join('app/templates')
     file = root.join(template)
     sys_inputs = common_inputs.merge(inputs)
 
@@ -10,10 +10,13 @@ module TypstHelper
 
   private
 
-  def common_inputs() = {
-    'footer.adresse': "#{Rails.configuration.qed_name}\np.Adr. #{Rails.configuration.qed_address}",
-    'footer.internet': "#{Rails.configuration.qed_homepage}",
-    'footer.vorstand': "#{Rails.configuration.qed_vorstand}",
-    'footer.bankverbindung': "#{Rails.configuration.banking_name}\n#{Rails.configuration.iban}\n#{Rails.configuration.bic}"
-  }
+  def common_inputs
+    {
+      'footer.adresse': "#{Rails.configuration.qed_name}\np.Adr. #{Rails.configuration.qed_address}",
+      'footer.internet': Rails.configuration.qed_homepage.to_s,
+      'footer.vorstand': Rails.configuration.qed_vorstand.to_s,
+      'footer.bankverbindung': [Rails.configuration.banking_name.to_s, Rails.configuration.iban.to_s,
+                                Rails.configuration.bic.to_s].join("\n")
+    }
+  end
 end

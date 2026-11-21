@@ -7,16 +7,12 @@ module ApplicationHelper
     link_to 'Admin', admin_path
   end
 
-  def navigation_path(links)
-    links.join(' » ').html_safe
-  end
-
   def unknown_html
-    '<i>unb.</i>'.html_safe
+    tag.i('unb.')
   end
 
   def blank_html
-    '<i>k.A.</i>'.html_safe
+    tag.i('k.A.')
   end
 
   def check_unknown(str)
@@ -74,7 +70,7 @@ module ApplicationHelper
   def privileged_mode_link
     return unless toggle_privileged_mode?
 
-    if session[:mode] == 'privileged' then
+    if session[:mode] == 'privileged'
       url = 'admin_standard_mode_path'
       text = 'actions.admin.exit_privileged_mode'
       icon = :lock_open

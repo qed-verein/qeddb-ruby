@@ -27,7 +27,7 @@ class Mailinglist < ApplicationRecord
     self.table_name = 'all_subscriptions'
   end
   # Damit kann man auch automatische Eintragungen in eine Mailingliste abfragen
-  has_many :all_subscriptions, class_name: 'Mailinglist::VirtualSubscription'
+  has_many :all_subscriptions, dependent: :destroy, class_name: 'Mailinglist::VirtualSubscription'
 
   validates :title, length: { maximum: 50 }, presence: true
   validates :description, length: { maximum: 1000 }
@@ -50,7 +50,7 @@ class Mailinglist < ApplicationRecord
     title
   end
 
-  def event_related? 
-    !receiver_group.nil? && !receiver_group.event.nil? 
+  def event_related?
+    !receiver_group.nil? && !receiver_group.event.nil?
   end
 end
